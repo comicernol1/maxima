@@ -1,6 +1,6 @@
 import os,tornado.web,tornado.ioloop
 
-with open("/root/maxima/kelimart/req/index.html", "r") as home_icnt_f:
+with open("/root/maxima/kelimart/index.html", "r") as home_icnt_f:
     home_icnt = home_icnt_f.read()
 class homeHTMLHandler(tornado.web.RequestHandler):
     def get(self):
@@ -10,7 +10,7 @@ class homeHTMLHandler(tornado.web.RequestHandler):
         else:
             self.write(self.request.host)
         
-with open("/root/maxima/kelimart/req/i.css", "r") as home_scnt_f:
+with open("/root/maxima/kelimart/i.css", "r") as home_scnt_f:
     home_scnt = home_scnt_f.read()
 class homeCSSHandler(tornado.web.RequestHandler):
     def get(self):
