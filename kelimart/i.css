@@ -1,0 +1,314 @@
+body{background:#F2F2F2;font-family:Arial,sans-serif,Verdana;overflow-x:hidden;}
+form{margin:0px;}
+input{outline:none;}
+::-ms-clear,::-ms-reveal{display:none;width:0;height:0;}::-webkit-search-decoration,::-webkit-search-cancel-button,::-webkit-search-results-button,::-webkit-search-results-decoration{display:none;}
+::-webkit-inner-spin-button,::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+input[type="submit"]{cursor:pointer;}
+textarea{outline:none;}
+select{outline:none;cursor:pointer;-webkit-appearance:none;-khtml-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;background:white;}
+select::-ms-expand{display:none;}
+a{outline:none;cursor:pointer;}
+button{outline:none;cursor:pointer;}
+input[type="checkbox"]{visibility:hidden;cursor:pointer;}
+input[type="checkbox"]:after{visibility:visible;display:inline-block;content:"";width:20px;height:20px;cursor:pointer;position:relative;top:-3px;left:-10px;}
+input[type="checkbox"][v="y"]:after{background:url('/images/multiplier_image.png');background-size:175px 170px;background-position:27px 24px;}
+input[type="checkbox"][v="n"]:after{background:url('/images/multiplier_image.png');background-size:175px 170px;background-position:27px 65px;}
+input[type="checkbox"]:checked:after{background:url('/images/multiplier_image.png');background-size:175px 170px;background-position:27px 44px;}
+input[type="radio"]{visibility:hidden;cursor:pointer;}
+input[type="radio"]:after{visibility:visible;display:inline-block;content:"";width:20px;height:20px;cursor:pointer;background:url('/images/multiplier_image.png');background-size:200px 200px;background-position:128px 75px;margin:0px 0px 0px 5px;position:relative;top:-3px;left:-10px;}
+input[type="radio"]:checked:after{background:url('/images/multiplier_image.png');background-size:200px 200px;background-position:108px 75px;}
+#HPb,#HPbh{display:none;width:100%;height:100%;background:rgba(0,0,0,0.7);position:fixed;top:0px;left:0px;}
+#HPb{z-index:101;}
+#HPbh{z-index:99;}
+header{
+	width:100%;
+	height:60px;
+	background:white;
+	border-bottom:1px solid #E2E2E2;
+	position:fixed;
+	z-index:100;
+	top:0px;
+	left:0px;
+}
+#C_P{
+	width:100%;
+	background:white;
+	text-align:center;
+	font-size:18px;
+	color:#444;
+	padding:10px 0px;
+	border-top:1px solid #CCC;
+	position:fixed;
+	z-index:200;
+	bottom:0px;
+	left:0px;
+}
+#CP_L{color:#22E;text-decoration:underline;}
+#CP_A{padding-left:20px;color:#222;text-decoration:underline;}
+#Ha{
+	width:40px;
+	height:40px;
+	background-image:url("/images/multiplier_image.png");
+	background-color:transparent;
+	background-position:-175px -195px;
+	background-size:300px 300px;
+	border:none;
+	position:absolute;
+	top:10px;
+	left:10px;
+}
+#HMu{
+	display:none;
+	width:300px;
+	height:100%;
+	background:white;
+	list-style-type:none;
+	padding:50px 0px 0px 0px;
+	margin:0px;
+	overflow:hidden;
+	position:fixed;
+	z-index:101;
+	top:0px;
+	left:0px;
+}
+#HMt{
+	display:none;
+	width:40px;
+	height:32px;
+	border:none;
+	background-image:url("/images/multiplier_image.png");
+	background-color:transparent;
+	background-position:-213px -198px;
+	background-size:300px 300px;
+	position:absolute;
+	top:8px;
+	left:5px;
+}
+#Ht{
+	display:inline-block;
+	width:40px;
+	height:32px;
+	border:none;
+	background-image:url("/images/multiplier_image.png");
+	background-color:transparent;
+	background-position:-213px -198px;
+	background-size:300px 300px;
+	position:absolute;
+	top:12px;
+	right:70px;
+}
+#HMt::after,#Ht::after{
+	padding:0px;
+	margin:0px;
+	font-size:20px;
+	color:#424242;
+	content:"0";
+	position:absolute;
+	top:5px;
+	left:40px;
+}
+#HMc{
+	width:40px;
+	height:40px;
+	border:none;
+	background-image:url("/images/multiplier_image.png");
+	background-color:transparent;
+	background-position:-213px -162px;
+	background-size:300px 300px;
+	position:absolute;
+	top:5px;
+	right:8px;
+}
+.HMLi{
+	display:inline-block;
+	width:100%;
+	padding:15px 0px;
+	font-size:20px;
+	text-align:center;
+	margin:0px;
+	cursor:pointer;
+	border:1px solid #E4E4E4;
+	color:#424242;
+	text-decoration:none;
+}
+#Hi{
+	width:625px;
+	height:40px;
+	font-size:20px;
+	border:1px solid black;
+	border-radius:20px;
+	padding:0px 45px 0px 20px;
+	position:absolute;
+	top:10px;
+	left:60px;
+}
+#Hi::placeholder{font-style:italic;font-family:Candara;}
+#Hs{
+	width:40px;
+	height:40px;
+	background-image:url("/images/multiplier_image.png");
+	background-size:240px 240px;
+	background-position:-199px -108px;
+	background-color:transparent;
+	border:none;
+	position:absolute;
+	top:10px;
+	left:635px;
+}
+#Bo{
+	width:100%;
+	margin:0px;
+	padding:0px;
+	position:absolute;
+	top:60px;
+	left:0px;
+}
+.Boi{
+	display:inline-block;
+	width:100%;
+	height:300px;
+	background-image:url("");
+	background-repeat:no-repeat;
+	background-size:auto 100%;
+	background-position:0px 0px;
+	background-color:white;
+	text-decoration:none;
+	cursor:pointer;
+}
+.Boi div{
+	width:calc(100% - 300px);
+	height:100%;
+	background:white;
+	float:right;
+}
+.Boi div h1{
+	width:calc(100% - 40px);
+	padding:0px;
+	margin:0px;
+	font-size:32px;
+	color:#222;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	position:relative;
+	top:20px;
+	left:20px;
+}
+.Boi div h2{
+	width:calc(100% - 80px);
+	padding:0px;
+	margin:0px;
+	font-size:30px;
+	color:#222;
+	position:relative;
+	top:35px;
+	left:40px;
+}
+.Boi div h2 u{
+	text-decoration:none;
+	font-size:14px;
+	color:#888;
+	position:relative;
+	top:-7px;
+	left:10px;
+}
+.Boi div ol{
+	width:calc(100% - 80px);
+	padding:0px;
+	margin:0px;
+	list-style-type:none;
+	position:relative;
+	top:13px;
+	left:165px;
+}
+.Boi div span{
+	display:inline-block;
+	width:112px;
+	height:28px;
+	background-image:url("/images/multiplier_image.png");
+	background-color:transparent;
+	background-size:400px 400px;
+	background-position:-524px -332px;
+	position:relative;
+	top:45px;
+	left:40px;
+}
+.Boi div span[r="0"]{background-position:-524px -332px;}
+.Boi div span[r="1"]{background-position:-500px -332px;}
+.Boi div span[r="2"]{background-position:-478px -332px;}
+.Boi div span[r="3"]{background-position:-456px -332px;}
+.Boi div span[r="4"]{background-position:-434px -332px;}
+.Boi div span[r="5"]{background-position:-411px -332px;}
+.BLi{
+	display:inline-block;
+	font-size:16px;
+	color:white;
+	padding:5px 10px;
+}
+.BLi[t="r"]{background:red;}
+.BLi[t="g"]{background:green;}
+p#reo{
+	width:100%;
+	padding:0px;
+	margin:0px;
+	font-size:14px;
+	text-align:center;
+	color:#888;
+	position:absolute;
+	top:674px;
+	left:0px;
+}
+footer{
+	width:100%;
+	height:340px;
+	background:white;
+	position:absolute;
+	top:700px;
+	left:0px;
+}
+#FL,#Fn{
+	width:240px;
+	font-size:20px;
+	border-top:none;
+	border-bottom:1px solid black;
+	border-left:none;
+	border-right:none;
+	padding:4px 6px;
+	position:absolute;
+	top:10px;
+}
+#FL{left:100px;}
+#Fn{left:calc(50% + 100px);}
+footer ul{width:25%;height:170px;list-style-type:none;margin:0px;padding:0px;position:absolute;top:60px;}
+footer ul:nth-of-type(1){left:0px;}
+footer ul:nth-of-type(2){left:25%;}
+footer ul:nth-of-type(3){left:50%;}
+footer ul:nth-of-type(4){left:75%;}
+footer ul li{padding:5px 0px;text-align:center;font-size:14px;}
+footer ul li a{color:#444;text-decoration:none;}
+footer p{width:100%;color:#444;text-align:center;padding:0px;margin:0px;position:absolute;bottom:20px;left:0px;}
+
+@media screen and (max-width:700px){
+	#Hi{width:calc(100% - 80px);}
+	#Hs{left:calc(100% - 67px);}
+	#HMu{width:100%;height:100%;top:0px;left:0px;}
+	#HMt{display:block;}
+	#Ht{display:none;}
+	#FL,#Fn{width:calc(100% - 100px);font-size:16px;left:50px;}
+	#FL{top:10px;}
+	#Fn{top:55px;}
+	#Bo{width:100%;}
+	.Boi{height:400px;background-size:cover;background-position:center;}
+	.Boi div{width:100%;height:100px;background:rgba(255,255,255,0.70);float:left;position:relative;top:calc(100% - 100px);}
+	.Boi div h1{width:calc(100% - 20px);font-size:24px;top:10px;left:10px;}
+	.Boi div h2{width:calc(100% - 50px);font-size:28px;top:10px;left:25px;}
+	.Boi div h2 u{top:-5px;}
+	.Boi div ol{top:14px;left:25px;}
+	.BLi{font-size:12px;padding:4px 8px;}
+	footer{height:830px;}
+	footer ul{width:100%;}
+	footer ul:nth-of-type(1){top:100px;left:0px;}
+	footer ul:nth-of-type(2){top:270px;left:0px;}
+	footer ul:nth-of-type(3){top:440px;left:0px;}
+	footer ul:nth-of-type(4){top:610px;left:0px;}
+}
