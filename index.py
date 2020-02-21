@@ -1,6 +1,6 @@
 import os,tornado.web,tornado.ioloop
 
-class HomeHTMLHandler(tornado.web.RequestHandler):
+class HomeHTMLHand(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
             self.set_header('Content-Type', 'text/html')
@@ -8,7 +8,7 @@ class HomeHTMLHandler(tornado.web.RequestHandler):
                 self.write(kelimart_home_html.read())
             kelimart_home_html.close()
 
-class HomeCSSHandler(tornado.web.RequestHandler):
+class HomeCSSHand(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
             self.set_header('Content-Type', 'text/css')
@@ -16,14 +16,22 @@ class HomeCSSHandler(tornado.web.RequestHandler):
                 self.write(kelimart_home_css.read())
             kelimart_home_css.close()
 
-class MultiplierImageHandler(tornado.web.RequestHandler):
+class KelimartCookiesHand(tornado.web.RequestHandler):
+    def get(self):
+        if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
+            self.set_header('Content-Type', 'text/css')
+            with open("/root/maxima/kelimart/i.css", "r") as kelimart_cookies_html:
+                self.write(kelimart_cookies_html.read())
+            kelimart_cookies_html.close()
+
+class MultiplierImageHand(tornado.web.RequestHandler):
     def get(self):
         self.set_header('Content-Type', 'image/png')
         with open("/root/maxima/images/multiplier_image.png", "rb") as maxima_img_multiplier:
             self.write(maxima_img_multiplier.read())
         maxima_img_multiplier.close()
 
-class Favicon32Handler(tornado.web.RequestHandler):
+class Favicon32Hand(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
             self.set_header('Content-Type', 'image/png')
@@ -31,7 +39,7 @@ class Favicon32Handler(tornado.web.RequestHandler):
                 self.write(kelimart_favicon_32.read())
             kelimart_favicon_32.close()
 
-class Favicon64Handler(tornado.web.RequestHandler):
+class Favicon64Hand(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
             self.set_header('Content-Type', 'image/png')
@@ -41,11 +49,12 @@ class Favicon64Handler(tornado.web.RequestHandler):
 
 if __name__ == "__main__":
     app = tornado.web.Application([
-        (r"/", HomeHTMLHandler),
-        (r"/pull/i.css", HomeCSSHandler),
-        (r"/images/multiplier_image.png", MultiplierImageHandler),
-        (r"/images/favicon32.png", Favicon32Handler),
-        (r"/images/favicon64.png", Favicon64Handler)
+        (r"/", HomeHTMLHand),
+        (r"/pull/i.css", HomeCSSHand),
+        (r"/images/multiplier_image.png", MultiplierImageHand),
+        (r"/images/favicon32.png", Favicon32Hand),
+        (r"/cookies/", KelimartCookiesHand),
+        (r"/images/favicon64.png", Favicon64Hand)
     ])
   
     app.listen(80)
