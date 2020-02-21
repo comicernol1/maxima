@@ -23,6 +23,14 @@ class MultiplierImageHandler(tornado.web.RequestHandler):
             self.write(maxima_img_multiplier.read())
         maxima_img_multiplier.close()
 
+class Favicon32Handler(tornado.web.RequestHandler):
+    def get(self):
+        if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
+            self.set_header('Content-Type', 'image/png')
+            with open("/root/maxima/kelimart/images/Faroe_Logo_32.png", "rb") as kelimart_favicon_32:
+                self.write(kelimart_favicon_32.read())
+            kelimart_favicon_32.close()
+
 class Favicon64Handler(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
@@ -36,7 +44,8 @@ if __name__ == "__main__":
         (r"/", HomeHTMLHandler),
         (r"/pull/i.css", HomeCSSHandler),
         (r"/images/multiplier_image.png", MultiplierImageHandler),
-        (r"/images/Faroe_Logo_64.png", Favicon64Handler)
+        (r"/images/favicon32.png", Favicon32Handler),
+        (r"/images/favicon64.png", Favicon64Handler)
     ])
   
     app.listen(80)
