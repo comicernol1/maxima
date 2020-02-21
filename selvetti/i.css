@@ -1,0 +1,218 @@
+body{font-family:sans-serif,Arial,Verdana;line-height:1.2;letter-spacing:1px;background-color:#E7E7E7;overflow-x:hidden;overflow-y:scroll;}
+form{margin:0px;}
+input{outline:none;}
+::-ms-clear,::-ms-reveal{display:none;width:0;height:0;}::-webkit-search-decoration,::-webkit-search-cancel-button,::-webkit-search-results-button,::-webkit-search-results-decoration{display:none;}
+::-webkit-inner-spin-button,::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+input[type="submit"]{cursor:pointer;}
+textarea{outline:none;}
+select{outline:none;cursor:pointer;-webkit-appearance:none;-khtml-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;}
+select::-ms-expand{display:none;}
+select option{color:black;}
+a{outline:none;cursor:pointer;}
+button{outline:none;cursor:pointer;}
+input[type="checkbox"]{visibility:hidden;cursor:pointer;}
+input[type="checkbox"]:after{visibility:visible;display:inline-block;content:"";width:20px;height:20px;cursor:pointer;position:relative;top:-3px;left:-10px;}
+input[type="checkbox"][v="y"]:after{background:url('/images/multiplier_image.png');background-size:175px 170px;background-position:27px 24px;}
+input[type="checkbox"][v="n"]:after{background:url('/images/multiplier_image.png');background-size:175px 170px;background-position:27px 65px;}
+input[type="checkbox"]:checked:after{background:url('/images/multiplier_image.png');background-size:175px 170px;background-position:27px 44px;}
+input[type="radio"]{visibility:hidden;cursor:pointer;}
+input[type="radio"]:after{visibility:visible;display:inline-block;content:"";width:20px;height:20px;cursor:pointer;background:url('/images/multiplier_image.png');background-size:200px 200px;background-position:128px 75px;margin:0px 0px 0px 5px;position:relative;top:-3px;left:-10px;}
+input[type="radio"]:checked:after{background:url('/images/multiplier_image.png');background-size:200px 200px;background-position:108px 75px;}
+#Hdr{
+	width:100%;
+	height:700px;
+	background-image:url("https://image.shutterstock.com/image-photo/group-friends-dressed-casual-cloth-600w-1135762634.jpg");
+	background-size:cover;
+	background-position:center;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+#Hdr::before{
+	width:100%;
+	height:100%;
+	content:"";
+	background:rgba(0,0,0,0.5);
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+#Hm{
+	color:white;
+	font-size:16px;
+	list-style-type:none;
+	margin:0px;
+	padding:0px 15px;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+#Hm li{
+	display:inline-block;
+	padding:40px 30px;
+	cursor:pointer;
+}
+#Hm li a{
+	color:white;
+	text-decoration:none;
+	font-weight:300;
+}
+#Hm li a b{
+	font-weight:300;
+	padding:6px 8px;
+	border-bottom:2px solid white;
+}
+#Hdr h1{
+	width:100%;
+	font-size:72px;
+	font-weight:300;
+	letter-spacing:5px;
+	margin:0px;
+	color:white;
+	text-align:center;
+	text-shadow:0px 0px 2px black;
+	position:absolute;
+	top:260px;
+	left:0px;
+}
+#HdrLk{
+	width:300px;
+	font-size:18px;
+	color:white;
+	text-align:center;
+	background:#111;
+	padding:6px 0px;
+	border:none;
+	position:absolute;
+	top:370px;
+	left:calc(50% - 150px);
+}
+#BSa{
+	width:calc(100% - 30px);
+	height:400px;
+	white-space:nowrap;
+	overflow:hidden;
+	background:transparent;
+	margin:0px;
+	padding:0px;
+	position:absolute;
+	top:720px;
+	left:15px;
+}
+#BSa button{
+	width:60px;
+	height:60px;
+	background:white;
+	border:none;
+	font-size:36px;
+	box-shadow:0px 0px 5px rgba(0,0,0,0.3);
+	position:absolute;
+	z-index:1;
+	top:170px;
+}
+#BSa button[s="n"]{color:#BBB;}
+#BSa button[s="y"]{color:black;}
+#BSAp{left:0px;}
+#BSAn{right:0px;}
+#BSa a{
+	display:inline-block;
+	width:300px;
+	height:100%;
+	background-image:url("https://image.shutterstock.com/image-photo/portrait-handsome-man-black-suit-600w-460050457.jpg");
+	background-size:cover;
+	background-position:center;
+	margin:0px 5px;
+	border:1px solid #CCC;
+	box-sizing:border-box;
+	position:relative;
+	left:-5px;
+}
+#BSa a span{
+	width:100%;
+	height:100px;
+	background:rgba(255,255,255,0.8);
+	position:absolute;
+	bottom:0px;
+	left:0px;
+}
+#BSa a span h1{
+	width:calc(100% - 20px);
+	font-size:24px;
+	font-weight:300;
+	margin:0px;
+	padding:0px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	position:absolute;
+	top:10px;
+	left:10px;
+}
+#BSa a span hr{
+	width:calc(100% - 20px);
+	background-color:#222;
+	height:2px;
+	border:none;
+	position:absolute;
+	top:43px;
+	left:10px;
+}
+#BSa a span h2{
+	width:calc(100% - 30px);
+	font-size:18px;
+	margin:0px;
+	padding:0px;
+	position:absolute;
+	bottom:10px;
+	left:15px;
+}
+#Foot{
+	width:100%;
+	height:310px;
+	background:#222;
+	position:absolute;
+	top:1140px;
+	left:0px;
+}
+#Foot hr{
+	width:calc(100% - 60px);
+	height:1px;
+	border:none;
+	background:#444;
+	position:absolute;
+	bottom:60px;
+	left:30px;
+}
+#FPu{
+	color:white;
+	padding:0px;
+	margin:0px;
+	font-size:16px;
+	position:absolute;
+	bottom:20px;
+	left:50px;
+}
+#FPu select{
+	display:inline-block;
+	font-size:14px;
+	color:white;
+	padding:6px 25px 6px 3px;
+	margin:0px 5px;
+	background:transparent;
+	border-top:none;
+	border-bottom:1px solid #E2E2E2;
+	border-left:none;
+	border-right:none;
+}
+#FLo,#FNo{
+	display:inline-block;
+	width:12px;
+	height:12px;
+	background-image:url("/images/multiplier_image.png");
+	background-size:200px 200px;
+	background-position:83px 78px;
+	pointer-events:none;
+	position:relative;
+	top:2px;
+	left:-22px;
+}
