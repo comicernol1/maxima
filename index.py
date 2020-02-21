@@ -19,8 +19,8 @@ class HomeCSSHand(tornado.web.RequestHandler):
 class KelimartCookiesHand(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
-            self.set_header('Content-Type', 'text/css')
-            with open("/root/maxima/kelimart/i.css", "r") as kelimart_cookies_html:
+            self.set_header('Content-Type', 'text/html')
+            with open("/root/maxima/kelimart/cookies/index.html", "r") as kelimart_cookies_html:
                 self.write(kelimart_cookies_html.read())
             kelimart_cookies_html.close()
 
