@@ -1,6 +1,6 @@
 import os,tornado.web,tornado.ioloop
 
-class homeHTMLHandler(tornado.web.RequestHandler):
+class HomeHTMLHandler(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com":
             self.set_header('Content-Type', 'text/html')
@@ -8,7 +8,7 @@ class homeHTMLHandler(tornado.web.RequestHandler):
                 self.write(kelimart_home_html.read())
             kelimart_home_html.close()
 
-class homeCSSHandler(tornado.web.RequestHandler):
+class HomeCSSHandler(tornado.web.RequestHandler):
     def get(self):
         self.set_header('Content-Type', 'text/css')
         with open("/root/maxima/kelimart/i.css", "r") as kelimart_home_css:
@@ -32,8 +32,8 @@ class Favicon64Handler(tornado.web.RequestHandler):
 
 if __name__ == "__main__":
     app = tornado.web.Application([
-        (r"/", homeHTMLHandler),
-        (r"/pull/i.css", homeCSSHandler),
+        (r"/", HomeHTMLHandler),
+        (r"/pull/i.css", HomeCSSHandler),
         (r"/images/multiplier_image.png", MultiplierImageHandler),
         (r"/images/Faroe_Logo_64.png", Favicon64Handler)
     ])
