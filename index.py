@@ -1,35 +1,35 @@
 import os,tornado.web,tornado.ioloop
 
-with open("/root/maxima/kelimart/index.html", "r") as kelimart_home_html_f:
-    kelimart_home_html = kelimart_home_html_f.read()
 class homeHTMLHandler(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com":
             self.set_header('Content-Type', 'text/html')
-            self.write(kelimart_home_html)
-        
-with open("/root/maxima/kelimart/i.css", "r") as kelimart_home_css_f:
-    kelimart_home_css = kelimart_home_css_f.read()
+            with open("/root/maxima/kelimart/index.html", "r") as kelimart_home_html:
+                self.write(kelimart_home_html.read())
+            kelimart_home_html.close()
+
 class homeCSSHandler(tornado.web.RequestHandler):
     def get(self):
         self.set_header('Content-Type', 'text/css')
-        self.write(kelimart_home_css)
+        with open("/root/maxima/kelimart/i.css", "r") as kelimart_home_css:
+            self.write(kelimart_home_css.read())
+        kelimart_home_css.close()
 
-with open("/root/maxima/images/multiplier_image.png", "rb") as maxima_img_multiplier_f:
-    maxima_img_multiplier = maxima_img_multiplier_f.read()
 class MultiplierImageHandler(tornado.web.RequestHandler):
     def get(self):
         self.set_header('Content-Type', 'image/png')
-        self.write(maxima_img_multiplier)
-        
-with open("/root/maxima/kelimart/images/Faroe_Logo_64.png", "rb") as kelimart_favicon_64_f:
-    kelimart_favicon_64 = kelimart_favicon_64_f.read()
+        with open("/root/maxima/images/multiplier_image.png", "rb") as maxima_img_multiplier:
+            self.write(maxima_img_multiplier.read())
+        maxima_img_multiplier.close()
+
 class Favicon64Handler(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com":
             self.set_header('Content-Type', 'image/png')
-            self.write(kelimart_favicon_64)
-    
+            with open("/root/maxima/kelimart/images/Faroe_Logo_64.png", "rb") as kelimart_favicon_64:
+                self.write(kelimart_favicon_64.read())
+            kelimart_favicon_64.close()
+
 if __name__ == "__main__":
     app = tornado.web.Application([
         (r"/", homeHTMLHandler),
