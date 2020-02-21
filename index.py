@@ -28,6 +28,9 @@ class KelimartCookiesHand(tornado.web.RequestHandler):
             with open("/root/maxima/kelimart/cookies/index.html", "r") as kelimart_cookies_html:
                 self.write(kelimart_cookies_html.read())
             kelimart_cookies_html.close()
+            self.set_status(200)
+        else:
+            self.set_status(404)
 
 class MultiplierImageHand(tornado.web.RequestHandler):
     def get(self):
