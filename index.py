@@ -10,7 +10,6 @@ class HomeHTMLHand(tornado.web.RequestHandler):
             self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
             self.set_header("Access-Control-Max-Age", 1000)
             self.set_header("Access-Control-Allow-Headers", "*")
-            self.set_header("Server", "")
             with open("/root/maxima/kelimart/index.html", "r") as kelimart_home_html:
                 self.write(kelimart_home_html.read())
             kelimart_home_html.close()
