@@ -4,6 +4,12 @@ class HomeHTMLHand(tornado.web.RequestHandler):
     def get(self):
         if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
             self.set_header("Content-Type", "text/html")
+            self.set_header("Access-Control-Allow-Origin", "*")
+            self.set_header("Access-Control-Allow-Headers", "*")
+            self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+            self.set_header("Access-Control-Max-Age", 1000)
+            self.set_header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Origin, Access-Control-Allow-Headers, X-Requested-By, Access-Control-Allow-Methods")
+            self.set_status(200)
             with open("/root/maxima/kelimart/index.html", "r") as kelimart_home_html:
                 self.write(kelimart_home_html.read())
             kelimart_home_html.close()
@@ -25,10 +31,10 @@ class KelimartCookiesHand(tornado.web.RequestHandler):
             self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
             self.set_header("Access-Control-Max-Age", 1000)
             self.set_header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Origin, Access-Control-Allow-Headers, X-Requested-By, Access-Control-Allow-Methods")
+            self.set_status(200)
             with open("/root/maxima/kelimart/cookies/index.html", "r") as kelimart_cookies_html:
                 self.write(kelimart_cookies_html.read())
             kelimart_cookies_html.close()
-            self.set_status(200)
         else:
             self.set_status(404)
 
