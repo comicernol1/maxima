@@ -1,19 +1,12 @@
 import os,tornado.web,tornado.ioloop
-from handlers import FranzarHomeHand,FranzarSignInHand,FranzarSignUpHand
+from handlers import HomeHand,SignInHand,SignUpHand
 from settings import settings
 
 if __name__ == "__main__":
     app = tornado.web.Application([
-        (HostMatches("kelimart.com"), [
-            (r"/", FranzarHomeHand),
-            (r"/sign_in/", FranzarSignInHand),
-            (r"/sign_up/", FranzarSignUpHand)
-        ]),
-        (HostMatches("selvetti.com"), [
-            (r"/", SelvettiHomeHand),
-            (r"/sign_in/", SelvettiSignInHand),
-            (r"/sign_up/", SelvettiSignUpHand)
-        ])
+        (r"/", HomeHand),
+        (r"/sign_in/", SignInHand),
+        (r"/sign_up/", SignUpHand)
     ], **settings)
 
     app.listen(80)
