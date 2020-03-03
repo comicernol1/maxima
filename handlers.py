@@ -9,7 +9,7 @@ db = mysql.connector.connect(
 )
 mycursor = db.cursor()
 
-class FranzarHomeHand(tornado.web.RequestHandler):
+class HomeHand(tornado.web.RequestHandler):
   def get(self):
     self.set_status(200)
     self.set_header("Content-Type", "text/html")
@@ -20,7 +20,7 @@ class FranzarHomeHand(tornado.web.RequestHandler):
     self.set_header("Access-Control-Allow-Headers", "*")
     self.render('index.html')
 
-class FranzarSignInHand(tornado.web.RequestHandler):
+class SignInHand(tornado.web.RequestHandler):
   def get(self):
     self.set_status(200)
     self.set_header("Content-Type", "text/html")
@@ -41,7 +41,7 @@ class FranzarSignInHand(tornado.web.RequestHandler):
       mycursor.execute(SignInRequestDBInsert)
       db.commit()
 
-class FranzarSignUpHand(tornado.web.RequestHandler):
+class SignUpHand(tornado.web.RequestHandler):
   def get(self):
     self.set_status(200)
     self.set_header("Content-Type", "text/html")
