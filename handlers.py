@@ -29,6 +29,7 @@ class SignInHand(tornado.web.RequestHandler):
       self.set_status(404)
 
     def post(self):
+      if self.request.host=="kelimart.com" or self.request.host=="www.kelimart.com":
         SignInRequestBody=self.request.body.decode('utf-8')
         SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
         
@@ -37,6 +38,8 @@ class SignInHand(tornado.web.RequestHandler):
         SignInRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignInRequestEmail, SignInRequestPassword)
         mycursor.execute(SignInRequestDBInsert)
         db.commit()
+      else:
+        self.set_status(404)
 
 class SignUpHand(tornado.web.RequestHandler):
   def get(self):
@@ -62,5 +65,7 @@ class SignUpHand(tornado.web.RequestHandler):
       SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
       mycursor.execute(SignUpRequestDBInsert)
       db.commit()
+    else:
+      self.set_status(404)
 
 db.close()
