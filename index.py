@@ -3,7 +3,7 @@ from handlers import FranzarHomeHand,FranzarSignInHand,FranzarSignUpHand
 from settings import settings
 
 if __name__ == "__main__":
-    app = web.Application([
+    app = tornado.web.Application([
         (HostMatches("kelimart.com"), [
             (r"/", FranzarHomeHand),
             (r"/sign_in/", FranzarSignInHand),
