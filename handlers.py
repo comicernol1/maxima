@@ -55,11 +55,18 @@ class SignUpHand(tornado.web.RequestHandler):
     def post(self):
         SignUpRequestBody=self.request.body.decode('utf-8')
         SignUpRequestEmail=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
-
-        SignUpRequestPasswordPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):len(SignUpRequestBody)])
         SignUpRequestPassword=ph.hash(SignUpRequestPasswordPre)
-        SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
-        mycursor.execute(SignUpRequestDBInsert)
-        db.commit()
+        SignUpRequestPasswordPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
+        SignUpRequestPasswordAgain=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
+        if len(RequestPasswordPre)>=8 and RequestPasswordPre==SignUpRequestPasswordAgain:
+            SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
+            mycursor.execute(SignUpRequestDBInsert)
+            db.commit()
+        elif len(RequestPasswordPre)<8:
+            pass
+        elif RequestPasswordPre!=SignUpRequestPasswordAgain:
+            pass
+        else:
+            pass
 
 db.close()
