@@ -69,5 +69,3 @@ class SignUpHand(tornado.web.RequestHandler):
             pass
         else:
             pass
-
-db.close()
