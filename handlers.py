@@ -1,6 +1,6 @@
 import os,base64,tornado.web,urllib.parse,mysql.connector
 from cryptography.fernet import Fernet
-Enc32a = Fernet(base64.b64encode(os.environ["enc32a"].encode()))
+Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 db = mysql.connector.connect(
     host="localhost",
     user="maxima",
