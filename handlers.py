@@ -1,6 +1,6 @@
-import os,tornado.web,urllib.parse,mysql.connector
-from argon2 import PasswordHasher
-ph = PasswordHasher()
+import os,base64,tornado.web,urllib.parse,mysql.connector
+from cryptography.fernet import Fernet
+Enc32a = Fernet(base64.b64encode(os.environ["enc32a"].encode()))
 db = mysql.connector.connect(
     host="localhost",
     user="maxima",
@@ -55,8 +55,8 @@ class SignUpHand(tornado.web.RequestHandler):
     def post(self):
         SignUpRequestBody=self.request.body.decode('utf-8')
         SignUpRequestEmail=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
-        SignUpRequestPassword=ph.hash(SignUpRequestPasswordPre)
         SignUpRequestPasswordPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
+        SignUpRequestPassword=Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
         SignUpRequestPasswordAgain=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
         if len(RequestPasswordPre)>=8 and RequestPasswordPre==SignUpRequestPasswordAgain:
             SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
