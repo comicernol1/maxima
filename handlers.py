@@ -1,10 +1,11 @@
-import os,base64,tornado.web,urllib.parse,mysql.connector
+import os,base64,tornado.web,urllib.parse,mysql.connector,requests
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 db = mysql.connector.connect(
-    host="localhost",
+    host="127.0.0.1",
+    port=3306,
     user="maxima",
-    passwd=str(os.environ["MYSQL_MAXIMA_PASSWD"]),
+    password=str(os.environ["MYSQL_MAXIMA_PASSWD"]),
     database="franzar"
 )
 mycursor = db.cursor()
