@@ -10,6 +10,8 @@ db = mysql.connector.connect(
 )
 mycursor = db.cursor()
 
+# Don't forget to eventually close the MySQL connection
+
 class HomeHand(tornado.web.RequestHandler):
     def get(self):
         self.set_status(200)
