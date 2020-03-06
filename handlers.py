@@ -1,4 +1,4 @@
-import os,base64,tornado.web,urllib.parse,mysql.connector
+import os,base64,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
@@ -69,3 +69,13 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
             mycursor.execute(SignUpRequestDBInsert)
             db.commit()
+            SignUpSMTPTemplate="<center><h1>Please click here to verify your email address:</h1><br><a href=\"http://www.kelimart.com/verify/?e=stuff\">Click Here</a></center>"
+            SignUpSMTPHeaders="\r\n".join(["from: comicernol@gmail.com","subject: Testing","to:"+SignUpRequestEmail,"mime-version: 1.0","content-type: text/html"])
+            SignUpSMTPContent=SignUpSMTPHeaders+"\r\n\r\n"+SignUpSMTPTemplate
+            SignUpMail=smtplib.SMTP('smtp.gmail.com',587)
+            SignUpMail.ehlo()
+            SignUpMail.starttls()
+            SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
+            SignUpMail.sendmail('comicernol@gmail.com','reedsienkiewicz@gmail.com',SignUpSMTPContent)
+            SignUpMail.close()
+            
