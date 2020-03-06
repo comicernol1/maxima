@@ -62,7 +62,6 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpRequestEmail=Enc32b.encrypt(SignUpRequestEmailPre.encode()).decode('utf-8')
         SignUpRequestDBSelectEmail="SELECT COUNT(*) from compacc where email='{0:s}'".format(SignUpRequestEmail)
         mycursor.execute(SignUpRequestDBSelectEmail)
-        db.commit()
         QueryCountEmail=mycursor.fetchone()
         SignUpRequestPasswordPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
         SignUpRequestPassword=Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
