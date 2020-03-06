@@ -76,6 +76,6 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpMail.ehlo()
             SignUpMail.starttls()
             SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
-            SignUpMail.sendmail('comicernol@gmail.com','reedsienkiewicz@gmail.com',SignUpSMTPContent)
+            SignUpMail.sendmail('comicernol@gmail.com',SignUpRequestEmail,SignUpSMTPContent)
             SignUpMail.close()
             
