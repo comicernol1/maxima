@@ -60,10 +60,14 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpRequestBody=self.request.body.decode('utf-8')
         SignUpRequestEmailPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
         SignUpRequestEmail=Enc32b.encrypt(SignUpRequestEmailPre.encode()).decode('utf-8')
+        SignUpRequestDBSelectEmail="SELECT COUNT(*) from compacc where email='{0:s}'".format(SignUpRequestEmail)
+        mycursor.execute(SignUpRequestDBSelectEmail)
+        db.commit()
+        QueryCountEmail=mycursor.fetchone()
         SignUpRequestPasswordPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
         SignUpRequestPassword=Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
         SignUpRequestPasswordAgain=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
-        if len(SignUpRequestPasswordPre)>=8 and SignUpRequestPasswordPre==SignUpRequestPasswordAgain:
+        if len(SignUpRequestPasswordPre)>=8 and SignUpRequestPasswordPre==SignUpRequestPasswordAgain and int(QueryCountEmail)<1:
             SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
             mycursor.execute(SignUpRequestDBInsert)
             db.commit()
