@@ -58,8 +58,7 @@ class SignUpHand(tornado.web.RequestHandler):
 
     def post(self):
         SignUpRequestBody=self.request.body.decode('utf-8')
-        SignUpRequestEmailPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
-        SignUpRequestEmail=Enc32b.encrypt(SignUpRequestEmailPre.encode()).decode('utf-8')
+        SignUpRequestEmail=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
         SignUpRequestDBSelectEmail="SELECT COUNT(*) from compacc where email='{0:s}'".format(SignUpRequestEmail)
         mycursor.execute(SignUpRequestDBSelectEmail)
         QueryCountEmail=mycursor.fetchone()
