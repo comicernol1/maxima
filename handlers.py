@@ -69,7 +69,7 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
             mycursor.execute(SignUpRequestDBInsert)
             db.commit()
-            with open("/root/maxima/static/sign_up/conf_email_template.html") as SignUpSMPTTemplate_F:
+            with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
                 SignUpSMTPTemplate=SignUpSMPTTemplate_F.read()
             SignUpSMTPHeaders="\r\n".join(["from: comicernol@gmail.com","subject: Testing","to:"+SignUpRequestEmail,"mime-version: 1.0","content-type: text/html"])
             SignUpSMTPContent=SignUpSMTPHeaders+"\r\n\r\n"+SignUpSMTPTemplate
