@@ -1,6 +1,7 @@
 import os,base64,tornado.web,urllib.parse,mysql.connector
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
+Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
 db = mysql.connector.connect(
     host="127.0.0.1",
     port=3306,
@@ -57,7 +58,8 @@ class SignUpHand(tornado.web.RequestHandler):
 
     def post(self):
         SignUpRequestBody=self.request.body.decode('utf-8')
-        SignUpRequestEmail=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
+        SignUpRequestEmailPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
+        SignUpRequestEmail=Enc32b.encrypt(SignUpRequestEmailPre.encode()).decode('utf-8')
         SignUpRequestPasswordPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
         SignUpRequestPassword=Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
         SignUpRequestPasswordAgain=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
