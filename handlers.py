@@ -67,9 +67,3 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
             mycursor.execute(SignUpRequestDBInsert)
             db.commit()
-        elif len(SignUpRequestPasswordPre)<8:
-            pass
-        elif SignUpRequestPasswordPre!=SignUpRequestPasswordAgain:
-            pass
-        else:
-            pass
