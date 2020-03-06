@@ -78,4 +78,8 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
             SignUpMail.sendmail('comicernol@gmail.com',SignUpRequestEmail,SignUpSMTPContent)
             SignUpMail.close()
-            
+            self.render('sign_up/conf_sent.html')
+        elif int(QueryCountEmail[0])>=1:
+            self.render('sign_in/exists.html')
+        else:
+            self.render('sign_up/error.html')
