@@ -67,7 +67,7 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpRequestPasswordPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
         SignUpRequestPassword=Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
         SignUpRequestPasswordAgain=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
-        if len(SignUpRequestPasswordPre)>=8 and SignUpRequestPasswordPre==SignUpRequestPasswordAgain and int(QueryCountEmail)<1:
+        if len(SignUpRequestPasswordPre)>=8 and SignUpRequestPasswordPre==SignUpRequestPasswordAgain and int(QueryCountEmail[0])<1:
             SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
             mycursor.execute(SignUpRequestDBInsert)
             db.commit()
