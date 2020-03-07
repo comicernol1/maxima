@@ -33,7 +33,7 @@ class SignInHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         self.set_header("Access-Control-Max-Age", 1000)
         self.set_header("Access-Control-Allow-Headers", "*")
-        self.render('sign_in.html')
+        self.render('sign_in/index.html')
 
     def post(self):
         SignInRequestBody=self.request.body.decode('utf-8')
@@ -54,7 +54,7 @@ class SignUpHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         self.set_header("Access-Control-Max-Age", 1000)
         self.set_header("Access-Control-Allow-Headers", "*")
-        self.render('sign_up.html')
+        self.render('sign_up/index.html')
 
     def post(self):
         SignUpRequestBody=self.request.body.decode('utf-8')
