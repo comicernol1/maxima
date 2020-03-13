@@ -15,10 +15,12 @@ mycursor = db.cursor()
 
 class HomeHand(tornado.web.RequestHandler):
     def get(self):
-        HomeProductList = "<p>TESTING</p>"
+        HomeProductList=""
+        for i in range(0,1):
+            HomeProductList+="<a href=\"/product/"+str(i)+"/\"><div class=\"BPX\"><span><abbr></abbr></span><h6>Product "+str(i)+"</h6><h1>$18.00</h1></div></a>\n"
         HomeIndexF = open("/root/maxima/req/index.html", "r")
         HomeIndex = HomeIndexF.read()
-        HomeIndex = HomeIndex.replace("<% Products %>", "<p>TESTING</p>")
+        HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
         self.set_header("Access-Control-Allow-Origin", "*")
