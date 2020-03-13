@@ -15,6 +15,10 @@ mycursor = db.cursor()
 
 class HomeHand(tornado.web.RequestHandler):
     def get(self):
+        HomeProductList = "<p>TESTING</p>"
+        HomeIndexF = open("/root/maxima/req/index.html", "r")
+        HomeIndex = HomeIndexF.read()
+        HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
         self.set_header("Access-Control-Allow-Origin", "*")
@@ -22,7 +26,7 @@ class HomeHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         self.set_header("Access-Control-Max-Age", 1000)
         self.set_header("Access-Control-Allow-Headers", "*")
-        self.render('index.html')
+        self.write(HomeIndex)
 
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
