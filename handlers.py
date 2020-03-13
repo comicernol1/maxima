@@ -18,7 +18,7 @@ class HomeHand(tornado.web.RequestHandler):
         HomeProductList = "<p>TESTING</p>"
         HomeIndexF = open("/root/maxima/req/index.html", "r")
         HomeIndex = HomeIndexF.read()
-        HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
+        HomeIndex = HomeIndex.replace("<% Products %>", "<p>TESTING</p>")
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
         self.set_header("Access-Control-Allow-Origin", "*")
