@@ -33,6 +33,11 @@ class HomeHand(tornado.web.RequestHandler):
 
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
+        with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
+                SignInIndex=SignInIndex_F.read()
+        SignInIndex = SignInIndex.replace("<% ShowError %>","none")
+        SignInIndex = SignInIndex.replace("<% ErrorMsg %>","")
+        
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
         self.set_header("Access-Control-Allow-Origin", "*")
@@ -40,7 +45,7 @@ class SignInHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         self.set_header("Access-Control-Max-Age", 1000)
         self.set_header("Access-Control-Allow-Headers", "*")
-        self.render('sign_in/index.html')
+        self.write(SignInIndex)
 
     def post(self):
         SignInRequestBody=self.request.body.decode('utf-8')
