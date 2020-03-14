@@ -102,10 +102,10 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpMail.close()
             self.render('sign_up/conf_sent.html')
         elif int(QueryCountEmail[0])>=1:
-            SignInIndex.replace("<% ShowError %>","block")
-            SignInIndex.replace("<% ErrorMsg %>","Your account already exists.")
+            SignInIndex = SignInIndex.replace("<% ShowError %>","block")
+            SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Your account already exists.")
             self.write(SignInIndex)
         else:
-            SignUpIndex.replace("<% ShowError %>","block")
-            SignUpIndex.replace("<% ErrorMsg %>","Something went wrong, please try again")
+            SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
+            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Something went wrong, please try again")
             self.render(SignUpIndex)
