@@ -18,9 +18,10 @@ class HomeHand(tornado.web.RequestHandler):
         HomeProductList=""
         for i in range(0,1):
             HomeProductList+="<a href=\"/product/"+str(i)+"/\"><div class=\"BPX\"><span><abbr></abbr></span><h6>Product "+str(i)+"</h6><h1>$18.00</h1></div></a>\n"
-        HomeIndexF = open("/root/maxima/req/index.html", "r")
-        HomeIndex = HomeIndexF.read()
+        with open("/root/maxima/req/index.html") as HomeIndex_F:
+                HomeIndex=HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
+        
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
         self.set_header("Access-Control-Allow-Origin", "*")
@@ -44,7 +45,6 @@ class SignInHand(tornado.web.RequestHandler):
     def post(self):
         SignInRequestBody=self.request.body.decode('utf-8')
         SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
-
         SignInRequestPasswordPre=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
         SignInRequestPassword=ph.hash(SignInRequestPasswordPre)
         SignInRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignInRequestEmail, SignInRequestPassword)
@@ -53,6 +53,11 @@ class SignInHand(tornado.web.RequestHandler):
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
+        with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
+                SignUpIndex=SignUpIndex_F.read()
+        SignUpIndex.replace("<% ShowError %>","none")
+        SignUpIndex.replace("<% ErrorMsg %>","")
+        
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
         self.set_header("Access-Control-Allow-Origin", "*")
@@ -60,9 +65,14 @@ class SignUpHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         self.set_header("Access-Control-Max-Age", 1000)
         self.set_header("Access-Control-Allow-Headers", "*")
-        self.render('sign_up/index.html')
+        self.write(SignUpIndex)
 
     def post(self):
+        with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
+                SignUpIndex=SignUpIndex_F.read()
+        with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
+                SignInIndex=SignInIndex_F.read()
+        
         SignUpRequestBody=self.request.body.decode('utf-8')
         SignUpRequestEmail=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
         SignUpRequestDBSelectEmail="SELECT COUNT(*) from compacc where email='{0:s}'".format(SignUpRequestEmail)
@@ -87,6 +97,10 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpMail.close()
             self.render('sign_up/conf_sent.html')
         elif int(QueryCountEmail[0])>=1:
-            self.render('sign_in/exists.html')
+            SignInIndex.replace("<% ShowError %>","block")
+            SignInIndex.replace("<% ErrorMsg %>","Your account already exists.")
+            self.write(SignInIndex)
         else:
-            self.render('sign_up/error.html')
+            SignUpIndex.replace("<% ShowError %>","block")
+            SignUpIndex.replace("<% ErrorMsg %>","Something went wrong, please try again")
+            self.render(SignUpIndex)
