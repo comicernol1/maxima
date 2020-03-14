@@ -18,9 +18,10 @@
     <link rel="preload" href="/static/multiplier_image.png" as="image">
 </head>
 <body>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
 <ul id="Hm">
-    <li><a href="/">Home</a></li> |
-    <li><a href="/shop/">Shop</a></li> |
+    <li><a href="/">Home</a></li>
+    <li><a href="/shop/">Shop</a></li>
     <li><a href="/contact/">Contact</a></li>
 </ul>
 <div class="ser" id="suer"><% ErrorMsg %></div>
@@ -298,11 +299,16 @@
     </p>
 </footer>
 <script>
+Hm=document.getElementById("Hm");
 su_form=document.getElementById("su_form");
 suer=document.getElementById("suer");
 suem=document.getElementById("suem");
 supw=document.getElementById("supw");
 supa=document.getElementById("supa");
+function M_menu_show(){Hm.style.display="block";}
+function M_menu_hide(){Hm.style.display="none";}
+if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
+document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
 function valEm(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
