@@ -55,8 +55,8 @@ class SignUpHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
                 SignUpIndex=SignUpIndex_F.read()
-        SignUpIndex.replace("<% ShowError %>","none")
-        SignUpIndex.replace("<% ErrorMsg %>","")
+        SignUpIndex = SignUpIndex.replace("<% ShowError %>","none")
+        SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","")
         
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
