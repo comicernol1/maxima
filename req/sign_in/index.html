@@ -25,7 +25,7 @@
     <li><a href="/contact/">Contact</a></li>
     <div id="M_H_close" onclick="M_menu_hide()"></div>
 </ul>
-<div class="ser" id="sier"></div>
+<div class="ser" id="sier"><% ErrorMsg %></div>
 <div id="rg_block" hg="i">
     <a class="sign_x" id="sign_x_in" s="y">Sign In</a>
     <a class="sign_x" id="sign_x_up" s="n" href="/sign_up/">Sign Up</a>
@@ -61,6 +61,9 @@ function sb_si(){
 function M_menu_show(){Hm.style.display="block";}
 function M_menu_hide(){Hm.style.display="none";}
 </script>
+<style>
+#sier{display:<% ShowError %>}
+</style>
 <footer id="Foot">
     <table id="Ft"><tbody>
         <tr><th>About</th><th>Legal</th></tr>
