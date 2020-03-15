@@ -53,24 +53,29 @@ class SignInHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex=SignInIndex_F.read()
         SignInRequestBody=self.request.body.decode('utf-8')
-        SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
-        SignInRequestPassword=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
-        SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
-        mycursor.execute(SignInRequestDBSelectEmail)
-        QueryEmailPwPre=mycursor.fetchone()
-        if QueryEmailPwPre:
-            QueryEmailPw=QueryEmailPwPre[0].encode()
-            SignInQueryPassword=Enc32a.decrypt(QueryEmailPw).decode('utf-8')
-            if SignInQueryPassword==SignInRequestPassword:
-                self.write("Signed In")
+        if SignInRequestBody.find("siem=")>=0 && SignInRequestBody.find("sipw=")>=0:
+            SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
+            SignInRequestPassword=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
+            SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
+            mycursor.execute(SignInRequestDBSelectEmail)
+            QueryEmailPwPre=mycursor.fetchone()
+            if QueryEmailPwPre:
+                QueryEmailPw=QueryEmailPwPre[0].encode()
+                SignInQueryPassword=Enc32a.decrypt(QueryEmailPw).decode('utf-8')
+                if SignInQueryPassword==SignInRequestPassword:
+                    self.write("Signed In")
+                else:
+                    SignInIndex = SignInIndex.replace("<% ShowError %>","block")
+                    SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Incorrect Password")
+                    self.write(SignInIndex)
             else:
                 SignInIndex = SignInIndex.replace("<% ShowError %>","block")
-                SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Incorrect Password")
+                SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Account already exists")
                 self.write(SignInIndex)
         else:
             SignInIndex = SignInIndex.replace("<% ShowError %>","block")
-            SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Account already exists")
-            self.write(SignInIndex)
+                SignInIndex = SignInIndex.replace("<% ErrorMsg %>","(N1) Something went wrong, please try again")
+                self.write(SignInIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
@@ -127,7 +132,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 self.write(SignUpIndex)
             else:
                 SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
-                SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Something went wrong (1), please try again")
+                SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P1) Something went wrong, please try again")
                 self.write(SignUpIndex)
         elif SignUpRequestBody.find("rsve=")>=0:
             SignUpRSVEEmail=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)])
@@ -145,5 +150,5 @@ class SignUpHand(tornado.web.RequestHandler):
             self.write(SignUpConf)
         else:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
-            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Something went wrong (2), please try again")
+            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P2) Something went wrong, please try again")
             self.write(SignUpIndex)
