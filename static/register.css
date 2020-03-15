@@ -76,7 +76,7 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
     #HMs a{width:calc(100% - 60px);height:50px;float:unset;color:#FAFAFF !important;padding:10px 0px !important;background:#008148;border:none;border-radius:4px;box-sizing:border-box;position:absolute;bottom:30px;left:30px;}
     #rg_block{width:calc(100% - 40px);left:20px;}
     #rg_block[hg="i"]{height:330px;top:150px;}
-    #rg_block[hg="u"]{height:470px;top:90px;}
+    #rg_block[hg="u"]{height:470px;top:110px;}
     #rg_block[hg="uv"]{top:170px;}
     #rg_block a.sign_x{font-size:24px;padding:15px 0px;}
     #rg_block input[type="email"], #rg_block input[type="password"]{width:calc(100% - 30px);padding:0 15px 0 25px;left:15px;}
@@ -85,6 +85,8 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
     #suua{width:calc(100% - 30px);top:320px;left:15px;}
     .rgsb{width:calc(100% - 30px);left:15px;}
     .ser{width:calc(100% - 40px);padding:10px 12px;left:20px;}
+    #suer{top:60px;}
+    #sier{top:95px;}
     #rg_block[hg="i"] .rgsb{top:260px;}
     #rg_block[hg="u"] .rgsb{top:400px;}
     #siem,#suem{top:80px;}
