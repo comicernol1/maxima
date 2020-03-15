@@ -116,7 +116,8 @@ class SignUpHand(tornado.web.RequestHandler):
                 db.commit()
                 with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
                     SignUpSMTPTemplate=SignUpSMPTTemplate_F.read()
-                SignUpSMTPTemplate = SignUpSMTPTemplate.replace("<% UserCode %>",random.randint(1000000000,9999999999))
+                SignUpVerifyCode=str(random.randint(1000000000,9999999999))
+                SignUpSMTPTemplate = SignUpSMTPTemplate.replace("<% UserCode %>",SignUpVerifyCode)
                 SignUpSMTPHeaders="\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+SignUpRequestEmail,"mime-version: 1.0","content-type: text/html"])
                 SignUpSMTPContent=SignUpSMTPHeaders+"\r\n\r\n"+SignUpSMTPTemplate
                 SignUpMail=smtplib.SMTP('smtp.gmail.com',587)
