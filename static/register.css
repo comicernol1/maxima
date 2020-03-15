@@ -28,7 +28,7 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
 #rg_block{width:400px;background:#FAFAFF;border-radius:6px;overflow:hidden;position:absolute;left:calc(50% - 200px);}
 #rg_block[hg="u"]{height:490px;top:160px;}
 #rg_block[hg="uv"]{height:300px;text-align:center;top:220px;}
-#suv_h{width:340px;margin:0px;font-size:16px;font-weight:300;position:absolute;top:30px;left:30px;}
+#suv_h{width:calc(100% - 60px);margin:0px;font-size:16px;font-weight:300;position:absolute;top:30px;left:30px;}
 #rg_block[hg="i"]{height:350px;top:200px;}
 #rg_block a.sign_x{width:50%;text-align:center;font-size:28px;color:#0A0908;text-decoration:none;margin:0;padding:20px 0;position:absolute;top:0;}
 #rg_block a.sign_x[s="y"]{background:transparent;}
@@ -87,12 +87,12 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
     .ser{width:calc(100% - 40px);padding:10px 12px;left:20px;}
     #suer{top:60px;}
     #sier{top:95px;}
+    #suv_h{width:calc(100% - 20px);left:10px;}
     #rg_block[hg="i"] .rgsb{top:260px;}
     #rg_block[hg="u"] .rgsb{top:400px;}
     #siem,#suem{top:80px;}
     #sipw,#supw{top:160px;}
     #supa{top:245px;}
-    #suv_h{width:300px;left:10px;}
     #Foot{height:340px;top:600px;}
     #Ft{width:calc(100% - 60px);left:30px;}
     #Ft tr th{font-size:14px;padding:5px 0px;}
