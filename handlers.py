@@ -74,8 +74,8 @@ class SignInHand(tornado.web.RequestHandler):
                 self.write(SignInIndex)
         else:
             SignInIndex = SignInIndex.replace("<% ShowError %>","block")
-                SignInIndex = SignInIndex.replace("<% ErrorMsg %>","(N1) Something went wrong, please try again")
-                self.write(SignInIndex)
+            SignInIndex = SignInIndex.replace("<% ErrorMsg %>","(N1) Something went wrong, please try again")
+            self.write(SignInIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
