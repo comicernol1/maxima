@@ -50,12 +50,18 @@ class SignInHand(tornado.web.RequestHandler):
     def post(self):
         SignInRequestBody=self.request.body.decode('utf-8')
         SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
-        SignInRequestPasswordPre=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
+        SignInRequestPassword=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
         SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
         mycursor.execute(SignInRequestDBSelectEmail)
         QueryEmailPw=mycursor.fetchone()[0].encode()
-        SignInRequestPassword=Enc32a.decrypt(QueryEmailPw)
-        self.write(SignInRequestPassword)
+        SignInQueryPassword=Enc32a.decrypt(QueryEmailPw)
+        if QueryEmailPw!="":
+            if SignInQueryPassword==SignInRequestPassword:
+                self.write("Signed In")
+            else:
+                self.write("Incorrect Password")
+        else:
+            self.write("Account does not exist")
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
