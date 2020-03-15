@@ -69,7 +69,7 @@ class SignInHand(tornado.web.RequestHandler):
                 self.write(SignInIndex)
         else:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
-            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Account does not exist")
+            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Account does not exist. Please create one.")
             self.write(SignUpIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
