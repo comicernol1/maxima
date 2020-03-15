@@ -112,7 +112,7 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestPasswordAgain=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
             if SignUpRequestBody.find("rsve=y") and len(SignUpRequestPasswordPre)>=8 and SignUpRequestPasswordPre==SignUpRequestPasswordAgain and int(QueryCountEmail[0])<1:
                 SignUpVerifyCode=str(random.randint(1000000000,9999999999))
-                SignUpRequestDBInsert="INSERT INTO compacc (userid,email,veremail,passwd) VALUES ('{0:i}','{1:s}',0,'{2:s}')".format(SignUpVerifyCode,SignUpRequestEmail,SignUpRequestPassword)
+                SignUpRequestDBInsert="INSERT INTO compacc (userid,email,veremail,passwd) VALUES ('{0:d}','{1:s}',0,'{2:s}')".format(SignUpVerifyCode,SignUpRequestEmail,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
                 with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
