@@ -36,7 +36,7 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
 #sign_x_in{left:0;}
 #sign_x_up{left:50%;}
 .ser{display:none;width:400px;height:40px;font-size:16px;padding:10px 20px;color:#FAFAFF;background:#D7263D;border:1px solid #FAFAFF;border-radius:6px;box-sizing:border-box;position:absolute;z-index:1;left:calc(50% - 200px);}
-#suer{top:90px;}
+#suer{top:100px;}
 #sier{top:140px;}
 #rg_block input[type="email"],#rg_block input[type="password"]{width:340px;height:60px;box-sizing:border-box;font-size:20px;color:#444054;padding:0 20px 0 40px;background:#E6E6E6;border:1px solid #E6E6E6;border-radius:4px;position:absolute;left:30px;}
 #siem{top:100px;}
