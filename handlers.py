@@ -111,8 +111,8 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestPassword=Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
             SignUpRequestPasswordAgain=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
             if SignUpRequestBody.find("rsve=y") and len(SignUpRequestPasswordPre)>=8 and SignUpRequestPasswordPre==SignUpRequestPasswordAgain and int(QueryCountEmail[0])<1:
-                # SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
-                # mycursor.execute(SignUpRequestDBInsert)
+                SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
+                mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
                 with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
                     SignUpSMTPTemplate=SignUpSMPTTemplate_F.read()
