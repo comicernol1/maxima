@@ -54,7 +54,7 @@ class SignInHand(tornado.web.RequestHandler):
         SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
         mycursor.execute(SignInRequestDBSelectEmail)
         QueryCountEmail=mycursor.fetchone()
-        self.write(QueryCountEmail)
+        self.write(str(QueryCountEmail).decode('utf-8'))
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
@@ -70,7 +70,7 @@ class SignUpHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         self.set_header("Access-Control-Max-Age", 1000)
         self.set_header("Access-Control-Allow-Headers", "*")
-        self.write(str(SignUpIndex).decode('utf-8'))
+        self.write(SignUpIndex)
 
     def post(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
