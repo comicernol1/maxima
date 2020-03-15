@@ -129,16 +129,19 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
                 SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Something went wrong (1), please try again")
                 self.write(SignUpIndex)
-        elif SignUpRequestBody.find("rsve=y")>=0:
-            SignUpSMTPHeaders="\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+SignUpRequestEmail,"mime-version: 1.0","content-type: text/html"])
+        elif SignUpRequestBody.find("rsve=")>=0:
+            SignUpRSVEEmail=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)])
+            with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
+                    SignUpSMTPTemplate=SignUpSMPTTemplate_F.read()
+            SignUpSMTPHeaders="\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+SignUpRSVEEmail,"mime-version: 1.0","content-type: text/html"])
             SignUpSMTPContent=SignUpSMTPHeaders+"\r\n\r\n"+SignUpSMTPTemplate
             SignUpMail=smtplib.SMTP('smtp.gmail.com',587)
             SignUpMail.ehlo()
             SignUpMail.starttls()
             SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
-            SignUpMail.sendmail('comicernol@gmail.com',SignUpRequestEmail,SignUpSMTPContent)
+            SignUpMail.sendmail('comicernol@gmail.com',SignUpRSVEEmail,SignUpSMTPContent)
             SignUpMail.close()
-            SignUpConf = SignUpConf.replace("<% Email %>",SignUpRequestEmail)
+            SignUpConf = SignUpConf.replace("<% Email %>",SignUpRSVEEmail)
             self.write(SignUpConf)
         else:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
