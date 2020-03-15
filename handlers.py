@@ -51,10 +51,10 @@ class SignInHand(tornado.web.RequestHandler):
         SignInRequestBody=self.request.body.decode('utf-8')
         SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
         SignInRequestPasswordPre=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
-        SignInRequestPassword=ph.hash(SignInRequestPasswordPre)
-        SignInRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignInRequestEmail, SignInRequestPassword)
-        mycursor.execute(SignInRequestDBInsert)
-        db.commit()
+        SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
+        mycursor.execute(SignInRequestDBSelectEmail)
+        QueryCountEmail=mycursor.fetchone()
+        self.write(QueryCountEmail)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
