@@ -53,8 +53,9 @@ class SignInHand(tornado.web.RequestHandler):
         SignInRequestPasswordPre=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
         SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
         mycursor.execute(SignInRequestDBSelectEmail)
-        QueryCountEmail=mycursor.fetchone()
-        self.write(str(QueryCountEmail).encode())
+        QueryEmailPw=mycursor.fetchone().encode()[0]
+        SignInRequestPassword=Enc32a.decrypt(QueryEmailPw)
+        self.write(SignInRequestPassword)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
