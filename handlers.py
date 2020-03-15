@@ -53,7 +53,7 @@ class SignInHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex=SignInIndex_F.read()
         SignInRequestBody=self.request.body.decode('utf-8')
-        if SignInRequestBody.find("siem=")>=0 && SignInRequestBody.find("sipw=")>=0:
+        if SignInRequestBody.find("siem=")>=0 and SignInRequestBody.find("sipw=")>=0:
             SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
             SignInRequestPassword=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
             SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
