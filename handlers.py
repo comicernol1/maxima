@@ -1,4 +1,4 @@
-import os,base64,tornado.web,urllib.parse,mysql.connector,smtplib
+import os,random,base64,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
@@ -116,6 +116,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 db.commit()
                 with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
                     SignUpSMTPTemplate=SignUpSMPTTemplate_F.read()
+                SignUpSMTPTemplate = SignUpSMTPTemplate.replace("<% UserCode %>",random.randint(1000000000,9999999999))
                 SignUpSMTPHeaders="\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+SignUpRequestEmail,"mime-version: 1.0","content-type: text/html"])
                 SignUpSMTPContent=SignUpSMTPHeaders+"\r\n\r\n"+SignUpSMTPTemplate
                 SignUpMail=smtplib.SMTP('smtp.gmail.com',587)
