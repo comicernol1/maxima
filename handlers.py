@@ -104,7 +104,7 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpRequestPasswordPre=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
         SignUpRequestPassword=Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
         SignUpRequestPasswordAgain=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
-        if len(SignUpRequestPasswordPre)>=8 and SignUpRequestPasswordPre==SignUpRequestPasswordAgain and int(QueryCountEmail[0])<1:
+        if SignUpRequestBody.find("rsve=y")==-1 and len(SignUpRequestPasswordPre)>=8 and SignUpRequestPasswordPre==SignUpRequestPasswordAgain and int(QueryCountEmail[0])<1:
             # SignUpRequestDBInsert="INSERT INTO compacc (email, passwd) VALUES ('{0:s}', '{1:s}')".format(SignUpRequestEmail, SignUpRequestPassword)
             # mycursor.execute(SignUpRequestDBInsert)
             db.commit()
@@ -120,10 +120,21 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpMail.close()
             SignUpConf = SignUpConf.replace("<% Email %>",SignUpRequestEmail)
             self.write(SignUpConf)
-        elif int(QueryCountEmail[0])>=1:
+        elif SignUpRequestBody.find("rsve=y")==-1 and int(QueryCountEmail[0])>=1:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
             SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","This account already exists")
             self.write(SignUpIndex)
+        elif SignUpRequestBody.find("rsve=y")>=0:
+            SignUpSMTPHeaders="\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+SignUpRequestEmail,"mime-version: 1.0","content-type: text/html"])
+            SignUpSMTPContent=SignUpSMTPHeaders+"\r\n\r\n"+SignUpSMTPTemplate
+            SignUpMail=smtplib.SMTP('smtp.gmail.com',587)
+            SignUpMail.ehlo()
+            SignUpMail.starttls()
+            SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
+            SignUpMail.sendmail('comicernol@gmail.com',SignUpRequestEmail,SignUpSMTPContent)
+            SignUpMail.close()
+            SignUpConf = SignUpConf.replace("<% Email %>",SignUpRequestEmail)
+            self.write(SignUpConf)
         else:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
             SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Something went wrong, please try again")
