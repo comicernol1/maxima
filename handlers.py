@@ -19,7 +19,7 @@ class HomeHand(tornado.web.RequestHandler):
         for i in range(0,1):
             HomeProductList+="<a href=\"/product/"+str(i)+"/\"><div class=\"BPX\"><span><abbr></abbr></span><h6>Product "+str(i)+"</h6><h1>$18.00</h1></div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
-                HomeIndex=HomeIndex_F.read()
+            HomeIndex=HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         
         self.set_status(200)
@@ -34,7 +34,7 @@ class HomeHand(tornado.web.RequestHandler):
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
-                SignInIndex=SignInIndex_F.read()
+            SignInIndex=SignInIndex_F.read()
         SignInIndex = SignInIndex.replace("<% ShowError %>","none")
         SignInIndex = SignInIndex.replace("<% ErrorMsg %>","")
         
@@ -49,9 +49,9 @@ class SignInHand(tornado.web.RequestHandler):
 
     def post(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
-                SignUpIndex=SignUpIndex_F.read()
+            SignUpIndex=SignUpIndex_F.read()
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
-                SignInIndex=SignInIndex_F.read()
+            SignInIndex=SignInIndex_F.read()
         SignInRequestBody=self.request.body.decode('utf-8')
         SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
         SignInRequestPassword=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
@@ -68,14 +68,14 @@ class SignInHand(tornado.web.RequestHandler):
                 SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Incorrect Password")
                 self.write(SignInIndex)
         else:
-            SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
-            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Account does not exist. Please create one.")
-            self.write(SignUpIndex)
+            SignInIndex = SignInIndex.replace("<% ShowError %>","block")
+            SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Account already exists")
+            self.write(SignInIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
-                SignUpIndex=SignUpIndex_F.read()
+            SignUpIndex=SignUpIndex_F.read()
         SignUpIndex = SignUpIndex.replace("<% ShowError %>","none")
         SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","")
         
@@ -90,9 +90,11 @@ class SignUpHand(tornado.web.RequestHandler):
 
     def post(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
-                SignUpIndex=SignUpIndex_F.read()
+            SignUpIndex=SignUpIndex_F.read()
+        with open("/root/maxima/req/sign_up/conf_sent.html") as SignUpConf_F:
+            SignUpConf=SignUpConf_F.read()
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
-                SignInIndex=SignInIndex_F.read()
+            SignInIndex=SignInIndex_F.read()
         
         SignUpRequestBody=self.request.body.decode('utf-8')
         SignUpRequestEmail=urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
@@ -116,11 +118,12 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
             SignUpMail.sendmail('comicernol@gmail.com',SignUpRequestEmail,SignUpSMTPContent)
             SignUpMail.close()
-            self.render('sign_up/conf_sent.html')
+            SignUpConf = SignUpConf.replace("<% Email %>",SignUpRequestEmail)
+            self.write(SignUpConf)
         elif int(QueryCountEmail[0])>=1:
-            SignInIndex = SignInIndex.replace("<% ShowError %>","block")
-            SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Your account already exists.")
-            self.write(SignInIndex)
+            SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
+            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","This account already exists")
+            self.render(SignUpIndex)
         else:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
             SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Something went wrong, please try again")
