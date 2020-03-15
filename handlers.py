@@ -53,13 +53,14 @@ class SignInHand(tornado.web.RequestHandler):
         SignInRequestPassword=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
         SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
         mycursor.execute(SignInRequestDBSelectEmail)
-        QueryEmailPw=mycursor.fetchone()[0].encode()
-        SignInQueryPassword=Enc32a.decrypt(QueryEmailPw)
-        if QueryEmailPw!="":
+        QueryEmailPwPre=mycursor.fetchone()
+        if QueryEmailPwPre:
+            QueryEmailPw=QueryEmailPwPre[0].encode()
+            SignInQueryPassword=Enc32a.decrypt(QueryEmailPw)
             if SignInQueryPassword==SignInRequestPassword:
                 self.write("Signed In")
             else:
-                self.write("Incorrect Password")
+                self.write(SignInQueryPassword+"\n"+SignInRequestPassword)
         else:
             self.write("Account does not exist")
 
