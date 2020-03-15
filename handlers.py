@@ -123,8 +123,8 @@ class SignUpHand(tornado.web.RequestHandler):
         elif int(QueryCountEmail[0])>=1:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
             SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","This account already exists")
-            self.render(SignUpIndex)
+            self.write(SignUpIndex)
         else:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
             SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Something went wrong, please try again")
-            self.render(SignUpIndex)
+            self.write(SignUpIndex)
