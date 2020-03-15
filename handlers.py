@@ -48,6 +48,10 @@ class SignInHand(tornado.web.RequestHandler):
         self.write(SignInIndex)
 
     def post(self):
+        with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
+                SignUpIndex=SignUpIndex_F.read()
+        with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
+                SignInIndex=SignInIndex_F.read()
         SignInRequestBody=self.request.body.decode('utf-8')
         SignInRequestEmail=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
         SignInRequestPassword=urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
@@ -60,9 +64,13 @@ class SignInHand(tornado.web.RequestHandler):
             if SignInQueryPassword==SignInRequestPassword:
                 self.write("Signed In")
             else:
-                self.write("Incorrect Password")
+                SignInIndex = SignInIndex.replace("<% ShowError %>","block")
+                SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Incorrect Password")
+                self.write(SignInIndex)
         else:
-            self.write("Account does not exist")
+            SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
+            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Account does not exist")
+            self.write(SignUpIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
