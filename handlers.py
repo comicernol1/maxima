@@ -56,7 +56,7 @@ class SignInHand(tornado.web.RequestHandler):
         QueryEmailPwPre=mycursor.fetchone()
         if QueryEmailPwPre:
             QueryEmailPw=QueryEmailPwPre[0].encode()
-            SignInQueryPassword=Enc32a.decrypt(QueryEmailPw)
+            SignInQueryPassword=Enc32a.decrypt(QueryEmailPw).decode('utf-8')
             if SignInQueryPassword==SignInRequestPassword:
                 self.write("Signed In")
             else:
