@@ -70,7 +70,7 @@ class SignUpHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         self.set_header("Access-Control-Max-Age", 1000)
         self.set_header("Access-Control-Allow-Headers", "*")
-        self.write(SignUpIndex)
+        self.write(str(SignUpIndex).encode())
 
     def post(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
