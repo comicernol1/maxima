@@ -153,3 +153,17 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
             SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P2) Something went wrong, please try again")
             self.write(SignUpIndex)
+class VerifyHand(tornado.web.RequestHandler):
+    def get(self):
+        with open("/root/maxima/req/sign_up/verify/index.html") as VerifyIndex_F:
+            VerifyIndex=VerifyIndex_F.read()
+        VerifyIndex = VerifyIndex.replace("<% Email %>","Stuff")
+        
+        self.set_status(200)
+        self.set_header("Content-Type", "text/html")
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "*")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.set_header("Access-Control-Max-Age", 1000)
+        self.set_header("Access-Control-Allow-Headers", "*")
+        self.write(VerifyIndex)
