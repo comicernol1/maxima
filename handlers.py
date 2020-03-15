@@ -54,7 +54,7 @@ class SignInHand(tornado.web.RequestHandler):
         SignInRequestDBSelectEmail="SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
         mycursor.execute(SignInRequestDBSelectEmail)
         QueryCountEmail=mycursor.fetchone()
-        self.write(str(QueryCountEmail).decode('utf-8'))
+        self.write(str(QueryCountEmail).encode())
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
