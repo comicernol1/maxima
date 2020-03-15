@@ -157,7 +157,7 @@ class VerifyHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_up/verified.html") as VerifyIndex_F:
             VerifyIndex=VerifyIndex_F.read()
-        VerifyIndex = VerifyIndex.replace("<% Email %>","Stuff")
+        VerifyIndex = VerifyIndex.replace("<% Email %>",self.get_query_argument("e"))
         
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
