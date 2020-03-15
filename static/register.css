@@ -36,8 +36,8 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
 #sign_x_in{left:0;}
 #sign_x_up{left:50%;}
 .ser{display:none;width:400px;height:40px;font-size:16px;padding:10px 20px;color:#FAFAFF;background:#D7263D;border:1px solid #FAFAFF;border-radius:6px;box-sizing:border-box;position:absolute;z-index:1;left:calc(50% - 200px);}
-#suer{top:calc(50% - 300px);}
-#sier{top:calc(50% - 230px);}
+#suer{top:90px;}
+#sier{top:140px;}
 #rg_block input[type="email"],#rg_block input[type="password"]{width:340px;height:60px;box-sizing:border-box;font-size:20px;color:#444054;padding:0 20px 0 40px;background:#E6E6E6;border:1px solid #E6E6E6;border-radius:4px;position:absolute;left:30px;}
 #siem{top:100px;}
 #sipw{top:180px;}
@@ -84,6 +84,7 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
     #supwmin{width:calc(100% - 30px);top:225px;left:15px;}
     #suua{width:calc(100% - 30px);top:320px;left:15px;}
     .rgsb{width:calc(100% - 30px);left:15px;}
+    .ser{width:calc(100% - 40px);padding:10px 12px;left:20px;}
     #rg_block[hg="i"] .rgsb{top:260px;}
     #rg_block[hg="u"] .rgsb{top:400px;}
     #siem,#suem{top:80px;}
