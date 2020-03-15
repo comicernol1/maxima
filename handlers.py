@@ -60,7 +60,7 @@ class SignInHand(tornado.web.RequestHandler):
             if SignInQueryPassword==SignInRequestPassword:
                 self.write("Signed In")
             else:
-                self.write(str(SignInQueryPassword)+"\n"+str(SignInRequestPassword))
+                self.write("Incorrect Password")
         else:
             self.write("Account does not exist")
 
