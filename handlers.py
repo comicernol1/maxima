@@ -21,7 +21,7 @@ class HomeHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
-        if true:
+        if True:
             HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/account/\">My Account</a></li>")
         else:
             HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
