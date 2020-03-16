@@ -56,15 +56,16 @@ class SignInHand(tornado.web.RequestHandler):
         if SignInRequestBody.find("siem=") >= 0 and SignInRequestBody.find("sipw=") >= 0:
             SignInRequestEmail = urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
             SignInRequestPassword = urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
-            SignInRequestDBSelectEmail = "SELECT passwd from compacc where email='{0:s}'".format(SignInRequestEmail)
+            SignInRequestDBSelectEmail = "SELECT passwd,userid from compacc where email='{0:s}'".format(SignInRequestEmail)
             mycursor.execute(SignInRequestDBSelectEmail)
-            QueryEmailPwPre = mycursor.fetchone()
-            if QueryEmailPwPre:
-                QueryEmailPw = QueryEmailPwPre[0].encode()
+            QueryEmailPre = mycursor.fetchone()
+            if QueryEmailPre:
+                QueryEmailPw = QueryEmailPre[0].encode()
+                QueryEmailUserID = QueryEmailPre[1].encode()
                 SignInQueryPassword = Enc32a.decrypt(QueryEmailPw).decode('utf-8')
                 if SignInQueryPassword == SignInRequestPassword:
                     SignInRequestToken = random.randint(1000000000,9999999999)
-                    SignInRequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE email='{1:s}'".format(SignInRequestToken,SignUpRequestEmail)
+                    SignInRequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE email='{1:s}'".format(SignInRequestToken,SignInRequestEmail)
                     mycursor.execute(SignInRequestDBUpdate)
                     db.commit()
                     self.set_cookie("Ft",str(SignInRequestToken))
