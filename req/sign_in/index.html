@@ -30,7 +30,6 @@
     <a class="sign_x" id="sign_x_in" s="y">Sign In</a>
     <a class="sign_x" id="sign_x_up" s="n" href="/sign_up/">Sign Up</a>
     <form action="" method="POST" id="si_form">
-        {% raw xsrf_form_html() %}
         <input type="email" placeholder="Email" spellcheck="false" name="siem" id="siem">
         <input type="password" placeholder="Password" name="sipw" id="sipw">
         <a href="/sign_in/forgot_password/" id="sifp">Forgot Password?</a>
