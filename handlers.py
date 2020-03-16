@@ -21,9 +21,9 @@ class HomeHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
-        if self.get_cookie("Fu") and self.get_cookie("Ft"):
-            UserInfoFu = self.get_cookie("Fu")
-            UserInfoFt = self.get_cookie("Ft")
+        if self.get_secure_cookie("Fu") and self.get_secure_cookie("Ft"):
+            UserInfoFu = self.get_secure_cookie("Fu")
+            UserInfoFt = self.get_secure_cookie("Ft")
             UserInfoLoginQuery = "SELECT * from compacc where userid='{0:d}' and token='{1:d}'".format(int(UserInfoFu),int(UserInfoFt))
             mycursor.execute(UserInfoLoginQuery)
             UserInfoLoginFetch = mycursor.fetchone()
@@ -80,8 +80,8 @@ class SignInHand(tornado.web.RequestHandler):
                     SignInRequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE email='{1:s}'".format(SignInRequestToken,SignInRequestEmail)
                     mycursor.execute(SignInRequestDBUpdate)
                     db.commit()
-                    self.set_cookie("Fu",QueryEmailUserID)
-                    self.set_cookie("Ft",str(SignInRequestToken))
+                    self.set_secure_cookie("Fu",QueryEmailUserID)
+                    self.set_secure_cookie("Ft",str(SignInRequestToken))
                     self.redirect("/")
                 else:
                     SignInIndex = SignInIndex.replace("<% ShowError %>","block")
