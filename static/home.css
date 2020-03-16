@@ -44,7 +44,7 @@ input[type="radio"]:checked:after{background:url("/static/multiplier_image.png")
 #Hm li a{color:#FAFAFF;padding:40px 20px;text-decoration:none;font-weight:300;}
 #Hm li a b{font-weight:300;padding:6px 5px;border-bottom:2px solid #EAEAEA;}
 #HMs{float:right;}
-#HMs span{display:block;width:36px;height:36px;background:white;box-sizing:border-box;border:1px solid grey;border-radius:100%;position:relative;top:-28px;left:-28px;}
+#HMs span{display:block;width:36px;height:36px;background:white;box-sizing:border-box;border:1px solid grey;border-radius:100%;position:relative;bottom:28px;right:28px;}
 #Hdr h1{width:100%;font-size:72px;font-weight:300;letter-spacing:5px;margin:0;color:#FAFAFF;text-align:center;text-shadow:0 0 2px #04151F;position:absolute;top:260px;left:0;}
 #Hdr h2{width:400px;color:#FAFAFF;font-size:18px;letter-spacing:1px;font-weight:300;text-align:center;margin:0px;text-shadow:0 0 2px #04151F;position:absolute;top:340px;left:calc(50% - 200px);}
 #HdrLk{width:300px;font-size:18px;color:#FAFAFF;text-decoration:none;text-align:center;background:#04151F;padding:6px 0;border:none;position:absolute;top:390px;left:calc(50% - 150px);}
