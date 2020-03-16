@@ -63,7 +63,7 @@ class SignInHand(tornado.web.RequestHandler):
                 QueryEmailPw=QueryEmailPwPre[0].encode()
                 SignInQueryPassword=Enc32a.decrypt(QueryEmailPw).decode('utf-8')
                 if SignInQueryPassword==SignInRequestPassword:
-                    self.write("Signed In")
+                    self.set_header("Location", "/")
                 else:
                     SignInIndex = SignInIndex.replace("<% ShowError %>","block")
                     SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Incorrect Password")
