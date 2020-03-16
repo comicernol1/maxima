@@ -63,6 +63,11 @@ class SignInHand(tornado.web.RequestHandler):
                 QueryEmailPw = QueryEmailPwPre[0].encode()
                 SignInQueryPassword = Enc32a.decrypt(QueryEmailPw).decode('utf-8')
                 if SignInQueryPassword == SignInRequestPassword:
+                    SignInRequestToken = random.randint(1000000000,9999999999)
+                    SignInRequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE email='{1:s}'".format(SignInRequestToken,SignUpRequestEmail)
+                    mycursor.execute(SignInRequestDBUpdate)
+                    db.commit()
+                    self.set_cookie("Ft",str(SignInRequestToken))
                     self.redirect("/")
                 else:
                     SignInIndex = SignInIndex.replace("<% ShowError %>","block")
@@ -112,7 +117,7 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestPasswordAgain = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
             if SignUpRequestBody.find("rsve=y") and len(SignUpRequestPasswordPre) >= 8 and SignUpRequestPasswordPre == SignUpRequestPasswordAgain and int(QueryCountEmail[0]) < 1:
                 SignUpVerifyCode = random.randint(1000000000,9999999999)
-                SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd) VALUES ('{0:d}','{1:s}',0,'{2:s}')".format(SignUpVerifyCode,SignUpRequestEmail,SignUpRequestPassword)
+                SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:s}','')".format(SignUpVerifyCode,SignUpRequestEmail,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
                 with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
