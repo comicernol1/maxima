@@ -23,7 +23,7 @@ class HomeHand(tornado.web.RequestHandler):
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         UserInfoFu = self.get_cookie("Fu")
         UserInfoFt = self.get_cookie("Ft")
-        UserInfoLoginQuery = "SELECT * from compacc where userid='{0:d}' and token='{1:d}'".format(UserInfoFu,UserInfoFt)
+        UserInfoLoginQuery = "SELECT * from compacc where userid='{0:d}' and token='{1:d}'".format(int(UserInfoFu),int(UserInfoFt))
         mycursor.execute(UserInfoLoginQuery)
         UserInfoLoginFetch = mycursor.fetchone()
         if UserInfoLoginFetch:
