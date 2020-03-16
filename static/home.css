@@ -55,7 +55,7 @@ input[type="radio"]:checked:after{background:url("/static/multiplier_image.png")
 #BPa a .BPX span abbr{display:inline-block;width:25px;height:25px;background:red;border:1px solid white;border-radius:100%;box-sizing:border-box;}
 #BPa a .BPX h6{width:calc(100% - 20px);margin:0px;font-size:14px;font-weight:300;color:black;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;position:relative;top:15px;left:10px;}
 #BPa a .BPX h1{width:calc(100% - 20px);margin:0px;font-size:24px;font-weight:300;color:black;position:relative;top:20px;left:10px;}
-#Foot{width:100%;height:350px;background:#605F5E;position:absolute;left:0;}
+#Foot{width:100%;height:350px;background:#605F5E;position:absolute;top:700px;left:0;}
 #Ft{width:calc(100% - 100px);position:absolute;top:20px;left:50px;}
 #Ft tr th{text-align:left;font-size:16px;color:#EAEAEA;padding:10px 0;}
 #Ft tr td{text-align:left;}
