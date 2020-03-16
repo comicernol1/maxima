@@ -61,7 +61,7 @@ class SignInHand(tornado.web.RequestHandler):
             QueryEmailPre = mycursor.fetchone()
             if QueryEmailPre:
                 QueryEmailPw = QueryEmailPre[0].encode()
-                QueryEmailUserID = QueryEmailPre[1].encode()
+                QueryEmailUserID = str(QueryEmailPre[1])
                 SignInQueryPassword = Enc32a.decrypt(QueryEmailPw).decode('utf-8')
                 if SignInQueryPassword == SignInRequestPassword:
                     SignInRequestToken = random.randint(1000000000,9999999999)
