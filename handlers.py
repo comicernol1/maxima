@@ -68,6 +68,7 @@ class SignInHand(tornado.web.RequestHandler):
                     SignInRequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE email='{1:s}'".format(SignInRequestToken,SignInRequestEmail)
                     mycursor.execute(SignInRequestDBUpdate)
                     db.commit()
+                    self.set_cookie("Fu",QueryEmailUserID)
                     self.set_cookie("Ft",str(SignInRequestToken))
                     self.redirect("/")
                 else:
