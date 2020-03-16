@@ -21,13 +21,16 @@ class HomeHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
-        UserInfoFu = self.get_cookie("Fu")
-        UserInfoFt = self.get_cookie("Ft")
-        UserInfoLoginQuery = "SELECT * from compacc where userid='{0:d}' and token='{1:d}'".format(int(UserInfoFu),int(UserInfoFt))
-        mycursor.execute(UserInfoLoginQuery)
-        UserInfoLoginFetch = mycursor.fetchone()
-        if UserInfoLoginFetch:
-            HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+        if self.get_cookie("Fu") and self.get_cookie("Ft"):
+            UserInfoFu = self.get_cookie("Fu")
+            UserInfoFt = self.get_cookie("Ft")
+            UserInfoLoginQuery = "SELECT * from compacc where userid='{0:d}' and token='{1:d}'".format(int(UserInfoFu),int(UserInfoFt))
+            mycursor.execute(UserInfoLoginQuery)
+            UserInfoLoginFetch = mycursor.fetchone()
+            if UserInfoLoginFetch:
+                HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+            else:
+                HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
         else:
             HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
         
