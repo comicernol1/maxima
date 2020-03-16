@@ -22,7 +22,7 @@ class HomeHand(tornado.web.RequestHandler):
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         if True:
-            HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/account/\">My Account</a></li>")
+            HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
         else:
             HomeIndex = HomeIndex.replace("<% AccountButton %>","<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
         
