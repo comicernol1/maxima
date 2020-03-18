@@ -10,7 +10,6 @@ db = mysql.connector.connect(
     database = "franzar"
 )
 mycursor = db.cursor()
-HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
 with open("/root/maxima/templates/head.html") as HeadHTML_F:
     HeadHTML = HeadHTML_F.read()
 with open("/root/maxima/templates/footer.html") as FooterHTML_F:
@@ -39,6 +38,7 @@ class HomeHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
             HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
         else:
@@ -59,10 +59,11 @@ class SignInHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex = SignInIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
             SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
         else:
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre)
         SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
         SignInIndex = SignInIndex.replace("<% Footer %>",FooterHTML)
         SignInIndex = SignInIndex.replace("<% ShowError %>","none")
@@ -118,10 +119,11 @@ class SignUpHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
             SignUpIndex = SignUpIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
             SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
         else:
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre)
         SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
         SignUpIndex = SignUpIndex.replace("<% Footer %>",FooterHTML)
         SignUpIndex = SignUpIndex.replace("<% ShowError %>","none")
@@ -201,6 +203,7 @@ class VerifyHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_up/verified.html") as VerifyIndex_F:
             VerifyIndex = VerifyIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
             VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
         else:
