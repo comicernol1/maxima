@@ -1,4 +1,5 @@
 #Hdr{display:block;width:100%;height:100px;background:#04151F;position:absolute;top:0px;left:0px;}
+#Cfm{width:400px;height:500px;background:#FAFAFF;border:1px solid #E2DADB;border-radius:3px;box-sizing:border-box;position:absolute;top:150px;left:calc(50% - 200px);}
 #Foot{top:700px;}
 @media only screen and (max-width:700px){
     #Hdr{display:none;}
