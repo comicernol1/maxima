@@ -45,7 +45,7 @@ input[type="radio"]:checked:after{background:url("/static/multiplier_image.png")
 #Hm li a b{font-weight:300;padding:6px 5px;border-bottom:2px solid #EAEAEA;}
 #HMs{float:right;}
 #HMs span{display:block;width:36px;height:36px;background-image:url("/static/profile_icon.png");background-repeat:no-repeat;background-size:cover;background-position:center;box-sizing:border-box;border:1px solid grey;border-radius:100%;position:relative;bottom:28px;right:28px;}
-#Foot{width:100%;height:350px;background:#605F5E;position:absolute;top:700px;left:0;}
+#Foot{width:100%;height:350px;background:#605F5E;position:absolute;left:0;}
 #Ft{width:calc(100% - 100px);position:absolute;top:20px;left:50px;}
 #Ft tr th{text-align:left;font-size:16px;color:#EAEAEA;padding:10px 0;}
 #Ft tr td{text-align:left;}
@@ -65,7 +65,7 @@ input[type="radio"]:checked:after{background:url("/static/multiplier_image.png")
     #M_H_close{display:block;}
     #HMs a{width:calc(100% - 60px);height:50px;float:unset;color:#FAFAFF !important;padding:10px 0px !important;background:#008148;border:none;border-radius:4px;box-sizing:border-box;position:absolute;bottom:30px;left:30px;}
     #HMs span{position:absolute;bottom:37px;right:40px;}
-    #Foot{height:340px;top:940px;}
+    #Foot{height:340px;}
     #Ft{width:calc(100% - 60px);left:30px;}
     #Ft tr th{font-size:14px;padding:5px 0px;}
     #Ft tr td a{font-size:9px;}
