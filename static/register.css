@@ -29,8 +29,9 @@ body::before{width:100%;height:800px;content:"";background:rgba(0,0,0,0.5);posit
 #rg_block[hg="u"] .rgsb{top:420px;}
 #rg_block[hg="uv"] .rgsb{top:220px;}
 #rg_block[hg="i"] .rgsb{top:280px;}
+#Foot{top:700px;}
 @media only screen and (max-width:700px){
-    body::before{height:500px;}
+    body::before{height:700px;}
     #rg_block{width:calc(100% - 40px);left:20px;}
     #rg_block[hg="i"]{height:330px;top:150px;}
     #rg_block[hg="u"]{height:470px;top:110px;}
