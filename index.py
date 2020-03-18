@@ -5,6 +5,7 @@ from settings import settings
 if __name__ == "__main__":
     app = tornado.web.Application([
         (r"/", HomeHand),
+        (r"/contact/", ContactHand),
         (r"/sign_in/", SignInHand),
         (r"/sign_up/", SignUpHand),
         (r"/verify/", VerifyHand)
