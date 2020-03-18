@@ -1,5 +1,5 @@
-Hdr{width:100%;height:100px;background:#04151F;position:absolute;top:0px;left:0px;}
+Hdr{display:block;width:100%;height:100px;background:#04151F;position:absolute;top:0px;left:0px;}
 #Foot{top:700px;}
 @media only screen and (max-width:700px){
-
+    #Hdr{display:none;}
 }
