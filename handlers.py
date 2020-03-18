@@ -27,7 +27,7 @@ class HomeHand(tornado.web.RequestHandler):
             UserInfoLoginQuery = "SELECT * from compacc where userid='{0:d}' and token='{1:d}'".format(int(UserInfoFu),int(UserInfoFt))
             mycursor.execute(UserInfoLoginQuery)
             UserInfoLoginFetch = mycursor.fetchone()
-            HeaderLIPre = "<li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
+            HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
             if UserInfoLoginFetch:
                 HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
             else:
