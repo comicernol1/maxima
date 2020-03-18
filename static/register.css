@@ -37,7 +37,7 @@ body::before{width:100%;height:800px;content:"";background:rgba(0,0,0,0.5);posit
     #rg_block[hg="u"]{height:470px;top:110px;}
     #rg_block[hg="uv"]{top:170px;}
     #rg_block a.sign_x{font-size:24px;padding:15px 0px;}
-    #rg_block input[type="email"], #rg_block input[type="password"]{width:calc(100% - 30px);padding:0 15px 0 25px;left:15px;}
+    #rg_block input[type="email"], #rg_block input[type="password"]{width:calc(100% - 30px);left:15px;}
     #sifp{width:calc(100% - 30px);top:227px;left:15px;}
     #supwmin{width:calc(100% - 30px);top:225px;left:15px;}
     #suua{width:calc(100% - 30px);top:320px;left:15px;}
