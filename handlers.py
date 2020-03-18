@@ -14,6 +14,7 @@ with open("/root/maxima/templates/head.html") as HeadHTML_F:
     HeadHTML = HeadHTML_F.read()
 with open("/root/maxima/templates/footer.html") as FooterHTML_F:
     FooterHTML = FooterHTML_F.read()
+        
 def CheckLogin(self):
     if self.get_secure_cookie("Fu") and self.get_secure_cookie("Ft"):
         UserInfoFu = self.get_secure_cookie("Fu")
