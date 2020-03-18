@@ -25,9 +25,9 @@ def CheckLogin(self):
         if UserInfoLoginFetch:
             return True
         else:
-            return Flase
+            return False
     else:
-        return Flase
+        return False
 
 # Don't forget to eventually close the MySQL connection
 
