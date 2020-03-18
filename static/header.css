@@ -16,7 +16,7 @@
 
 body{font-family:sans-serif,Arial,Verdana;line-height:1.2;letter-spacing:1px;background-color:#E7E7E7;}
 form{margin:0;}
-input{outline:none;width:340px;height:60px;box-sizing:border-box;font-size:20px;color:#444054;padding:0 20px 0 40px;background:#E6E6E6;border:1px solid #E6E6E6;border-radius:4px;}
+input{outline:none;height:60px;box-sizing:border-box;font-size:20px;color:#444054;padding:0 20px 0 40px;background:#E6E6E6;border:1px solid #E6E6E6;border-radius:4px;}
 ::-ms-clear,::-ms-reveal{display:none;width:0;height:0;}::-webkit-search-decoration,::-webkit-search-cancel-button,::-webkit-search-results-button,::-webkit-search-results-decoration{display:none;}
 ::-webkit-inner-spin-button,::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 input[type="submit"]{cursor:pointer;}
