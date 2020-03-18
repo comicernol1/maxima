@@ -27,13 +27,14 @@ class HomeHand(tornado.web.RequestHandler):
             UserInfoLoginQuery = "SELECT * from compacc where userid='{0:d}' and token='{1:d}'".format(int(UserInfoFu),int(UserInfoFt))
             mycursor.execute(UserInfoLoginQuery)
             UserInfoLoginFetch = mycursor.fetchone()
+            HeaderLIPre = "<li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
             if UserInfoLoginFetch:
-                HomeIndex = HomeIndex.replace("<% HeaderLI %>","<li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li><li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+                HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
             else:
-                HomeIndex = HomeIndex.replace("<% HeaderLI %>","<li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li><li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
+                HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
         else:
-            HomeIndex = HomeIndex.replace("<% HeaderLI %>","<li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li><li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
-        HomeIndex = HomeIndex.replace("<% Home %>","<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><meta name=\"apple-mobile-web-app-title\" content=\"Franzar\" /><meta name=\"description\" content=\"\"><meta name=\"keywords\" content=\"Franzar, Franzar.com\"><link rel=\"canonical\" href=\"https://www.franzar.com/\"><link rel=\"icon\" href=\"/static/favicon32.png\" sizes=\"32x32\"><link rel=\"icon\" href=\"/static/favicon192.png\" sizes=\"192x192\"><link rel=\"apple-touch-icon\" href=\"/static/favicon180.png\" sizes=\"180x180\"><meta name=\"msapplication-TileImage\" content=\"/static/favicon32.png\"><meta name=\"msapplication-TileColor\" content=\"#FFFFFF\"><meta name=\"theme-color\" content=\"\"><link rel=\"shortcut icon\" href=\"/static/favicon64.png\"><link rel=\"preload\" href=\"/static/multiplier_image.png\" as=\"image\">")
+            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
+        HomeIndex = HomeIndex.replace("<% Head %>","<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><meta name=\"apple-mobile-web-app-title\" content=\"Franzar\" /><meta name=\"description\" content=\"\"><meta name=\"keywords\" content=\"Franzar, Franzar.com\"><link rel=\"canonical\" href=\"https://www.franzar.com/\"><link rel=\"icon\" href=\"/static/favicon32.png\" sizes=\"32x32\"><link rel=\"icon\" href=\"/static/favicon192.png\" sizes=\"192x192\"><link rel=\"apple-touch-icon\" href=\"/static/favicon180.png\" sizes=\"180x180\"><meta name=\"msapplication-TileImage\" content=\"/static/favicon32.png\"><meta name=\"msapplication-TileColor\" content=\"#FFFFFF\"><meta name=\"theme-color\" content=\"\"><link rel=\"shortcut icon\" href=\"/static/favicon64.png\"><link rel=\"preload\" href=\"/static/multiplier_image.png\" as=\"image\">")
         with open("/root/maxima/templates/footer.html") as FooterHTML_F:
             FooterHTML = FooterHTML_F.read()
         HomeIndex = HomeIndex.replace("<% Footer %>",FooterHTML)
