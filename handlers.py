@@ -56,6 +56,27 @@ class HomeHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Headers", "*")
         self.write(HomeIndex)
 
+class ContactHand(tornado.web.RequestHandler):
+    def get(self):
+        with open("/root/maxima/req/contact.html") as ContactIndex_F:
+            ContactIndex = ContactIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
+        if CheckLogin(self):
+            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+        else:
+            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
+        ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
+        ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
+        
+        self.set_status(200)
+        self.set_header("Content-Type", "text/html")
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "*")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.set_header("Access-Control-Max-Age", 1000)
+        self.set_header("Access-Control-Allow-Headers", "*")
+        self.write(ContactIndex)
+
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
