@@ -6,9 +6,28 @@
 </head>
 <body>
 <div id="M_H"><button onclick="M_menu_show()"></button></div>
+<header id="Hdr"></header>
 <ul id="Hm">
     <% HeaderLI %>
 </ul>
+<form id="Cfm">
+    <input type="text" placeholder="First Name">
+    <input type="text" placeholder="Last Name">
+    <input type="email" placeholder="Email">
+    <input type="text" placeholder="Order ID (optional)">
+    <select>
+        <option value="gqa" selected>General Question</option>
+        <option value="acc">Account Issues</option>
+        <option value="ord">Problem With Order</option>
+        <option value="pay">Billing & Payment</option>
+        <option value="ctf">Report Counterfeit</option>
+        <option value="pub">Publicity & Press</option>
+        <option value="biq">Business Inquiry</option>
+        <option value="fdb">Feedback</option>
+        <option value="oth">Other</option>
+    </select>
+    <textarea placeholder="Message"></textarea>
+</form>
 <% Footer %>
 <script>
 Hm=document.getElementById("Hm");
