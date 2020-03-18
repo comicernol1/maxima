@@ -1,11 +1,5 @@
 body{font-family:sans-serif,Arial,Verdana;line-height:1.2;letter-spacing:1px;background-image:url("/static/1135762634.jpg");background-size:cover;background-position:center;overflow-x:hidden;}
 body::before{width:100%;height:800px;content:"";background:rgba(0,0,0,0.5);position:absolute;top:0;left:0;}
-#Hm{width:calc(100% - 50px);color:#FAFAFF;font-size:16px;list-style-type:none;margin:0;padding:0 15px;position:absolute;top:40px;left:0;}
-#Hm li{display:inline-block;padding:0;cursor:pointer;}
-#Hm li a{color:#FAFAFF;padding:40px 30px;text-decoration:none;font-weight:300;}
-#M_H{width:100%;height:50px;background:#FAFAFF;display:none;position:absolute;top:0px;left:0px;}
-#M_H button{width:40px;height:40px;background-image:url("/static/multiplier_image.png");background-color:transparent;background-size:400px;background-position:-240px -265px;border:none;margin:5px 15px;position:absolute;top:0px;left:0px;}
-#M_H_close{display:none;width:40px;height:40px;background-image:url("/static/multiplier_image.png");background-size:400px;background-position:-290px -223px;position:absolute;top:15px;right:15px;}
 form{margin:0;}
 input{outline:none;}
 ::-ms-clear,::-ms-reveal{display:none;width:0;height:0;}::-webkit-search-decoration,::-webkit-search-cancel-button,::-webkit-search-results-button,::-webkit-search-results-decoration{display:none;}
@@ -25,6 +19,17 @@ input[type="checkbox"]:checked:after{background:url('/images/multiplier_image.pn
 input[type="radio"]{visibility:hidden;cursor:pointer;}
 input[type="radio"]:after{visibility:visible;display:inline-block;content:"";width:20px;height:20px;cursor:pointer;background:url('/images/multiplier_image.png');background-size:200px 200px;background-position:128px 75px;margin:0px 0px 0px 5px;position:relative;top:-3px;left:-10px;}
 input[type="radio"]:checked:after{background:url('/images/multiplier_image.png');background-size:200px 200px;background-position:108px 75px;}
+#Hdr{width:100%;height:700px;background-image:url("/static/1135762634.jpg");background-size:cover;background-position:center;position:absolute;top:0;left:0;}
+#Hdr::before{width:100%;height:100%;content:"";background:rgba(0,0,0,0.5);position:absolute;top:0;left:0;}
+#M_H{width:100%;height:50px;background:#FAFAFF;display:none;position:absolute;top:0px;left:0px;}
+#M_H button{width:40px;height:40px;background-image:url("/static/multiplier_image.png");background-color:transparent;background-size:400px;background-position:-240px -265px;border:none;margin:5px 15px;position:absolute;top:0px;left:0px;}
+#M_H_close{display:none;width:40px;height:40px;background-image:url("/static/multiplier_image.png");background-size:400px;background-position:-290px -223px;position:absolute;top:15px;right:15px;}
+#Hm{width:calc(100% - 50px);color:#FAFAFF;font-size:16px;list-style-type:none;margin:0;padding:0 15px;position:absolute;top:40px;left:0;}
+#Hm li{display:inline-block;padding:0;cursor:pointer;}
+#Hm li a{color:#FAFAFF;padding:40px 20px;text-decoration:none;font-weight:300;}
+#Hm li a b{font-weight:300;padding:6px 5px;border-bottom:2px solid #EAEAEA;}
+#HMs{float:right;}
+#HMs span{display:block;width:36px;height:36px;background-image:url("/static/profile_icon.png");background-repeat:no-repeat;background-size:cover;background-position:center;box-sizing:border-box;border:1px solid grey;border-radius:100%;position:relative;bottom:28px;right:28px;}
 #rg_block{width:400px;background:#FAFAFF;border-radius:6px;overflow:hidden;position:absolute;left:calc(50% - 200px);}
 #rg_block[hg="u"]{height:490px;top:160px;}
 #rg_block[hg="uv"]{height:300px;text-align:center;top:220px;}
@@ -65,7 +70,6 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
 #FLo,#FNo{display:inline-block;width:12px;height:12px;background-image:url("/static/multiplier_image.png");background-size:200px 200px;background-position:83px 78px;pointer-events:none;position:relative;top:2px;left:-22px;}
 #FPUc{text-align:right;margin:10px 0;font-size:14px;text-decoration:none;color:#E2DADB;float:right;}
 @media only screen and (max-width:700px){
-    body::before{height:600px;}
     #Hdr{height:500px;}
     #Hm{display:none;width:100%;height:100%;background:white;padding:40px 0px;box-sizing:border-box;position:fixed;z-index:100;top:0px;left:0px;}
     #Hm li{display:block;padding:15px 0px;text-align:center;}
@@ -74,6 +78,7 @@ input[type="radio"]:checked:after{background:url('/images/multiplier_image.png')
     #M_H{display:block;}
     #M_H_close{display:block;}
     #HMs a{width:calc(100% - 60px);height:50px;float:unset;color:#FAFAFF !important;padding:10px 0px !important;background:#008148;border:none;border-radius:4px;box-sizing:border-box;position:absolute;bottom:30px;left:30px;}
+    #HMs span{position:absolute;bottom:37px;right:40px;}
     #rg_block{width:calc(100% - 40px);left:20px;}
     #rg_block[hg="i"]{height:330px;top:150px;}
     #rg_block[hg="u"]{height:470px;top:110px;}
