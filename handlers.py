@@ -41,9 +41,9 @@ class HomeHand(tornado.web.RequestHandler):
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
-            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
-            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
+            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         HomeIndex = HomeIndex.replace("<% Head %>",HeadHTML)
         HomeIndex = HomeIndex.replace("<% Footer %>",FooterHTML)
         
