@@ -34,12 +34,12 @@ function valEm(email) {
 function sb_cf(){
     if (CFn.value!="" && valEm(CFe.value) && CFt.value!=""){CFm.submit();}else{
         cfer.style.display="block";
-        if (CFt.value==""){
-            cfer.innerHTML="Please enter your message";
-        }else if (CFn.value==""){
+        if (CFn.value==""){
             cfer.innerHTML="Please enter your name";
-        }else{
+        }else if (!valEm(CFe.value)){
             cfer.innerHTML="Please enter a valid Email";
+        }else if (CFt.value==""){
+            cfer.innerHTML="Please enter your message";
         }
     }
 }
