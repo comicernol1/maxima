@@ -33,8 +33,11 @@ function valEm(email) {
     return re.test(String(email).toLowerCase());
 }
 function sb_cf(){
-    if (CFn.value.length>0 && valEm(CFe.value) && CFt.value.length>0){CFm.submit();}else{
-        
+    if (CFn.value!="" && valEm(CFe.value) && CFt.value!=""){CFm.submit();}else{
+        cfer.style.display="block";
+        if (CFn.value==""){cfer.innerHTML="Please enter your name"}
+        if (!valEm(CFe.value)){cfer.innerHTML="Please enter a valid Email"}
+        if (CFt.value==""){cfer.innerHTML="Please enter your message"}
     }
 }
 </script>
