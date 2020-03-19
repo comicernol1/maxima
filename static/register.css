@@ -7,7 +7,7 @@ body{overflow-x:hidden;}
 #rg_block[hg="i"]{height:350px;top:200px;}
 #rg_block a.sign_x{width:50%;text-align:center;font-size:28px;color:#0A0908;text-decoration:none;margin:0;padding:20px 0;position:absolute;top:0;}
 #rg_block a.sign_x[s="y"]{background:transparent;}
-#rg_block a.sign_x[s="n"]{background:#EAEAEA;}
+#rg_block a.sign_x[s="n"]{background:#F2F2F2;}
 #sign_x_in{left:0;}
 #sign_x_up{left:50%;}
 .ser{display:none;width:400px;height:40px;font-size:16px;padding:10px 20px;color:#FAFAFF;background:#D7263D;border:1px solid #FAFAFF;border-radius:6px;box-sizing:border-box;position:absolute;z-index:1;left:calc(50% - 200px);}
