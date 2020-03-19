@@ -1,5 +1,5 @@
 #Hdr{display:block;width:100%;height:100px;background:#04151F;position:absolute;top:0px;left:0px;}
-#cfer{display:none;width:400px;height:40px;font-size:16px;padding:10px 20px;color:#FAFAFF;background:#D7263D;border:1px solid #FAFAFF;border-radius:6px;box-sizing:border-box;position:absolute;z-index:1;left:calc(50% - 200px);}
+#cfer{display:none;width:400px;height:40px;font-size:16px;padding:10px 20px;color:#FAFAFF;background:#D7263D;border:1px solid #FAFAFF;border-radius:6px;box-sizing:border-box;position:absolute;z-index:1;top:105px;left:calc(50% - 200px);}
 #Cfm{width:400px;height:500px;background:#FAFAFF;border:1px solid #E2DADB;border-radius:4px;box-sizing:border-box;position:absolute;top:150px;left:calc(50% - 200px);}
 #CFn,#CFe,#CFo,#CFt{width:calc(100% - 40px);position:absolute;left:20px;}
 #CFn,#CFe,#CFo{padding:0 15px 0 20px;}
@@ -11,6 +11,7 @@
 #Foot{top:700px;}
 @media only screen and (max-width:700px){
     #Hdr{display:none;}
+    #cfer{width:calc(100% - 30px);top:55px;left:15px;}
     #Cfm{width:calc(100% - 30px);top:100px;left:15px;}
     #CFs{width:calc(100% - 70px);top:530px;left:35px;}
 }
