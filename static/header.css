@@ -20,7 +20,7 @@ input{outline:none;height:60px;box-sizing:border-box;font-size:20px;color:#44405
 ::-ms-clear,::-ms-reveal{display:none;width:0;height:0;}::-webkit-search-decoration,::-webkit-search-cancel-button,::-webkit-search-results-button,::-webkit-search-results-decoration{display:none;}
 ::-webkit-inner-spin-button,::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 input[type="submit"]{cursor:pointer;}
-textarea{outline:none;font-family:sans-serif,Arial,Verdana;}
+textarea{outline:none;font-family:sans-serif,Arial,Verdana;padding:15px 20px 10px 40px;color:#444054;background:#E6E6E6;border:1px solid #E6E6E6;border-radius:4px;box-sizing:border-box;font-size:20px;}
 select{outline:none;cursor:pointer;-webkit-appearance:none;-khtml-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;}
 select::-ms-expand{display:none;}
 select option{color:black;}
