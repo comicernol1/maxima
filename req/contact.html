@@ -35,9 +35,9 @@ function valEm(email) {
 function sb_cf(){
     if (CFn.value!="" && valEm(CFe.value) && CFt.value!=""){CFm.submit();}else{
         cfer.style.display="block";
-        if (CFn.value==""){cfer.innerHTML="Please enter your name"}
-        if (!valEm(CFe.value)){cfer.innerHTML="Please enter a valid Email"}
         if (CFt.value==""){cfer.innerHTML="Please enter your message"}
+        if (!valEm(CFe.value)){cfer.innerHTML="Please enter a valid Email"}
+        if (CFn.value==""){cfer.innerHTML="Please enter your name"}
     }
 }
 </script>
