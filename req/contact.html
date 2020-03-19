@@ -10,17 +10,31 @@
 <ul id="Hm">
     <% HeaderLI %>
 </ul>
+<div id="cfer"><% ErrorMsg %></div>
 <form id="Cfm">
-    <input type="text" id="CFn" placeholder="Full Name">
-    <input type="email" id="CFe" placeholder="Email">
-    <input type="text" id="CFo" placeholder="Order ID (optional)">
-    <textarea id="CFt" data-gramm_editor="false" placeholder="Message"></textarea>
+    <input type="text" id="CFn" name="CFn" placeholder="Full Name">
+    <input type="email" id="CFe" name="CFe" placeholder="Email">
+    <input type="text" id="CFo" name="CFo" placeholder="Order ID (optional)">
+    <textarea id="CFt" name="CFt" data-gramm_editor="false" placeholder="Message"></textarea>
 </form>
 <button id="CFs" onclick="sb_cf()">SUBMIT</button>
 <% Footer %>
 <script>
 Hm=document.getElementById("Hm");
+CFm=document.getElementById("CFm");
+CFn=document.getElementById("CFn");
+CFe=document.getElementById("CFe");
+CFt=document.getElementById("CFt");
 function M_menu_show(){Hm.style.display="block";}
 function M_menu_hide(){Hm.style.display="none";}
+function valEm(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+function sb_cf(){
+    if (CFn.value.length>0 && valEm(CFe.value) && CFt.value.length>0){CFm.submit();}else{
+        
+    }
+}
 </script>
 </body></html>
