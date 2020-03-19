@@ -62,9 +62,9 @@ class ContactHand(tornado.web.RequestHandler):
             ContactIndex = ContactIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
         if CheckLogin(self):
-            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
-            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
+            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
         ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
         
@@ -83,7 +83,7 @@ class SignInHand(tornado.web.RequestHandler):
             SignInIndex = SignInIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
             SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre)
         SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
@@ -143,7 +143,7 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpIndex = SignUpIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
             SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre)
         SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
@@ -227,9 +227,9 @@ class VerifyHand(tornado.web.RequestHandler):
             VerifyIndex = VerifyIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
-            VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/account/\">My Account</a><span></span></li>")
+            VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
-            VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPre+"<li id=\"HMs\"><a href=\"/sign_in/\">Sign In</a></li>")
+            VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         VerifyIndex = VerifyIndex.replace("<% Head %>",HeadHTML)
         VerifyIndex = VerifyIndex.replace("<% Footer %>",FooterHTML)
         VerifyIndex = VerifyIndex.replace("<% Email %>",self.get_query_argument("e"))
