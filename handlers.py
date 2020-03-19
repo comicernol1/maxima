@@ -67,6 +67,8 @@ class ContactHand(tornado.web.RequestHandler):
             ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
         ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
+        ContactIndex = ContactIndex.replace("<% ShowError %>","none")
+        ContactIndex = ContactIndex.replace("<% ErrorMsg %>","")
         
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
@@ -76,6 +78,35 @@ class ContactHand(tornado.web.RequestHandler):
         self.set_header("Access-Control-Max-Age", 1000)
         self.set_header("Access-Control-Allow-Headers", "*")
         self.write(ContactIndex)
+        
+    def post(self):
+        with open("/root/maxima/req/contact.html") as ContactIndex_F:
+            ContactIndex = ContactIndex_F.read()
+        with open("/root/maxima/req/contact_sent.html") as ContactSentIndex_F:
+            ContactSentIndex = ContactSentIndex_F.read()
+        ContactRequestBody = self.request.body.decode('utf-8')
+        if ContactRequestBody.find("CFn=") >= 0 and ContactRequestBody.find("CFe=") >= 0 and ContactRequestBody.find("CFo=") >= 0 and ContactRequestBody.find("CFt=") >= 0:
+            ContactRequestCFn = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFn=")+4):ContactRequestBody.index("&CFe=")])
+            ContactRequestCFe = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFe=")+4):ContactRequestBody.index("&CFo=")])
+            ContactRequestCFo = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFo=")+4):ContactRequestBody.index("&CFt=")])
+            ContactRequestCFt = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFt=")+4):len(ContactRequestBody)])
+            if ContactRequestCFn!="" and ContactRequestCFe!="" and ContactRequestCFt!="":
+                with open("/root/maxima/templates/contact/ticket.html") as ContactSMPTTemplate_T_F:
+                    ContactSMTPTemplate_T = ContactSMPTTemplate_T_F.read()
+                with open("/root/maxima/templates/contact/confirm.html") as ContactSMPTTemplate_U_F:
+                    ContactSMTPTemplate_U = ContactSMPTTemplate_U_F.read()
+                ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% FullName %>",str(ContactRequestCFn))
+                ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% Email %>",str(ContactRequestCFe))
+                ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% OrderID %>",str(ContactRequestCFo))
+                ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% Message %>",str(ContactRequestCFt))
+                ContactSMTPHeaders_T = "\r\n".join(["from: comicernol@gmail.com","subject: Confirmation of Ticket","to:reedsienkiewicz@gmail.com","mime-version: 1.0","content-type: text/html"])
+                ContactSMTPContent_T = ContactSMTPHeaders_T+"\r\n\r\n"+ContactSMTPTemplate_T
+                ContactMail_T = smtplib.SMTP('smtp.gmail.com',587)
+                ContactMail_T.ehlo()
+                ContactMail_T.starttls()
+                ContactMail_T.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
+                ContactMail_T.sendmail('comicernol@gmail.com','reedsienkiewicz@gmail.com',ContactSMTPContent_T)
+                ContactMail_T.close()
 
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
