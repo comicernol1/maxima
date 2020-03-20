@@ -1,4 +1,4 @@
-import os,tornado.web,tornado.ioloop
+import handlers,os,tornado.web,tornado.ioloop
 from settings import settings
 
 if __name__ == "__main__":
