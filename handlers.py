@@ -281,6 +281,7 @@ class VerifyHand(tornado.web.RequestHandler):
         VerifyIndex = VerifyIndex.replace("<% Email %>",self.get_query_argument("e"))
         self.write(VerifyIndex)
 class NotFoundHand(tornado.web.RequestHandler):
-    with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
-        NotFoundIndex = NotFoundIndex_F.read()
-    self.write(NotFoundIndex)
+    def get(self):
+        with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
+            NotFoundIndex = NotFoundIndex_F.read()
+        self.write(NotFoundIndex)
