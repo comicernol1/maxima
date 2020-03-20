@@ -118,7 +118,7 @@ class ContactHand(tornado.web.RequestHandler):
                 ContactMail_U.ehlo()
                 ContactMail_U.starttls()
                 ContactMail_U.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
-                ContactMail_U.sendmail('comicernol@gmail.com',str(ContactRequestCFe),ContactSMTPContent_T)
+                ContactMail_U.sendmail('comicernol@gmail.com',str(ContactRequestCFe),ContactSMTPContent_U)
                 ContactMail_U.close()
 
 class SignInHand(tornado.web.RequestHandler):
