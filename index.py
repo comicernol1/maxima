@@ -7,7 +7,7 @@ if __name__ == "__main__":
         (r"/", HomeHand),
         (r"/contact/", ContactHand),
         (r"/sign_in/", SignInHand),
-        (r"/forgot_password/", ForgotPWHand),
+        (r"/sign_in/forgot_password/", ForgotPWHand),
         (r"/sign_up/", SignUpHand),
         (r"/verify/", VerifyHand)
     ], **settings)
