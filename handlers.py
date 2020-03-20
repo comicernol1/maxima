@@ -86,7 +86,7 @@ class ContactHand(tornado.web.RequestHandler):
             ContactSentIndex = ContactSentIndex_F.read()
         ContactRequestBody = self.request.body.decode('utf-8')
         if ContactRequestBody.find("CFn=") >= 0 and ContactRequestBody.find("CFe=") >= 0 and ContactRequestBody.find("CFo=") >= 0 and ContactRequestBody.find("CFt=") >= 0:
-            self.write(urllib.parse.unquote(ContactRequestBody))
+            self.write(urllib.parse.unquote(ContactRequestBody.replace("+"," ")))
             """
             ContactRequestCFn = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFn=")+4):ContactRequestBody.index("&CFe=")])
             ContactRequestCFe = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFe=")+4):ContactRequestBody.index("&CFo=")])
