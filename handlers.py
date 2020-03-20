@@ -69,14 +69,6 @@ class ContactHand(tornado.web.RequestHandler):
         ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
         ContactIndex = ContactIndex.replace("<% ShowError %>","none")
         ContactIndex = ContactIndex.replace("<% ErrorMsg %>","")
-        
-        self.set_status(200)
-        self.set_header("Content-Type", "text/html")
-        self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "*")
-        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-        self.set_header("Access-Control-Max-Age", 1000)
-        self.set_header("Access-Control-Allow-Headers", "*")
         self.write(ContactIndex)
         
     def post(self):
@@ -150,14 +142,6 @@ class SignInHand(tornado.web.RequestHandler):
         SignInIndex = SignInIndex.replace("<% Footer %>",FooterHTML)
         SignInIndex = SignInIndex.replace("<% ShowError %>","none")
         SignInIndex = SignInIndex.replace("<% ErrorMsg %>","")
-        
-        self.set_status(200)
-        self.set_header("Content-Type", "text/html")
-        self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "*")
-        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-        self.set_header("Access-Control-Max-Age", 1000)
-        self.set_header("Access-Control-Allow-Headers", "*")
         self.write(SignInIndex)
 
     def post(self):
@@ -197,6 +181,16 @@ class SignInHand(tornado.web.RequestHandler):
             SignInIndex = SignInIndex.replace("<% ErrorMsg %>","(N1) Something went wrong, please try again")
             self.write(SignInIndex)
 
+class ForgotPWHand(tornado.web.RequestHandler):
+    def get(self):
+        with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
+            ForgotPWIndex = ForgotPWIndex_F.read()
+        self.write(ForgotPWIndex)
+    def post(self):
+        with open("/root/maxima/req/sign_in/forgot_pw_conf.html") as ForgotPWConfIndex_F:
+            ForgotPWConfIndex = ForgotPWConfIndex_F.read()
+        self.write(ForgotPWConfIndex)
+
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
@@ -210,14 +204,6 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpIndex = SignUpIndex.replace("<% Footer %>",FooterHTML)
         SignUpIndex = SignUpIndex.replace("<% ShowError %>","none")
         SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","")
-        
-        self.set_status(200)
-        self.set_header("Content-Type", "text/html")
-        self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "*")
-        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-        self.set_header("Access-Control-Max-Age", 1000)
-        self.set_header("Access-Control-Allow-Headers", "*")
         self.write(SignUpIndex)
 
     def post(self):
@@ -293,12 +279,4 @@ class VerifyHand(tornado.web.RequestHandler):
         VerifyIndex = VerifyIndex.replace("<% Head %>",HeadHTML)
         VerifyIndex = VerifyIndex.replace("<% Footer %>",FooterHTML)
         VerifyIndex = VerifyIndex.replace("<% Email %>",self.get_query_argument("e"))
-        
-        self.set_status(200)
-        self.set_header("Content-Type", "text/html")
-        self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "*")
-        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-        self.set_header("Access-Control-Max-Age", 1000)
-        self.set_header("Access-Control-Allow-Headers", "*")
         self.write(VerifyIndex)
