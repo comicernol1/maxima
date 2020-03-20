@@ -35,7 +35,7 @@ class HomeHand(tornado.web.RequestHandler):
     def get(self):
         HomeProductList = ""
         for i in range(0,1):
-            HomeProductList += "<a style=\"background-image:url(/static/products/"+str(i)+"/0.jpg);\" href=\"/product/"+str(i)+"/\"><div class=\"BPX\"><span><abbr></abbr></span><h6>Product "+str(i)+"</h6><h1>$18.00</h1></div></a>\n"
+            HomeProductList += "<a style=\"background-image:url(/static/products/"+str(i)+"/0.jpg);\" href=\"/product/"+str(i)+"/\"><div class=\"BPX\"><span><abbr style=\"background:#2d2e32;\"></abbr></span><h6>Product "+str(i)+"</h6><h1>$18.00</h1></div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
