@@ -72,10 +72,23 @@ class ContactHand(tornado.web.RequestHandler):
         self.write(ContactIndex)
         
     def post(self):
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
         with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
             ContactIndex = ContactIndex_F.read()
+        if CheckLogin(self):
+            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
+        ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
         with open("/root/maxima/req/contact/sent.html") as ContactSentIndex_F:
             ContactSentIndex = ContactSentIndex_F.read()
+        if CheckLogin(self):
+            ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ContactSentIndex = ContactSentIndex.replace("<% Head %>",HeadHTML)
+        ContactSentIndex = ContactSentIndex.replace("<% Footer %>",FooterHTML)
         ContactRequestBody = self.request.body.decode('utf-8').replace("+"," ")
         if ContactRequestBody.find("CFn=") >= 0 and ContactRequestBody.find("CFe=") >= 0 and ContactRequestBody.find("CFo=") >= 0 and ContactRequestBody.find("CFt=") >= 0:
             ContactRequestCFn = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFn=")+4):ContactRequestBody.index("&CFe=")])
