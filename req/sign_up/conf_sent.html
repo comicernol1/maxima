@@ -16,30 +16,8 @@
 </div>
 <script>
 Hm=document.getElementById("Hm");
-su_form=document.getElementById("su_form");
-suer=document.getElementById("suer");
-suem=document.getElementById("suem");
-supw=document.getElementById("supw");
-supa=document.getElementById("supa");
 function M_menu_show(){Hm.style.display="block";}
 function M_menu_hide(){Hm.style.display="none";}
-function valEm(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-function sb_su(){
-    if (valEm(suem.value) && supw.value.length>=8 && supw.value==supa.value){
-        suer.style.display="none";
-        su_form.submit();
-    }else{suer.style.display="block";}
-    if (!valEm(suem.value)){
-        suer.innerHTML="Please enter a valid Email";
-    }else if (supw.value.length<8){
-        suer.innerHTML="Password must be 8 characters or more";
-    }else if (supw.value!=supa.value){
-        suer.innerHTML="Passwords must match";
-    }
-}
 </script>
 <% Footer %>
 </body></html>
