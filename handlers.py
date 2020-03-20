@@ -86,6 +86,8 @@ class ContactHand(tornado.web.RequestHandler):
             ContactSentIndex = ContactSentIndex_F.read()
         ContactRequestBody = self.request.body.decode('utf-8')
         if ContactRequestBody.find("CFn=") >= 0 and ContactRequestBody.find("CFe=") >= 0 and ContactRequestBody.find("CFo=") >= 0 and ContactRequestBody.find("CFt=") >= 0:
+            self.write(ContactRequestBody)
+            """
             ContactRequestCFn = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFn=")+4):ContactRequestBody.index("&CFe=")])
             ContactRequestCFe = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFe=")+4):ContactRequestBody.index("&CFo=")])
             ContactRequestCFo = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFo=")+4):ContactRequestBody.index("&CFt=")])
@@ -120,6 +122,8 @@ class ContactHand(tornado.web.RequestHandler):
                 ContactMail_U.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
                 ContactMail_U.sendmail('comicernol@gmail.com',str(ContactRequestCFe),ContactSMTPContent_U)
                 ContactMail_U.close()
+                self.write(ContactSentIndex)
+            """
 
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
