@@ -58,7 +58,7 @@ class HomeHand(tornado.web.RequestHandler):
 
 class ContactHand(tornado.web.RequestHandler):
     def get(self):
-        with open("/root/maxima/req/contact.html") as ContactIndex_F:
+        with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
             ContactIndex = ContactIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
         if CheckLogin(self):
@@ -80,9 +80,9 @@ class ContactHand(tornado.web.RequestHandler):
         self.write(ContactIndex)
         
     def post(self):
-        with open("/root/maxima/req/contact.html") as ContactIndex_F:
+        with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
             ContactIndex = ContactIndex_F.read()
-        with open("/root/maxima/req/contact_sent.html") as ContactSentIndex_F:
+        with open("/root/maxima/req/contact/sent.html") as ContactSentIndex_F:
             ContactSentIndex = ContactSentIndex_F.read()
         ContactRequestBody = self.request.body.decode('utf-8')
         if ContactRequestBody.find("CFn=") >= 0 and ContactRequestBody.find("CFe=") >= 0 and ContactRequestBody.find("CFo=") >= 0 and ContactRequestBody.find("CFt=") >= 0:
