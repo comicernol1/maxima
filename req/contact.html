@@ -32,7 +32,7 @@ function valEm(email) {
     return re.test(String(email).toLowerCase());
 }
 function sb_cf(){
-    if (CFn.value!="" && valEm(CFe.value) && CFt.value!=""){CFm.submit();}else{
+    if (CFn.value!="" && valEm(CFe.value) && CFt.value!=""){Cfm.submit();}else{
         cfer.style.display="block";
         if (CFn.value==""){
             cfer.innerHTML="Please enter your name";
