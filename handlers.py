@@ -84,10 +84,8 @@ class ContactHand(tornado.web.RequestHandler):
             ContactIndex = ContactIndex_F.read()
         with open("/root/maxima/req/contact/sent.html") as ContactSentIndex_F:
             ContactSentIndex = ContactSentIndex_F.read()
-        ContactRequestBody = self.request.body.decode('utf-8')
+        ContactRequestBody = self.request.body.decode('utf-8').replace("+"," ")
         if ContactRequestBody.find("CFn=") >= 0 and ContactRequestBody.find("CFe=") >= 0 and ContactRequestBody.find("CFo=") >= 0 and ContactRequestBody.find("CFt=") >= 0:
-            self.write(urllib.parse.unquote(ContactRequestBody.replace("+"," ")))
-            """
             ContactRequestCFn = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFn=")+4):ContactRequestBody.index("&CFe=")])
             ContactRequestCFe = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFe=")+4):ContactRequestBody.index("&CFo=")])
             ContactRequestCFo = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFo=")+4):ContactRequestBody.index("&CFt=")])
@@ -123,7 +121,21 @@ class ContactHand(tornado.web.RequestHandler):
                 ContactMail_U.sendmail('comicernol@gmail.com',str(ContactRequestCFe),ContactSMTPContent_U)
                 ContactMail_U.close()
                 self.write(ContactSentIndex)
-            """
+            else:
+                if ContactRequestCFn=="":
+                    ContactIndex = ContactIndex.replace("<% ErrorMsg %>","Please enter your name")
+                elif ContactRequestCFe=="":
+                    ContactIndex = ContactIndex.replace("<% ErrorMsg %>","Please enter a valid Email")
+                elif ContactRequestCFt=="":
+                    ContactIndex = ContactIndex.replace("<% ErrorMsg %>","Please enter your message")
+                else:
+                    ContactIndex = ContactIndex.replace("<% ErrorMsg %>","(C1) Something went wrong, please try again")
+                ContactIndex = ContactIndex.replace("<% ShowError %>","block")
+                self.write(ContactIndex)
+        else:
+            ContactIndex = ContactIndex.replace("<% ErrorMsg %>","(C2) Something went wrong, please try again")
+            ContactIndex = ContactIndex.replace("<% ShowError %>","block")
+            self.write(ContactIndex)
 
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
