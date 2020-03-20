@@ -99,7 +99,8 @@ class ContactHand(tornado.web.RequestHandler):
                 ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% Email %>",str(ContactRequestCFe))
                 ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% OrderID %>",str(ContactRequestCFo))
                 ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% Message %>",str(ContactRequestCFt))
-                ContactSMTPHeaders_T = "\r\n".join(["from: comicernol@gmail.com","subject: Confirmation of Ticket","to:reedsienkiewicz@gmail.com","mime-version: 1.0","content-type: text/html"])
+                ContactSMTPTicketID = str(random.randint(10000,99999))
+                ContactSMTPHeaders_T = "\r\n".join(["from: comicernol@gmail.com","subject: Ticket #"+ContactSMTPTicketID,"to:reedsienkiewicz@gmail.com","mime-version: 1.0","content-type: text/html"])
                 ContactSMTPContent_T = ContactSMTPHeaders_T+"\r\n\r\n"+ContactSMTPTemplate_T
                 ContactMail_T = smtplib.SMTP('smtp.gmail.com',587)
                 ContactMail_T.ehlo()
@@ -107,6 +108,18 @@ class ContactHand(tornado.web.RequestHandler):
                 ContactMail_T.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
                 ContactMail_T.sendmail('comicernol@gmail.com','reedsienkiewicz@gmail.com',ContactSMTPContent_T)
                 ContactMail_T.close()
+                ContactSMTPTemplate_U = ContactSMTPTemplate_U.replace("<% FullName %>",str(ContactRequestCFn))
+                ContactSMTPTemplate_U = ContactSMTPTemplate_U.replace("<% Email %>",str(ContactRequestCFe))
+                ContactSMTPTemplate_U = ContactSMTPTemplate_U.replace("<% OrderID %>",str(ContactRequestCFo))
+                ContactSMTPTemplate_U = ContactSMTPTemplate_U.replace("<% Message %>",str(ContactRequestCFt))
+                ContactSMTPHeaders_U = "\r\n".join(["from: comicernol@gmail.com","subject: Confirmation of Ticket #"+ContactSMTPTicketID,"to:"+str(ContactRequestCFe),"mime-version: 1.0","content-type: text/html"])
+                ContactSMTPContent_U = ContactSMTPHeaders_U+"\r\n\r\n"+ContactSMTPTemplate_U
+                ContactMail_U = smtplib.SMTP('smtp.gmail.com',587)
+                ContactMail_U.ehlo()
+                ContactMail_U.starttls()
+                ContactMail_U.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
+                ContactMail_U.sendmail('comicernol@gmail.com',str(ContactRequestCFe),ContactSMTPContent_T)
+                ContactMail_U.close()
 
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
