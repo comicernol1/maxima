@@ -7,7 +7,7 @@
 #BPa a{display:inline-block;width:400px;height:400px;box-sizing:border-box;border:1px solid #EAEAEA;text-decoration:none;background:white;margin:10px;}
 #BPa a .BPX{width:100%;height:100px;background:rgba(255,255,255,0.75);text-align:left;position:relative;top:300px;left:0px;}
 #BPa a .BPX span{display:block;width:calc(100% - 20px);height:25px;position:relative;top:5px;left:10px;}
-#BPa a .BPX span abbr{display:inline-block;width:25px;height:25px;background:red;border:1px solid white;border-radius:100%;box-sizing:border-box;}
+#BPa a .BPX span abbr{display:inline-block;width:25px;height:25px;border:1px solid white;border-radius:100%;box-sizing:border-box;}
 #BPa a .BPX h6{width:calc(100% - 20px);margin:0px;font-size:14px;font-weight:300;color:black;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;position:relative;top:15px;left:10px;}
 #BPa a .BPX h1{width:calc(100% - 20px);margin:0px;font-size:24px;font-weight:300;color:black;position:relative;top:20px;left:10px;}
 #Foot{top:700px;}
