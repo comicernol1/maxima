@@ -1,1 +1,23 @@
-404 Error: Page not found, sorry mate!
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/status.css">
+    <title>FRANZAR&trade; Official Site | 404 Not Found</title>
+    <% Head %>
+</head>
+<body>
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<div id="E404">
+    <h1>WHOOPS!</h1>
+    <h3>We couldn't find the page you're looking for.</h3>
+</div>
+<% Footer %>
+<script>
+Hm=document.getElementById("Hm");
+function M_menu_show(){Hm.style.display="block";}
+function M_menu_hide(){Hm.style.display="none";}
+</script>
+</body></html>
