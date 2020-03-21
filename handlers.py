@@ -306,7 +306,97 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
         ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
-        self.write(ResetPWIndex)
+        with open("/root/maxima/req/sign_in/reset_pw_error.html") as ResetPWErrorIndex_F:
+            ResetPWErrorIndex = ResetPWErrorIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
+        ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
+        ResetPWRequestE = self.get_query_argument("e")
+        ResetPWRequestTempID = self.get_query_argument("id")
+        ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:d}'".format(ResetPWRequestE)
+        mycursor.execute(ResetPWRequestDBSelectCode)
+        QueryIDPre = mycursor.fetchone()
+        if QueryIDPre:
+            if str(QueryIDPre[0]) == ResetPWRequestTempID:
+                if int(QueryIDPre[2]) == 1:
+                    ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                    self.write(ResetPWIndex)
+                else:
+                    ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
+                    mycursor.execute(ResetPWRequestDBUpdate)
+                    db.commit()
+                    ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                    self.write(ResetPWIndex)
+            else:
+                ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
+                self.write(ResetPWErrorIndex)
+        else:
+            ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
+            self.write(ResetPWErrorIndex)
+    def post(self):
+        with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
+            ResetPWIndex = ResetPWIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
+        ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
+        with open("/root/maxima/req/sign_in/reset_pw_error.html") as ResetPWErrorIndex_F:
+            ResetPWErrorIndex = ResetPWErrorIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
+        ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
+        with open("/root/maxima/req/sign_in/reset_pw_conf.html") as ResetPWConfIndex_F:
+            ResetPWConfIndex = ResetPWConfIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            ResetPWConfIndex = ResetPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ResetPWConfIndex = ResetPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ResetPWConfIndex = ResetPWConfIndex.replace("<% Head %>",HeadHTML)
+        ResetPWConfIndex = ResetPWConfIndex.replace("<% Footer %>",FooterHTML)
+        ResetPWRequestBody = self.request.body.decode('utf-8')
+        ResetPWRequestE = self.get_query_argument("e")
+        ResetPWRequestTempID = self.get_query_argument("id")
+        if ResetPWRequestBody.find("rppw=") >= 0 and ResetPWRequestBody.find("rppa=") >= 0:
+            ResetPWRequestNewPWPre = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):(ResetPWRequestBody.index("rppa=")+5)])
+            ResetPWRequestNewPWAgain = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)])
+            ResetPWRequestDBSelectCode = "SELECT email,tmpcode FROM compacc WHERE userid='{0:s}'".format(ResetPWRequestE)
+            mycursor.execute(ResetPWRequestDBSelectCode)
+            QueryIDPre = mycursor.fetchone()
+            if QueryIDPre:
+                if QueryIDPre[0] == ResetPWRequestTempID:
+                    if ResetPWRequestNewPWPre == ResetPWRequestNewPWAgain:
+                        ResetPWRequestNewPW = Enc32a.encrypt(ResetPWRequestNewPWPre.encode()).decode('utf-8')
+                        ResetPWRequestDBUpdate = "UPDATE compacc SET tmpcode='',passwd='{0:s}',token='' WHERE userid='{1:d}'".format(ResetPWRequestNewPW,ResetPWRequestE)
+                        mycursor.execute(ResetPWRequestDBUpdate)
+                        db.commit()
+                        ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                        self.write(ResetPWIndex)
+                    else:
+                        ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                        ResetPWIndex.replace("<% ShowError %>","block")
+                        ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
+                        self.write(ResetPWIndex)
+                else:
+                    ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
+                    self.write(ResetPWErrorIndex)
+            else:
+                ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
+                self.write(ResetPWErrorIndex)
+        else:
+            ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong")
+            self.write(ResetPWErrorIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
@@ -341,8 +431,9 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestPassword = Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
             SignUpRequestPasswordAgain = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
             if SignUpRequestBody.find("rsve=y") and len(SignUpRequestPasswordPre) >= 8 and SignUpRequestPasswordPre == SignUpRequestPasswordAgain and int(QueryCountEmail[0]) < 1:
+                SignUpUserID = random.randint(1000000000,9999999999)
                 SignUpVerifyCode = random.randint(1000000000,9999999999)
-                SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:s}','')".format(SignUpVerifyCode,SignUpRequestEmail,SignUpRequestPassword)
+                SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,tmpcode,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:d}','{3:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpVerifyCode,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
                 with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
@@ -397,6 +488,7 @@ class VerifyHand(tornado.web.RequestHandler):
         VerifyIndex = VerifyIndex.replace("<% Footer %>",FooterHTML)
         VerifyIndex = VerifyIndex.replace("<% Email %>",self.get_query_argument("e"))
         self.write(VerifyIndex)
+
 class NotFoundHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
