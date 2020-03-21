@@ -5,7 +5,7 @@ body{overflow-x:hidden;}
 #rg_block[hg="uv"]{height:300px;text-align:center;top:220px;}
 #rg_block[hg="i"]{height:350px;top:200px;}
 #rg_block[hg="fp"]{height:280px;top:250px;}
-#rg_block[hg="fa"]{height:210px;top:300px;}
+#rg_block[hg="fa"]{height:230px;top:280px;}
 #suv_h{width:calc(100% - 60px);margin:0px;font-size:16px;font-weight:300;position:absolute;top:30px;left:30px;}
 #rg_block a.sign_x{width:50%;text-align:center;font-size:28px;color:#0A0908;text-decoration:none;margin:0;padding:20px 0;position:absolute;top:0;}
 #rg_block a.sign_x[s="y"]{background:transparent;}
@@ -39,7 +39,7 @@ body{overflow-x:hidden;}
 #rg_block[hg="uv"] .rgsb{top:220px;}
 #rg_block[hg="i"] .rgsb{top:280px;}
 #rg_block[hg="fp"] .rgsb{top:200px;}
-#rg_block[hg="fa"] .rgsb{top:140px;}
+#rg_block[hg="fa"] .rgsb{top:160px;}
 #Foot{top:700px;}
 @media only screen and (max-width:700px){
     #rg_block{width:calc(100% - 40px);left:20px;}
