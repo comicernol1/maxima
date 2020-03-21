@@ -253,6 +253,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
                 ForgotPWMail.close()
                 ForgotPWConfIndex = ForgotPWConfIndex.replace("<% ShowError %>","none")
                 ForgotPWConfIndex = ForgotPWConfIndex.replace("<% ErrorMsg %>","")
+                ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Email %>",ForgotPWRequestEmail)
                 self.write(ForgotPWConfIndex)
             else:
                 ForgotPWIndex = ForgotPWIndex.replace("<% ShowError %>","block")
