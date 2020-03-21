@@ -225,7 +225,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
             ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
             ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ForgotPWIndex = ForgotPWConfIndex.replace("<% Head %>",HeadHTML)
+        ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Head %>",HeadHTML)
         ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Footer %>",FooterHTML)
         ForgotPWRequestBody = self.request.body.decode('utf-8')
         if ForgotPWRequestBody.find("fpem=") >= 0:
