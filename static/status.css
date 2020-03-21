@@ -1,3 +1,6 @@
-#E404{width:300px;height:200px;background:white;position:absolute;top:300px;left:calc(50% - 150px);}
-#E404 h1{width:100%;font-size:36px;margin:0;text-align:center;position:absolute;top:15px;left:0;}
-#E404 h3{font-size:24px;margin:0;position:absolute;top:50px;left:0;}
+  
+body{overflow-x:hidden;}
+#Hm{background:#04151F;}
+#E404 h1{width:100%;font-size:84px;margin:0;text-align:center;position:absolute;top:250px;left:0;}
+#E404 h3{width:500px;font-size:24px;font-weight:300;text-align:center;margin:0;position:absolute;top:350px;left:calc(50% - 250px);}
+#Foot{top:700px;}
