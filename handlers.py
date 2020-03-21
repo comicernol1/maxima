@@ -136,11 +136,11 @@ class ContactHand(tornado.web.RequestHandler):
                 elif ContactRequestCFt=="":
                     ContactIndex = ContactIndex.replace("<% ErrorMsg %>","Please enter your message")
                 else:
-                    ContactIndex = ContactIndex.replace("<% ErrorMsg %>","(C1) Something went wrong, please try again")
+                    ContactIndex = ContactIndex.replace("<% ErrorMsg %>","(C1) Something went wrong")
                 ContactIndex = ContactIndex.replace("<% ShowError %>","block")
                 self.write(ContactIndex)
         else:
-            ContactIndex = ContactIndex.replace("<% ErrorMsg %>","(C2) Something went wrong, please try again")
+            ContactIndex = ContactIndex.replace("<% ErrorMsg %>","(C2) Something went wrong")
             ContactIndex = ContactIndex.replace("<% ShowError %>","block")
             self.write(ContactIndex)
 
@@ -193,7 +193,7 @@ class SignInHand(tornado.web.RequestHandler):
                 self.write(SignInIndex)
         else:
             SignInIndex = SignInIndex.replace("<% ShowError %>","block")
-            SignInIndex = SignInIndex.replace("<% ErrorMsg %>","(N1) Something went wrong, please try again")
+            SignInIndex = SignInIndex.replace("<% ErrorMsg %>","(N1) Something went wrong")
             self.write(SignInIndex)
 
 class ForgotPWHand(tornado.web.RequestHandler):
@@ -261,7 +261,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
                 self.write(ForgotPWIndex)
         else:
             ForgotPWIndex = ForgotPWIndex.replace("<% ShowError %>","block")
-            ForgotPWIndex = ForgotPWIndex.replace("<% ErrorMsg %>","(F1) Something went wrong, please try again")
+            ForgotPWIndex = ForgotPWIndex.replace("<% ErrorMsg %>","(F1) Something went wrong")
             self.write(ForgotPWIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
@@ -320,7 +320,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 self.write(SignUpIndex)
             else:
                 SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
-                SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P1) Something went wrong, please try again")
+                SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P1) Something went wrong")
                 self.write(SignUpIndex)
         elif SignUpRequestBody.find("rsve=") >= 0:
             SignUpRSVEEmail = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)])
@@ -338,7 +338,7 @@ class SignUpHand(tornado.web.RequestHandler):
             self.write(SignUpConf)
         else:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
-            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P2) Something went wrong, please try again")
+            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P2) Something went wrong")
             self.write(SignUpIndex)
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
