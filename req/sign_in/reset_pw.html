@@ -1,7 +1,7 @@
 <!DOCTYPE html><html>
 <head>
     <link rel="stylesheet" href="/static/register.css">
-    <title>FRANZAR&trade; Official Site | Sign In</title>
+    <title>FRANZAR&trade; Official Site | Reset Password</title>
     <% Head %>
 </head>
 <body>
@@ -11,15 +11,13 @@
     <% HeaderLI %>
 </ul>
 <div class="ser" id="sier"><% ErrorMsg %></div>
-<div id="rg_block" hg="i">
-    <a class="sign_x" id="sign_x_in" s="y">Sign In</a>
-    <a class="sign_x" id="sign_x_up" s="n" href="/sign_up/">Sign Up</a>
-    <form action="" method="POST" id="si_form">
-        <input type="email" placeholder="Email" spellcheck="false" name="siem" id="siem">
-        <input type="password" placeholder="Password" name="sipw" id="sipw">
-        <a href="/sign_in/forgot_password/" id="sifp">Forgot Password?</a>
+<div id="rg_block" hg="rp">
+    <h1>Reset Password</h1>
+    <form action="" method="POST" id="rp_form">
+        <input type="password" placeholder="New Password" spellcheck="false" name="rppw" id="rppw">
+        <input type="password" placeholder="Retype New Password" name="rppa" id="rppa">
+        <input type="submit" value="RESET PASSWORD">
     </form>
-    <button class="rgsb" onclick="sb_si()">SIGN IN</button>
 </div>
 <script>
 Hm=document.getElementById("Hm");
