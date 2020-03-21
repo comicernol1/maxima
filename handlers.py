@@ -168,7 +168,7 @@ class SignInHand(tornado.web.RequestHandler):
         if SignInRequestBody.find("siem=") >= 0 and SignInRequestBody.find("sipw=") >= 0:
             SignInRequestEmail = urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
             SignInRequestPassword = urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
-            SignInRequestDBSelectEmail = "SELECT passwd,userid from compacc where email='{0:s}'".format(SignInRequestEmail)
+            SignInRequestDBSelectEmail = "SELECT passwd,userid FROM compacc WHERE email='{0:s}'".format(SignInRequestEmail)
             mycursor.execute(SignInRequestDBSelectEmail)
             QueryEmailPre = mycursor.fetchone()
             if QueryEmailPre:
@@ -189,7 +189,7 @@ class SignInHand(tornado.web.RequestHandler):
                     self.write(SignInIndex)
             else:
                 SignInIndex = SignInIndex.replace("<% ShowError %>","block")
-                SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Account already exists")
+                SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Account does not exist")
                 self.write(SignInIndex)
         else:
             SignInIndex = SignInIndex.replace("<% ShowError %>","block")
@@ -202,9 +202,38 @@ class ForgotPWHand(tornado.web.RequestHandler):
             ForgotPWIndex = ForgotPWIndex_F.read()
         self.write(ForgotPWIndex)
     def post(self):
+        with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
+            ForgotPWIndex = ForgotPWIndex_F.read()
         with open("/root/maxima/req/sign_in/forgot_pw_conf.html") as ForgotPWConfIndex_F:
             ForgotPWConfIndex = ForgotPWConfIndex_F.read()
-        self.write(ForgotPWConfIndex)
+        ForgotPWRequestBody = self.request.body.decode('utf-8')
+        if ForgotPWRequestBody.find("fpem=") >= 0:
+            ForgotPWRequestEmail = urllib.parse.unquote(ForgotPWRequestBody[(ForgotPWRequestBody.index("fpem=")+5):len(ForgotPWRequestBody)])
+            ForgotPWRequestDBSelectEmail = "SELECT email FROM compacc WHERE email='{0:s}'".format(ForgotPWRequestEmail)
+            mycursor.execute(ForgotPWRequestDBSelectEmail)
+            QueryEmailPre = mycursor.fetchone()
+            if QueryEmailPre:
+                with open("/root/maxima/templates/sign_in/password_reset_email.html") as ForgotPWSMTPTemplate_F:
+                    ForgotPWSMTPTemplate = ForgotPWSMTPTemplate_F.read()
+                ForgotPWSMTPHeaders = "\r\n".join(["from: comicernol@gmail.com","subject: Reset Your Password - FRANZAR","to:"+ForgotPWRequestEmail,"mime-version: 1.0","content-type: text/html"])
+                ForgotPWSMTPContent = ForgotPWSMTPHeaders+"\r\n\r\n"+ForgotPWSMTPTemplate
+                ForgotPWMail = smtplib.SMTP('smtp.gmail.com',587)
+                ForgotPWMail.ehlo()
+                ForgotPWMail.starttls()
+                ForgotPWMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
+                ForgotPWMail.sendmail('comicernol@gmail.com',ForgotPWRequestEmail,ForgotPWSMTPContent)
+                ForgotPWMail.close()
+                ForgotPWConfIndex = ForgotPWConfIndex.replace("<% ShowError %>","none")
+                ForgotPWConfIndex = ForgotPWConfIndex.replace("<% ErrorMsg %>","")
+                self.write(ForgotPWConfIndex)
+            else:
+                ForgotPWIndex = ForgotPWIndex.replace("<% ShowError %>","block")
+                ForgotPWIndex = ForgotPWIndex.replace("<% ErrorMsg %>","Account does not exist")
+                self.write(ForgotPWIndex)
+        else:
+            ForgotPWIndex = ForgotPWIndex.replace("<% ShowError %>","block")
+            ForgotPWIndex = ForgotPWIndex.replace("<% ErrorMsg %>","(F1) Something went wrong, please try again")
+            self.write(ForgotPWIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
@@ -232,7 +261,7 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpRequestBody = self.request.body.decode('utf-8')
         if SignUpRequestBody.find("suem=") >= 0 and SignUpRequestBody.find("supw=") >= 0 and SignUpRequestBody.find("supa=") >= 0:
             SignUpRequestEmail = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
-            SignUpRequestDBSelectEmail = "SELECT COUNT(*) from compacc where email='{0:s}'".format(SignUpRequestEmail)
+            SignUpRequestDBSelectEmail = "SELECT COUNT(*) FROM compacc WHERE email='{0:s}'".format(SignUpRequestEmail)
             mycursor.execute(SignUpRequestDBSelectEmail)
             QueryCountEmail = mycursor.fetchone()
             SignUpRequestPasswordPre = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
