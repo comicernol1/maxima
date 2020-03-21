@@ -315,38 +315,34 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
-        """
-        ResetPWRequestE = self.get_query_argument("e")
-        ResetPWRequestTempID = self.get_query_argument("id")
-        ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWRequestE)
-        mycursor.execute(ResetPWRequestDBSelectCode)
-        QueryIDPre = mycursor.fetchone()
-        if QueryIDPre:
-            if str(QueryIDPre[0]) == ResetPWRequestTempID:
-                if int(QueryIDPre[2]) == 1:
-                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                    self.write(ResetPWIndex)
-                else:
-                    ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:s}'".format(ResetPWRequestE)
-                    mycursor.execute(ResetPWRequestDBUpdate)
-                    db.commit()
-                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                    self.write(ResetPWIndex)
-            else:
-                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
-                self.write(ResetPWErrorIndex)
-        else:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
-            self.write(ResetPWErrorIndex)
-        """
         try:
-            X = self.get_query_argument("e")
+            """
+            ResetPWRequestE = self.get_query_argument("e")
+            ResetPWRequestTempID = self.get_query_argument("id")
+            ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWRequestE)
+            mycursor.execute(ResetPWRequestDBSelectCode)
+            QueryIDPre = mycursor.fetchone()
+            if QueryIDPre:
+                if str(QueryIDPre[0]) == ResetPWRequestTempID:
+                    if int(QueryIDPre[2]) == 1:
+                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                        self.write(ResetPWIndex)
+                    else:
+                        ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:s}'".format(ResetPWRequestE)
+                        mycursor.execute(ResetPWRequestDBUpdate)
+                        db.commit()
+                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                        self.write(ResetPWIndex)
+                else:
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
+                    self.write(ResetPWErrorIndex)
+            else:
+                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
+                self.write(ResetPWErrorIndex)
+            """
             self.write(ResetPWIndex)
         except tornado.web.MissingArgumentError:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","PROBLEM")
-            self.write(ResetPWErrorIndex)
-        else:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","MUCH BIGGER PROBLEM")
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","The page was reloaded. Please click on the link again.")
             self.write(ResetPWErrorIndex)
     def post(self):
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
