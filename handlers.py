@@ -388,4 +388,11 @@ class NotFoundHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
             NotFoundIndex = NotFoundIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        NotFoundIndex = NotFoundIndex.replace("<% Head %>",HeadHTML)
+        NotFoundIndex = NotFoundIndex.replace("<% Footer %>",FooterHTML)
         self.write(NotFoundIndex)
