@@ -323,26 +323,21 @@ class ResetPWHand(tornado.web.RequestHandler):
         if QueryIDPre:
             if str(QueryIDPre[0]) == ResetPWRequestTempID:
                 if int(QueryIDPre[2]) == 1:
-                    ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                     self.write(ResetPWIndex)
-                    print("RP-1")
                 else:
                     ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:s}'".format(ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBUpdate)
                     db.commit()
-                    ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                     self.write(ResetPWIndex)
-                    print("RP-2")
             else:
-                ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
+                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
                 self.write(ResetPWErrorIndex)
-                print("RP-3")
         else:
-            ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
             self.write(ResetPWErrorIndex)
-            print("RP-4")
     def post(self):
-        """
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
             ResetPWIndex = ResetPWIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -402,8 +397,6 @@ class ResetPWHand(tornado.web.RequestHandler):
         else:
             ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong")
             self.write(ResetPWErrorIndex)
-        """
-        print("POST REQUEST")
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
