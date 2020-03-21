@@ -295,6 +295,19 @@ class ForgotPWHand(tornado.web.RequestHandler):
             ForgotPWIndex = ForgotPWIndex.replace("<% ErrorMsg %>","(F1) Something went wrong")
             self.write(ForgotPWIndex)
 
+class ResetPWHand(tornado.web.RequestHandler):
+    def get(self):
+        with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
+            ResetPWIndex = ResetPWIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
+        ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
+        self.write(ResetPWIndex)
+
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
