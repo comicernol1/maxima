@@ -339,10 +339,14 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
             self.write(ResetPWErrorIndex)
         """
-        if self.get_query_argument("e"):
+        try:
+            X = self.get_query_argument("e")
             self.write(ResetPWIndex)
-        else:
+        except MissingArgumentError:
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","PROBLEM")
+            self.write(ResetPWErrorIndex)
+        else:
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","MUCH BIGGER PROBLEM")
             self.write(ResetPWErrorIndex)
     def post(self):
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
