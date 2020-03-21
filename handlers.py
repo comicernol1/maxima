@@ -211,8 +211,22 @@ class ForgotPWHand(tornado.web.RequestHandler):
     def post(self):
         with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
             ForgotPWIndex = ForgotPWIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ForgotPWIndex = ForgotPWIndex.replace("<% Head %>",HeadHTML)
+        ForgotPWIndex = ForgotPWIndex.replace("<% Footer %>",FooterHTML)
         with open("/root/maxima/req/sign_in/forgot_pw_conf.html") as ForgotPWConfIndex_F:
             ForgotPWConfIndex = ForgotPWConfIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ForgotPWIndex = ForgotPWConfIndex.replace("<% Head %>",HeadHTML)
+        ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Footer %>",FooterHTML)
         ForgotPWRequestBody = self.request.body.decode('utf-8')
         if ForgotPWRequestBody.find("fpem=") >= 0:
             ForgotPWRequestEmail = urllib.parse.unquote(ForgotPWRequestBody[(ForgotPWRequestBody.index("fpem=")+5):len(ForgotPWRequestBody)])
@@ -225,7 +239,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
                     ForgotPWSMTPTemplate = ForgotPWSMTPTemplate_F.read()
                 ForgotPWSMTPTemplate = ForgotPWSMTPTemplate.replace("<% UserID %>",QueryEmailUserID)
                 ForgotPWTempCode = random.randint(1000000000,9999999999)
-                ForgotPWSMTPTemplate = ForgotPWSMTPTemplate.replace("<% TempCode %>",ForgotPWTempCode)
+                ForgotPWSMTPTemplate = ForgotPWSMTPTemplate.replace("<% TempCode %>",str(ForgotPWTempCode))
                 ForgotPWRequestDBUpdate = "UPDATE compacc SET tmpcode={0:d} WHERE email={1:s}".format(ForgotPWTempCode,ForgotPWRequestEmail)
                 mycursor.execute(ForgotPWRequestDBUpdate)
                 db.commit()
