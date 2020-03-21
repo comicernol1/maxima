@@ -200,6 +200,13 @@ class ForgotPWHand(tornado.web.RequestHandler):
     def get(self):
         with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
             ForgotPWIndex = ForgotPWIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ForgotPWIndex = ForgotPWIndex.replace("<% Head %>",HeadHTML)
+        ForgotPWIndex = ForgotPWIndex.replace("<% Footer %>",FooterHTML)
         self.write(ForgotPWIndex)
     def post(self):
         with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
