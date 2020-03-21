@@ -209,12 +209,19 @@ class ForgotPWHand(tornado.web.RequestHandler):
         ForgotPWRequestBody = self.request.body.decode('utf-8')
         if ForgotPWRequestBody.find("fpem=") >= 0:
             ForgotPWRequestEmail = urllib.parse.unquote(ForgotPWRequestBody[(ForgotPWRequestBody.index("fpem=")+5):len(ForgotPWRequestBody)])
-            ForgotPWRequestDBSelectEmail = "SELECT email FROM compacc WHERE email='{0:s}'".format(ForgotPWRequestEmail)
+            ForgotPWRequestDBSelectEmail = "SELECT userid FROM compacc WHERE email='{0:s}'".format(ForgotPWRequestEmail)
             mycursor.execute(ForgotPWRequestDBSelectEmail)
             QueryEmailPre = mycursor.fetchone()
             if QueryEmailPre:
+                QueryEmailUserID = str(QueryEmailPre[0])
                 with open("/root/maxima/templates/sign_in/password_reset_email.html") as ForgotPWSMTPTemplate_F:
                     ForgotPWSMTPTemplate = ForgotPWSMTPTemplate_F.read()
+                ForgotPWSMTPTemplate = ForgotPWSMTPTemplate.replace("<% UserID %>",QueryEmailUserID)
+                ForgotPWTempCode = random.randint(1000000000,9999999999)
+                ForgotPWSMTPTemplate = ForgotPWSMTPTemplate.replace("<% TempCode %>",ForgotPWTempCode)
+                ForgotPWRequestDBUpdate = "UPDATE compacc SET tempcode={0:d} WHERE email={1:s}".format(ForgotPWTempCode,ForgotPWRequestEmail)
+                mycursor.execute(ForgotPWRequestDBUpdate)
+                db.commit()
                 ForgotPWSMTPHeaders = "\r\n".join(["from: comicernol@gmail.com","subject: Reset Your Password - FRANZAR","to:"+ForgotPWRequestEmail,"mime-version: 1.0","content-type: text/html"])
                 ForgotPWSMTPContent = ForgotPWSMTPHeaders+"\r\n\r\n"+ForgotPWSMTPTemplate
                 ForgotPWMail = smtplib.SMTP('smtp.gmail.com',587)
