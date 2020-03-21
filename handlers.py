@@ -306,7 +306,6 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
         ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
-        """
         with open("/root/maxima/req/sign_in/reset_pw_error.html") as ResetPWErrorIndex_F:
             ResetPWErrorIndex = ResetPWErrorIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -316,6 +315,7 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
+        """
         ResetPWRequestE = self.get_query_argument("e")
         ResetPWRequestTempID = self.get_query_argument("id")
         ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWRequestE)
@@ -339,7 +339,11 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
             self.write(ResetPWErrorIndex)
         """
-        self.write(ResetPWIndex)
+        if self.get_query_argument("e"):
+            self.write(ResetPWIndex)
+        else:
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","PROBLEM")
+            self.write(ResetPWErrorIndex)
     def post(self):
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
             ResetPWIndex = ResetPWIndex_F.read()
