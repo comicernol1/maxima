@@ -342,7 +342,7 @@ class ResetPWHand(tornado.web.RequestHandler):
         try:
             X = self.get_query_argument("e")
             self.write(ResetPWIndex)
-        except tornado.general:
+        except tornado.web.MissingArgumentError:
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","PROBLEM")
             self.write(ResetPWErrorIndex)
         else:
