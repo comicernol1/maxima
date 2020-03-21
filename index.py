@@ -7,6 +7,7 @@ if __name__ == "__main__":
         (r"/contact/", handlers.ContactHand),
         (r"/sign_in/", handlers.SignInHand),
         (r"/sign_in/forgot_password/", handlers.ForgotPWHand),
+        (r"/sign_in/reset_password/", handlers.ResetPWHand),
         (r"/sign_up/", handlers.SignUpHand),
         (r"/verify/", handlers.VerifyHand),
         (r"/.*", handlers.NotFoundHand)
