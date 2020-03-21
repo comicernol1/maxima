@@ -338,6 +338,7 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
             self.write(ResetPWErrorIndex)
     def post(self):
+        """
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
             ResetPWIndex = ResetPWIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -397,6 +398,8 @@ class ResetPWHand(tornado.web.RequestHandler):
         else:
             ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong")
             self.write(ResetPWErrorIndex)
+        """
+        print("POST REQUEST")
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
