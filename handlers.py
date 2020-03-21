@@ -240,7 +240,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
                 ForgotPWSMTPTemplate = ForgotPWSMTPTemplate.replace("<% UserID %>",QueryEmailUserID)
                 ForgotPWTempCode = random.randint(1000000000,9999999999)
                 ForgotPWSMTPTemplate = ForgotPWSMTPTemplate.replace("<% TempCode %>",str(ForgotPWTempCode))
-                ForgotPWRequestDBUpdate = "UPDATE compacc SET tmpcode={0:d} WHERE email={1:s}".format(ForgotPWTempCode,ForgotPWRequestEmail)
+                ForgotPWRequestDBUpdate = "UPDATE compacc SET tmpcode='{0:d}' WHERE email='{1:s}'".format(ForgotPWTempCode,ForgotPWRequestEmail)
                 mycursor.execute(ForgotPWRequestDBUpdate)
                 db.commit()
                 ForgotPWSMTPHeaders = "\r\n".join(["from: comicernol@gmail.com","subject: Reset Your Password - FRANZAR","to:"+ForgotPWRequestEmail,"mime-version: 1.0","content-type: text/html"])
