@@ -5,6 +5,6 @@ body{overflow-x:hidden;}
 #E404 h3{width:400px;font-size:24px;font-weight:300;text-align:center;margin:0;position:absolute;top:400px;left:calc(50% - 200px);}
 #Foot{top:700px;}
 @media only screen and (max-width:700px){
-    #E404 h1{font-size:60px;top:305px;}
-    #E404 h3{width:80%;top:380px;left:10%;}
+    #E404 h1{font-size:60px;}
+    #E404 h3{width:80%;top:375px;left:10%;}
 }
