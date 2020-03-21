@@ -1,1 +1,27 @@
-Password Reset Instructions Sent
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/register.css">
+    <title>FRANZAR&trade; Official Site | Forgot Password</title>
+    <link rel="stylesheet" href="/static/header.css">
+</head>
+<body>
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<div class="ser" id="faer"><% ErrorMsg %></div>
+<form action="" method="POST" id="rg_block" hg="fa">
+    <h1>Reset Password</h1>
+    <h3>We have sent a recovery code to <b><% Email %></b> with instructions on how to reset your password.</h3>
+    <input type="hidden" name="faem" value="<% Email %>">
+    <input type="submit" value="RESEND EMAIL" class="rgsb">
+</form>
+<script>
+Hm=document.getElementById("Hm");
+function M_menu_show(){Hm.style.display="block";}
+function M_menu_hide(){Hm.style.display="none";}
+</script>
+<style>#faer{display:<% ShowError %>}</style>
+<% Footer %>
+</body></html>
