@@ -15,6 +15,8 @@
     <h1>Reset Password</h1>
     <h3><% Email %></h3>
     <form action="" method="POST" id="rp_form">
+        <input type="hidden" name="e" value="<% ReqE %>">
+        <input type="hidden" name="id" value="<% ReqID %>">
         <input type="password" placeholder="New Password" name="rppw" id="rppw">
         <input type="password" placeholder="Retype New Password" name="rppa" id="rppa">
     </form>
