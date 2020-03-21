@@ -317,7 +317,7 @@ class ResetPWHand(tornado.web.RequestHandler):
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
         ResetPWRequestE = self.get_query_argument("e")
         ResetPWRequestTempID = self.get_query_argument("id")
-        ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:d}'".format(ResetPWRequestE)
+        ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWRequestE)
         mycursor.execute(ResetPWRequestDBSelectCode)
         QueryIDPre = mycursor.fetchone()
         if QueryIDPre:
@@ -326,7 +326,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                     ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                     self.write(ResetPWIndex)
                 else:
-                    ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
+                    ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:s}'".format(ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBUpdate)
                     db.commit()
                     ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
@@ -378,7 +378,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                 if QueryIDPre[0] == ResetPWRequestTempID:
                     if ResetPWRequestNewPWPre == ResetPWRequestNewPWAgain:
                         ResetPWRequestNewPW = Enc32a.encrypt(ResetPWRequestNewPWPre.encode()).decode('utf-8')
-                        ResetPWRequestDBUpdate = "UPDATE compacc SET tmpcode='',passwd='{0:s}',token='' WHERE userid='{1:d}'".format(ResetPWRequestNewPW,ResetPWRequestE)
+                        ResetPWRequestDBUpdate = "UPDATE compacc SET tmpcode='',passwd='{0:s}',token='' WHERE userid='{1:s}'".format(ResetPWRequestNewPW,ResetPWRequestE)
                         mycursor.execute(ResetPWRequestDBUpdate)
                         db.commit()
                         ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
