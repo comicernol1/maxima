@@ -316,7 +316,6 @@ class ResetPWHand(tornado.web.RequestHandler):
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
         try:
-            """
             ResetPWRequestE = self.get_query_argument("e")
             ResetPWRequestTempID = self.get_query_argument("id")
             ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWRequestE)
@@ -339,8 +338,6 @@ class ResetPWHand(tornado.web.RequestHandler):
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
                 self.write(ResetPWErrorIndex)
-            """
-            self.write(ResetPWIndex)
         except tornado.web.MissingArgumentError:
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","The page was reloaded. Please click on the link again.")
             self.write(ResetPWErrorIndex)
