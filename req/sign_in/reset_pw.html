@@ -16,33 +16,27 @@
     <form action="" method="POST" id="rp_form">
         <input type="password" placeholder="New Password" name="rppw" id="rppw">
         <input type="password" placeholder="Retype New Password" name="rppa" id="rppa">
-        <input type="submit" value="RESET PASSWORD" class="rgsb">
     </form>
+    <button class="rgsb" onclick="sb_rp()">RESET PASSWORD</button>
 </div>
 <script>
 Hm=document.getElementById("Hm");
-si_form=document.getElementById("si_form");
-sier=document.getElementById("sier");
-siem=document.getElementById("siem");
-sipw=document.getElementById("sipw");
-function valEm(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-function sb_si(){
-    if (valEm(siem.value) && sipw.value.length>=8){
-        sier.style.display="none";
-        si_form.submit();
-    }else{sier.style.display="block";}
-    if (!valEm(siem.value)){
-        sier.innerHTML="Please enter a valid Email";
-    }else if (sipw.value.length<8){
-        sier.innerHTML="Password must be 8 characters or more";
+rp_form=document.getElementById("rp_form");
+rper=document.getElementById("rper");
+rppw=document.getElementById("rppw");
+rppa=document.getElementById("rppa");
+function sb_rp(){
+    if (rppw.value == rppa.value){
+        rper.style.display="none";
+        rp_form.submit();
+    }else{
+        rper.innerHTML="Your passwords must match";
+        rper.style.display="block";
     }
 }
 function M_menu_show(){Hm.style.display="block";}
 function M_menu_hide(){Hm.style.display="none";}
 </script>
-<style>#sier{display:<% ShowError %>}</style>
+<style>#rper{display:<% ShowError %>}</style>
 <% Footer %>
 </body></html>
