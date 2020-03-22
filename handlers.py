@@ -328,7 +328,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                         mycursor.execute(ResetPWRequestDBUpdate)
                     ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                     ResetPWRequestToken = str(random.randint(1000000000,9999999999))
-                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token='{0:s}' WHERE userid='{1:s}'".format(ResetPWRequestToken,ResetPWRequestE)
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:s}' WHERE userid='{1:s}'".format(ResetPWRequestToken,ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
                     self.set_secure_cookie("Fu",ResetPWRequestE)
@@ -341,8 +341,29 @@ class ResetPWHand(tornado.web.RequestHandler):
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
                 self.write(ResetPWErrorIndex)
         except tornado.web.MissingArgumentError:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","Something went wrong. Please click on the link again.")
-            self.write(ResetPWErrorIndex)
+            ResetPWCookieFu = self.get_secure_cookie("Fu")
+            ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWCookieFu)
+            mycursor.execute(ResetPWRequestDBSelectCode)
+            QueryIDPre = mycursor.fetchone()
+            if QueryIDPre:
+                if str(QueryIDPre[0]) == ResetPWRequestTempID:
+                    if int(QueryIDPre[2]) != 1:
+                        ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:s}'".format(ResetPWRequestE)
+                        mycursor.execute(ResetPWRequestDBUpdate)
+                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                    ResetPWRequestToken = str(random.randint(1000000000,9999999999))
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:s}' WHERE userid='{1:s}'".format(ResetPWRequestToken,ResetPWRequestE)
+                    mycursor.execute(ResetPWRequestDBTokenUpdate)
+                    db.commit()
+                    self.set_secure_cookie("Fu",ResetPWRequestE)
+                    self.set_secure_cookie("Ft",ResetPWRequestToken)
+                    self.write(ResetPWIndex)
+                else:
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
+                    self.write(ResetPWErrorIndex)
+            else:
+                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
+                self.write(ResetPWErrorIndex)
     def post(self):
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
             ResetPWIndex = ResetPWIndex_F.read()
