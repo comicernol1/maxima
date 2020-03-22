@@ -335,7 +335,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                     self.set_secure_cookie("Ft",ResetPWRequestToken)
                     self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(A) This link has expired.")
                     self.write(ResetPWErrorIndex)
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
@@ -359,7 +359,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                     self.set_secure_cookie("Ft",ResetPWRequestToken)
                     self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(B) This link has expired.")
                     self.write(ResetPWErrorIndex)
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
