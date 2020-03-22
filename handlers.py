@@ -375,12 +375,11 @@ class ResetPWHand(tornado.web.RequestHandler):
                         ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
                         mycursor.execute(ResetPWRequestDBUpdate)
                     ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                    ResetPWRequestToken = str(random.randint(1000000000,9999999999))
-                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token=NULL WHERE userid='{0:d}'".format(ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
                     self.set_secure_cookie("Fu",str(ResetPWRequestE))
-                    self.set_secure_cookie("Ft",str(ResetPWRequestToken))
+                    self.set_secure_cookie("Ft","")
                     self.write(ResetPWIndex)
                 else:
                     ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
@@ -395,8 +394,7 @@ class ResetPWHand(tornado.web.RequestHandler):
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
                 ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
-                ResetPWRequestToken = random.randint(1000000000,9999999999)
-                ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token='{0:d}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWCookieFu)
+                ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token=NULL WHERE userid='{0:d}'".format(ResetPWCookieFu)
                 mycursor.execute(ResetPWRequestDBTokenUpdate)
                 db.commit()
                 self.write(ResetPWIndex)
@@ -566,6 +564,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P1) Something went wrong")
                 self.write(SignUpIndex)
         elif SignUpRequestBody.find("rsve=") >= 0:
+            
             # Resend Verification Email
             SignUpRSVEEmail = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)])
             with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
