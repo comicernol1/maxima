@@ -387,7 +387,7 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWRequestBody = self.request.body.decode('utf-8')
             ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
             if ResetPWRequestBody.find("rppw=") >= 0 and ResetPWRequestBody.find("rppa=") >= 0:
-                ResetPWRequestNewPWPre = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):ResetPWRequestBody.index("rppa=")])
+                ResetPWRequestNewPWPre = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):ResetPWRequestBody.index("&rppa=")])
                 ResetPWRequestNewPWAgain = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)])
                 ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
                 mycursor.execute(ResetPWRequestDBSelectCode)
