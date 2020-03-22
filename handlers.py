@@ -316,19 +316,19 @@ class ResetPWHand(tornado.web.RequestHandler):
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
         try:
-            ResetPWRequestE = self.get_query_argument("e")
-            ResetPWRequestTempID = self.get_query_argument("id")
-            ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWRequestE)
+            ResetPWRequestE = int(self.get_query_argument("e"))
+            ResetPWRequestTempID = int(self.get_query_argument("id"))
+            ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:d}'".format(ResetPWRequestE)
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
                 if str(QueryIDPre[0]) == ResetPWRequestTempID:
                     if int(QueryIDPre[2]) != 1:
-                        ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:s}'".format(ResetPWRequestE)
+                        ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
                         mycursor.execute(ResetPWRequestDBUpdate)
                     ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                     ResetPWRequestToken = str(random.randint(1000000000,9999999999))
-                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:s}' WHERE userid='{1:s}'".format(ResetPWRequestToken,ResetPWRequestE)
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
                     self.set_secure_cookie("Fu",ResetPWRequestE)
@@ -341,18 +341,18 @@ class ResetPWHand(tornado.web.RequestHandler):
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
                 self.write(ResetPWErrorIndex)
         except tornado.web.MissingArgumentError:
-            ResetPWCookieFu = str(self.get_secure_cookie("Fu"))
-            ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWCookieFu)
+            ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
+            ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
                 if str(QueryIDPre[0]) == ResetPWRequestTempID:
                     if int(QueryIDPre[2]) != 1:
-                        ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:s}'".format(ResetPWRequestE)
+                        ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
                         mycursor.execute(ResetPWRequestDBUpdate)
                     ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                    ResetPWRequestToken = str(random.randint(1000000000,9999999999))
-                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:s}' WHERE userid='{1:s}'".format(ResetPWRequestToken,ResetPWRequestE)
+                    ResetPWRequestToken = random.randint(1000000000,9999999999)
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:d}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
                     self.set_secure_cookie("Fu",ResetPWRequestE)
