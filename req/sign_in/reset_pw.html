@@ -4,7 +4,7 @@
     <title>FRANZAR&trade; Official Site | Reset Password</title>
     <% Head %>
 </head>
-<body>
+<body onbeforeunload="sb_rp()">
 <script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
 <div id="M_H"><button onclick="M_menu_show()"></button></div>
 <ul id="Hm">
@@ -24,22 +24,10 @@
 </div>
 <script>
 Hm=document.getElementById("Hm");
-rp_form=document.getElementById("rp_form");
-rper=document.getElementById("rper");
-rppw=document.getElementById("rppw");
-rppa=document.getElementById("rppa");
-function sb_rp(){
-    if (rppw.value == rppa.value){
-        rper.style.display="none";
-        rp_form.submit();
-    }else{
-        rper.innerHTML="Your passwords must match";
-        rper.style.display="block";
-    }
-}
 function M_menu_show(){Hm.style.display="block";}
 function M_menu_hide(){Hm.style.display="none";}
+function sb_rp(){document.getElementById("rp_form").submit();}
 </script>
-<style>#rper{display:<% ShowError %>}</style>
+<style>#rper{display:<% ShowError %>;}</style>
 <% Footer %>
 </body></html>
