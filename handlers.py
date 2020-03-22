@@ -346,21 +346,14 @@ class ResetPWHand(tornado.web.RequestHandler):
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
-                if int(QueryIDPre[0]) == ResetPWRequestTempID:
-                    if int(QueryIDPre[2]) != 1:
-                        ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
-                        mycursor.execute(ResetPWRequestDBUpdate)
-                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                    ResetPWRequestToken = random.randint(1000000000,9999999999)
-                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:d}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
-                    mycursor.execute(ResetPWRequestDBTokenUpdate)
-                    db.commit()
-                    self.set_secure_cookie("Fu",str(ResetPWRequestE))
-                    self.set_secure_cookie("Ft",str(ResetPWRequestToken))
-                    self.write(ResetPWIndex)
-                else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
-                    self.write(ResetPWErrorIndex)
+                ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                ResetPWRequestToken = random.randint(1000000000,9999999999)
+                ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:d}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
+                mycursor.execute(ResetPWRequestDBTokenUpdate)
+                db.commit()
+                self.set_secure_cookie("Fu",str(ResetPWRequestE))
+                self.set_secure_cookie("Ft",str(ResetPWRequestToken))
+                self.write(ResetPWIndex)
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
                 self.write(ResetPWErrorIndex)
