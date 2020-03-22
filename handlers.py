@@ -323,19 +323,17 @@ class ResetPWHand(tornado.web.RequestHandler):
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
                 if str(QueryIDPre[0]) == ResetPWRequestTempID:
-                    if int(QueryIDPre[2]) == 1:
-                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                        ResetPWIndex = ResetPWIndex.replace("<% ReqE %>",ResetPWRequestE)
-                        ResetPWIndex = ResetPWIndex.replace("<% ReqID %>",ResetPWRequestTempID)
-                        self.write(ResetPWIndex)
-                    else:
+                    if int(QueryIDPre[2]) != 1:
                         ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:s}'".format(ResetPWRequestE)
                         mycursor.execute(ResetPWRequestDBUpdate)
-                        db.commit()
-                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                        ResetPWIndex = ResetPWIndex.replace("<% ReqE %>",ResetPWRequestE)
-                        ResetPWIndex = ResetPWIndex.replace("<% ReqID %>",ResetPWRequestTempID)
-                        self.write(ResetPWIndex)
+                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                    ResetPWRequestToken = random.randint(1000000000,9999999999)
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode='',token='{0:d}' WHERE userid='{1:s}'".format(ResetPWRequestToken,ResetPWRequestE)
+                    mycursor.execute(ResetPWRequestDBTokenUpdate)
+                    db.commit()
+                    self.set_secure_cookie("Fu",QueryEmailUserID)
+                    self.set_secure_cookie("Ft",str(SignInRequestToken))
+                    self.write(ResetPWIndex)
                 else:
                     ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
                     self.write(ResetPWErrorIndex)
@@ -343,7 +341,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
                 self.write(ResetPWErrorIndex)
         except tornado.web.MissingArgumentError:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","The page was reloaded. Please click on the link again.")
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","Something went wrong. Please click on the link again.")
             self.write(ResetPWErrorIndex)
     def post(self):
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
