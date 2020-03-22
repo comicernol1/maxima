@@ -322,7 +322,11 @@ class ResetPWHand(tornado.web.RequestHandler):
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
-                if int(QueryIDPre[0]) == ResetPWRequestTempID:
+                if QueryIDPre[0] != "":
+                    ResetPWQueryIDTemp = int(QueryIDPre[0])
+                else:
+                    ResetPWQueryIDTemp = ""
+                if ResetPWQueryIDTemp == ResetPWRequestTempID:
                     if int(QueryIDPre[2]) != 1:
                         ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
                         mycursor.execute(ResetPWRequestDBUpdate)
