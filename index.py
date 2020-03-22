@@ -10,7 +10,7 @@ if __name__ == "__main__":
         (r"/sign_in/reset_password/", handlers.ResetPWHand),
         (r"/sign_up/", handlers.SignUpHand),
         (r"/verify/", handlers.VerifyHand),
-        (r"/terms_and_conditions/", handlers.TermsConditionsHand),
+        (r"/legal/terms_and_conditions/", handlers.TermsConditionsHand),
         (r"/.*", handlers.NotFoundHand)
     ], **settings)
 
