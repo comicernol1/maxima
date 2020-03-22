@@ -341,7 +341,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
                 self.write(ResetPWErrorIndex)
         except tornado.web.MissingArgumentError:
-            ResetPWCookieFu = self.get_secure_cookie("Fu")
+            ResetPWCookieFu = self.get_secure_cookie("Fu").encode()
             ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:s}'".format(ResetPWCookieFu)
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
