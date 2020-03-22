@@ -577,8 +577,8 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
             SignUpMail.sendmail('comicernol@gmail.com',SignUpRSVEEmail,SignUpSMTPContent)
             SignUpMail.close()
-            SignUpConf = SignUpConf.replace("<% Email %>",SignUpRSVEEmail)
-            self.write(SignUpConf)
+            SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRSVEEmail)
+            self.write(SignUpConfIndex)
         else:
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
             SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P2) Something went wrong")
