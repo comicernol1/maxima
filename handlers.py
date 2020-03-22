@@ -322,7 +322,7 @@ class ResetPWHand(tornado.web.RequestHandler):
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
-                if str(QueryIDPre[0]) == ResetPWRequestTempID:
+                if int(QueryIDPre[0]) == ResetPWRequestTempID:
                     if int(QueryIDPre[2]) != 1:
                         ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
                         mycursor.execute(ResetPWRequestDBUpdate)
@@ -335,7 +335,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                     self.set_secure_cookie("Ft",ResetPWRequestToken)
                     self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(A) This link has expired: "+str(QueryIDPre[0]))
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
                     self.write(ResetPWErrorIndex)
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
@@ -346,7 +346,7 @@ class ResetPWHand(tornado.web.RequestHandler):
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
-                if str(QueryIDPre[0]) == ResetPWRequestTempID:
+                if int(QueryIDPre[0]) == ResetPWRequestTempID:
                     if int(QueryIDPre[2]) != 1:
                         ResetPWRequestDBUpdate = "UPDATE compacc SET veremail='1' WHERE userid='{0:d}'".format(ResetPWRequestE)
                         mycursor.execute(ResetPWRequestDBUpdate)
@@ -359,7 +359,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                     self.set_secure_cookie("Ft",ResetPWRequestToken)
                     self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(B) This link has expired: "+str(QueryIDPre[0]))
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
                     self.write(ResetPWErrorIndex)
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
