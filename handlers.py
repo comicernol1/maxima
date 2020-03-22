@@ -383,40 +383,43 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWConfIndex = ResetPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWConfIndex = ResetPWConfIndex.replace("<% Head %>",HeadHTML)
         ResetPWConfIndex = ResetPWConfIndex.replace("<% Footer %>",FooterHTML)
-        
-        ResetPWRequestBody = self.request.body.decode('utf-8')
-        ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
-        if ResetPWRequestBody.find("rppw=") >= 0 and ResetPWRequestBody.find("rppa=") >= 0:
-            ResetPWRequestNewPWPre = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):ResetPWRequestBody.index("rppa=")])
-            ResetPWRequestNewPWAgain = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)])
-            ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
-            mycursor.execute(ResetPWRequestDBSelectCode)
-            QueryIDPre = mycursor.fetchone()
-            if QueryIDPre:
-                if ResetPWRequestNewPWPre == ResetPWRequestNewPWAgain:
-                    if len(ResetPWRequestNewPWPre) >= 8:
-                        ResetPWRequestNewPW = Enc32a.encrypt(ResetPWRequestNewPWPre.encode()).decode('utf-8')
-                        ResetPWRequestDBUpdate = "UPDATE compacc SET passwd='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestNewPW,ResetPWCookieFu)
-                        mycursor.execute(ResetPWRequestDBUpdate)
-                        db.commit()
-                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
-                        ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","none")
-                        self.write(ResetPWIndex)
+        if self.get_secure_cookie("Fu") != "":
+            ResetPWRequestBody = self.request.body.decode('utf-8')
+            ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
+            if ResetPWRequestBody.find("rppw=") >= 0 and ResetPWRequestBody.find("rppa=") >= 0:
+                ResetPWRequestNewPWPre = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):ResetPWRequestBody.index("rppa=")])
+                ResetPWRequestNewPWAgain = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)])
+                ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
+                mycursor.execute(ResetPWRequestDBSelectCode)
+                QueryIDPre = mycursor.fetchone()
+                if QueryIDPre:
+                    if ResetPWRequestNewPWPre == ResetPWRequestNewPWAgain:
+                        if len(ResetPWRequestNewPWPre) >= 8:
+                            ResetPWRequestNewPW = Enc32a.encrypt(ResetPWRequestNewPWPre.encode()).decode('utf-8')
+                            ResetPWRequestDBUpdate = "UPDATE compacc SET passwd='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestNewPW,ResetPWCookieFu)
+                            mycursor.execute(ResetPWRequestDBUpdate)
+                            db.commit()
+                            ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
+                            ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","none")
+                            self.write(ResetPWIndex)
+                        else:
+                            ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
+                            ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
+                            ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Password must be 8 characters or more")
+                            self.write(ResetPWIndex)
                     else:
                         ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
                         ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
-                        ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Password must be 8 characters or more")
+                        ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Passwords must match")
                         self.write(ResetPWIndex)
                 else:
-                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
-                    ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
-                    ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Passwords must match")
-                    self.write(ResetPWIndex)
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
+                    self.write(ResetPWErrorIndex)
             else:
-                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
+                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong")
                 self.write(ResetPWErrorIndex)
         else:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong")
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R2) Something went wrong")
             self.write(ResetPWErrorIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
