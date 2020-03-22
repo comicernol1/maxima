@@ -399,9 +399,8 @@ class ResetPWHand(tornado.web.RequestHandler):
                             ResetPWRequestDBUpdate = "UPDATE compacc SET passwd='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestNewPW,ResetPWCookieFu)
                             mycursor.execute(ResetPWRequestDBUpdate)
                             db.commit()
-                            ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
-                            ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","none")
-                            self.write(ResetPWIndex)
+                            ResetPWConfIndex = ResetPWConfIndex.replace("<% Email %>",str(QueryIDPre[0]))
+                            self.write(ResetPWConfIndex)
                         else:
                             ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
                             ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
