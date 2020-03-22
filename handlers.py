@@ -405,12 +405,12 @@ class ResetPWHand(tornado.web.RequestHandler):
                     else:
                         ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
                         ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
-                        ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
+                        ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Password must be 8 characters or more")
                         self.write(ResetPWIndex)
                 else:
                     ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
                     ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
-                    ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
+                    ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Passwords must match: "+ResetPWRequestNewPWPre+" - "+ResetPWRequestNewPWAgain)
                     self.write(ResetPWIndex)
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
