@@ -328,7 +328,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                         mycursor.execute(ResetPWRequestDBUpdate)
                     ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                     ResetPWRequestToken = str(random.randint(1000000000,9999999999))
-                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
                     self.set_secure_cookie("Fu",str(ResetPWRequestE))
@@ -342,17 +342,15 @@ class ResetPWHand(tornado.web.RequestHandler):
                 self.write(ResetPWErrorIndex)
         except tornado.web.MissingArgumentError:
             ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
-            ResetPWRequestDBSelectCode = "SELECT tmpcode,email,veremail FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
+            ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
-                ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
                 ResetPWRequestToken = random.randint(1000000000,9999999999)
-                ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:d}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWCookieFu)
+                ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token='{0:d}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWCookieFu)
                 mycursor.execute(ResetPWRequestDBTokenUpdate)
                 db.commit()
-                self.set_secure_cookie("Fu",str(ResetPWCookieFu))
-                self.set_secure_cookie("Ft",str(ResetPWRequestToken))
                 self.write(ResetPWIndex)
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
@@ -385,42 +383,35 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWConfIndex = ResetPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWConfIndex = ResetPWConfIndex.replace("<% Head %>",HeadHTML)
         ResetPWConfIndex = ResetPWConfIndex.replace("<% Footer %>",FooterHTML)
+        
         ResetPWRequestBody = self.request.body.decode('utf-8')
-        try:
-            ResetPWRequestE = self.get_query_argument("e")
-            ResetPWRequestTempID = self.get_query_argument("id")
-        except tornado.web.MissingArgumentError:
-            ResetPWRequestE = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("e=")+2):(ResetPWRequestBody.index("id=")+2)])
-            ResetPWRequestTempID = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("id=")+3):(ResetPWRequestBody.index("rppw=")+3)])
+        ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
         if ResetPWRequestBody.find("rppw=") >= 0 and ResetPWRequestBody.find("rppa=") >= 0:
             ResetPWRequestNewPWPre = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):(ResetPWRequestBody.index("rppa=")+5)])
             ResetPWRequestNewPWAgain = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)])
-            ResetPWRequestDBSelectCode = "SELECT email,tmpcode FROM compacc WHERE userid='{0:s}'".format(ResetPWRequestE)
+            ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
-                if QueryIDPre[0] == ResetPWRequestTempID:
-                    if ResetPWRequestNewPWPre == ResetPWRequestNewPWAgain:
-                        if len(ResetPWRequestNewPWPre) >= 8:
-                            ResetPWRequestNewPW = Enc32a.encrypt(ResetPWRequestNewPWPre.encode()).decode('utf-8')
-                            ResetPWRequestDBUpdate = "UPDATE compacc SET tmpcode='',passwd='{0:s}',token='' WHERE userid='{1:s}'".format(ResetPWRequestNewPW,ResetPWRequestE)
-                            mycursor.execute(ResetPWRequestDBUpdate)
-                            db.commit()
-                            ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                            self.write(ResetPWIndex)
-                        else:
-                            ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                            ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
-                            ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
-                            self.write(ResetPWIndex)
+                if ResetPWRequestNewPWPre == ResetPWRequestNewPWAgain:
+                    if len(ResetPWRequestNewPWPre) >= 8:
+                        ResetPWRequestNewPW = Enc32a.encrypt(ResetPWRequestNewPWPre.encode()).decode('utf-8')
+                        ResetPWRequestDBUpdate = "UPDATE compacc SET passwd='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestNewPW,ResetPWCookieFu)
+                        mycursor.execute(ResetPWRequestDBUpdate)
+                        db.commit()
+                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
+                        ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","none")
+                        self.write(ResetPWIndex)
                     else:
-                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
                         ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
                         ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
                         self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
-                    self.write(ResetPWErrorIndex)
+                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
+                    ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
+                    ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
+                    self.write(ResetPWIndex)
             else:
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
                 self.write(ResetPWErrorIndex)
