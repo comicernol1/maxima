@@ -33,6 +33,7 @@ def CheckLogin(self):
 
 class HomeHand(tornado.web.RequestHandler):
     def get(self):
+        # Open Home
         HomeProductList = ""
         mycursor.execute("SELECT * from products")
         QueryProductsDict = mycursor.fetchall()
@@ -60,6 +61,7 @@ class HomeHand(tornado.web.RequestHandler):
 
 class ContactHand(tornado.web.RequestHandler):
     def get(self):
+        # Open Contact
         with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
             ContactIndex = ContactIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
@@ -74,15 +76,18 @@ class ContactHand(tornado.web.RequestHandler):
         self.write(ContactIndex)
         
     def post(self):
-        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
+        # Open Contact
         with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
             ContactIndex = ContactIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
         if CheckLogin(self):
             ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
             ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
         ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Contact Confirmation
         with open("/root/maxima/req/contact/sent.html") as ContactSentIndex_F:
             ContactSentIndex = ContactSentIndex_F.read()
         if CheckLogin(self):
@@ -91,6 +96,8 @@ class ContactHand(tornado.web.RequestHandler):
             ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactSentIndex = ContactSentIndex.replace("<% Head %>",HeadHTML)
         ContactSentIndex = ContactSentIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Test
         ContactRequestBody = self.request.body.decode('utf-8').replace("+"," ")
         if ContactRequestBody.find("CFn=") >= 0 and ContactRequestBody.find("CFe=") >= 0 and ContactRequestBody.find("CFo=") >= 0 and ContactRequestBody.find("CFt=") >= 0:
             ContactRequestCFn = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFn=")+4):ContactRequestBody.index("&CFe=")])
@@ -102,6 +109,8 @@ class ContactHand(tornado.web.RequestHandler):
                     ContactSMTPTemplate_T = ContactSMPTTemplate_T_F.read()
                 with open("/root/maxima/templates/contact/confirm.html") as ContactSMPTTemplate_U_F:
                     ContactSMTPTemplate_U = ContactSMPTTemplate_U_F.read()
+                
+                # Send Ticket Email
                 ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% FullName %>",str(ContactRequestCFn))
                 ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% Email %>",str(ContactRequestCFe))
                 ContactSMTPTemplate_T = ContactSMTPTemplate_T.replace("<% OrderID %>",str(ContactRequestCFo))
@@ -115,6 +124,8 @@ class ContactHand(tornado.web.RequestHandler):
                 ContactMail_T.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
                 ContactMail_T.sendmail('comicernol@gmail.com','reedsienkiewicz@gmail.com',ContactSMTPContent_T)
                 ContactMail_T.close()
+                
+                # Send User Confirmation Email
                 ContactSMTPTemplate_U = ContactSMTPTemplate_U.replace("<% FullName %>",str(ContactRequestCFn))
                 ContactSMTPTemplate_U = ContactSMTPTemplate_U.replace("<% Email %>",str(ContactRequestCFe))
                 ContactSMTPTemplate_U = ContactSMTPTemplate_U.replace("<% OrderID %>",str(ContactRequestCFo))
@@ -146,6 +157,7 @@ class ContactHand(tornado.web.RequestHandler):
 
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
+        # Open Sign In
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex = SignInIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -160,10 +172,29 @@ class SignInHand(tornado.web.RequestHandler):
         self.write(SignInIndex)
 
     def post(self):
+        # Open Sign Up
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
             SignUpIndex = SignUpIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre)
+        SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
+        SignUpIndex = SignUpIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Sign In
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex = SignInIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre)
+        SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
+        SignInIndex = SignInIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Test
         SignInRequestBody = self.request.body.decode('utf-8')
         if SignInRequestBody.find("siem=") >= 0 and SignInRequestBody.find("sipw=") >= 0:
             SignInRequestEmail = urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
@@ -198,6 +229,7 @@ class SignInHand(tornado.web.RequestHandler):
 
 class ForgotPWHand(tornado.web.RequestHandler):
     def get(self):
+        # Open Forgot Password
         with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
             ForgotPWIndex = ForgotPWIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -209,6 +241,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
         ForgotPWIndex = ForgotPWIndex.replace("<% Footer %>",FooterHTML)
         self.write(ForgotPWIndex)
     def post(self):
+        # Open Forgot Password
         with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
             ForgotPWIndex = ForgotPWIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -218,6 +251,8 @@ class ForgotPWHand(tornado.web.RequestHandler):
             ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ForgotPWIndex = ForgotPWIndex.replace("<% Head %>",HeadHTML)
         ForgotPWIndex = ForgotPWIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Forgot Password Confirmation
         with open("/root/maxima/req/sign_in/forgot_pw_conf.html") as ForgotPWConfIndex_F:
             ForgotPWConfIndex = ForgotPWConfIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -227,6 +262,8 @@ class ForgotPWHand(tornado.web.RequestHandler):
             ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Head %>",HeadHTML)
         ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Test
         ForgotPWRequestBody = self.request.body.decode('utf-8')
         if ForgotPWRequestBody.find("fpem=") >= 0:
             ForgotPWRequestEmail = urllib.parse.unquote(ForgotPWRequestBody[(ForgotPWRequestBody.index("fpem=")+5):len(ForgotPWRequestBody)])
@@ -235,6 +272,8 @@ class ForgotPWHand(tornado.web.RequestHandler):
             QueryEmailPre = mycursor.fetchone()
             if QueryEmailPre:
                 QueryEmailUserID = str(QueryEmailPre[0])
+                
+                # Send Password Reset Email
                 with open("/root/maxima/templates/sign_in/password_reset_email.html") as ForgotPWSMTPTemplate_F:
                     ForgotPWSMTPTemplate = ForgotPWSMTPTemplate_F.read()
                 ForgotPWSMTPTemplate = ForgotPWSMTPTemplate.replace("<% UserID %>",QueryEmailUserID)
@@ -297,6 +336,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
 
 class ResetPWHand(tornado.web.RequestHandler):
     def get(self):
+        # Open Reset Password
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
             ResetPWIndex = ResetPWIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -306,6 +346,8 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
         ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Reset Password Error
         with open("/root/maxima/req/sign_in/reset_pw_error.html") as ResetPWErrorIndex_F:
             ResetPWErrorIndex = ResetPWErrorIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -315,6 +357,8 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Test
         try:
             ResetPWRequestE = int(self.get_query_argument("e"))
             ResetPWRequestTempID = int(self.get_query_argument("id"))
@@ -360,6 +404,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
                 self.write(ResetPWErrorIndex)
     def post(self):
+        # Open Reset Password
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
             ResetPWIndex = ResetPWIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -369,6 +414,8 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
         ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Reset Password Error
         with open("/root/maxima/req/sign_in/reset_pw_error.html") as ResetPWErrorIndex_F:
             ResetPWErrorIndex = ResetPWErrorIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -378,6 +425,8 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
         ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Reset Password Confirmation
         with open("/root/maxima/req/sign_in/reset_pw_conf.html") as ResetPWConfIndex_F:
             ResetPWConfIndex = ResetPWConfIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -387,6 +436,8 @@ class ResetPWHand(tornado.web.RequestHandler):
             ResetPWConfIndex = ResetPWConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWConfIndex = ResetPWConfIndex.replace("<% Head %>",HeadHTML)
         ResetPWConfIndex = ResetPWConfIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Test
         if self.get_secure_cookie("Fu") != "":
             ResetPWRequestBody = self.request.body.decode('utf-8')
             ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
@@ -427,6 +478,7 @@ class ResetPWHand(tornado.web.RequestHandler):
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
+        # Open Sign Up
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
             SignUpIndex = SignUpIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -441,13 +493,40 @@ class SignUpHand(tornado.web.RequestHandler):
         self.write(SignUpIndex)
 
     def post(self):
+        # Open Sign Up
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
             SignUpIndex = SignUpIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPre)
+        SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
+        SignUpIndex = SignUpIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Sign Up Confirmation
         with open("/root/maxima/req/sign_up/conf_sent.html") as SignUpConf_F:
             SignUpConf = SignUpConf_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            SignUpConfIndex = SignUpConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            SignUpConfIndex = SignUpConfIndex.replace("<% HeaderLI %>",HeaderLIPre)
+        SignUpConfIndex = SignUpConfIndex.replace("<% Head %>",HeadHTML)
+        SignUpConfIndex = SignUpConfIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Sign In
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex = SignInIndex_F.read()
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        if CheckLogin(self):
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPre)
+        SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
+        SignInIndex = SignInIndex.replace("<% Footer %>",FooterHTML)
         
+        # Test
         SignUpRequestBody = self.request.body.decode('utf-8')
         if SignUpRequestBody.find("suem=") >= 0 and SignUpRequestBody.find("supw=") >= 0 and SignUpRequestBody.find("supa=") >= 0:
             SignUpRequestEmail = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
@@ -463,6 +542,8 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,tmpcode,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:d}','{3:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpVerifyCode,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
+                
+                # Send Verification Email
                 with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
                     SignUpSMTPTemplate = SignUpSMPTTemplate_F.read()
                 SignUpSMTPTemplate = SignUpSMTPTemplate.replace("<% UserCode %>",str(SignUpVerifyCode))
@@ -485,6 +566,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P1) Something went wrong")
                 self.write(SignUpIndex)
         elif SignUpRequestBody.find("rsve=") >= 0:
+            # Resend Verification Email
             SignUpRSVEEmail = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)])
             with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
                     SignUpSMTPTemplate = SignUpSMPTTemplate_F.read()
@@ -504,6 +586,7 @@ class SignUpHand(tornado.web.RequestHandler):
             self.write(SignUpIndex)
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
+        # Open Verify
         with open("/root/maxima/req/sign_up/verified.html") as VerifyIndex_F:
             VerifyIndex = VerifyIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -518,6 +601,7 @@ class VerifyHand(tornado.web.RequestHandler):
 
 class NotFoundHand(tornado.web.RequestHandler):
     def get(self):
+        # Open Not Found
         with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
             NotFoundIndex = NotFoundIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
