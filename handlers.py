@@ -322,7 +322,7 @@ class ResetPWHand(tornado.web.RequestHandler):
             mycursor.execute(ResetPWRequestDBSelectCode)
             QueryIDPre = mycursor.fetchone()
             if QueryIDPre:
-                if QueryIDPre[0] != "":
+                if str(QueryIDPre[0]) != "":
                     ResetPWQueryIDTemp = int(QueryIDPre[0])
                 else:
                     ResetPWQueryIDTemp = ""
