@@ -331,6 +331,8 @@ class ResetPWHand(tornado.web.RequestHandler):
                         mycursor.execute(ResetPWRequestDBUpdate)
                         db.commit()
                         ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                        ResetPWIndex = ResetPWIndex.replace("<% ReqE %>",ResetPWRequestE)
+                        ResetPWIndex = ResetPWIndex.replace("<% ReqID %>",ResetPWRequestTempID)
                         self.write(ResetPWIndex)
                 else:
                     ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
@@ -370,8 +372,12 @@ class ResetPWHand(tornado.web.RequestHandler):
         ResetPWConfIndex = ResetPWConfIndex.replace("<% Head %>",HeadHTML)
         ResetPWConfIndex = ResetPWConfIndex.replace("<% Footer %>",FooterHTML)
         ResetPWRequestBody = self.request.body.decode('utf-8')
-        ResetPWRequestE = self.get_query_argument("e")
-        ResetPWRequestTempID = self.get_query_argument("id")
+        try:
+            ResetPWRequestE = self.get_query_argument("e")
+            ResetPWRequestTempID = self.get_query_argument("id")
+        except tornado.web.MissingArgumentError:
+            ResetPWRequestE = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("e=")+2):(ResetPWRequestBody.index("id=")+2)])
+            ResetPWRequestTempID = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("id=")+3):(ResetPWRequestBody.index("rppw=")+3)])
         if ResetPWRequestBody.find("rppw=") >= 0 and ResetPWRequestBody.find("rppa=") >= 0:
             ResetPWRequestNewPWPre = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):(ResetPWRequestBody.index("rppa=")+5)])
             ResetPWRequestNewPWAgain = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)])
@@ -381,12 +387,18 @@ class ResetPWHand(tornado.web.RequestHandler):
             if QueryIDPre:
                 if QueryIDPre[0] == ResetPWRequestTempID:
                     if ResetPWRequestNewPWPre == ResetPWRequestNewPWAgain:
-                        ResetPWRequestNewPW = Enc32a.encrypt(ResetPWRequestNewPWPre.encode()).decode('utf-8')
-                        ResetPWRequestDBUpdate = "UPDATE compacc SET tmpcode='',passwd='{0:s}',token='' WHERE userid='{1:s}'".format(ResetPWRequestNewPW,ResetPWRequestE)
-                        mycursor.execute(ResetPWRequestDBUpdate)
-                        db.commit()
-                        ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                        self.write(ResetPWIndex)
+                        if len(ResetPWRequestNewPWPre) >= 8:
+                            ResetPWRequestNewPW = Enc32a.encrypt(ResetPWRequestNewPWPre.encode()).decode('utf-8')
+                            ResetPWRequestDBUpdate = "UPDATE compacc SET tmpcode='',passwd='{0:s}',token='' WHERE userid='{1:s}'".format(ResetPWRequestNewPW,ResetPWRequestE)
+                            mycursor.execute(ResetPWRequestDBUpdate)
+                            db.commit()
+                            ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                            self.write(ResetPWIndex)
+                        else:
+                            ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                            ResetPWIndex.replace("<% ShowError %>","block")
+                            ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
+                            self.write(ResetPWIndex)
                     else:
                         ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                         ResetPWIndex.replace("<% ShowError %>","block")
