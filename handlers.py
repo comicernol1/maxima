@@ -503,8 +503,8 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpIndex = SignUpIndex.replace("<% Footer %>",FooterHTML)
         
         # Open Sign Up Confirmation
-        with open("/root/maxima/req/sign_up/conf_sent.html") as SignUpConf_F:
-            SignUpConf = SignUpConf_F.read()
+        with open("/root/maxima/req/sign_up/conf_sent.html") as SignUpConfIndex_F:
+            SignUpConfIndex = SignUpConfIndex_F.read()
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
         if CheckLogin(self):
             SignUpConfIndex = SignUpConfIndex.replace("<% HeaderLI %>",HeaderLIPre+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
@@ -553,8 +553,8 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
                 SignUpMail.sendmail('comicernol@gmail.com',SignUpRequestEmail,SignUpSMTPContent)
                 SignUpMail.close()
-                SignUpConf = SignUpConf.replace("<% Email %>",SignUpRequestEmail)
-                self.write(SignUpConf)
+                SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRequestEmail)
+                self.write(SignUpConfIndex)
             elif SignUpRequestBody.find("rsve=y") == -1 and int(QueryCountEmail[0]) >= 1:
                 SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
                 SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","This account already exists")
