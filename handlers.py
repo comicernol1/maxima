@@ -328,7 +328,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                         mycursor.execute(ResetPWRequestDBUpdate)
                     ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                     ResetPWRequestToken = random.randint(1000000000,9999999999)
-                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode='',token='{0:d}' WHERE userid='{1:s}'".format(ResetPWRequestToken,ResetPWRequestE)
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token='{0:s}' WHERE userid='{1:s}'".format(ResetPWRequestToken,ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
                     self.set_secure_cookie("Fu",QueryEmailUserID)
