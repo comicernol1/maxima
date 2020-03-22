@@ -394,26 +394,26 @@ class ResetPWHand(tornado.web.RequestHandler):
                             ResetPWRequestDBUpdate = "UPDATE compacc SET tmpcode='',passwd='{0:s}',token='' WHERE userid='{1:s}'".format(ResetPWRequestNewPW,ResetPWRequestE)
                             mycursor.execute(ResetPWRequestDBUpdate)
                             db.commit()
-                            ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                            ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
                             self.write(ResetPWIndex)
                         else:
-                            ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                            ResetPWIndex.replace("<% ShowError %>","block")
-                            ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
+                            ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                            ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
+                            ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
                             self.write(ResetPWIndex)
                     else:
-                        ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
-                        ResetPWIndex.replace("<% ShowError %>","block")
-                        ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
+                        ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[1]))
+                        ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
+                        ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Your passwords must match")
                         self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
                     self.write(ResetPWErrorIndex)
             else:
-                ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
+                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
                 self.write(ResetPWErrorIndex)
         else:
-            ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong")
+            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong")
             self.write(ResetPWErrorIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
