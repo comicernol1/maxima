@@ -331,8 +331,8 @@ class ResetPWHand(tornado.web.RequestHandler):
                     ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
-                    self.set_secure_cookie("Fu",ResetPWRequestE)
-                    self.set_secure_cookie("Ft",ResetPWRequestToken)
+                    self.set_secure_cookie("Fu",str(ResetPWRequestE))
+                    self.set_secure_cookie("Ft",str(ResetPWRequestToken))
                     self.write(ResetPWIndex)
                 else:
                     ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
@@ -355,8 +355,8 @@ class ResetPWHand(tornado.web.RequestHandler):
                     ResetPWRequestDBTokenUpdate = "UPDATE compacc SET token='{0:d}' WHERE userid='{1:d}'".format(ResetPWRequestToken,ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
-                    self.set_secure_cookie("Fu",ResetPWRequestE)
-                    self.set_secure_cookie("Ft",ResetPWRequestToken)
+                    self.set_secure_cookie("Fu",str(ResetPWRequestE))
+                    self.set_secure_cookie("Ft",str(ResetPWRequestToken))
                     self.write(ResetPWIndex)
                 else:
                     ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
