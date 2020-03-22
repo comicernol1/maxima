@@ -16,7 +16,7 @@ body{overflow-x:hidden;}
 #rg_block[hg="fp"] h1,#rg_block[hg="fa"] h1,#rg_block[hg="rp"] h1{width:100%;font-size:30px;text-align:center;margin:0;position:absolute;top:15px;left:0;}
 #rg_block[hg="fp"] h3,#rg_block[hg="fa"] h3,#rg_block[hg="rp"] h3{width:calc(100% - 60px);font-size:16px;font-weight:300;text-align:center;margin:0;position:absolute;top:60px;left:30px;}
 .ser{display:none;width:400px;height:40px;font-size:16px;padding:10px 20px;color:#FAFAFF;background:#D7263D;border:1px solid #FAFAFF;border-radius:6px;box-sizing:border-box;position:absolute;z-index:1;left:calc(50% - 200px);}
-#suer{top:100px;}
+#suer{top:110px;}
 #sier{top:140px;}
 #fper{top:200px;}
 #faer{top:250px;}
