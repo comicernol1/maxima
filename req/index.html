@@ -18,12 +18,9 @@
 <center id="BPa">
     <% Products %>
 </center>
+<% Footer %>
 <script>
-Hm=document.getElementById("Hm");
-function M_menu_show(){Hm.style.display="block";}
-function M_menu_hide(){Hm.style.display="none";}
 if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
 document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
 </script>
-<% Footer %>
 </body></html>
