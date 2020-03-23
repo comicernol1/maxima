@@ -583,7 +583,7 @@ class AccountHand(tornado.web.RequestHandler):
         if CheckLogin(self):
             # Open Account
             with open("/root/maxima/req/account/index.html") as AccountIndex_F:
-                AccountIndex = VerifyIndex_F.read()
+                AccountIndex = AccountIndex_F.read()
             AccountIndex = AccountIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
             AccountIndex = AccountIndex.replace("<% Head %>",HeadHTML)
             AccountIndex = AccountIndex.replace("<% Footer %>",FooterHTML)
