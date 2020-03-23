@@ -21,14 +21,11 @@
 <button id="CFs" onclick="sb_cf()">SUBMIT</button>
 <% Footer %>
 <script>
-Hm=document.getElementById("Hm");
 cfer=document.getElementById("cfer");
 Cfm=document.getElementById("Cfm");
 CFn=document.getElementById("CFn");
 CFe=document.getElementById("CFe");
 CFt=document.getElementById("CFt");
-function M_menu_show(){Hm.style.display="block";}
-function M_menu_hide(){Hm.style.display="none";}
 function valEm(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
