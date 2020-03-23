@@ -43,6 +43,7 @@ body{overflow-x:hidden;}
 #rg_block[hg="fp"] .rgsb{top:200px;}
 #rg_block[hg="fa"] .rgsb{top:160px;}
 #rg_block[hg="rp"] .rgsb{top:260px;}
+#rpi{width:400px;height:80px;background:#FAFAFF;font-size:16px;text-align:center;color:#0A0908;border-radius:6px;padding:20px 15px;box-sizing:border-box;position:absolute;top:calc(50% - 40px);left:calc(50% - 200px);}
 #Foot{top:700px;}
 @media only screen and (max-width:700px){
     #rg_block{width:calc(100% - 40px);left:20px;}
