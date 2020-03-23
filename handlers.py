@@ -382,22 +382,23 @@ class ResetPWHand(tornado.web.RequestHandler):
                 ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
                 self.write(ResetPWErrorIndex)
         except tornado.web.MissingArgumentError:
-            ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
-            ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
-            mycursor.execute(ResetPWRequestDBSelectCode)
-            QueryIDPre = mycursor.fetchone()
-            if QueryIDPre:
-                ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
-                ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token=NULL WHERE userid='{0:d}'".format(ResetPWCookieFu)
-                mycursor.execute(ResetPWRequestDBTokenUpdate)
-                db.commit()
-                self.write(ResetPWIndex)
+            try:
+                ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
+                ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
+                mycursor.execute(ResetPWRequestDBSelectCode)
+                QueryIDPre = mycursor.fetchone()
+                if QueryIDPre:
+                    ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
+                    ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token=NULL WHERE userid='{0:d}'".format(ResetPWCookieFu)
+                    mycursor.execute(ResetPWRequestDBTokenUpdate)
+                    db.commit()
+                    self.write(ResetPWIndex)
+                else:
+                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
+                    self.write(ResetPWErrorIndex)
             else:
-                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
+                # Route to forgot password
                 self.write(ResetPWErrorIndex)
-        else:
-            # Route to forgot password
-            self.write(ResetPWErrorIndex)
             
     def post(self):
         # Open Reset Password
