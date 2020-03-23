@@ -4,7 +4,7 @@
     <title>FRANZAR&trade; Official Site | Reset Password</title>
     <% Head %>
 </head>
-<body onbeforeunload="sb_rp()">
+<body>
 <script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
 <div id="M_H"><button onclick="M_menu_show()"></button></div>
 <ul id="Hm">
@@ -20,7 +20,6 @@
         <input type="submit" class="rgsb" value="RESET PASSWORD">
     </form>
 </div>
-<script>function sb_rp(){document.getElementById("rp_form").submit();}</script>
 <style>#rper{display:<% ShowError %>;}</style>
 <% Footer %>
 </body></html>
