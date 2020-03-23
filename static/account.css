@@ -10,7 +10,7 @@ body{overflow-x:hidden;}
 .ACAH{font-size:30px;margin:0;color:#D7263D;position:absolute;z-index:1;}
 #ACAHn{top:85px;}
 #ACAHs{top:165px;}
-#ACAHc{top:325px;right:250px;}
+#ACAHc{top:325px;right:calc(50% + 20px);}
 #ACAHz{top:325px;}
 #ACAHr{top:405px;}
 #ACAHt{top:485px;}
