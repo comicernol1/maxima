@@ -4,6 +4,7 @@ body{overflow-x:hidden;}
 #ACM h1{width:100%;font-size:60px;font-weight:300;text-align:center;margin:0;position:absolute;top:40px;left:0;}
 .AC_block{background:white;border:1px solid #E7E7E7;box-sizing:border-box;position:absolute;}
 .AC_block h2{width:100%;font-size:36px;font-weight:300;margin:0;position:absolute;top:15px;left:20px;}
+
 #ACa{width:calc(50% - 60px);height:550px;position:absolute;top:150px;left:30px;}
 #ACa input{position:absolute;}
 #ACAn{width:calc(100% - 40px);top:80px;left:20px;}
@@ -13,12 +14,14 @@ body{overflow-x:hidden;}
 #ACAz{width:calc(50% - 30px);top:320px;left:calc(50% + 10px);}
 #ACAr{width:calc(100% - 40px);top:400px;left:20px;}
 #ACAt{width:calc(100% - 40px);position:absolute;top:480px;left:20px;}
-#ACo{width:calc(100% - 60px);height:500px;top:700px;left:30px;}
+
+#ACo{width:calc(100% - 60px);height:500px;top:750px;left:30px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
 #ACOL table{width:100%;}
 #ACOL table tr{text-align:left;}
 #ACOL table tr th{padding:0 0 6px 0;}
 #ACOL table tr td{padding:5px 0;}
+
 #Foot{top:2000px;}
 @media only screen and (min-width:1100px){
     #ACOL table tr th,#ACOL table tr td{font-size:16px;}
