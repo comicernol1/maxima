@@ -17,6 +17,8 @@ body{overflow-x:hidden;}
     #ACAL table tr th:nth-child(1){width:100px;}
     #ACAL table tr th:nth-child(3){width:100px;}
     #ACAL table tr th:nth-child(4){width:200px;}
+    #ACAL table tr th:nth-child(5){display:initial;}
+    #ACAL table tr td:nth-child(5){display:initial;}
 }
 @media only screen and (max-width:1100px){
     #ACAL table tr th{font-size:14px;}
@@ -24,6 +26,8 @@ body{overflow-x:hidden;}
     #ACAL table tr th:nth-child(1){width:80px;}
     #ACAL table tr th:nth-child(3){width:70px;}
     #ACAL table tr th:nth-child(4){width:150px;}
+    #ACAL table tr th:nth-child(5){display:initial;}
+    #ACAL table tr td:nth-child(5){display:initial;}
 }
 @media only screen and (max-width:900px){
     #ACAL table tr th{font-size:14px;}
