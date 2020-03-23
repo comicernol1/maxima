@@ -343,7 +343,7 @@ class ResetPWHand(tornado.web.RequestHandler):
         ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
         
         # Open Reset Password Error
-        with open("/root/maxima/req/sign_in/reset_pw_conf.html") as ResetPWErrorIndex_F:
+        with open("/root/maxima/req/sign_in/reset_pw_error.html") as ResetPWErrorIndex_F:
             ResetPWErrorIndex = ResetPWErrorIndex_F.read()
         if CheckLogin(self):
             ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
@@ -397,8 +397,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                     ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
                     self.write(ResetPWErrorIndex)
             except:
-                # Route to forgot password
-                self.write(ResetPWErrorIndex)
+                self.redirect("/sign_in/forgot_password/")
             
     def post(self):
         # Open Reset Password
