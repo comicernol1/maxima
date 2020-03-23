@@ -25,7 +25,7 @@ body{overflow-x:hidden;}
 #ACAz{left:calc(50% + 10px);}
 #ACAr{top:400px;}
 #ACAt{top:480px;}
-#ACATo{width:12px;height:12px;background-image:url("/static/multiplier_image.png");background-size:200px 200px;background-position:83px 44px;pointer-events:none;position:absolute;top:58px;left:218px;}
+#ACATo{width:18px;height:18px;background-image:url("/static/multiplier_image.png");background-size:300px 300px;background-position:125px 66px;pointer-events:none;position:absolute;top:58px;left:218px;}
 
 #ACo{width:calc(100% - 60px);height:500px;top:750px;left:30px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
