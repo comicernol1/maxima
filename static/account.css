@@ -29,6 +29,8 @@ body{overflow-x:hidden;}
     #ACAL table tr th:nth-child(6),#ACAL table tr td:nth-child(6){display:none;}
 }
 @media only screen and (max-width:700px){
+    #ACM h1{font-size:48px;top:30px;}
+    #ACa{top:120px;}
     #ACa{width:calc(100% - 20px);left:10px;}
     #ACAL{width:calc(100% - 10px);left:5px;}
     #ACAL table tr th,#ACAL table tr td{font-size:10px;}
