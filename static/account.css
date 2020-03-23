@@ -30,9 +30,9 @@ body{overflow-x:hidden;}
 }
 @media only screen and (max-width:700px){
     #ACM h1{font-size:48px;top:30px;}
-    #ACa{top:120px;}
+    #ACa{height:400px;top:120px;}
     #ACa{width:calc(100% - 20px);left:10px;}
-    #ACAL{width:calc(100% - 10px);left:5px;}
+    #ACAL{width:calc(100% - 10px);height:300px;left:5px;}
     #ACAL table tr th,#ACAL table tr td{font-size:10px;}
     #ACAL table tr th:nth-child(1),#ACAL table tr th:nth-child(3),#ACAL table tr th:nth-child(4){width:55px;}
     #ACAL table tr th:nth-child(5),#ACAL table tr td:nth-child(5),#ACAL table tr th:nth-child(6),#ACAL table tr td:nth-child(6){display:none;}
