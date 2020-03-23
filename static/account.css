@@ -9,8 +9,8 @@ body{overflow-x:hidden;}
 #ACAn{width:calc(100% - 40px);top:70px;left:20px;}
 #ACAs{width:calc(100% - 40px);top:150px;left:20px;}
 #ACAb{width:calc(100% - 40px);top:230px;left:20px;}
-#ACAc{width:calc(50% - 60px);top:310px;left:20px;}
-#ACAr{width:calc(50% - 60px);top:310px;left:calc(50% + 30px);}
+#ACAc{width:calc(50% - 30px);top:310px;left:20px;}
+#ACAr{width:calc(50% - 30px);top:310px;left:calc(50% + 10px);}
 #ACo{width:calc(100% - 60px);height:500px;top:700px;left:30px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
 #ACOL table{width:100%;}
