@@ -12,41 +12,26 @@ body{overflow-x:hidden;}
 #ACAL table tr td{padding:5px 0;}
 #Foot{top:1100px;}
 @media only screen and (min-width:1100px){
-    #ACAL table tr th{font-size:16px;}
-    #ACAL table tr td{font-size:16px;}
-    #ACAL table tr th:nth-child(1){width:100px;}
-    #ACAL table tr th:nth-child(3){width:100px;}
-    #ACAL table tr th:nth-child(4){width:100px;}
-    #ACAL table tr th:nth-child(5){width:100px;}
+    #ACAL table tr th,#ACAL table tr td{font-size:16px;}
+    #ACAL table tr th:nth-child(1),#ACAL table tr th:nth-child(3),#ACAL table tr th:nth-child(4),#ACAL table tr th:nth-child(5){width:100px;}
 }
 @media only screen and (min-width:900px) and (max-width:1100px){
     #ACAL table tr th{font-size:14px;}
     #ACAL table tr td{font-size:12px;}
-    #ACAL table tr th:nth-child(1){width:80px;}
+    #ACAL table tr th:nth-child(1),#ACAL table tr th:nth-child(4),#ACAL table tr th:nth-child(5){width:80px;}
     #ACAL table tr th:nth-child(3){width:70px;}
-    #ACAL table tr th:nth-child(4){width:80px;}
-    #ACAL table tr th:nth-child(5){width:80px;}
 }
 @media only screen and (min-width:700px) and (max-width:900px){
     #ACAL table tr th{font-size:14px;}
     #ACAL table tr td{font-size:12px;}
-    #ACAL table tr th:nth-child(1){width:80px;}
+    #ACAL table tr th:nth-child(1),#ACAL table tr th:nth-child(4),#ACAL table tr th:nth-child(5){width:80px;}
     #ACAL table tr th:nth-child(3){width:70px;}
-    #ACAL table tr th:nth-child(4){width:80px;}
-    #ACAL table tr th:nth-child(5){width:80px;}
-    #ACAL table tr th:nth-child(6){display:none;}
-    #ACAL table tr td:nth-child(6){display:none;}
+    #ACAL table tr th:nth-child(6),#ACAL table tr td:nth-child(6){display:none;}
 }
 @media only screen and (max-width:700px){
     #ACa{width:calc(100% - 20px);left:10px;}
     #ACAL{width:calc(100% - 10px);left:5px;}
-    #ACAL table tr th{font-size:12px;}
-    #ACAL table tr td{font-size:12px;}
-    #ACAL table tr th:nth-child(1){width:80px;}
-    #ACAL table tr th:nth-child(3){width:70px;}
-    #ACAL table tr th:nth-child(4){width:80px;}
-    #ACAL table tr th:nth-child(5){display:none;}
-    #ACAL table tr td:nth-child(5){display:none;}
-    #ACAL table tr th:nth-child(6){display:none;}
-    #ACAL table tr td:nth-child(6){display:none;}
+    #ACAL table tr th,#ACAL table tr td{font-size:10px;}
+    #ACAL table tr th:nth-child(1),#ACAL table tr th:nth-child(3),#ACAL table tr th:nth-child(4){width:55px;}
+    #ACAL table tr th:nth-child(5),#ACAL table tr td:nth-child(5),#ACAL table tr th:nth-child(6),#ACAL table tr td:nth-child(6){display:none;}
 }
