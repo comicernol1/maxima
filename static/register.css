@@ -21,7 +21,7 @@ body{overflow-x:hidden;}
 #fper{top:200px;}
 #faer{top:250px;}
 #rper{top:170px;}
-#rg_block input[type="email"],#rg_block input[type="password"]{width:340px;position:absolute;left:30px;}
+#rg_block input[type="email"],#rg_block input[type="password"]{width:340px;padding:0 20px 0 40px;position:absolute;left:30px;}
 #siem{top:100px;}
 #sipw{top:180px;}
 #supwmin{width:calc(100% - 60px);margin:0px;font-size:9px;text-align:right;color:#444054;position:absolute;top:245px;left:30px;}
