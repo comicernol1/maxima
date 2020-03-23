@@ -396,7 +396,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                 else:
                     ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
                     self.write(ResetPWErrorIndex)
-            else:
+            except:
                 # Route to forgot password
                 self.write(ResetPWErrorIndex)
             
