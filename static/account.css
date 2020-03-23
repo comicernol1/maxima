@@ -18,8 +18,6 @@ body{overflow-x:hidden;}
     #ACAL table tr th:nth-child(3){width:100px;}
     #ACAL table tr th:nth-child(4){width:100px;}
     #ACAL table tr th:nth-child(5){width:100px;}
-    #ACAL table tr th:nth-child(6){display:inherit;}
-    #ACAL table tr td:nth-child(6){display:inherit;}
 }
 @media only screen and (min-width:900px) and (max-width:1100px){
     #ACAL table tr th{font-size:14px;}
@@ -27,8 +25,6 @@ body{overflow-x:hidden;}
     #ACAL table tr th:nth-child(1){width:80px;}
     #ACAL table tr th:nth-child(3){width:70px;}
     #ACAL table tr th:nth-child(4){width:150px;}
-    #ACAL table tr th:nth-child(6){display:initial;}
-    #ACAL table tr td:nth-child(6){display:initial;}
 }
 @media only screen and (min-width:700px) and (max-width:900px){
     #ACAL table tr th{font-size:14px;}
@@ -47,6 +43,8 @@ body{overflow-x:hidden;}
     #ACAL table tr th:nth-child(1){width:80px;}
     #ACAL table tr th:nth-child(3){width:70px;}
     #ACAL table tr th:nth-child(4){width:150px;}
+    #ACAL table tr th:nth-child(5){display:none;}
+    #ACAL table tr td:nth-child(5){display:none;}
     #ACAL table tr th:nth-child(6){display:none;}
     #ACAL table tr td:nth-child(6){display:none;}
 }
