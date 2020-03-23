@@ -13,7 +13,7 @@ body{overflow-x:hidden;}
 #ACAz{width:calc(50% - 30px);top:310px;left:calc(50% + 10px);}
 #ACAr{width:calc(100% - 40px);top:390px;left:20px;}
 #ACa select{height:60px;box-sizing:border-box;font-size:20px;color:#444054;padding:0 10px 0 20px;background:#E6E6E6;border:1px solid #E6E6E6;border-radius:4px;}
-#ACAt{width:calc(100% - 40px);top:470px;left:20px;}
+#ACAt{width:calc(100% - 40px);position:absolute;top:470px;left:20px;}
 #ACo{width:calc(100% - 60px);height:500px;top:700px;left:30px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
 #ACOL table{width:100%;}
