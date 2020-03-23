@@ -587,7 +587,7 @@ class AccountHand(tornado.web.RequestHandler):
             AccountIndex = AccountIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
             AccountIndex = AccountIndex.replace("<% Head %>",HeadHTML)
             AccountIndex = AccountIndex.replace("<% Footer %>",FooterHTML)
-            self.write(VerifyIndex)
+            self.write(AccountIndex)
         else:
             self.redirect("/sign_in/")
 
