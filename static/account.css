@@ -4,7 +4,7 @@ body{overflow-x:hidden;}
 #ACM h1{width:100%;font-size:60px;font-weight:300;text-align:center;margin:0;position:absolute;top:40px;left:0;}
 .AC_block{background:white;border:1px solid #E7E7E7;box-sizing:border-box;position:absolute;}
 .AC_block h2{width:100%;font-size:24px;font-weight:300;margin:0;position:absolute;top:15px;left:20px;}
-#ACa{width:50%;height:300px;top:150px;left:30px;}
+#ACa{width:calc(100% - 60px);height:300px;top:150px;left:30px;}
 #ACAL{width:calc(100% - 20px);height:220px;overflow-x:hidden;overflow-y:auto;font-size:12px;position:absolute;top:60px;left:10px;}
 #ACAL table{width:100%;}
 #ACAL table tr{text-align:left;}
