@@ -578,6 +578,19 @@ class VerifyHand(tornado.web.RequestHandler):
         VerifyIndex = VerifyIndex.replace("<% Email %>",self.get_query_argument("e"))
         self.write(VerifyIndex)
 
+class AccountHand(tornado.web.RequestHandler):
+    def get(self):
+        if CheckLogin(self):
+            # Open Account
+            with open("/root/maxima/req/account/index.html") as AccountIndex_F:
+                AccountIndex = VerifyIndex_F.read()
+            AccountIndex = AccountIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            AccountIndex = AccountIndex.replace("<% Head %>",HeadHTML)
+            AccountIndex = AccountIndex.replace("<% Footer %>",FooterHTML)
+            self.write(VerifyIndex)
+        else:
+            self.redirect("/sign_in/")
+
 class TermsConditionsHand(tornado.web.RequestHandler):
     def get(self):
         # Open Terms & Conditions
