@@ -343,14 +343,14 @@ class ResetPWHand(tornado.web.RequestHandler):
         ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
         
         # Open Reset Password Error
-        with open("/root/maxima/req/sign_in/reset_pw_error.html") as ResetPWErrorIndex_F:
-            ResetPWErrorIndex = ResetPWErrorIndex_F.read()
+        with open("/root/maxima/req/sign_in/reset_pw_msg.html") as ResetPWMsgIndex_F:
+            ResetPWMsgIndex = ResetPWMsgIndex_F.read()
         if CheckLogin(self):
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
-        ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
+            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Head %>",HeadHTML)
+        ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Footer %>",FooterHTML)
         
         # Test
         try:
@@ -376,11 +376,11 @@ class ResetPWHand(tornado.web.RequestHandler):
                     self.set_secure_cookie("Ft","")
                     self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","This link has expired.")
-                    self.write(ResetPWErrorIndex)
+                    ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","This link has expired.")
+                    self.write(ResetPWMsgIndex)
             else:
-                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
-                self.write(ResetPWErrorIndex)
+                ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","We can't find an account matching this link.")
+                self.write(ResetPWMsgIndex)
         except tornado.web.MissingArgumentError:
             try:
                 ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
@@ -394,8 +394,8 @@ class ResetPWHand(tornado.web.RequestHandler):
                     db.commit()
                     self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong. Please click on the link again.")
-                    self.write(ResetPWErrorIndex)
+                    ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","(R1) Something went wrong. Please click on the link again.")
+                    self.write(ResetPWMsgIndex)
             except:
                 self.redirect("/sign_in/forgot_password/")
             
@@ -410,25 +410,15 @@ class ResetPWHand(tornado.web.RequestHandler):
         ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
         ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
         
-        # Open Reset Password Error
-        with open("/root/maxima/req/sign_in/reset_pw_error.html") as ResetPWErrorIndex_F:
-            ResetPWErrorIndex = ResetPWErrorIndex_F.read()
+        # Open Reset Password Message
+        with open("/root/maxima/req/sign_in/reset_pw_msg.html") as ResetPWMsgIndex_F:
+            ResetPWMsgIndex = ResetPWMsgIndex_F.read()
         if CheckLogin(self):
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
         else:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Head %>",HeadHTML)
-        ResetPWErrorIndex = ResetPWErrorIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Reset Password Confirmation
-        with open("/root/maxima/req/sign_in/reset_pw_conf.html") as ResetPWConfIndex_F:
-            ResetPWConfIndex = ResetPWConfIndex_F.read()
-        if CheckLogin(self):
-            ResetPWConfIndex = ResetPWConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
-        else:
-            ResetPWConfIndex = ResetPWConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ResetPWConfIndex = ResetPWConfIndex.replace("<% Head %>",HeadHTML)
-        ResetPWConfIndex = ResetPWConfIndex.replace("<% Footer %>",FooterHTML)
+            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Head %>",HeadHTML)
+        ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Footer %>",FooterHTML)
         
         # Test
         if self.get_secure_cookie("Fu") != "":
@@ -447,8 +437,8 @@ class ResetPWHand(tornado.web.RequestHandler):
                             ResetPWRequestDBUpdate = "UPDATE compacc SET passwd='{0:s}' WHERE userid='{1:d}'".format(ResetPWRequestNewPW,ResetPWCookieFu)
                             mycursor.execute(ResetPWRequestDBUpdate)
                             db.commit()
-                            ResetPWConfIndex = ResetPWConfIndex.replace("<% Email %>",str(QueryIDPre[0]))
-                            self.write(ResetPWConfIndex)
+                            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","Your password has been changed")
+                            self.write(ResetPWMsgIndex)
                         else:
                             ResetPWIndex = ResetPWIndex.replace("<% Email %>",str(QueryIDPre[0]))
                             ResetPWIndex = ResetPWIndex.replace("<% ShowError %>","block")
@@ -460,14 +450,14 @@ class ResetPWHand(tornado.web.RequestHandler):
                         ResetPWIndex = ResetPWIndex.replace("<% ErrorMsg %>","Passwords must match")
                         self.write(ResetPWIndex)
                 else:
-                    ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","We can't find an account matching this link.")
-                    self.write(ResetPWErrorIndex)
+                    ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","We can't find an account matching this link.")
+                    self.write(ResetPWMsgIndex)
             else:
-                ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R1) Something went wrong")
-                self.write(ResetPWErrorIndex)
+                ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","(R1) Something went wrong")
+                self.write(ResetPWMsgIndex)
         else:
-            ResetPWErrorIndex = ResetPWErrorIndex.replace("<% ErrorMsg %>","(R2) Something went wrong")
-            self.write(ResetPWErrorIndex)
+            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","(R2) Something went wrong")
+            self.write(ResetPWMsgIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
