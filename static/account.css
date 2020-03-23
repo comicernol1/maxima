@@ -7,13 +7,14 @@ body{overflow-x:hidden;}
 
 #ACa{width:calc(50% - 60px);height:560px;position:absolute;top:150px;left:30px;}
 #ACAHM{color:#D7263D;font-size:16px;margin:0;position:absolute;top:20px;right:20px;}
-.ACAH{font-size:30px;margin:0;color:#D7263D;position:absolute;right:30px;}
+.ACAH{font-size:30px;margin:0;color:#D7263D;position:absolute;z-index:1;}
 #ACAHn{top:85px;}
 #ACAHs{top:165px;}
-#ACAHc{top:245px;}
+#ACAHc{top:245px;right:200px;}
 #ACAHz{top:325px;}
 #ACAHr{top:405px;}
 #ACAHt{top:485px;}
+#ACAHn,#ACAHs,#ACAHz,#ACAHr,#ACAHt{right:30px;}
 #ACa input,#ACa select{position:absolute;}
 #ACAn,#ACAs,#ACAb,#ACAr,#ACAt{width:calc(100% - 40px);padding:0 30px 0 20px;left:20px;}
 #ACAn{top:80px;}
