@@ -7,16 +7,18 @@ body{overflow-x:hidden;}
 
 #ACa{width:calc(50% - 60px);height:560px;position:absolute;top:150px;left:30px;}
 #ACAHM{color:#D7263D;font-size:16px;margin:0;position:absolute;top:20px;right:20px;}
-.ACAH{color:#D7263D;position:absolute;}
+.ACAH{font-size:30px;margin:0;color:#D7263D;position:absolute;}
 #ACAHn{top:80px;right:50px;}
-#ACa input{position:absolute;}
-#ACAn{width:calc(100% - 40px);top:80px;left:20px;}
-#ACAs{width:calc(100% - 40px);top:160px;left:20px;}
-#ACAb{width:calc(100% - 40px);top:240px;left:20px;}
-#ACAc{width:calc(50% - 30px);top:320px;left:20px;}
-#ACAz{width:calc(50% - 30px);top:320px;left:calc(50% + 10px);}
-#ACAr{width:calc(100% - 40px);top:400px;left:20px;}
-#ACAt{width:calc(100% - 40px);position:absolute;top:480px;left:20px;}
+#ACa input,#ACa select{position:absolute;}
+#ACAn,#ACAs,#ACAb,#ACAr,#ACAt{width:calc(100% - 40px);padding:0 30px 0 20px;left:20px;}
+#ACAn{top:80px;}
+#ACAs{top:160px;}
+#ACAb{top:240px;}
+#ACAc,#ACAz{width:calc(50% - 30px);padding:0 30px 0 20px;top:320px;}
+#ACAc{left:20px;}
+#ACAz{left:calc(50% + 10px);}
+#ACAr{top:400px;}
+#ACAt{top:480px;}
 
 #ACo{width:calc(100% - 60px);height:500px;top:750px;left:30px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
