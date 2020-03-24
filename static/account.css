@@ -28,10 +28,11 @@ body{overflow-x:hidden;}
 #ACATo{width:18px;height:18px;background-image:url("/static/multiplier_image.png");background-size:300px 300px;background-position:125px 66px;pointer-events:none;position:absolute;top:503px;right:40px;}
 #ACA_S{width:calc(100% - 40px);position:absolute;top:560px;left:20px;}
 
-#ACp{width:calc(50% - 30px);height:300px;position:absolute;top:150px;left:calc(50% + 10px);}
+#ACp{width:calc(50% - 30px);height:310px;position:absolute;top:150px;left:calc(50% + 10px);}
 #ACPp,#ACPa{width:calc(100% - 40px);padding:0 30px 0 20px;position:absolute;left:20px;}
 #ACPp{top:80px;}
 #ACPa{top:160px;}
+#ACP_S{width:calc(100% - 40px);position:absolute;top:240px;left:20px;}
 
 #ACo{width:calc(100% - 60px);height:500px;top:800px;left:30px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
