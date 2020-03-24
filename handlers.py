@@ -29,8 +29,45 @@ def CheckLogin(self):
     else:
         return False
 
-HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+def FindAddress(adid):
+    if adid.is_integer():
+        FindAddressQuery = "SELECT name,stadda,staddb,city,zip,prov,ntn from addresses where adid='{0:d}'".format(int(adid))
+        mycursor.execute(FindAddressQuery)
+        FindAddressFetch = mycursor.fetchone()
+        if FindAddressFetch:
+            FindAddressName = FindAddressFetch[0]
+            FindAddressStAddA = FindAddressFetch[1]
+            FindAddressStAddB = FindAddressFetch[2]
+            FindAddressCity = FindAddressFetch[3]
+            FindAddressZip = FindAddressFetch[4]
+            FindAddressProv = FindAddressFetch[5]
+            FindAddressNtn = FindAddressFetch[6]
+            FindAddressDict = {"Name":FindAddressName,"StAddA":FindAddressStAddA,"StAddB":FindAddressStAddB,"City":FindAddressCity,"Zip":FindAddressZip,"Prov":FindAddressProv,"Ntn":FindAddressNtn}
+            return FindAddressDict
+        else:
+            return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
+    else:
+        return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
+def FindProduct(pid):
+    if pid.is_integer():
+        FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from productd where id='{0:d}'".format(int(pid))
+        mycursor.execute(FindProductQuery)
+        FindProductFetch = mycursor.fetchone()
+        if FindProductFetch:
+            FindProductName = FindProductFetch[0]
+            FindProductPrice = FindProductFetch[1]
+            FindProductDiscount = FindProductFetch[2]
+            FindProductSize = FindProductFetch[3]
+            FindProductColour = FindProductFetch[4]
+            FindProductColourName = FindProductFetch[5]
+            FindProductDict = {"Name":FindProductName,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName}
+            return FindProductDict
+        else:
+            return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+    else:
+        return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
+HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
 HeaderLIPreHome = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
 HeaderLIPreContact = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
 
@@ -581,12 +618,32 @@ class VerifyHand(tornado.web.RequestHandler):
 class AccountHand(tornado.web.RequestHandler):
     def get(self):
         if CheckLogin(self):
+            UserInfoFu = self.get_secure_cookie("Fu")
+            # Pull Account Orders
+            AccountOrdersQuery = "SELECT oid,pid,fprice,stat,arrival,dest from orders where uid='{0:s}' sort by pdate desc".format(UserInfoFu)
+            mycursor.execute(AccountOrdersQuery)
+            AccountOrdersFetch = mycursor.fetchall()
+            
+            # Set OrderList
+            AccountOrdersList = ""
+            for OFi in AccountOrdersFetch:
+                AccountOrdersList += "<tr>"
+                AccountOrdersList += "<td><a href=\"/order/"+AccountOrdersFetch[0]+"/\">"+AccountOrdersFetch[0]+"</a></td>"
+                AccountOrdersList += "<td><a href=\"/product/"+AccountOrdersFetch[1]+"/\">"+FindProduct(AccountOrdersFetch[1])["Name"]+"</a></td>"
+                AccountOrdersList += "<td>"+AccountOrdersFetch[2]+"</td>"
+                AccountOrdersList += "<td>"+AccountOrdersFetch[3]+"</td>"
+                AccountOrdersList += "<td>"+FindAddress(AccountOrdersFetch[4])["StAddA"]+"</td>"
+                AccountOrdersList += "<td>"+AccountOrdersFetch[5]+"</td>"
+                AccountOrdersList += "</tr>\n"
+            
+            
             # Open Account
             with open("/root/maxima/req/account/index.html") as AccountIndex_F:
                 AccountIndex = AccountIndex_F.read()
             AccountIndex = AccountIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
             AccountIndex = AccountIndex.replace("<% Head %>",HeadHTML)
             AccountIndex = AccountIndex.replace("<% Footer %>",FooterHTML)
+            AccountIndex = AccountIndex.replace("<% OrderList %>",AccountOrdersList)
             self.write(AccountIndex)
         else:
             self.redirect("/sign_in/")
