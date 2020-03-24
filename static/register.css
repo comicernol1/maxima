@@ -35,7 +35,7 @@ body{overflow-x:hidden;}
 #suua a{color:#1446A0;text-decoration:underline;}
 #suua a:active{color:#113A83;}
 #sifp{width:calc(100% - 60px);margin:0;font-size:12px;text-align:right;text-decoration:none;color:#444054;position:absolute;top:247px;left:30px;}
-.rgsb{width:calc(100% - 60px);height:50px;box-sizing:border-box;font-size:16px;font-weight:600;color:#FAFAFF;letter-spacing:1px;padding:0 20px 0 40px;background:#008148;border:none;border-radius:4px;position:absolute;left:30px;}
+.rgsb{width:calc(100% - 60px);position:absolute;left:30px;}
 .rgsb:active{background:#006A3B;}
 #rg_block[hg="u"] .rgsb{top:420px;}
 #rg_block[hg="uv"] .rgsb{top:220px;}
