@@ -24,6 +24,9 @@ input[type="text"],input[type="email"],input[type="password"],input[type="search
 textarea{outline:none;font-family:sans-serif,Arial,Verdana;padding:15px 20px 10px 40px;color:#444054;background:#E6E6E6;border:1px solid #E6E6E6;border-radius:4px;box-sizing:border-box;font-size:20px;}
 select{outline:none;height:60px;cursor:pointer;-webkit-appearance:none;-khtml-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;box-sizing:border-box;font-size:20px;color:#444054;padding:0 40px 0 20px;background:#E6E6E6;border:1px solid #E6E6E6;border-radius:4px;}
 select::-ms-expand{display:none;}
+.DDoA{width:12px;height:12px;background-image:url("/static/multiplier_image.png");background-size:200px 200px;background-position:83px 44px;pointer-events:none;}
+.DDoB{width:18px;height:18px;background-image:url("/static/multiplier_image.png");background-size:300px 300px;background-position:125px 66px;pointer-events:none;}
+.DDoC{width:24px;height:24px;background-image:url("/static/multiplier_image.png");background-size:400px 400px;background-position:166px 88px;pointer-events:none;}
 select option{color:black;}
 a{outline:none;cursor:pointer;}
 button{outline:none;cursor:pointer;}
