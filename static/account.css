@@ -7,7 +7,9 @@ body{overflow-x:hidden;}
 .ACH{font-size:30px;margin:0;color:#D7263D;position:absolute;z-index:1;right:30px;}
 .ACHM{color:#D7263D;font-size:16px;margin:0;position:absolute;top:20px;right:20px;}
 
-#ACa{width:calc(50% - 30px);height:630px;position:absolute;top:150px;left:20px;}
+#ACL{width:calc(50% - 30px);height:270px;position:absolute;top:150px;left:20px;}
+
+#ACa{width:calc(50% - 30px);height:630px;position:absolute;top:300px;left:20px;}
 #ACAHn{top:85px;}
 #ACAHs{top:165px;}
 #ACAHc{top:325px;right:calc(50% + 20px);}
