@@ -8,6 +8,7 @@ body{overflow-x:hidden;}
 .ACHM{color:#D7263D;font-size:16px;margin:0;position:absolute;top:20px;right:20px;}
 
 #ACL{width:calc(50% - 30px);height:270px;position:absolute;top:150px;left:20px;}
+#ACLn{width:calc(100% - 40px);position:absolute;top:80px;left:20px;}
 
 #ACa{width:calc(50% - 30px);height:630px;position:absolute;top:300px;left:20px;}
 #ACAHn{top:85px;}
