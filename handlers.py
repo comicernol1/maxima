@@ -63,9 +63,9 @@ def FindProduct(pid):
             FindProductDict = {"Name":FindProductName,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName}
             return FindProductDict
         else:
-            return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+            return {"Name":"None","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
     except:
-        return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+        return {"Name":"Error","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
 HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
 HeaderLIPreHome = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
