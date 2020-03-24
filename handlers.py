@@ -30,7 +30,7 @@ def CheckLogin(self):
         return False
 
 def FindAddress(adid):
-    if isinstance(adid,int):
+    try:
         FindAddressQuery = "SELECT name,stadda,staddb,city,zip,prov,ntn from addresses where adid='{0:d}'".format(int(adid))
         mycursor.execute(FindAddressQuery)
         FindAddressFetch = mycursor.fetchone()
@@ -46,10 +46,10 @@ def FindAddress(adid):
             return FindAddressDict
         else:
             return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
-    else:
+    except:
         return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
 def FindProduct(pid):
-    if isinstance(pid,int):
+    try:
         FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from productd where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
@@ -64,7 +64,7 @@ def FindProduct(pid):
             return FindProductDict
         else:
             return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
-    else:
+    except:
         return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
 HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
