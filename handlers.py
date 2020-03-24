@@ -643,7 +643,7 @@ class AccountHand(tornado.web.RequestHandler):
             # Set AddressOptions
             AccountAddressOptions = ""
             for AFi in range(0,len(AccountAddressesFetch)):
-                AccountAddressOptions += "<option value=\""+str(AccountAddressesFetch[AFi][0])+"\">"+str(AccountAddressesFetch[AFi][1])+"</option>\n"
+                AccountAddressOptions += "<option value=\""+str(AccountAddressesFetch[AFi][0])+"\">"+str(AccountAddressesFetch[AFi][1])+", "+str(AccountAddressesFetch[AFi][3])+"</option>\n"
             
             # Open Account
             with open("/root/maxima/req/account/index.html") as AccountIndex_F:
