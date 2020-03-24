@@ -7,11 +7,12 @@ body{overflow-x:hidden;}
 .ACH{font-size:30px;margin:0;color:#D7263D;position:absolute;z-index:1;right:30px;}
 .ACHM{color:#D7263D;font-size:16px;margin:0;position:absolute;top:20px;right:20px;}
 
-#ACL{width:calc(50% - 30px);height:240px;position:absolute;top:150px;left:20px;}
+#ACL{width:calc(50% - 30px);height:230px;position:absolute;top:150px;left:20px;}
 #ACLn{width:calc(100% - 40px);position:absolute;top:80px;left:20px;}
+#ACLNo{width:18px;height:18px;background-image:url("/static/multiplier_image.png");background-size:300px 300px;background-position:125px 66px;pointer-events:none;position:absolute;top:103px;right:40px;}
 #ACL_S{width:200px;position:absolute;top:160px;right:20px;}
 
-#ACa{width:calc(50% - 30px);height:630px;position:absolute;top:260px;left:20px;}
+#ACa{width:calc(50% - 30px);height:630px;position:absolute;top:400px;left:20px;}
 #ACAHn{top:85px;}
 #ACAHs{top:165px;}
 #ACAHc{top:325px;right:calc(50% + 20px);}
