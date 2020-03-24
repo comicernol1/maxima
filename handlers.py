@@ -633,7 +633,7 @@ class AccountHand(tornado.web.RequestHandler):
                 AccountOrdersList += "<td>$"+str(AccountOrdersFetch[OFi][2])+"</td>"
                 AccountOrdersList += "<td>"+str(AccountOrdersFetch[OFi][3])+"</td>"
                 AccountOrdersList += "<td>"+str(AccountOrdersFetch[OFi][4])+"</td>"
-                AccountOrdersList += "<td>"+str(FindAddress(AccountOrdersFetch[OFi][5]))+"</td>"
+                AccountOrdersList += "<td>"+str(FindAddress(AccountOrdersFetch[OFi][5])["StAddA"])+"</td>"
                 AccountOrdersList += "</tr>\n"
             
             
