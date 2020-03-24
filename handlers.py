@@ -636,6 +636,15 @@ class AccountHand(tornado.web.RequestHandler):
                 AccountOrdersList += "<td>"+str(FindAddress(AccountOrdersFetch[OFi][5])["StAddA"])+"</td>"
                 AccountOrdersList += "</tr>\n"
             
+            # Pull Account Addresses
+            AccountAddressesQuery = "SELECT adid,name,stadda,staddb,city,zip,prov,ntn from addresses where uid='{0:d}' order by name asc".format(int(UserInfoFu))
+            mycursor.execute(AccountAddressesQuery)
+            AccountAddressesFetch = mycursor.fetchall()
+            
+            # Set AddressOptions
+            AccountAddressOptions = ""
+            for AFi in range(0,len(AccountAddressesFetch)):
+                AccountAddressOptions += "<option value=\""+str(AccountAddressesFetch[AFi][0])+"\">"+str(AccountAddressesFetch[AFi][0])+"</option>\n"
             
             # Open Account
             with open("/root/maxima/req/account/index.html") as AccountIndex_F:
