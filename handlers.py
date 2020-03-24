@@ -50,7 +50,7 @@ def FindAddress(adid):
         return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
 def FindProduct(pid):
     if True:
-        FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from productd where id='{0:d}'".format(int(pid))
+        FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from products where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
         if FindProductFetch:
