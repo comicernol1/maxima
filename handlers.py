@@ -1,4 +1,4 @@
-import HomeHand
+import os,random,base64,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
