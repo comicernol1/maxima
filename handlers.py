@@ -652,6 +652,7 @@ class AccountHand(tornado.web.RequestHandler):
             AccountIndex = AccountIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
             AccountIndex = AccountIndex.replace("<% Head %>",HeadHTML)
             AccountIndex = AccountIndex.replace("<% Footer %>",FooterHTML)
+            AccountIndex = AccountIndex.replace("<% AddressOptions %>",AccountAddressOptions)
             AccountIndex = AccountIndex.replace("<% OrderList %>",AccountOrdersList)
             self.write(AccountIndex)
         else:
