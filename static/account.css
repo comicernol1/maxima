@@ -5,7 +5,7 @@ body{overflow-x:hidden;}
 .AC_block{background:white;border:1px solid #E7E7E7;box-sizing:border-box;position:absolute;}
 .AC_block h2{width:100%;font-size:36px;font-weight:300;margin:0;position:absolute;top:15px;left:20px;}
 
-#ACa{width:calc(50% - 60px);height:640px;position:absolute;top:150px;left:30px;}
+#ACa{width:calc(50% - 60px);height:630px;position:absolute;top:150px;left:30px;}
 #ACAHM{color:#D7263D;font-size:16px;margin:0;position:absolute;top:20px;right:20px;}
 .ACAH{font-size:30px;margin:0;color:#D7263D;position:absolute;z-index:1;}
 #ACAHn{top:85px;}
