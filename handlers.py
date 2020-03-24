@@ -31,23 +31,22 @@ def CheckLogin(self):
 
 def FindAddress(adid):
     try:
-        FindAddressQuery = "SELECT name,stadda,staddb,city,zip,prov,ntn from addresses where adid='{0:d}'".format(int(adid))
+        FindAddressQuery = "SELECT stadda,staddb,city,zip,prov,ntn from addresses where adid='{0:d}'".format(int(adid))
         mycursor.execute(FindAddressQuery)
         FindAddressFetch = mycursor.fetchone()
         if FindAddressFetch:
-            FindAddressName = FindAddressFetch[0]
-            FindAddressStAddA = FindAddressFetch[1]
-            FindAddressStAddB = FindAddressFetch[2]
-            FindAddressCity = FindAddressFetch[3]
-            FindAddressZip = FindAddressFetch[4]
-            FindAddressProv = FindAddressFetch[5]
-            FindAddressNtn = FindAddressFetch[6]
-            FindAddressDict = {"Name":FindAddressName,"StAddA":FindAddressStAddA,"StAddB":FindAddressStAddB,"City":FindAddressCity,"Zip":FindAddressZip,"Prov":FindAddressProv,"Ntn":FindAddressNtn}
+            FindAddressStAddA = FindAddressFetch[0]
+            FindAddressStAddB = FindAddressFetch[1]
+            FindAddressCity = FindAddressFetch[2]
+            FindAddressZip = FindAddressFetch[3]
+            FindAddressProv = FindAddressFetch[4]
+            FindAddressNtn = FindAddressFetch[5]
+            FindAddressDict = {"StAddA":FindAddressStAddA,"StAddB":FindAddressStAddB,"City":FindAddressCity,"Zip":FindAddressZip,"Prov":FindAddressProv,"Ntn":FindAddressNtn}
             return FindAddressDict
         else:
-            return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
+            return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
     except:
-        return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
+        return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
 def FindProduct(pid):
     try:
         FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from products where id='{0:d}'".format(int(pid))
@@ -637,7 +636,7 @@ class AccountHand(tornado.web.RequestHandler):
                 AccountOrdersList += "</tr>\n"
             
             # Pull Account Addresses
-            AccountAddressesQuery = "SELECT adid,name,stadda,staddb,city,zip,prov,ntn from addresses where uid='{0:d}' order by name asc".format(int(UserInfoFu))
+            AccountAddressesQuery = "SELECT adid,stadda,staddb,city,zip,prov,ntn from addresses where uid='{0:d}' order by name asc".format(int(UserInfoFu))
             mycursor.execute(AccountAddressesQuery)
             AccountAddressesFetch = mycursor.fetchall()
             
