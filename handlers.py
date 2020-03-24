@@ -49,7 +49,7 @@ def FindAddress(adid):
     except:
         return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
 def FindProduct(pid):
-    if True:
+    try:
         FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from products where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
@@ -63,9 +63,9 @@ def FindProduct(pid):
             FindProductDict = {"Name":FindProductName,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName}
             return FindProductDict
         else:
-            return {"Name":"None","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
-    else:
-        return {"Name":"Error","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+            return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+    except:
+        return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
 HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
 HeaderLIPreHome = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -629,7 +629,7 @@ class AccountHand(tornado.web.RequestHandler):
             for OFi in range(0,len(AccountOrdersFetch)):
                 AccountOrdersList += "<tr>"
                 AccountOrdersList += "<td><a href=\"/order/"+str(AccountOrdersFetch[OFi][0])+"/\">"+str(AccountOrdersFetch[OFi][0])+"</a></td>"
-                AccountOrdersList += "<td><a href=\"/product/"+str(AccountOrdersFetch[OFi][1])+"/\">"+str(FindProduct(AccountOrdersFetch[OFi][1]))+"</a></td>"
+                AccountOrdersList += "<td><a href=\"/product/"+str(AccountOrdersFetch[OFi][1])+"/\">"+str(FindProduct(AccountOrdersFetch[OFi][1])["Name"])+"</a></td>"
                 AccountOrdersList += "<td>"+str(AccountOrdersFetch[OFi][2])+"</td>"
                 AccountOrdersList += "<td>"+str(AccountOrdersFetch[OFi][3])+"</td>"
                 AccountOrdersList += "<td>"+str(FindAddress(AccountOrdersFetch[OFi][4])["StAddA"])+"</td>"
