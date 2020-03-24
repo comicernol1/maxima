@@ -66,6 +66,8 @@ def FindProduct(pid):
     except:
         return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
+ShippingCodesList = [("p","In Production"),("i","In Progress"),("d","Delivered")]
+
 HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
 HeaderLIPreHome = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
 HeaderLIPreContact = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
