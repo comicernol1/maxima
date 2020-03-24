@@ -10,14 +10,15 @@ body{overflow-x:hidden;}
 #ACL{width:calc(50% - 30px);height:230px;position:absolute;top:150px;left:20px;}
 #ACLn{width:calc(100% - 40px);position:absolute;top:80px;left:20px;}
 #ACLNo{width:18px;height:18px;background-image:url("/static/multiplier_image.png");background-size:300px 300px;background-position:125px 66px;pointer-events:none;position:absolute;top:103px;right:40px;}
-#ACL_S{width:200px;background:#D7263D;position:absolute;top:160px;right:20px;}
+#ACL_SA{width:200px;background:#D7263D;position:absolute;top:160px;right:20px;}
 #ACL hr{width:calc(100% - 20px);margin:0;position:absolute;top:225px;left:10px;}
 #ACLDh,#ACLBh{font-size:16px;width:calc(100% - 40px);margin:0;position:absolute;left:20px;}
 #ACLDh{top:240px;}
-#ACLBh{top:310px;}
-#ACLDh select,#ACLBh select{width:100%;position:relative;top:6px;}
+#ACLBh{top:340px;}
+#ACLDh select,#ACLBh select{width:100%;position:absolute;top:25px;left:0;}
+#ACA_SB{width:calc(100% - 40px);position:absolute;top:440px;left:20px;}
 
-#ACa{width:calc(50% - 30px);height:550px;position:absolute;top:600px;left:20px;}
+#ACa{width:calc(50% - 30px);height:550px;position:absolute;top:700px;left:20px;}
 #ACAHs{top:85px;}
 #ACAHc{top:245px;right:calc(50% + 20px);}
 #ACAHz{top:245px;}
