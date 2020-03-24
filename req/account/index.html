@@ -19,6 +19,17 @@
         </select>
         <span id="ACLNo"></span>
         <input type="submit" id="ACL_S" value="DELETE ADDRESS">
+        <hr>
+        <h3 id="ACLDh">Default Delivery Address:
+            <select name="ACLd" id="ACLd">
+                <% AddressOptions %>
+            </select>
+        </h3>
+        <h3 id="ACLBh">Billing Address:
+            <select name="ACLb" id="ACLb">
+                <% AddressOptions %>
+            </select>
+        </h3>
     </form>
     <form id="ACa" class="AC_block" action="" method="POST">
         <h2>Connect Address</h2>
