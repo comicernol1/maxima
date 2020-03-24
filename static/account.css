@@ -9,11 +9,12 @@ body{overflow-x:hidden;}
 
 #ACL{width:calc(50% - 30px);height:515px;position:absolute;top:150px;left:20px;}
 #ACLn{width:calc(100% - 40px);position:absolute;top:80px;left:20px;}
-#ACLNo{width:18px;height:18px;background-image:url("/static/multiplier_image.png");background-size:300px 300px;background-position:125px 66px;pointer-events:none;position:absolute;top:103px;right:40px;}
+#ACLNo{position:absolute;top:103px;right:40px;}
 #ACL_SA{width:200px;background:#D7263D;position:absolute;top:160px;right:20px;}
 #ACL hr{width:calc(100% - 20px);height:1px;background:#757780;border:0;margin:0;position:absolute;top:225px;left:10px;}
 #ACLDh,#ACLBh{font-size:16px;width:calc(100% - 40px);margin:0;position:absolute;left:20px;}
 #ACLDh{top:240px;}
+#ACLDo{position:absolute;top:103px;right:40px;}
 #ACLBh{top:340px;}
 #ACLDh select,#ACLBh select{width:100%;position:absolute;top:25px;left:0;}
 #ACL_SB{width:calc(100% - 40px);position:absolute;top:445px;left:20px;}
