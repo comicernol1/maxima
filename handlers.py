@@ -641,9 +641,12 @@ class AccountHand(tornado.web.RequestHandler):
             AccountAddressesFetch = mycursor.fetchall()
             
             # Set AddressOptions
-            AccountAddressOptions = ""
-            for AFi in range(0,len(AccountAddressesFetch)):
-                AccountAddressOptions += "<option value=\""+str(AccountAddressesFetch[AFi][0])+"\">"+str(AccountAddressesFetch[AFi][1])+", "+str(AccountAddressesFetch[AFi][3])+" "+str(AccountAddressesFetch[AFi][4])+"</option>\n"
+            if AccountAddressesFetch:
+                AccountAddressOptions = ""
+                for AFi in range(0,len(AccountAddressesFetch)):
+                    AccountAddressOptions += "<option value=\""+str(AccountAddressesFetch[AFi][0])+"\">"+str(AccountAddressesFetch[AFi][1])+", "+str(AccountAddressesFetch[AFi][3])+" "+str(AccountAddressesFetch[AFi][4])+"</option>\n"
+            else:
+                AccountAddressOptions = "<option value=\"na\"> - Please Connect an Address - </option>"
             
             # Open Account
             with open("/root/maxima/req/account/index.html") as AccountIndex_F:
