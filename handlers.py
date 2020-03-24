@@ -49,7 +49,7 @@ def FindAddress(adid):
     except:
         return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
 def FindProduct(pid):
-    try:
+    if True:
         FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from productd where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
@@ -64,7 +64,7 @@ def FindProduct(pid):
             return FindProductDict
         else:
             return {"Name":"None","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
-    except:
+    else:
         return {"Name":"Error","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
 HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
