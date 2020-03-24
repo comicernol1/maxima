@@ -14,8 +14,8 @@ body{overflow-x:hidden;}
 
 #ACa{width:calc(50% - 30px);height:550px;position:absolute;top:400px;left:20px;}
 #ACAHs{top:85px;}
-#ACAHc{top:165px;}
-#ACAHz{top:325px;right:calc(50% + 20px);}
+#ACAHc{top:245px;right:calc(50% + 20px);}
+#ACAHz{top:245px;}
 #ACAHr{top:325px;}
 #ACAHt{top:405px;}
 #ACa input,#ACa select{position:absolute;}
