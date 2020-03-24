@@ -30,7 +30,7 @@ def CheckLogin(self):
         return False
 
 def FindAddress(adid):
-    if adid.is_integer():
+    if isinstance(adid,int):
         FindAddressQuery = "SELECT name,stadda,staddb,city,zip,prov,ntn from addresses where adid='{0:d}'".format(int(adid))
         mycursor.execute(FindAddressQuery)
         FindAddressFetch = mycursor.fetchone()
@@ -49,7 +49,7 @@ def FindAddress(adid):
     else:
         return {"Name":"","StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
 def FindProduct(pid):
-    if pid.is_integer():
+    if isinstance(pid,int):
         FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from productd where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
