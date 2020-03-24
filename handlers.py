@@ -620,7 +620,7 @@ class AccountHand(tornado.web.RequestHandler):
         if CheckLogin(self):
             UserInfoFu = self.get_secure_cookie("Fu")
             # Pull Account Orders
-            AccountOrdersQuery = "SELECT oid,pid,fprice,stat,arrival,dest from orders where uid='{0:s}' sort by pdate desc".format(int(UserInfoFu))
+            AccountOrdersQuery = "SELECT oid,pid,fprice,stat,arrival,dest from orders where uid='{0:d}' sort by pdate desc".format(int(UserInfoFu))
             mycursor.execute(AccountOrdersQuery)
             AccountOrdersFetch = mycursor.fetchall()
             
