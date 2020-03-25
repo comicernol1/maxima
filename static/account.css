@@ -11,7 +11,7 @@ body{overflow-x:hidden;}
 #ACLn{width:calc(100% - 160px);position:absolute;top:80px;left:20px;}
 #ACLNo{position:absolute;top:103px;left:calc(100% - 180px);}
 #ACL_SA{width:100px;height:60px;background:#D7263D;position:absolute;top:80px;right:20px;}
-#ACL hr{width:calc(100% - 20px);height:1px;background:#757780;border:0;margin:0;position:absolute;top:165px;left:10px;}
+#ACL hr{width:calc(100% - 20px);height:1px;background:#757780;border:0;margin:0;position:absolute;top:160px;left:10px;}
 #ACLDh,#ACLBh{font-size:16px;width:calc(100% - 40px);margin:0;position:absolute;left:20px;}
 #ACLDh{top:180px;}
 #ACLBh{top:280px;}
@@ -44,6 +44,8 @@ body{overflow-x:hidden;}
 #ACPHp{top:85px;}
 #ACPHa{top:165px;}
 #ACP_S{width:calc(100% - 40px);position:absolute;top:240px;left:20px;}
+
+#ACs{width:calc(50% - 30px);height:600px;position:absolute;top:480px;left:calc(50% + 10px);}
 
 #ACo{width:calc(100% - 60px);height:500px;top:1350px;left:30px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
