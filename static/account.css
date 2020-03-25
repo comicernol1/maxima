@@ -55,7 +55,7 @@ body{overflow-x:hidden;}
 #ACMc{width:calc(100% - 40px);font-size:16px;margin:0;position:absolute;top:80px;left:20px;}
 #ACMc select{width:calc(100% - 120px);position:absolute;top:25px;left:0;}
 #ACMCo{position:absolute;top:48px;right:140px;}
-#ACM_SA{width:100px;height:60px;background:#D7263D;position:absolute;top:80px;right:20px;}
+#ACM_SA{width:100px;height:60px;background:#D7263D;position:absolute;top:25px;right:0;}
 
 #ACo{width:calc(100% - 40px);height:500px;top:1195px;left:20px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
