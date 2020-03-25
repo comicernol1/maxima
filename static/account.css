@@ -50,6 +50,8 @@ body{overflow-x:hidden;}
 #ACSn li{padding:3px 0;}
 #ACSb{width:calc(100% - 40px);height:50px;box-sizing:border-box;font-size:16px;font-weight:600;color:#FAFAFF;text-decoration:none;text-align:center;padding:16px 0;letter-spacing:1px;background:#008148;border:none;border-radius:4px;position:absolute;top:220px;left:20px;}
 
+#ACm{width:calc(50% - 30px);height:290px;position:absolute;top:790px;left:calc(50% + 10px);}
+
 #ACo{width:calc(100% - 60px);height:500px;top:1350px;left:30px;}
 #ACOL{width:calc(100% - 40px);height:400px;overflow-x:hidden;overflow-y:auto;font-size:16px;position:absolute;top:80px;left:20px;}
 #ACOL table{width:100%;}
