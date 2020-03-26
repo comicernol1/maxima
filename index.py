@@ -11,6 +11,7 @@ if __name__ == "__main__":
         (r"/sign_up/", handlers.SignUpHand),
         (r"/verify/", handlers.VerifyHand),
         (r"/account/", handlers.AccountHand),
+        (r"/product/.*", handlers.AccountHand),
         (r"/legal/terms_and_conditions/", handlers.TermsConditionsHand),
         (r"/.*", handlers.NotFoundHand)
     ], **settings)
