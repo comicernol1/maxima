@@ -7,19 +7,8 @@ body{overflow-x:hidden;}
 #Bi{width:50%;position:absolute;top:100px;right:0;}
 #BIn{width:100%;margin:0;position:absolute;top:40px;left:0;}
 #BIr{margin:0;position:absolute;top:80px;left:0;}
-#BIr span{display:inline-block;width:83px;height:18px;background-image:url("/static/multiplier_image.png");background-size:300px;position:relative;top:5px;}
+#BIr span{display:inline-block;position:relative;top:5px;}
 #BIr u{padding-left:8px;}
-.r_star_s[r="5"]{background-position:-309px -250px;}
-.r_star_s[r="4.5"]{background-position:-309px -275px;}
-.r_star_s[r="4"]{background-position:-326px -250px;}
-.r_star_s[r="3.5"]{background-position:-326px -275px;}
-.r_star_s[r="3"]{background-position:-343px -250px;}
-.r_star_s[r="2.5"]{background-position:-343px -275px;}
-.r_star_s[r="2"]{background-position:-359px -250px;}
-.r_star_s[r="1.5"]{background-position:-359px -275px;}
-.r_star_s[r="1"]{background-position:-376px -250px;}
-.r_star_s[r="0.5"]{background-position:-376px -275px;}
-.r_star_s[r="0"]{background-position:-392px -250px;}
 #Foot{top:2000px;}
 @media only screen and (max-width:700px){
     /* PLACEHOLDER */
