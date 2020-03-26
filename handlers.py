@@ -700,7 +700,7 @@ class ProductHand(tornado.web.RequestHandler):
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
             ProductIndex = ProductIndex.replace("<% FullImageList %>",ProductRequested_BPs)
-            ProductIndex = ProductIndex.replace("<% ReviewCount %>",ProductRequested_ReviewCount)
+            ProductIndex = ProductIndex.replace("<% ReviewCount %>",str(ProductRequested_ReviewCount))
             self.write(ProductIndex)
         else:
             self.write(NotFoundIndex)
