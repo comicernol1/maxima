@@ -691,9 +691,16 @@ class ProductHand(tornado.web.RequestHandler):
         ProductIndexURI = self.request.uri
         ProductRequested_ID = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
         ProductRequested_Name = FindProduct(ProductRequested_ID)["Name"]
+        ProductRequested_ImageCnt = len(fnmatch.filter(os.listdir("/root/maxima/static/product/"+ProductRequested_ID+"/"), "*.jpg"))
+        ProductRequested_BPs = ""
+        for BPSi in range(0,ProductRequested_ImageCnt):
+            ProductRequested_BPs += "<li><img src=\"/static/product/"+ProductRequested_ID+"/"+str(BPSi)+".jpg\" alt=\""+ProductRequested_Name+" ("+str(BPSi + 1)+")\"></li>\n"
+        ProductRequested_ReviewCount = 0
         if ProductRequested_Name != "":
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
+            ProductIndex = ProductIndex.replace("<% FullImageList %>",ProductRequested_BPs)
+            ProductIndex = ProductIndex.replace("<% ReviewCount %>",ProductRequested_ReviewCount)
             self.write(ProductIndex)
         else:
             self.write(NotFoundIndex)
