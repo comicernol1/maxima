@@ -1,5 +1,11 @@
 body{overflow-x:hidden;}
 #Hm{background:#04151F;}
-h1{width:100%;font-size:84px;margin:0;text-align:center;position:absolute;top:300px;left:0;}
-#Foot{top:700px;}
-@media only screen and (max-width:700px){}
+#Bp{width:calc(50% - 30px);height:600px;margin:0;padding:0;background-position:center;background-size:contain;background-repeat:no-repeat;position:absolute;top:100px;left:15px;}
+#BPs{width:calc(50% - 30px);height:110px;white-space:nowrap;margin:0;padding:0;list-style-type:none;overflow-x:auto;overflow-y:hidden;position:absolute;top:720px;left:15px;}
+#BPs li{display:inline-block;}
+#BPs li img{width:auto;height:100px;}
+#Bi{width:50%;position:absolute;top:100px;right:0;}
+#Foot{top:2000px;}
+@media only screen and (max-width:700px){
+    /* PLACEHOLDER */
+}
