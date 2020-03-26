@@ -66,6 +66,14 @@ def FindProduct(pid):
     except:
         return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
+UserCurrency = "USD"
+if UserCurrency=="USD" or UserCurrency=="CAD":
+    UserCurrencySymbol = "$"
+elif UserCurrency=="EUR":
+    UserCurrencySymbol = "€"
+else:
+    UserCurrencySymbol = "(?)"
+
 ShippingCodesList = [("p","In Production"),("i","In Progress"),("d","Delivered")]
 
 HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -692,6 +700,17 @@ class ProductHand(tornado.web.RequestHandler):
         ProductRequested_ID = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
         ProductRequested_Name = FindProduct(ProductRequested_ID)["Name"]
         if ProductRequested_Name != "":
+            ProductRequested_PricePre = FindProduct(ProductRequested_ID)["Price"]
+            if UserCurrencySymbol=="$":
+                ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre+" ("+UserCurrency+")"
+            else:
+                ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre
+            ProductRequested_Discount = FindProduct(ProductRequested_ID)["Discount"]
+            if float(ProductRequested_Discount) > 0:
+                ProductRequested_ShowDiscount = "block"
+                ProductRequested_Price = "<strike>"+ProductRequested_Price+"</strike>"
+            else:
+                ProductRequested_ShowDiscount = "none"
             ProductRequested_ImageCnt = len(fnmatch.filter(os.listdir("/root/maxima/static/product/"+ProductRequested_ID+"/"), "*.jpg"))
             ProductRequested_BPs = ""
             for BPSi in range(0,ProductRequested_ImageCnt):
@@ -701,6 +720,9 @@ class ProductHand(tornado.web.RequestHandler):
         
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
+            ProductIndex = ProductIndex.replace("<% ProductPrice %>",ProductRequested_Price)
+            ProductIndex = ProductIndex.replace("<% ProductShowDiscount %>",ProductRequested_ShowDiscount)
+            ProductIndex = ProductIndex.replace("<% ProductDiscount %>",ProductRequested_Discount)
             ProductIndex = ProductIndex.replace("<% FullImageList %>",ProductRequested_BPs)
             ProductIndex = ProductIndex.replace("<% Rating %>",str(ProductRequested_Rating))
             ProductIndex = ProductIndex.replace("<% ReviewCount %>",str(ProductRequested_ReviewCount))
