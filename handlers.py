@@ -696,7 +696,7 @@ class ProductHand(tornado.web.RequestHandler):
             ProductRequested_BPs = ""
             for BPSi in range(0,ProductRequested_ImageCnt):
                 ProductRequested_BPs += "<li><img src=\"/static/product/"+ProductRequested_ID+"/"+str(BPSi)+".jpg\" alt=\""+ProductRequested_Name+" ("+str(BPSi + 1)+")\"></li>\n"
-            ProductRequested_Rating = 4
+            ProductRequested_Rating = 0
             ProductRequested_ReviewCount = 0
         
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
