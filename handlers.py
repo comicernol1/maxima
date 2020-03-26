@@ -705,7 +705,7 @@ class ProductHand(tornado.web.RequestHandler):
                 ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre+" ("+UserCurrency+")"
             else:
                 ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre
-            ProductRequested_Discount = FindProduct(ProductRequested_ID)["Discount"]
+            ProductRequested_Discount = str(FindProduct(ProductRequested_ID)["Discount"])
             if float(ProductRequested_Discount) > 0:
                 ProductRequested_ShowDiscount = "block"
                 ProductRequested_Price = "<strike>"+ProductRequested_Price+"</strike>"
