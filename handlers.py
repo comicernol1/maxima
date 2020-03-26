@@ -700,7 +700,7 @@ class ProductHand(tornado.web.RequestHandler):
         ProductRequested_ID = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
         ProductRequested_Name = FindProduct(ProductRequested_ID)["Name"]
         if ProductRequested_Name != "":
-            ProductRequested_PricePre = FindProduct(ProductRequested_ID)["Price"]
+            ProductRequested_PricePre = str(FindProduct(ProductRequested_ID)["Price"])
             if UserCurrencySymbol=="$":
                 ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre+" ("+UserCurrency+")"
             else:
