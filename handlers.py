@@ -689,10 +689,11 @@ class ProductHand(tornado.web.RequestHandler):
         
         # Formatting
         ProductIndexURI = self.request.uri
-        ProductIDRequested = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
-        ProductRequested_Name = FindProduct(ProductIDRequested)["Name"]
+        ProductRequested_ID = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
+        ProductRequested_Name = FindProduct(ProductRequested_ID)["Name"]
         if ProductRequested_Name != "":
-            ProductIndex = ProductIndex.replace("<% ProductName %>",FindProduct(ProductIDRequested)["Name"])
+            ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
+            ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
             self.write(ProductIndex)
         else:
             self.write(NotFoundIndex)
