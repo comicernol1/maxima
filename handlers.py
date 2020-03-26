@@ -676,10 +676,26 @@ class ProductHand(tornado.web.RequestHandler):
             ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ProductIndex = ProductIndex.replace("<% Head %>",HeadHTML)
         ProductIndex = ProductIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Open Not Found
+        with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
+            NotFoundIndex = NotFoundIndex_F.read()
+        if CheckLogin(self):
+            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        NotFoundIndex = NotFoundIndex.replace("<% Head %>",HeadHTML)
+        NotFoundIndex = NotFoundIndex.replace("<% Footer %>",FooterHTML)
+        
+        # Formatting
         ProductIndexURI = self.request.uri
         ProductIDRequested = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
-        ProductIndex = ProductIndex.replace("<% ProductName %>",FindProduct(ProductIDRequested)["Name"])
-        self.write(ProductIndex)
+        ProductRequested_Name = FindProduct(ProductIDRequested)["Name"]
+        if ProductRequested_Name != "":
+            ProductIndex = ProductIndex.replace("<% ProductName %>",FindProduct(ProductIDRequested)["Name"])
+            self.write(ProductIndex)
+        else:
+            self.write(NotFoundIndex)
 
 class TermsConditionsHand(tornado.web.RequestHandler):
     def get(self):
