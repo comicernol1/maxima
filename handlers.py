@@ -678,7 +678,7 @@ class ProductHand(tornado.web.RequestHandler):
         ProductIndex = ProductIndex.replace("<% Footer %>",FooterHTML)
         ProductIndexURI = self.request.uri
         ProductIDRequested = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
-        ProductIndex = ProductIndex.replace("<% ProductName %>",ProductIDRequested)
+        ProductIndex = ProductIndex.replace("<% ProductName %>",FindProduct(ProductIDRequested)["Name"])
         self.write(ProductIndex)
 
 class TermsConditionsHand(tornado.web.RequestHandler):
