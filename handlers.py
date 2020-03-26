@@ -665,6 +665,19 @@ class AccountHand(tornado.web.RequestHandler):
         else:
             self.redirect("/sign_in/")
 
+class ProductHand(tornado.web.RequestHandler):
+    def get(self):
+        # Open Product
+        with open("/root/maxima/req/product/index.html") as ProductIndex_F:
+            ProductIndex = ProductIndex_F.read()
+        if CheckLogin(self):
+            ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+        else:
+            ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        ProductIndex = ProductIndex.replace("<% Head %>",HeadHTML)
+        ProductIndex = ProductIndex.replace("<% Footer %>",FooterHTML)
+        self.write(ProductIndex)
+
 class TermsConditionsHand(tornado.web.RequestHandler):
     def get(self):
         # Open Terms & Conditions
