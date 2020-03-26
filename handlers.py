@@ -676,6 +676,7 @@ class ProductHand(tornado.web.RequestHandler):
             ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ProductIndex = ProductIndex.replace("<% Head %>",HeadHTML)
         ProductIndex = ProductIndex.replace("<% Footer %>",FooterHTML)
+        ProductIndex = ProductIndex.replace("<% ProductName %>",self.request.uri)
         self.write(ProductIndex)
 
 class TermsConditionsHand(tornado.web.RequestHandler):
