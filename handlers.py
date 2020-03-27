@@ -716,17 +716,19 @@ class ProductHand(tornado.web.RequestHandler):
         ProductRequested_ID = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
         ProductRequested_Name = FindProduct(ProductRequested_ID)["Name"]
         if ProductRequested_Name != "":
-            ProductRequested_PricePre = str(FindProduct(ProductRequested_ID)["Price"])
+            ProductRequested_Price = float(FindProduct(ProductRequested_ID)["Price"])
+            ProductRequested_DiscountPre = int(FindProduct(ProductRequested_ID)["Discount"])
+            ProductRequested_Discount = (ProductRequested_Price * ((100 - ProductRequested_DiscountPre) / 100))
             if UserCurrencySymbol in SpecifyCurrencyList:
-                ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre+" ("+UserCurrency+")"
+                if ProductRequested_DiscountPre > 0:
+                    ProductRequested_PriceSet = "<h1 id=\"BIp\"><strike>{1:s}{2:,.2f}</strike></h1><h2 id=\"BId\">{1}{3:,.2f} ({0:s})</h2>".format(UserCurrency,UserCurrencySymbol,ProductRequested_Price,ProductRequested_Discount)
+                else:
+                    ProductRequested_PriceSet = "<h1 id=\"BIp\">{1:s}{2:,.2f} ({0:s})</h1>".format(UserCurrency,UserCurrencySymbol,ProductRequested_Price)
             else:
-                ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre
-            ProductRequested_Discount = str(FindProduct(ProductRequested_ID)["Discount"])
-            if float(ProductRequested_Discount) > 0:
-                ProductRequested_ShowDiscount = "block"
-                ProductRequested_Price = "<strike>"+ProductRequested_Price+"</strike>"
-            else:
-                ProductRequested_ShowDiscount = "none"
+                if ProductRequested_DiscountPre > 0:
+                    ProductRequested_PriceSet = "<h1 id=\"BIp\"><strike>{0:s}{1:,.2f}</strike></h1><h2 id=\"BId\">{0:s}{2:,.2f}</h2>".format(UserCurrencySymbol,ProductRequested_Price,ProductRequested_Discount)
+                else:
+                    ProductRequested_PriceSet = "<h1 id=\"BIp\">{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,ProductRequested_Price)
             ProductRequested_ImageCnt = len(fnmatch.filter(os.listdir("/root/maxima/static/product/"+ProductRequested_ID+"/"), "*.jpg"))
             ProductRequested_BPs = ""
             for BPSi in range(0,ProductRequested_ImageCnt):
@@ -735,9 +737,8 @@ class ProductHand(tornado.web.RequestHandler):
             ProductRequested_ReviewCount = 0
         
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
-            ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
+            ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_PriceSet)
             ProductIndex = ProductIndex.replace("<% ProductPrice %>",ProductRequested_Price)
-            ProductIndex = ProductIndex.replace("<% ProductShowDiscount %>",ProductRequested_ShowDiscount)
             ProductIndex = ProductIndex.replace("<% ProductDiscount %>",ProductRequested_Discount)
             ProductIndex = ProductIndex.replace("<% FullImageList %>",ProductRequested_BPs)
             ProductIndex = ProductIndex.replace("<% Rating %>",str(ProductRequested_Rating))
