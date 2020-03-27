@@ -49,9 +49,9 @@ def ServePage(self,pageloc):
     with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
         PageIndex = PageIndex_F.read()
     if CheckLogin(self):
-        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPreHome+HeaderLIAccountButton)
+        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLIAccountButton)
     else:
-        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPreHome+HeaderLISignIn)
+        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLISignIn)
     PageIndex = PageIndex.replace("<% Head %>",HeadHTML)
     if self.get_secure_cookie("Fa") == "true":
         FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
