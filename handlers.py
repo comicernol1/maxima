@@ -1,5 +1,6 @@
 import os,random,base64,fnmatch,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
+global mycursor,db,HeadHTML,FooterHTML,Enc32a,Enc32b,SpecifyCurrencyList,UserCurrency,UserCurrencySymbol,ShoppingCodesList,CookieNotifDiv,HeaderLIPreBase,HeaderLIPreHome,HeaderLIPreContact,HeaderLIPreAccountButton
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
 db = mysql.connector.connect(
@@ -10,7 +11,6 @@ db = mysql.connector.connect(
     database = "franzar"
 )
 mycursor = db.cursor()
-global mycursor,HeadHTML,FooterHTML
 with open("/root/maxima/templates/head.html") as HeadHTML_F:
     HeadHTML = HeadHTML_F.read()
 with open("/root/maxima/templates/footer.html") as FooterHTML_F:
