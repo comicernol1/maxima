@@ -93,14 +93,20 @@ class HomeHand(tornado.web.RequestHandler):
         QueryProductsDict = mycursor.fetchall()
         for i in range(0,len(QueryProductsDict)):
             QueryProductsDiscountInt = str(QueryProductsDict[i][3])
-            if int(QueryProductsDiscountInt) > 0:
-                QueryProductsDiscountSet = "<h5>"+QueryProductsDiscountInt+"</h5>"
+            
+                QueryProductsDiscountSet = "<h5>"++"</h5>"
             else:
                 QueryProductsDiscountSet = ""
             if UserCurrencySymbol in SpecifyCurrencyList:
-                QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"+QueryProductsDiscountSet
+                if int(QueryProductsDiscountInt) > 0:
+                    QueryProductsPriceSet = "<h1><strike>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</strike></h1><h5>"+UserCurrencySymbol+QueryProductsDiscountInt+" ("+UserCurrency+")</h5>"
+                else:
+                    QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"
             else:
-                QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</h1>"+QueryProductsDiscountSet
+                if int(QueryProductsDiscountInt) > 0:
+                    QueryProductsPriceSet = "<h1><strike>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</strike></h1><h5>"+UserCurrencySymbol+QueryProductsDiscountInt+"</h5>"
+                else:
+                    QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</h1>"
             HomeProductList += "<a style=\"background-image:url(/static/products/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
