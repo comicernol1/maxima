@@ -26,23 +26,32 @@ def CheckLogin(self):
         return False
 
 def ServePage(self,pageloc):
+    # Define Basics
+    HeaderLISignIn = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
+    HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span>0</span></a>"
     CookieNotifDiv = "<div id=\"Fackc\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <b onclick=\"ackc()\">Accept</b></div>"
-    HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
-    HeaderLIPreHome = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
-    HeaderLIPreContact = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
-    HeaderLIPreAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span>0</span></a>"
     
+    # Define Header Pre
+    if pageloc=="/index.html":
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
+    elif pageloc=="/contact/index.html" or pageloc=="/contact/sent.html":
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
+    else:
+        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+    
+    # Open Templates
     with open("/root/maxima/templates/head.html") as HeadHTML_F:
         HeadHTML = HeadHTML_F.read()
     with open("/root/maxima/templates/footer.html") as FooterHTML_F:
         FooterHTML = FooterHTML_F.read()
     
+    # Open Requested Page
     with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
         PageIndex = PageIndex_F.read()
     if CheckLogin(self):
-        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPreHome+HeaderLIPreAccountButton)
+        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPreHome+HeaderLIAccountButton)
     else:
-        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPreHome+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPreHome+HeaderLISignIn)
     PageIndex = PageIndex.replace("<% Head %>",HeadHTML)
     if self.get_secure_cookie("Fa") == "true":
         FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
@@ -134,7 +143,7 @@ class HomeHand(tornado.web.RequestHandler):
                 QueryProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursFetch[Ci][0])+";\" title=\""+str(QueryProductColoursFetch[Ci][1]).title()+"\" s=\"n\"></abbr>"
             HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6]).title()+"\" s=\"y\"></abbr>"+QueryProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         
-        # Open Home
+        # Open
         HomeIndex = ServePage(self,"/index.html")
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         
@@ -149,39 +158,16 @@ class HomeHand(tornado.web.RequestHandler):
 
 class ContactHand(tornado.web.RequestHandler):
     def get(self):
-        # Open Contact
-        with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
-            ContactIndex = ContactIndex_F.read()
-        if CheckLogin(self):
-            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+HeaderLIPreAccountButton)
-        else:
-            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
-        ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        ContactIndex = ServePage(self,"/contact/index.html")
         ContactIndex = ContactIndex.replace("<% ShowError %>","none")
         ContactIndex = ContactIndex.replace("<% ErrorMsg %>","")
         self.write(ContactIndex)
         
     def post(self):
-        # Open Contact
-        with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
-            ContactIndex = ContactIndex_F.read()
-        if CheckLogin(self):
-            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+HeaderLIPreAccountButton)
-        else:
-            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
-        ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Contact Confirmation
-        with open("/root/maxima/req/contact/sent.html") as ContactSentIndex_F:
-            ContactSentIndex = ContactSentIndex_F.read()
-        if CheckLogin(self):
-            ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPreContact+HeaderLIPreAccountButton)
-        else:
-            ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ContactSentIndex = ContactSentIndex.replace("<% Head %>",HeadHTML)
-        ContactSentIndex = ContactSentIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        ContactIndex = ServePage(self,"/contact/index.html")
+        ContactSentIndex = ServePage(self,"/contact/sent.html")
         
         # Test
         ContactRequestBody = self.request.body.decode('utf-8').replace("+"," ")
@@ -244,38 +230,14 @@ class ContactHand(tornado.web.RequestHandler):
 class SignInHand(tornado.web.RequestHandler):
     def get(self):
         # Open Sign In
-        with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
-            SignInIndex = SignInIndex_F.read()
-        if CheckLogin(self):
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
-        SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
-        SignInIndex = SignInIndex.replace("<% Footer %>",FooterHTML)
+        SignInIndex = ServePage(self,"/sign_in/index.html")
         SignInIndex = SignInIndex.replace("<% ShowError %>","none")
         SignInIndex = SignInIndex.replace("<% ErrorMsg %>","")
         self.write(SignInIndex)
 
     def post(self):
-        # Open Sign Up
-        with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
-            SignUpIndex = SignUpIndex_F.read()
-        if CheckLogin(self):
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
-        SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
-        SignUpIndex = SignUpIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Sign In
-        with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
-            SignInIndex = SignInIndex_F.read()
-        if CheckLogin(self):
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
-        SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
-        SignInIndex = SignInIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        SignInIndex = ServePage(self,"/sign_in/index.html")
         
         # Test
         SignInRequestBody = self.request.body.decode('utf-8')
@@ -312,36 +274,14 @@ class SignInHand(tornado.web.RequestHandler):
 
 class ForgotPWHand(tornado.web.RequestHandler):
     def get(self):
-        # Open Forgot Password
-        with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
-            ForgotPWIndex = ForgotPWIndex_F.read()
-        if CheckLogin(self):
-            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ForgotPWIndex = ForgotPWIndex.replace("<% Head %>",HeadHTML)
-        ForgotPWIndex = ForgotPWIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        ForgotPWIndex = ServePage(self,"/sign_in/forgot_pw.html")
         self.write(ForgotPWIndex)
+    
     def post(self):
-        # Open Forgot Password
-        with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
-            ForgotPWIndex = ForgotPWIndex_F.read()
-        if CheckLogin(self):
-            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ForgotPWIndex = ForgotPWIndex.replace("<% Head %>",HeadHTML)
-        ForgotPWIndex = ForgotPWIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Forgot Password Confirmation
-        with open("/root/maxima/req/sign_in/forgot_pw_conf.html") as ForgotPWConfIndex_F:
-            ForgotPWConfIndex = ForgotPWConfIndex_F.read()
-        if CheckLogin(self):
-            ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Head %>",HeadHTML)
-        ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        ForgotPWIndex = ServePage(self,"/sign_in/forgot_pw.html")
+        ForgotPWConfIndex = ServePage(self,"/sign_in/forgot_pw_conf.html")
         
         # Test
         ForgotPWRequestBody = self.request.body.decode('utf-8')
@@ -416,25 +356,9 @@ class ForgotPWHand(tornado.web.RequestHandler):
 
 class ResetPWHand(tornado.web.RequestHandler):
     def get(self):
-        # Open Reset Password
-        with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
-            ResetPWIndex = ResetPWIndex_F.read()
-        if CheckLogin(self):
-            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
-        ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Reset Password Error
-        with open("/root/maxima/req/sign_in/reset_pw_msg.html") as ResetPWMsgIndex_F:
-            ResetPWMsgIndex = ResetPWMsgIndex_F.read()
-        if CheckLogin(self):
-            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Head %>",HeadHTML)
-        ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        ResetPWIndex = ServePage(self,"/sign_in/reset_pw.html")
+        ResetPWMsgIndex = ServePage(self,"/sign_in/reset_pw_msg.html")
         
         # Test
         try:
@@ -484,25 +408,9 @@ class ResetPWHand(tornado.web.RequestHandler):
                 self.redirect("/sign_in/forgot_password/")
             
     def post(self):
-        # Open Reset Password
-        with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
-            ResetPWIndex = ResetPWIndex_F.read()
-        if CheckLogin(self):
-            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
-        ResetPWIndex = ResetPWIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Reset Password Message
-        with open("/root/maxima/req/sign_in/reset_pw_msg.html") as ResetPWMsgIndex_F:
-            ResetPWMsgIndex = ResetPWMsgIndex_F.read()
-        if CheckLogin(self):
-            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Head %>",HeadHTML)
-        ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        ResetPWIndex = ServePage(self,"/sign_in/reset_pw.html")
+        ResetPWMsgIndex = ServePage(self,"/sign_in/reset_pw_msg.html")
         
         # Test
         if self.get_secure_cookie("Fu") != "":
@@ -545,49 +453,16 @@ class ResetPWHand(tornado.web.RequestHandler):
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
-        # Open Sign Up
-        with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
-            SignUpIndex = SignUpIndex_F.read()
-        if CheckLogin(self):
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
-        SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
-        SignUpIndex = SignUpIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        SignUpIndex = ServePage(self,"/sign_up/index.html")
         SignUpIndex = SignUpIndex.replace("<% ShowError %>","none")
         SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","")
         self.write(SignUpIndex)
 
     def post(self):
-        # Open Sign Up
-        with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
-            SignUpIndex = SignUpIndex_F.read()
-        if CheckLogin(self):
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
-        SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
-        SignUpIndex = SignUpIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Sign Up Confirmation
-        with open("/root/maxima/req/sign_up/conf_sent.html") as SignUpConfIndex_F:
-            SignUpConfIndex = SignUpConfIndex_F.read()
-        if CheckLogin(self):
-            SignUpConfIndex = SignUpConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            SignUpConfIndex = SignUpConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
-        SignUpConfIndex = SignUpConfIndex.replace("<% Head %>",HeadHTML)
-        SignUpConfIndex = SignUpConfIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Sign In
-        with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
-            SignInIndex = SignInIndex_F.read()
-        if CheckLogin(self):
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
-        SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
-        SignInIndex = SignInIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        SignUpIndex = ServePage(self,"/sign_up/index.html")
+        SignUpConfIndex = ServePage(self,"/sign_up/conf_sent.html")
         
         # Test
         SignUpRequestBody = self.request.body.decode('utf-8')
@@ -648,17 +523,11 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
             SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P2) Something went wrong")
             self.write(SignUpIndex)
+
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
-        # Open Verify
-        with open("/root/maxima/req/sign_up/verified.html") as VerifyIndex_F:
-            VerifyIndex = VerifyIndex_F.read()
-        if CheckLogin(self):
-            VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        VerifyIndex = VerifyIndex.replace("<% Head %>",HeadHTML)
-        VerifyIndex = VerifyIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        VerifyIndex = ServePage(self,"/sign_up/verified.html")
         VerifyIndex = VerifyIndex.replace("<% Email %>",self.get_query_argument("e"))
         self.write(VerifyIndex)
 
@@ -699,12 +568,8 @@ class AccountHand(tornado.web.RequestHandler):
             else:
                 AccountAddressOptions = "<option value=\"na\"> - Please Connect an Address - </option>"
             
-            # Open Account
-            with open("/root/maxima/req/account/index.html") as AccountIndex_F:
-                AccountIndex = AccountIndex_F.read()
-            AccountIndex = AccountIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-            AccountIndex = AccountIndex.replace("<% Head %>",HeadHTML)
-            AccountIndex = AccountIndex.replace("<% Footer %>",FooterHTML)
+            # Open
+            AccountIndex = ServePage(self,"/account/index.html")
             AccountIndex = AccountIndex.replace("<% AddressOptions %>",AccountAddressOptions)
             AccountIndex = AccountIndex.replace("<% OrderList %>",AccountOrdersList)
             self.write(AccountIndex)
@@ -713,25 +578,9 @@ class AccountHand(tornado.web.RequestHandler):
 
 class ProductHand(tornado.web.RequestHandler):
     def get(self):
-        # Open Product
-        with open("/root/maxima/req/product/index.html") as ProductIndex_F:
-            ProductIndex = ProductIndex_F.read()
-        if CheckLogin(self):
-            ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        ProductIndex = ProductIndex.replace("<% Head %>",HeadHTML)
-        ProductIndex = ProductIndex.replace("<% Footer %>",FooterHTML)
-        
-        # Open Not Found
-        with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
-            NotFoundIndex = NotFoundIndex_F.read()
-        if CheckLogin(self):
-            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        NotFoundIndex = NotFoundIndex.replace("<% Head %>",HeadHTML)
-        NotFoundIndex = NotFoundIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        ProductIndex = ServePage(self,"/product/index.html")
+        NotFoundIndex = ServePage(self,"/status/404.html")
         
         # Formatting
         ProductIndexURI = self.request.uri
@@ -770,26 +619,12 @@ class ProductHand(tornado.web.RequestHandler):
 
 class TermsConditionsHand(tornado.web.RequestHandler):
     def get(self):
-        # Open Terms & Conditions
-        with open("/root/maxima/req/legal/terms.html") as TermsConditionsIndex_F:
-            TermsConditionsIndex = TermsConditionsIndex_F.read()
-        if CheckLogin(self):
-            TermsConditionsIndex = TermsConditionsIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            TermsConditionsIndex = TermsConditionsIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        TermsConditionsIndex = TermsConditionsIndex.replace("<% Head %>",HeadHTML)
-        TermsConditionsIndex = TermsConditionsIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        TermsConditionsIndex = ServePage(self,"/legal/terms.html")
         self.write(TermsConditionsIndex)
 
 class NotFoundHand(tornado.web.RequestHandler):
     def get(self):
-        # Open Not Found
-        with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
-            NotFoundIndex = NotFoundIndex_F.read()
-        if CheckLogin(self):
-            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
-        else:
-            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        NotFoundIndex = NotFoundIndex.replace("<% Head %>",HeadHTML)
-        NotFoundIndex = NotFoundIndex.replace("<% Footer %>",FooterHTML)
+        # Open
+        NotFoundIndex = ServePage(self,"/status/404.html")
         self.write(NotFoundIndex)
