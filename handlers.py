@@ -96,7 +96,7 @@ class HomeHand(tornado.web.RequestHandler):
             QueryProductsDiscountInt = str(float(QueryProductsDict[i][2]) * ((100 - int(QueryProductsDiscountIntPre)) / 100))
             if UserCurrencySymbol in SpecifyCurrencyList:
                 if int(QueryProductsDiscountIntPre) > 0:
-                    QueryProductsPriceSet = "<h1><strike>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</strike></h1><h5>Now only <i>"+UserCurrencySymbol+QueryProductsDiscountInt+" ("+UserCurrency+")</i></h5>"
+                    QueryProductsPriceSet = "<h1><strike>{1:s}{2:,.2f}</strike></h1><h5>Now only <i>{1}{3:,.2f} ({0:s})</i></h5>".format(UserCurrency,UserCurrencySymbol,QueryProductsDict[i][2],QueryProductsDiscountInt)
                 else:
                     QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"
             else:
