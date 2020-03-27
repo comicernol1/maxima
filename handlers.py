@@ -106,7 +106,7 @@ class HomeHand(tornado.web.RequestHandler):
                 else:
                     QueryProductsPriceSet = "<h1>{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,QueryProductsPrice)
             QueryProductsID = str(QueryProductsDict[i][0])
-            QueryProductsUniversalID = QueryProductsID[0,7]
+            QueryProductsUniversalID = QueryProductsID[0:7]
             QueryProductsDefaultColour = str(QueryProductsDict[i][5])
             RequestDBProductColours = "SELECT colour,colour_name from products where left(id,7)='{0:s}' and colour!='{1:s}'".format(QueryProductsUniversalID,QueryProductsDefaultColour)
             mycursor.execute(RequestDBProductColours)
