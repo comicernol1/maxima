@@ -89,7 +89,7 @@ class HomeHand(tornado.web.RequestHandler):
     def get(self):
         # Open Home
         HomeProductList = ""
-        mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products")
+        mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products group by left(id,7)")
         QueryProductsDict = mycursor.fetchall()
         for i in range(0,len(QueryProductsDict)):
             QueryProductsPrice = float(QueryProductsDict[i][2])
