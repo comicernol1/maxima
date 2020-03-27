@@ -95,12 +95,12 @@ class HomeHand(tornado.web.RequestHandler):
             QueryProductsDiscountInt = str(QueryProductsDict[i][3])
             if UserCurrencySymbol in SpecifyCurrencyList:
                 if int(QueryProductsDiscountInt) > 0:
-                    QueryProductsPriceSet = "<h1><strike>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</strike></h1><h5>"+UserCurrencySymbol+QueryProductsDiscountInt+" ("+UserCurrency+")</h5>"
+                    QueryProductsPriceSet = "<h1><strike>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</strike></h1><h5>Now only <i>"+UserCurrencySymbol+QueryProductsDiscountInt+" ("+UserCurrency+")</i></h5>"
                 else:
                     QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"
             else:
                 if int(QueryProductsDiscountInt) > 0:
-                    QueryProductsPriceSet = "<h1><strike>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</strike></h1><h5>"+UserCurrencySymbol+QueryProductsDiscountInt+"</h5>"
+                    QueryProductsPriceSet = "<h1><strike>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</strike></h1><h5>Now only <i>"+UserCurrencySymbol+QueryProductsDiscountInt+"</i></h5>"
                 else:
                     QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</h1>"
             HomeProductList += "<a style=\"background-image:url(/static/products/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
