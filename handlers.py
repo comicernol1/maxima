@@ -50,7 +50,7 @@ def FindAddress(adid):
 
 SpecifyCurrencyList = ["$"]
 
-UserCurrency = "EUR"
+UserCurrency = "USD"
 if UserCurrency=="USD" or UserCurrency=="CAD":
     UserCurrencySymbol = "$"
 elif UserCurrency=="EUR":
