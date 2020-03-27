@@ -10,6 +10,7 @@ db = mysql.connector.connect(
     database = "franzar"
 )
 mycursor = db.cursor()
+global mycursor,HeadHTML,FooterHTML
 with open("/root/maxima/templates/head.html") as HeadHTML_F:
     HeadHTML = HeadHTML_F.read()
 with open("/root/maxima/templates/footer.html") as FooterHTML_F:
