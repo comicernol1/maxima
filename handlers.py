@@ -69,7 +69,7 @@ def FindProduct(pid):
             FindProductDiscount = FindProductFetch[2]
             FindProductSize = FindProductFetch[3]
             FindProductColour = FindProductFetch[4]
-            FindProductColourName = FindProductFetch[5]
+            FindProductColourName = FindProductFetch[5].title()
             FindProductDict = {"Name":FindProductName,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName}
             return FindProductDict
         else:
@@ -113,8 +113,8 @@ class HomeHand(tornado.web.RequestHandler):
             QueryProductColoursFetch = mycursor.fetchall()
             QueryProductColoursDict = ""
             for Ci in range(0,len(QueryProductColoursFetch)):
-                QueryProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursFetch[Ci][0])+";\" title=\""+str(QueryProductColoursFetch[Ci][1])+"\" s=\"n\"></abbr>"
-            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6])+"\" s=\"y\"></abbr>"+QueryProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
+                QueryProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursFetch[Ci][0])+";\" title=\""+str(QueryProductColoursFetch[Ci][1]).title()+"\" s=\"n\"></abbr>"
+            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6]).title()+"\" s=\"y\"></abbr>"+QueryProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
