@@ -91,16 +91,16 @@ class HomeHand(tornado.web.RequestHandler):
         HomeProductList = ""
         mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products")
         QueryProductsDict = mycursor.fetchall()
-        QueryProductsDiscountInt = str(QueryProductsDict[i][3])
-        if int(QueryProductsDiscountInt) > 0:
-            QueryProductsDiscountSet = "<h5>"+QueryProductsDiscountInt+"</h5>"
-        else:
-            QueryProductsDiscountSet = ""
-        if UserCurrencySymbol in SpecifyCurrencyList:
-            QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"+QueryProductsDiscountSet
-        else:
-            QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"+QueryProductsDiscountSet
         for i in range(0,len(QueryProductsDict)):
+            QueryProductsDiscountInt = str(QueryProductsDict[i][3])
+            if int(QueryProductsDiscountInt) > 0:
+                QueryProductsDiscountSet = "<h5>"+QueryProductsDiscountInt+"</h5>"
+            else:
+                QueryProductsDiscountSet = ""
+            if UserCurrencySymbol in SpecifyCurrencyList:
+                QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"+QueryProductsDiscountSet
+            else:
+                QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</h1>"+QueryProductsDiscountSet
             HomeProductList += "<a style=\"background-image:url(/static/products/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
