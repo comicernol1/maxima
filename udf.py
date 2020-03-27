@@ -79,3 +79,35 @@ def FindAddress(adid):
             return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
     except:
         return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
+
+
+SpecifyCurrencyList = ["$"]
+
+UserCurrency = "USD"
+if UserCurrency=="USD" or UserCurrency=="CAD":
+    UserCurrencySymbol = "$"
+elif UserCurrency=="EUR":
+    UserCurrencySymbol = "€"
+else:
+    UserCurrencySymbol = "(?)"
+
+def FindProduct(pid):
+    try:
+        FindProductQuery = "SELECT ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products where id='{0:d}'".format(int(pid))
+        mycursor.execute(FindProductQuery)
+        FindProductFetch = mycursor.fetchone()
+        if FindProductFetch:
+            FindProductName = FindProductFetch[0]
+            FindProductPrice = FindProductFetch[1]
+            FindProductDiscount = FindProductFetch[2]
+            FindProductSize = FindProductFetch[3]
+            FindProductColour = FindProductFetch[4]
+            FindProductColourName = FindProductFetch[5].title()
+            FindProductDict = {"Name":FindProductName,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName}
+            return FindProductDict
+        else:
+            return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+    except:
+        return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+
+ShippingCodesList = [("p","In Production"),("i","In Progress"),("d","Delivered")]
