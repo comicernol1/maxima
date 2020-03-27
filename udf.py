@@ -1,3 +1,12 @@
+db = mysql.connector.connect(
+    host = "127.0.0.1",
+    port = 3306,
+    user = "maxima",
+    password = str(os.environ["MYSQL_MAXIMA_PASSWD"]),
+    database = "franzar"
+)
+mycursor = db.cursor()
+
 def CheckLogin(self):
     if self.get_secure_cookie("Fu") and self.get_secure_cookie("Ft"):
         UserInfoFu = self.get_secure_cookie("Fu")
