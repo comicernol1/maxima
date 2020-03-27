@@ -14,11 +14,6 @@ with open("/root/maxima/templates/head.html") as HeadHTML_F:
     HeadHTML = HeadHTML_F.read()
 with open("/root/maxima/templates/footer.html") as FooterHTML_F:
     FooterHTML = FooterHTML_F.read()
-UserInfoFa = self.get_secure_cookie("Fa")
-if UserInfoFa == "true":
-    FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
-else:
-    FooterHTML = FooterHTML.replace("<% CookieNotif %>","<div id=\"Fackc\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <b onclick=\"ackc()\">Accept</b></div>")
         
 def CheckLogin(self):
     if self.get_secure_cookie("Fu") and self.get_secure_cookie("Ft"):
@@ -33,6 +28,11 @@ def CheckLogin(self):
             return False
     else:
         return False
+    UserInfoFa = self.get_secure_cookie("Fa")
+    if UserInfoFa == "true":
+        FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
+    else:
+        FooterHTML = FooterHTML.replace("<% CookieNotif %>","<div id=\"Fackc\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <b onclick=\"ackc()\">Accept</b></div>")
 
 def FindAddress(adid):
     try:
