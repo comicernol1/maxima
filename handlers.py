@@ -739,7 +739,6 @@ class ProductHand(tornado.web.RequestHandler):
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
             ProductIndex = ProductIndex.replace("<% ProductPrice %>",ProductRequested_PriceSet)
-            ProductIndex = ProductIndex.replace("<% ProductDiscount %>",ProductRequested_Discount)
             ProductIndex = ProductIndex.replace("<% FullImageList %>",ProductRequested_BPs)
             ProductIndex = ProductIndex.replace("<% Rating %>",str(ProductRequested_Rating))
             ProductIndex = ProductIndex.replace("<% ReviewCount %>",str(ProductRequested_ReviewCount))
