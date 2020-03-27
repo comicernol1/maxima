@@ -2,14 +2,6 @@ import os,random,base64,fnmatch,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
-db = mysql.connector.connect(
-    host = "127.0.0.1",
-    port = 3306,
-    user = "maxima",
-    password = str(os.environ["MYSQL_MAXIMA_PASSWD"]),
-    database = "franzar"
-)
-mycursor = db.cursor()
         
 from udf import CheckLogin
 
