@@ -111,7 +111,7 @@ class HomeHand(tornado.web.RequestHandler):
             RequestDBProductColours = "SELECT colour,colour_name from products where left(id,7)='{0:s}' and colour!='{1:s}'".format(QueryProductsUniversalID,QueryProductsDefaultColour)
             mycursor.execute(RequestDBProductColours)
             QueryProductColoursFetch = mycursor.fetchall()
-            print(mycursor.fetchall())
+            print(QueryProductColoursFetch)
             QueryProductColoursDict = ""
             for Ci in QueryProductColoursFetch:
                 QueryProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursFetch[Ci][0])+";\" title=\""+str(QueryProductColoursFetch[Ci][1])+"\" s=\"n\"></abbr>"
