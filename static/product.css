@@ -5,11 +5,13 @@ body{overflow-x:hidden;}
 #BPs li{display:inline-block;}
 #BPs li img{width:auto;height:100px;}
 #Bi{width:50%;position:absolute;top:100px;right:0;}
-#BIn{width:100%;margin:0;font-size:36px;position:absolute;top:40px;left:0;}
+#BIn{width:100%;margin:0;font-size:24px;position:absolute;top:40px;left:0;}
 #BIr{margin:0;font-size:12px;position:absolute;top:80px;left:0;}
 #BIr span{display:inline-block;position:relative;top:5px;}
 #BIr u{padding-left:8px;}
-#BIp{margin:0;font-size:24px;position:absolute;top:120px;left:0;}
+#BIp{margin:0;font-size:36px;position:absolute;top:80px;left:0;}
+#BIp strike{font-size:14px;color:#757780;position:relative;top:-25px;}
+#BId{margin:0;font-size:36px;position:absolute;top:90px;left:10px;}
 #Foot{top:2000px;}
 @media only screen and (max-width:700px){
     /* PLACEHOLDER */
