@@ -47,9 +47,18 @@ def FindAddress(adid):
             return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
     except:
         return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
+
+UserCurrency = "USD"
+if UserCurrency=="USD" or UserCurrency=="CAD":
+    UserCurrencySymbol = "$"
+elif UserCurrency=="EUR":
+    UserCurrencySymbol = "€"
+else:
+    UserCurrencySymbol = "(?)"
+
 def FindProduct(pid):
     try:
-        FindProductQuery = "SELECT ttl,price,discount,size,colour,colour_name from products where id='{0:d}'".format(int(pid))
+        FindProductQuery = "SELECT ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
         if FindProductFetch:
@@ -66,14 +75,6 @@ def FindProduct(pid):
     except:
         return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
-UserCurrency = "USD"
-if UserCurrency=="USD" or UserCurrency=="CAD":
-    UserCurrencySymbol = "$"
-elif UserCurrency=="EUR":
-    UserCurrencySymbol = "€"
-else:
-    UserCurrencySymbol = "(?)"
-
 ShippingCodesList = [("p","In Production"),("i","In Progress"),("d","Delivered")]
 
 HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
@@ -86,10 +87,10 @@ class HomeHand(tornado.web.RequestHandler):
     def get(self):
         # Open Home
         HomeProductList = ""
-        mycursor.execute("SELECT * from products")
+        mycursor.execute("SELECT ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products")
         QueryProductsDict = mycursor.fetchall()
         for i in range(0,len(QueryProductsDict)):
-            HomeProductList += "<a style=\"background-image:url(/static/products/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6><h1>$"+str(QueryProductsDict[i][2])+"</h1></div></a>\n"
+            HomeProductList += "<a style=\"background-image:url(/static/products/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6><h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</h1></div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
