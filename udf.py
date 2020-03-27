@@ -59,6 +59,16 @@ def ServePage(self,pageloc):
     else:
         FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
     PageIndex = PageIndex.replace("<% Footer %>",FooterHTML)
+    
+    # Return Page
+    self.set_status(200)
+    self.set_header("Content-Type", "text/html")
+    self.set_header("Access-Control-Allow-Origin", "*")
+    self.set_header("Access-Control-Allow-Headers", "*")
+    self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+    self.set_header("Access-Control-Max-Age", 1000)
+    self.set_header("Access-Control-Allow-Headers", "*")
+    self.set_header("Server", "Harrison Sienkiewicz")
     return PageIndex
     
 def FindAddress(adid):
