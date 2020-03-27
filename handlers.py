@@ -92,11 +92,12 @@ class HomeHand(tornado.web.RequestHandler):
         mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products")
         QueryProductsDict = mycursor.fetchall()
         for i in range(0,len(QueryProductsDict)):
+            QueryProductsPrice = float(QueryProductsDict[i][2])
             QueryProductsDiscountIntPre = int(QueryProductsDict[i][3])
             QueryProductsDiscountInt = (float(QueryProductsDict[i][2]) * ((100 - int(QueryProductsDiscountIntPre)) / 100))
             if UserCurrencySymbol in SpecifyCurrencyList:
                 if QueryProductsDiscountIntPre > 0:
-                    QueryProductsPriceSet = "<h1><strike>{1:s}{2:,.2f}</strike></h1><h5>Now only <i>{1}{3:,.2f} ({0:s})</i></h5>".format(UserCurrency,UserCurrencySymbol,QueryProductsDict[i][2],QueryProductsDiscountInt)
+                    QueryProductsPriceSet = "<h1><strike>{1:s}{2:,.2f}</strike></h1><h5>Now only <i>{1}{3:,.2f} ({0:s})</i></h5>".format(UserCurrency,UserCurrencySymbol,QueryProductsPrice,QueryProductsDiscountInt)
                 else:
                     QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"
             else:
