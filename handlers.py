@@ -105,7 +105,16 @@ class HomeHand(tornado.web.RequestHandler):
                     QueryProductsPriceSet = "<h1><strike>{0:s}{1:,.2f}</strike></h1><h2>{0:s}{2:,.2f}</h2>".format(UserCurrencySymbol,QueryProductsPrice,QueryProductsDiscountInt)
                 else:
                     QueryProductsPriceSet = "<h1>{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,QueryProductsPrice)
-            HomeProductList += "<a style=\"background-image:url(/static/product/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
+            QueryProductsID = str(QueryProductsDict[i][0])
+            QueryProductsUniversalID = QueryProductsID[0,7]
+            QueryProductsDefaultColour = str(QueryProductsDict[i][5])
+            RequestDBProductColours = "SELECT colour,colour_name from products where left(id,7)='{0:s}' and colour!='{1:s}'".format(QueryProductsUniversalID,QueryProductsDefaultColour)
+            mycursor.execute(RequestDBProductColours)
+            QueryProductColoursFetch = mycursor.fetchall()
+            QueryProductColoursDict = ""
+            for Ci in QueryProductColoursFetch:
+                QueryProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursFetch[Ci][0])+";\" title=\""+str(QueryProductColoursFetch[Ci][1])+"\" s=\"n\"></abbr>"
+            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6])+"\" s=\"y\"></abbr>"+QueryProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
