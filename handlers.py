@@ -1,6 +1,5 @@
 import os,random,base64,fnmatch,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
-global mycursor,db,HeadHTML,FooterHTML,Enc32a,Enc32b,SpecifyCurrencyList,UserCurrency,UserCurrencySymbol,ShoppingCodesList,CookieNotifDiv,HeaderLIPreBase,HeaderLIPreHome,HeaderLIPreContact,HeaderLIPreAccountButton
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
 db = mysql.connector.connect(
@@ -11,10 +10,6 @@ db = mysql.connector.connect(
     database = "franzar"
 )
 mycursor = db.cursor()
-with open("/root/maxima/templates/head.html") as HeadHTML_F:
-    HeadHTML = HeadHTML_F.read()
-with open("/root/maxima/templates/footer.html") as FooterHTML_F:
-    FooterHTML = FooterHTML_F.read()
         
 def CheckLogin(self):
     if self.get_secure_cookie("Fu") and self.get_secure_cookie("Ft"):
@@ -30,6 +25,32 @@ def CheckLogin(self):
     else:
         return False
 
+def ServePage(self,pageloc):
+    CookieNotifDiv = "<div id=\"Fackc\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <b onclick=\"ackc()\">Accept</b></div>"
+    HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+    HeaderLIPreHome = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
+    HeaderLIPreContact = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
+    HeaderLIPreAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span>0</span></a>"
+    
+    with open("/root/maxima/templates/head.html") as HeadHTML_F:
+        HeadHTML = HeadHTML_F.read()
+    with open("/root/maxima/templates/footer.html") as FooterHTML_F:
+        FooterHTML = FooterHTML_F.read()
+    
+    with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
+        PageIndex = PageIndex_F.read()
+    if CheckLogin(self):
+        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPreHome+HeaderLIPreAccountButton)
+    else:
+        PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPreHome+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
+    PageIndex = PageIndex.replace("<% Head %>",HeadHTML)
+    if self.get_secure_cookie("Fa") == "true":
+        FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
+    else:
+        FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
+    PageIndex = PageIndex.replace("<% Footer %>",FooterHTML)
+    return PageIndex
+    
 def FindAddress(adid):
     try:
         FindAddressQuery = "SELECT stadda,staddb,city,zip,prov,ntn from addresses where adid='{0:d}'".format(int(adid))
@@ -80,12 +101,6 @@ def FindProduct(pid):
 
 ShippingCodesList = [("p","In Production"),("i","In Progress"),("d","Delivered")]
 
-CookieNotifDiv = "<div id=\"Fackc\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <b onclick=\"ackc()\">Accept</b></div>"
-HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
-HeaderLIPreHome = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
-HeaderLIPreContact = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
-HeaderLIPreAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span>0</span></a>"
-
 # Don't forget to eventually close the MySQL connection
 
 class HomeHand(tornado.web.RequestHandler):
@@ -120,19 +135,8 @@ class HomeHand(tornado.web.RequestHandler):
             HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6]).title()+"\" s=\"y\"></abbr>"+QueryProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         
         # Open Home
-        with open("/root/maxima/req/index.html") as HomeIndex_F:
-            HomeIndex = HomeIndex_F.read()
+        HomeIndex = ServePage(self,"/index.html")
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
-        if CheckLogin(self):
-            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPreHome+HeaderLIPreAccountButton)
-        else:
-            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPreHome+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
-        HomeIndex = HomeIndex.replace("<% Head %>",HeadHTML)
-        if self.get_secure_cookie("Fa") == "true":
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
-        else:
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
-        HomeIndex = HomeIndex.replace("<% Footer %>",FooterHTML)
         
         self.set_status(200)
         self.set_header("Content-Type", "text/html")
@@ -153,10 +157,6 @@ class ContactHand(tornado.web.RequestHandler):
         else:
             ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
-        if self.get_secure_cookie("Fa") == "true":
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
-        else:
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
         ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
         ContactIndex = ContactIndex.replace("<% ShowError %>","none")
         ContactIndex = ContactIndex.replace("<% ErrorMsg %>","")
@@ -171,10 +171,6 @@ class ContactHand(tornado.web.RequestHandler):
         else:
             ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
-        if self.get_secure_cookie("Fa") == "true":
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
-        else:
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
         ContactIndex = ContactIndex.replace("<% Footer %>",FooterHTML)
         
         # Open Contact Confirmation
@@ -185,10 +181,6 @@ class ContactHand(tornado.web.RequestHandler):
         else:
             ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactSentIndex = ContactSentIndex.replace("<% Head %>",HeadHTML)
-        if self.get_secure_cookie("Fa") == "true":
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
-        else:
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
         ContactSentIndex = ContactSentIndex.replace("<% Footer %>",FooterHTML)
         
         # Test
@@ -259,10 +251,6 @@ class SignInHand(tornado.web.RequestHandler):
         else:
             SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
         SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
-        if self.get_secure_cookie("Fa") == "true":
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
-        else:
-            FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
         SignInIndex = SignInIndex.replace("<% Footer %>",FooterHTML)
         SignInIndex = SignInIndex.replace("<% ShowError %>","none")
         SignInIndex = SignInIndex.replace("<% ErrorMsg %>","")
