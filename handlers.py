@@ -82,6 +82,7 @@ ShippingCodesList = [("p","In Production"),("i","In Progress"),("d","Delivered")
 HeaderLIPreBase = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
 HeaderLIPreHome = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
 HeaderLIPreContact = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
+HeaderLIPreAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"></a>"
 
 # Don't forget to eventually close the MySQL connection
 
@@ -119,7 +120,7 @@ class HomeHand(tornado.web.RequestHandler):
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         if CheckLogin(self):
-            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPreHome+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPreHome+HeaderLIPreAccountButton)
         else:
             HomeIndex = HomeIndex.replace("<% HeaderLI %>",HeaderLIPreHome+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         HomeIndex = HomeIndex.replace("<% Head %>",HeadHTML)
@@ -140,7 +141,7 @@ class ContactHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
             ContactIndex = ContactIndex_F.read()
         if CheckLogin(self):
-            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+HeaderLIPreAccountButton)
         else:
             ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
@@ -154,7 +155,7 @@ class ContactHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/contact/index.html") as ContactIndex_F:
             ContactIndex = ContactIndex_F.read()
         if CheckLogin(self):
-            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+HeaderLIPreAccountButton)
         else:
             ContactIndex = ContactIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactIndex = ContactIndex.replace("<% Head %>",HeadHTML)
@@ -164,7 +165,7 @@ class ContactHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/contact/sent.html") as ContactSentIndex_F:
             ContactSentIndex = ContactSentIndex_F.read()
         if CheckLogin(self):
-            ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPreContact+HeaderLIPreAccountButton)
         else:
             ContactSentIndex = ContactSentIndex.replace("<% HeaderLI %>",HeaderLIPreContact+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ContactSentIndex = ContactSentIndex.replace("<% Head %>",HeadHTML)
@@ -234,7 +235,7 @@ class SignInHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex = SignInIndex_F.read()
         if CheckLogin(self):
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
         SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
@@ -248,7 +249,7 @@ class SignInHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
             SignUpIndex = SignUpIndex_F.read()
         if CheckLogin(self):
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
         SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
@@ -258,7 +259,7 @@ class SignInHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex = SignInIndex_F.read()
         if CheckLogin(self):
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
         SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
@@ -303,7 +304,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
             ForgotPWIndex = ForgotPWIndex_F.read()
         if CheckLogin(self):
-            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ForgotPWIndex = ForgotPWIndex.replace("<% Head %>",HeadHTML)
@@ -314,7 +315,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/forgot_pw.html") as ForgotPWIndex_F:
             ForgotPWIndex = ForgotPWIndex_F.read()
         if CheckLogin(self):
-            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             ForgotPWIndex = ForgotPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ForgotPWIndex = ForgotPWIndex.replace("<% Head %>",HeadHTML)
@@ -324,7 +325,7 @@ class ForgotPWHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/forgot_pw_conf.html") as ForgotPWConfIndex_F:
             ForgotPWConfIndex = ForgotPWConfIndex_F.read()
         if CheckLogin(self):
-            ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             ForgotPWConfIndex = ForgotPWConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ForgotPWConfIndex = ForgotPWConfIndex.replace("<% Head %>",HeadHTML)
@@ -407,7 +408,7 @@ class ResetPWHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
             ResetPWIndex = ResetPWIndex_F.read()
         if CheckLogin(self):
-            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
@@ -417,7 +418,7 @@ class ResetPWHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/reset_pw_msg.html") as ResetPWMsgIndex_F:
             ResetPWMsgIndex = ResetPWMsgIndex_F.read()
         if CheckLogin(self):
-            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Head %>",HeadHTML)
@@ -475,7 +476,7 @@ class ResetPWHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/reset_pw.html") as ResetPWIndex_F:
             ResetPWIndex = ResetPWIndex_F.read()
         if CheckLogin(self):
-            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             ResetPWIndex = ResetPWIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWIndex = ResetPWIndex.replace("<% Head %>",HeadHTML)
@@ -485,7 +486,7 @@ class ResetPWHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/reset_pw_msg.html") as ResetPWMsgIndex_F:
             ResetPWMsgIndex = ResetPWMsgIndex_F.read()
         if CheckLogin(self):
-            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             ResetPWMsgIndex = ResetPWMsgIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Head %>",HeadHTML)
@@ -536,7 +537,7 @@ class SignUpHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
             SignUpIndex = SignUpIndex_F.read()
         if CheckLogin(self):
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
         SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
@@ -550,7 +551,7 @@ class SignUpHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_up/index.html") as SignUpIndex_F:
             SignUpIndex = SignUpIndex_F.read()
         if CheckLogin(self):
-            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             SignUpIndex = SignUpIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
         SignUpIndex = SignUpIndex.replace("<% Head %>",HeadHTML)
@@ -560,7 +561,7 @@ class SignUpHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_up/conf_sent.html") as SignUpConfIndex_F:
             SignUpConfIndex = SignUpConfIndex_F.read()
         if CheckLogin(self):
-            SignUpConfIndex = SignUpConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            SignUpConfIndex = SignUpConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             SignUpConfIndex = SignUpConfIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
         SignUpConfIndex = SignUpConfIndex.replace("<% Head %>",HeadHTML)
@@ -570,7 +571,7 @@ class SignUpHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_in/index.html") as SignInIndex_F:
             SignInIndex = SignInIndex_F.read()
         if CheckLogin(self):
-            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             SignInIndex = SignInIndex.replace("<% HeaderLI %>",HeaderLIPreBase)
         SignInIndex = SignInIndex.replace("<% Head %>",HeadHTML)
@@ -641,7 +642,7 @@ class VerifyHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/sign_up/verified.html") as VerifyIndex_F:
             VerifyIndex = VerifyIndex_F.read()
         if CheckLogin(self):
-            VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             VerifyIndex = VerifyIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         VerifyIndex = VerifyIndex.replace("<% Head %>",HeadHTML)
@@ -689,7 +690,7 @@ class AccountHand(tornado.web.RequestHandler):
             # Open Account
             with open("/root/maxima/req/account/index.html") as AccountIndex_F:
                 AccountIndex = AccountIndex_F.read()
-            AccountIndex = AccountIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            AccountIndex = AccountIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
             AccountIndex = AccountIndex.replace("<% Head %>",HeadHTML)
             AccountIndex = AccountIndex.replace("<% Footer %>",FooterHTML)
             AccountIndex = AccountIndex.replace("<% AddressOptions %>",AccountAddressOptions)
@@ -704,7 +705,7 @@ class ProductHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/product/index.html") as ProductIndex_F:
             ProductIndex = ProductIndex_F.read()
         if CheckLogin(self):
-            ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             ProductIndex = ProductIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         ProductIndex = ProductIndex.replace("<% Head %>",HeadHTML)
@@ -714,7 +715,7 @@ class ProductHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
             NotFoundIndex = NotFoundIndex_F.read()
         if CheckLogin(self):
-            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         NotFoundIndex = NotFoundIndex.replace("<% Head %>",HeadHTML)
@@ -761,7 +762,7 @@ class TermsConditionsHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/legal/terms.html") as TermsConditionsIndex_F:
             TermsConditionsIndex = TermsConditionsIndex_F.read()
         if CheckLogin(self):
-            TermsConditionsIndex = TermsConditionsIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            TermsConditionsIndex = TermsConditionsIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             TermsConditionsIndex = TermsConditionsIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         TermsConditionsIndex = TermsConditionsIndex.replace("<% Head %>",HeadHTML)
@@ -774,7 +775,7 @@ class NotFoundHand(tornado.web.RequestHandler):
         with open("/root/maxima/req/status/404.html") as NotFoundIndex_F:
             NotFoundIndex = NotFoundIndex_F.read()
         if CheckLogin(self):
-            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/account/\">My Account<span></span></a>")
+            NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+HeaderLIPreAccountButton)
         else:
             NotFoundIndex = NotFoundIndex.replace("<% HeaderLI %>",HeaderLIPreBase+"<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>")
         NotFoundIndex = NotFoundIndex.replace("<% Head %>",HeadHTML)
