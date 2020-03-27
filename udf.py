@@ -68,7 +68,7 @@ def ServePage(self,pageloc):
     self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
     self.set_header("Access-Control-Max-Age", 1000)
     self.set_header("Access-Control-Allow-Headers", "*")
-    self.set_header("Server", "Harrison Sienkiewicz")
+    self.set_header("Created By", "Harrison Reed Sienkiewicz")
     return PageIndex
     
 def FindAddress(adid):
