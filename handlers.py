@@ -112,7 +112,7 @@ class HomeHand(tornado.web.RequestHandler):
             mycursor.execute(RequestDBProductColours)
             QueryProductColoursFetch = mycursor.fetchall()
             QueryProductColoursDict = ""
-            for Ci in range(0,QueryProductColoursFetch):
+            for Ci in range(0,len(QueryProductColoursFetch)):
                 QueryProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursFetch[Ci][0])+";\" title=\""+str(QueryProductColoursFetch[Ci][1])+"\" s=\"n\"></abbr>"
             HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6])+"\" s=\"y\"></abbr>"+QueryProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
