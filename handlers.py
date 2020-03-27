@@ -48,6 +48,8 @@ def FindAddress(adid):
     except:
         return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
 
+SpecifyCurrencyList = ["$"]
+
 UserCurrency = "USD"
 if UserCurrency=="USD" or UserCurrency=="CAD":
     UserCurrencySymbol = "$"
@@ -89,8 +91,17 @@ class HomeHand(tornado.web.RequestHandler):
         HomeProductList = ""
         mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products")
         QueryProductsDict = mycursor.fetchall()
+        QueryProductsDiscountInt = str(QueryProductsDict[i][3])
+        if int(QueryProductsDiscountInt) > 0:
+            QueryProductsDiscountSet = "<h5>"+QueryProductsDiscountInt+"</h5>"
+        else:
+            QueryProductsDiscountSet = ""
+        if UserCurrencySymbol in SpecifyCurrencyList:
+            QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"+QueryProductsDiscountSet
+        else:
+            QueryProductsPriceSet = "<h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+" ("+UserCurrency+")</h1>"+QueryProductsDiscountSet
         for i in range(0,len(QueryProductsDict)):
-            HomeProductList += "<a style=\"background-image:url(/static/products/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6><h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</h1></div></a>\n"
+            HomeProductList += "<a style=\"background-image:url(/static/products/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         with open("/root/maxima/req/index.html") as HomeIndex_F:
             HomeIndex = HomeIndex_F.read()
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
@@ -702,7 +713,7 @@ class ProductHand(tornado.web.RequestHandler):
         ProductRequested_Name = FindProduct(ProductRequested_ID)["Name"]
         if ProductRequested_Name != "":
             ProductRequested_PricePre = str(FindProduct(ProductRequested_ID)["Price"])
-            if UserCurrencySymbol=="$":
+            if UserCurrencySymbol in SpecifyCurrencyList:
                 ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre+" ("+UserCurrency+")"
             else:
                 ProductRequested_Price = UserCurrencySymbol+ProductRequested_PricePre
