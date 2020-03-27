@@ -87,7 +87,7 @@ class HomeHand(tornado.web.RequestHandler):
     def get(self):
         # Open Home
         HomeProductList = ""
-        mycursor.execute("SELECT ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products")
+        mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products")
         QueryProductsDict = mycursor.fetchall()
         for i in range(0,len(QueryProductsDict)):
             HomeProductList += "<a style=\"background-image:url(/static/products/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6><h1>"+UserCurrencySymbol+str(QueryProductsDict[i][2])+"</h1></div></a>\n"
