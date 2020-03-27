@@ -97,12 +97,12 @@ class HomeHand(tornado.web.RequestHandler):
             QueryProductsDiscountInt = (float(QueryProductsDict[i][2]) * ((100 - int(QueryProductsDiscountIntPre)) / 100))
             if UserCurrencySymbol in SpecifyCurrencyList:
                 if QueryProductsDiscountIntPre > 0:
-                    QueryProductsPriceSet = "<h1><strike>{1:s}{2:,.2f}</strike></h1><h5>Now only <i>{1}{3:,.2f} ({0:s})</i></h5>".format(UserCurrency,UserCurrencySymbol,QueryProductsPrice,QueryProductsDiscountInt)
+                    QueryProductsPriceSet = "<h1><strike>{1:s}{2:,.2f}</strike></h1><h2>{1}{3:,.2f} ({0:s})</h2>".format(UserCurrency,UserCurrencySymbol,QueryProductsPrice,QueryProductsDiscountInt)
                 else:
                     QueryProductsPriceSet = "<h1>{1:s}{2:,.2f} ({0:s})</h1>".format(UserCurrency,UserCurrencySymbol,QueryProductsPrice)
             else:
                 if QueryProductsDiscountIntPre > 0:
-                    QueryProductsPriceSet = "<h1><strike>{0:s}{1:,.2f}</strike></h1><h5>Now only <i>{1}{2:,.2f}</i></h5>".format(UserCurrencySymbol,QueryProductsPrice,QueryProductsDiscountInt)
+                    QueryProductsPriceSet = "<h1><strike>{0:s}{1:,.2f}</strike></h1><h2>{1}{2:,.2f}</h2>".format(UserCurrencySymbol,QueryProductsPrice,QueryProductsDiscountInt)
                 else:
                     QueryProductsPriceSet = "<h1>{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,QueryProductsPrice)
             HomeProductList += "<a style=\"background-image:url(/static/product/"+str(QueryProductsDict[i][0])+"/0.jpg);\" href=\"/product/"+str(QueryProductsDict[i][0])+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+str(QueryProductsDict[i][5])+";\"></abbr></span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
