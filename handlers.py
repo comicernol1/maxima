@@ -30,7 +30,7 @@ class HomeHand(tornado.web.RequestHandler):
             for Ci in range(0,len(QueryProductColoursDict)):
                 if QueryProductColoursDict["Hex"][Ci] != QueryProductsDefaultColour:
                     ReturnProductColoursDict += "<abbr style=\"background:#"+QueryProductColoursDict["Hex"][Ci]+";\" title=\""+QueryProductColoursDict["Name"][Ci]+"\" s=\"n\"></abbr>"
-            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColour+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
+            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColourName+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         
         # Open
         HomeIndex = ServePage(self,"/index.html")
@@ -502,6 +502,13 @@ class ProductHand(tornado.web.RequestHandler):
                     ProductRequested_PriceSet = "<h1 id=\"BIp\"><strike>{0:s}{1:,.2f}</strike></h1><h2 id=\"BId\">{0:s}{2:,.2f}</h2>".format(UserCurrencySymbol,ProductRequested_Price,ProductRequested_Discount)
                 else:
                     ProductRequested_PriceSet = "<h1 id=\"BIp\">{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,ProductRequested_Price)
+            ProductColoursDict = FindProductColours(ProductRequested_ID)
+            ProductRequested_ColourOptions = ""
+            for i in range(0,len(ProductColoursDict)):
+                if ProductColoursDict["Hex"][i] == str(FindProduct(ProductRequested_ID)["Colour"]):
+                    ProductRequested_ColourOptions += "<abbr style=\"background:#"+str(FindProduct(ProductRequested_ID)["Colour"])+";\" title=\""+str(FindProduct(ProductRequested_ID)["ColourName"])+"\" s=\"y\"></abbr>"
+                else:
+                    ProductRequested_ColourOptions += "<abbr style=\"background:#"+ProductColoursDict["Hex"][i]+";\" title=\""+ProductColoursDict["Name"][i]+"\" s=\"n\"></abbr>"
             ProductRequested_ImageCnt = len(fnmatch.filter(os.listdir("/root/maxima/static/product/"+ProductRequested_ID+"/"), "*.jpg"))
             ProductRequested_BPs = ""
             for BPSi in range(0,ProductRequested_ImageCnt):
@@ -512,6 +519,7 @@ class ProductHand(tornado.web.RequestHandler):
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
             ProductIndex = ProductIndex.replace("<% ProductPrice %>",ProductRequested_PriceSet)
+            ProductIndex = ProductIndex.replace("<% ProductColourOptions %>",ProductRequested_ColourOptions)
             ProductIndex = ProductIndex.replace("<% FullImageList %>",ProductRequested_BPs)
             ProductIndex = ProductIndex.replace("<% Rating %>",str(ProductRequested_Rating))
             ProductIndex = ProductIndex.replace("<% ReviewCount %>",str(ProductRequested_ReviewCount))
