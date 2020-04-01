@@ -23,15 +23,12 @@ class HomeHand(tornado.web.RequestHandler):
                 else:
                     QueryProductsPriceSet = "<h1>{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,QueryProductsPrice)
             QueryProductsID = str(QueryProductsDict[i][0])
-            QueryProductsUniversalID = QueryProductsID[0:7]
-            QueryProductsDefaultColour = str(QueryProductsDict[i][5])
-            RequestDBProductColours = "SELECT colour,colour_name from products where left(id,7)='{0:s}' and colour!='{1:s}'".format(QueryProductsUniversalID,QueryProductsDefaultColour)
-            mycursor.execute(RequestDBProductColours)
-            QueryProductColoursFetch = mycursor.fetchall()
-            QueryProductColoursDict = ""
-            for Ci in range(0,len(QueryProductColoursFetch)):
-                QueryProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursFetch[Ci][0])+";\" title=\""+str(QueryProductColoursFetch[Ci][1]).title()+"\" s=\"n\"></abbr>"
-            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6]).title()+"\" s=\"y\"></abbr>"+QueryProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
+            QueryProductColoursDict = FindProductColours(QueryProductsID)
+            ReturnProductColoursDict = ""
+            for Ci in range(0,len(QueryProductColoursDict)):
+                if str(QueryProductColoursFetch[Ci][0]) != 
+                ReturnProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursDict[Ci][0])+";\" title=\""+str(QueryProductColoursDict[Ci][1]).title()+"\" s=\"n\"></abbr>"
+            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6]).title()+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         
         # Open
         HomeIndex = ServePage(self,"/index.html")
