@@ -509,10 +509,16 @@ class ProductHand(tornado.web.RequestHandler):
                     ProductRequested_ColourOptions += "<a style=\"background:#"+str(FindProduct(ProductRequested_ID)["Colour"])+";\" title=\""+str(FindProduct(ProductRequested_ID)["ColourName"])+"\" s=\"y\"></a>"
                 else:
                     ProductRequested_ColourOptions += "<a href=\"/product/"+ProductColoursDict["ID"][i]+"/\" style=\"background:#"+ProductColoursDict["Hex"][i]+";\" title=\""+ProductColoursDict["Name"][i]+"\" s=\"n\"></a>"
-            ProductRequested_ImageCnt = len(fnmatch.filter(os.listdir("/root/maxima/static/product/"+ProductRequested_ID+"/"), "*.jpg"))
-            ProductRequested_BPs = ""
-            for BPSi in range(0,ProductRequested_ImageCnt):
-                ProductRequested_BPs += "<li><img src=\"/static/product/"+ProductRequested_ID+"/"+str(BPSi)+".jpg\" alt=\""+ProductRequested_Name+" ("+str(BPSi + 1)+")\"></li>\n"
+            ProductRequested_ImageLinkTest = "/static/product/"+ProductRequested_ID+"/0.jpg"
+            if os.path.exists(ProductRequested_ImageLinkTest):
+                ProductRequested_ImageLink = ProductRequested_ImageLinkTest
+                ProductRequested_ImageCnt = len(fnmatch.filter(os.listdir("/root/maxima/static/product/"+ProductRequested_ID+"/"), "*.jpg"))
+                ProductRequested_BPs = ""
+                for BPSi in range(0,ProductRequested_ImageCnt):
+                    ProductRequested_BPs += "<li><img src=\"/static/product/"+ProductRequested_ID+"/"+str(BPSi)+".jpg\" alt=\""+ProductRequested_Name+" ("+str(BPSi + 1)+")\"></li>\n"
+            else:
+                ProductRequested_ImageLink = "/static/product/missing.jpg"
+                ProductRequested_BPs = "<li><img src=\"/static/product/missing.jpg\" alt=\""+ProductRequested_Name+" (1)\"></li>\n"
             ProductRequested_Rating = 0
             ProductRequested_ReviewCount = 0
         
@@ -520,6 +526,7 @@ class ProductHand(tornado.web.RequestHandler):
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
             ProductIndex = ProductIndex.replace("<% ProductPrice %>",ProductRequested_PriceSet)
             ProductIndex = ProductIndex.replace("<% ProductColourOptions %>",ProductRequested_ColourOptions)
+            ProductIndex = ProductIndex.replace("<% ProductImgLink %>",ProductRequested_ImageLink)
             ProductIndex = ProductIndex.replace("<% FullImageList %>",ProductRequested_BPs)
             ProductIndex = ProductIndex.replace("<% Rating %>",str(ProductRequested_Rating))
             ProductIndex = ProductIndex.replace("<% ReviewCount %>",str(ProductRequested_ReviewCount))
