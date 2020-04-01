@@ -562,7 +562,7 @@ class CartHand(tornado.web.RequestHandler):
         UserCartItems = ""
         for i in range(0,len(UserCartList)):
             UserCartItems += str(UserCartList[i][0])+" - "+str(UserCartList[i][1])
-        CartIndex = CartIndex.replace("<% Cart %>",CartItems)
+        CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
         self.write(CartIndex)
 
 class TermsConditionsHand(tornado.web.RequestHandler):
