@@ -3,6 +3,10 @@ from udf import *
 # Don't forget to eventually close the MySQL connection
 
 class AddToCartAjax(tornado.web.RequestHandler):
+    def get(self):
+        NotFoundIndex = ServePage(self,"/status/404.html")
+        self.write(NotFoundIndex)
+        
     def post(self):
         ATCRequest = urllib.parse.unquote(self.request.body.decode('utf-8'))
         if self.get_secure_cookie("Fu"):
