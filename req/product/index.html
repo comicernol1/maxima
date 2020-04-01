@@ -42,8 +42,13 @@ function ACt(){
     var xhttp=new XMLHttpRequest();
     xhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
-            HMCi.innerText=Math.floor(Number(HMCi.innerText)+Number(BIOq.value));
-            alert(this.responseText);
+            if (this.responseText=="A"){
+                HMCi.innerText=Math.floor(Number(HMCi.innerText)+Number(BIOq.value));
+            }else if (this.responseText=="E_B"){
+                window.open("/sign_in/","_self");
+            }else{
+                alert("Something went wrong.");
+            }
         }
     };
     xhttp.open("POST", "/add_to_cart/", true);
