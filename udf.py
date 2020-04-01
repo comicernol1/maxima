@@ -75,8 +75,11 @@ def ServePage(self,pageloc):
     with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
         PageIndex = PageIndex_F.read()
     if CheckLogin(self):
-        UserCartNum = len(GetCart(self))
-        HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span id=\"HMCi\">"+str(UserCartNum)+"</span></a>"
+        UserCartCnt = 0
+        UserCartList = GetCart(self)
+        for i in range(0,len(UserCartList)):
+            UserCartCnt += int(UserCartList[i][1])
+        HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span id=\"HMCi\">"+str(UserCartCnt)+"</span></a>"
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLIAccountButton)
     else:
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLISignIn)
