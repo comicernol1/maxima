@@ -54,12 +54,12 @@ class ContactHand(tornado.web.RequestHandler):
         ContactSentIndex = ServePage(self,"/contact/sent.html")
         
         # Test
-        ContactRequestBody = self.request.body.decode('utf-8').replace("+"," ")
+        ContactRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8').replace("+"," "))
         if ContactRequestBody.find("CFn=") >= 0 and ContactRequestBody.find("CFe=") >= 0 and ContactRequestBody.find("CFo=") >= 0 and ContactRequestBody.find("CFt=") >= 0:
-            ContactRequestCFn = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFn=")+4):ContactRequestBody.index("&CFe=")])
-            ContactRequestCFe = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFe=")+4):ContactRequestBody.index("&CFo=")])
-            ContactRequestCFo = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFo=")+4):ContactRequestBody.index("&CFt=")])
-            ContactRequestCFt = urllib.parse.unquote(ContactRequestBody[(ContactRequestBody.index("CFt=")+4):len(ContactRequestBody)])
+            ContactRequestCFn = ContactRequestBody[(ContactRequestBody.index("CFn=")+4):ContactRequestBody.index("&CFe=")]
+            ContactRequestCFe = ContactRequestBody[(ContactRequestBody.index("CFe=")+4):ContactRequestBody.index("&CFo=")]
+            ContactRequestCFo = ContactRequestBody[(ContactRequestBody.index("CFo=")+4):ContactRequestBody.index("&CFt=")]
+            ContactRequestCFt = ContactRequestBody[(ContactRequestBody.index("CFt=")+4):len(ContactRequestBody)]
             if ContactRequestCFn!="" and ContactRequestCFe!="" and ContactRequestCFt!="":
                 with open("/root/maxima/templates/contact/ticket.html") as ContactSMPTTemplate_T_F:
                     ContactSMTPTemplate_T = ContactSMPTTemplate_T_F.read()
@@ -127,10 +127,10 @@ class SignInHand(tornado.web.RequestHandler):
         SignInIndex = ServePage(self,"/sign_in/index.html")
         
         # Test
-        SignInRequestBody = self.request.body.decode('utf-8')
+        SignInRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
         if SignInRequestBody.find("siem=") >= 0 and SignInRequestBody.find("sipw=") >= 0:
-            SignInRequestEmail = urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")])
-            SignInRequestPassword = urllib.parse.unquote(SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)])
+            SignInRequestEmail = SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")]
+            SignInRequestPassword = SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)]
             SignInRequestDBSelectEmail = "SELECT passwd,userid FROM compacc WHERE email='{0:s}'".format(SignInRequestEmail)
             mycursor.execute(SignInRequestDBSelectEmail)
             QueryEmailPre = mycursor.fetchone()
@@ -174,9 +174,9 @@ class ForgotPWHand(tornado.web.RequestHandler):
         ForgotPWConfIndex = ServePage(self,"/sign_in/forgot_pw_conf.html")
         
         # Test
-        ForgotPWRequestBody = self.request.body.decode('utf-8')
+        ForgotPWRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
         if ForgotPWRequestBody.find("fpem=") >= 0:
-            ForgotPWRequestEmail = urllib.parse.unquote(ForgotPWRequestBody[(ForgotPWRequestBody.index("fpem=")+5):len(ForgotPWRequestBody)])
+            ForgotPWRequestEmail = ForgotPWRequestBody[(ForgotPWRequestBody.index("fpem=")+5):len(ForgotPWRequestBody)]
             ForgotPWRequestDBSelectEmail = "SELECT userid FROM compacc WHERE email='{0:s}'".format(ForgotPWRequestEmail)
             mycursor.execute(ForgotPWRequestDBSelectEmail)
             QueryEmailPre = mycursor.fetchone()
@@ -307,11 +307,11 @@ class ResetPWHand(tornado.web.RequestHandler):
         
         # Test
         if self.get_secure_cookie("Fu") != "":
-            ResetPWRequestBody = self.request.body.decode('utf-8')
+            ResetPWRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
             ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
             if ResetPWRequestBody.find("rppw=") >= 0 and ResetPWRequestBody.find("rppa=") >= 0:
-                ResetPWRequestNewPWPre = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):ResetPWRequestBody.index("&rppa=")])
-                ResetPWRequestNewPWAgain = urllib.parse.unquote(ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)])
+                ResetPWRequestNewPWPre = ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):ResetPWRequestBody.index("&rppa=")]
+                ResetPWRequestNewPWAgain = ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)]
                 ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
                 mycursor.execute(ResetPWRequestDBSelectCode)
                 QueryIDPre = mycursor.fetchone()
@@ -361,15 +361,15 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpConfIndex = ServePage(self,"/sign_up/conf_sent.html")
         
         # Test
-        SignUpRequestBody = self.request.body.decode('utf-8')
+        SignUpRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
         if SignUpRequestBody.find("suem=") >= 0 and SignUpRequestBody.find("supw=") >= 0 and SignUpRequestBody.find("supa=") >= 0:
-            SignUpRequestEmail = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")])
+            SignUpRequestEmail = SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")]
             SignUpRequestDBSelectEmail = "SELECT COUNT(*) FROM compacc WHERE email='{0:s}' and veremail=1".format(SignUpRequestEmail)
             mycursor.execute(SignUpRequestDBSelectEmail)
             QueryCountEmail = mycursor.fetchone()
-            SignUpRequestPasswordPre = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")])
+            SignUpRequestPasswordPre = SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")]
             SignUpRequestPassword = Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
-            SignUpRequestPasswordAgain = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)])
+            SignUpRequestPasswordAgain = SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)]
             if SignUpRequestBody.find("rsve=y") and len(SignUpRequestPasswordPre) >= 8 and SignUpRequestPasswordPre == SignUpRequestPasswordAgain and int(QueryCountEmail[0]) < 1:
                 SignUpUserID = random.randint(1000000000,9999999999)
                 SignUpVerifyCode = random.randint(1000000000,9999999999)
@@ -402,7 +402,7 @@ class SignUpHand(tornado.web.RequestHandler):
         elif SignUpRequestBody.find("rsve=") >= 0:
             
             # Resend Verification Email
-            SignUpRSVEEmail = urllib.parse.unquote(SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)])
+            SignUpRSVEEmail = SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)]
             with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
                     SignUpSMTPTemplate = SignUpSMPTTemplate_F.read()
             SignUpSMTPHeaders = "\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+SignUpRSVEEmail,"mime-version: 1.0","content-type: text/html"])
