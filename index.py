@@ -14,9 +14,10 @@ if __name__ == "__main__":
         (r"/verify/", VerifyHand),
         (r"/account/", AccountHand),
         (r"/product/.*", ProductHand),
-        (r"/add_to_cart/", AddToCartAjax),
+        (r"/cart/", CartHand),
         (r"/legal/terms_and_conditions/", TermsConditionsHand),
         (r"/report_a_counterfeit/", CounterfeitHand),
+        (r"/add_to_cart/", AddToCartAjax),
         (r"/.*", NotFoundHand)
     ], **settings)
 
