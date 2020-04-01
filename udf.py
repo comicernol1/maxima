@@ -27,6 +27,7 @@ def CheckLogin(self):
         return False
 
 def CheckCookie(self):
+    print("TEST")
     CheckCookieRequestBody = self.request.body.decode('utf-8')
     if CheckCookieRequestBody.find("ackc=") >= 0:
         CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
