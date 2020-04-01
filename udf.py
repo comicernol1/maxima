@@ -32,6 +32,7 @@ def CheckCookie(self):
         CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
         if CheckCookieRequestM=="true":
             self.set_secure_cookie("Fa","true")
+            self.redirect("/cookie_submitted/")
 
 def ServePage(self,pageloc):
     # Define Basics
