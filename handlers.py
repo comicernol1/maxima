@@ -555,6 +555,11 @@ class ProductHand(tornado.web.RequestHandler):
     def post(self):
         SetCookie(self)
 
+class CartHand(tornado.web.RequestHandler):
+    def get(self):
+        CartIndex = ServePage(self,"/cart/index.html")
+        self.write(CartIndex)
+
 class TermsConditionsHand(tornado.web.RequestHandler):
     def get(self):
         # Open
