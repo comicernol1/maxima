@@ -11,7 +11,7 @@ class AddToCartAjax(tornado.web.RequestHandler):
                 ATCRequestID = ATCRequest[(ATCRequest.index("id=")+3):ATCRequest.index("&qty=")]
                 ATCRequestQty = ATCRequest[(ATCRequest.index("&qty=")+5):len(ATCRequest)]
                 print(UserInfoFu)
-                return "Success"
+                self.write("Success")
             else:
                 print("Error A")
         else:
