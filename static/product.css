@@ -19,8 +19,9 @@ body{overflow-x:hidden;}
 #BIt a{display:inline-block;width:40px;height:40px;cursor:pointer;margin-right:8px;border-radius:100%;box-sizing:border-box;}
 #BIt a[s="y"]{border:4px solid white;box-shadow:0px 0px 0px 1px #D7263D;}
 #BIt a[s="n"]{border:1px solid white;box-shadow:none;}
-#BIo{width:calc(50% - 10px);height:40px;box-sizing:border-box;font-size:16px;font-weight:600;color:#FAFAFF;letter-spacing:1px;background:#F46036;border:none;border-radius:4px;position:relative;top:25px;}
-#BIo:active{background:#C84F2D;}
+#BIo{position:relative;top:25px;}
+#BIOb{display:inline-block;width:calc(50% - 10px);height:40px;box-sizing:border-box;font-size:16px;font-weight:600;color:#FAFAFF;letter-spacing:1px;background:#F46036;border:none;border-radius:4px;}
+#BIOb:active{background:#C84F2D;}
 #Foot{top:2000px;}
 @media only screen and (max-width:700px){
     /* PLACEHOLDER */
