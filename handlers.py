@@ -493,7 +493,17 @@ class ProductHand(tornado.web.RequestHandler):
             else:
                 ProductRequested_CareWring = ""
             ProductRequested_Care = "<li>"+WashCareCodesList[FindProduct(ProductRequested_ID)["Wash"]]+"</li><li>"+BleachCareCodesList[FindProduct(ProductRequested_ID)["Bleach"]]+"</li><li>"+DryCareCodesList[FindProduct(ProductRequested_ID)["Dry"]]+"</li>"+ProductRequested_CareWring+"<li>"+DryCleanCareCodesList[FindProduct(ProductRequested_ID)["DryClean"]]+"</li>"
-            ProductRequested_Contents = FindProduct(ProductRequested_ID)["ContentsDict"]["Main"]
+            ProductRequested_ContentsDict = FindProduct(ProductRequested_ID)["ContentsDict"]
+            if len(ProductRequested_ContentsDict) > 1:
+                ProductRequested_Contents = ""
+                for Ti in range(0,len(ProductRequested_ContentsDict)):
+                    ProductRequested_ContentsDict_Keys
+                    ProductRequested_Contents += "<li>"ProductRequested_ContentsDict_Keys[Ti]+": "+ProductRequested_ContentsDict[ProductRequested_ContentsDict_Keys[Ti]]+"</li>"
+                ProductRequested_Contents = "<ul>"+ProductRequested_Contents+"</ul>"
+            elif len(ProductRequested_ContentsDict) == 1:
+                ProductRequested_Contents = ProductRequested_ContentsDict["Main"]
+            else:
+                ProductRequested_Contents = ""
             ProductRequested_Price = FindProduct(ProductRequested_ID)["Price"]
             ProductRequested_DiscountPre = FindProduct(ProductRequested_ID)["Discount"]
             ProductRequested_Discount = (ProductRequested_Price * ((100 - ProductRequested_DiscountPre) / 100))
