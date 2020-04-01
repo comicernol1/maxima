@@ -139,18 +139,21 @@ def FindProduct(pid):
 
 def FindProductColours(pid):
     UniversalPID = pid[0:7]
-    RequestDBColours = "SELECT colour,colour_name from products where left(id,7)='{0:s}'".format(UniversalPID)
+    RequestDBColours = "SELECT id,colour,colour_name from products where left(id,7)='{0:s}'".format(UniversalPID)
     mycursor.execute(RequestDBColours)
     ColoursFetch = mycursor.fetchall()
+    IDsList = []
     ColoursList = []
     ColourNamesList = []
     if ColoursFetch:
         for i in range(0,len(ColoursFetch)):
-            PIDColour = str(ColoursFetch[i][0])
-            PIDColourName = str(ColoursFetch[i][1]).title()
+            PIDID = str(ColoursFetch[i][1])
+            PIDColour = str(ColoursFetch[i][1])
+            PIDColourName = str(ColoursFetch[i][2]).title()
+            IDsList.append(PIDID)
             ColoursList.append(PIDColour)
             ColourNamesList.append(PIDColourName)
-    ColoursDict = {"Hex":ColoursList,"Name":ColourNamesList}
+    ColoursDict = {"ID":IDsList,"Hex":ColoursList,"Name":ColourNamesList}
     return ColoursDict
 
 ShippingCodesList = [("p","In Production"),("i","In Progress"),("d","Delivered")]
