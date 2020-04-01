@@ -45,7 +45,7 @@ def GetCart(self):
     mycursor.execute(UserCartQuery)
     UserCartFetch = mycursor.fetchall()
     UserCartList = []
-    for i in UserCartFetch:
+    for i in range(0,len(UserCartFetch)):
         UserCartItm = []
         UserCartItm.append(UserCartFetch[i][0])
         UserCartItm.append(UserCartFetch[i][1])
