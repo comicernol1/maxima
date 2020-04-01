@@ -62,7 +62,7 @@ input[type="submit"]:active,.rgsb:active{background:#006A3B;}
 #HMs{height:100px;background:transparent;font-size:16px;padding:40px 40px 40px 10px;color:#FAFAFF;text-decoration:none;box-sizing:border-box;text-align:right;position:absolute;bottom:0;right:55px;}
 #HMs span{display:block;width:36px;height:36px;background-image:url("/static/profile_icon.png");background-repeat:no-repeat;background-size:cover;background-position:center;box-sizing:border-box;border:1px solid grey;border-radius:100%;position:relative;bottom:28px;right:45px;}
 #HMc{width:30px;height:30px;background-image:url("/static/multiplier_image.png");background-size:300px;background-position:-159px -153px;text-align:center;text-decoration:none;position:absolute;top:32px;left:calc(100% - 65px);}
-#HMc span{font-size:14px;color:white;position:relative;left:2px;}
+#HMCi{font-size:9px;color:white;position:relative;left:2px;}
 #Fackc{width:100%;background:#04151F;font-size:20px;color:#FAFAFF;padding:15px 50px;box-sizing:border-box;position:fixed;z-index:100;bottom:0;left:0;}
 #Fackc a{color:#757780;}
 #Fackc input[type="submit"]{height:auto;cursor:pointer;font-size:20px;font-weight:300;background:none;float:right;}
