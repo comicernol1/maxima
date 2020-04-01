@@ -145,7 +145,7 @@ def FindProductColours(pid):
     ColoursList = []
     ColourNamesList = []
     if ColoursFetch:
-        for i in ColoursFetch:
+        for i in range(0,len(ColoursFetch)):
             PIDColour = str(ColoursFetch[i][0])
             PIDColourName = str(ColoursFetch[i][1]).title()
             ColoursList.append(PIDColour)
