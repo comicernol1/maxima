@@ -489,8 +489,9 @@ class ProductHand(tornado.web.RequestHandler):
         ProductRequested_ID = ProductIndexURI[(ProductIndexURI.index("/product/")+9):(len(ProductIndexURI)-1)]
         ProductRequested_Name = FindProduct(ProductRequested_ID)["Name"]
         if ProductRequested_Name != "":
-            ProductRequested_Price = float(FindProduct(ProductRequested_ID)["Price"])
-            ProductRequested_DiscountPre = int(FindProduct(ProductRequested_ID)["Discount"])
+            ProductRequested_Desc = FindProduct(ProductRequested_ID)["Description"]
+            ProductRequested_Price = FindProduct(ProductRequested_ID)["Price"]
+            ProductRequested_DiscountPre = FindProduct(ProductRequested_ID)["Discount"]
             ProductRequested_Discount = (ProductRequested_Price * ((100 - ProductRequested_DiscountPre) / 100))
             if UserCurrencySymbol in SpecifyCurrencyList:
                 if ProductRequested_DiscountPre > 0:
@@ -524,6 +525,7 @@ class ProductHand(tornado.web.RequestHandler):
         
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
+            ProductIndex = ProductIndex.replace("<% ProductDescription %>",ProductRequested_Desc)
             ProductIndex = ProductIndex.replace("<% ProductPrice %>",ProductRequested_PriceSet)
             ProductIndex = ProductIndex.replace("<% ProductColourOptions %>",ProductRequested_ColourOptions)
             ProductIndex = ProductIndex.replace("<% ProductImgLink %>",ProductRequested_ImageLink)
