@@ -120,7 +120,7 @@ else:
 
 def FindProduct(pid):
     try:
-        FindProductQuery = "SELECT ttl,description,price_"+UserCurrency.lower()+",discount,size,colour,colour_name,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
+        FindProductQuery = "SELECT ttl,description,price_"+UserCurrency.lower()+",discount,size,colour,colour_name,contents_dict,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
         if FindProductFetch:
@@ -131,17 +131,18 @@ def FindProduct(pid):
             FindProductSize = str(FindProductFetch[4])
             FindProductColour = str(FindProductFetch[5])
             FindProductColourName = str(FindProductFetch[6]).title()
-            FindProductWash = str(FindProductFetch[7])
-            FindProductBleach = str(FindProductFetch[8])
-            FindProductDry = str(FindProductFetch[9])
-            FindProductWring = str(FindProductFetch[10])
-            FindProductDryClean = str(FindProductFetch[11])
-            FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean}
+            FindProductContentsDict = str(FindProductFetch[7])
+            FindProductWash = str(FindProductFetch[8])
+            FindProductBleach = str(FindProductFetch[9])
+            FindProductDry = str(FindProductFetch[10])
+            FindProductWring = str(FindProductFetch[11])
+            FindProductDryClean = str(FindProductFetch[12])
+            FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean}
             return FindProductDict
         else:
-            return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":""}
+            return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":"","Contents":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":""}
     except:
-        return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":""}
+        return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":"","Contents":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":""}
 
 def FindProductColours(pid):
     UniversalPID = pid[0:7]
