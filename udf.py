@@ -33,6 +33,10 @@ def CheckCookie(self):
         if CheckCookieRequestM == "true":
             # self.set_secure_cookie("Fa","true")
             self.write(self.request.uri)
+        else:
+            self.wite("FALSE - A")
+    else:
+        self.write("FALSE - B")
 
 def ServePage(self,pageloc):
     # Define Basics
