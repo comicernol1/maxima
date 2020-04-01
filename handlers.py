@@ -23,12 +23,14 @@ class HomeHand(tornado.web.RequestHandler):
                 else:
                     QueryProductsPriceSet = "<h1>{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,QueryProductsPrice)
             QueryProductsID = str(QueryProductsDict[i][0])
+            QueryProductsDefaultColour = str(QueryProductsDict[i][5])
+            QueryProductsDefaultColourName = str(QueryProductsDict[i][6]).title()
             QueryProductColoursDict = FindProductColours(QueryProductsID)
             ReturnProductColoursDict = ""
             for Ci in range(0,len(QueryProductColoursDict)):
                 if str(QueryProductColoursFetch[Ci][0]) != QueryProductsDefaultColour:
                 ReturnProductColoursDict += "<abbr style=\"background:#"+str(QueryProductColoursDict[Ci][0])+";\" title=\""+str(QueryProductColoursDict[Ci][1]).title()+"\" s=\"n\"></abbr>"
-            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+str(QueryProductsDict[i][6]).title()+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
+            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColour+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         
         # Open
         HomeIndex = ServePage(self,"/index.html")
