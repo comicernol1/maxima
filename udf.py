@@ -50,6 +50,7 @@ def GetCart(self):
         UserCartItm.append(UserCartFetch[i][0])
         UserCartItm.append(UserCartFetch[i][1])
         UserCartList.append(UserCartItm)
+    return UserCartList
 
 def ServePage(self,pageloc):
     # Define Basics
