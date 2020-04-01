@@ -36,7 +36,7 @@ def ServePage(self,pageloc):
     # Define Basics
     HeaderLISignIn = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
     HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span>0</span></a>"
-    CookieNotifDiv = "<form id=\"Sackc\"><input type=\"hidden\" name=\"ackc\" value=\"true\"></form><div id=\"Fackc\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <b onclick=\"ackc()\">Accept</b></div>"
+    CookieNotifDiv = "<form id=\"Sackc\" action=\"\" method=\"POST\"><input type=\"hidden\" name=\"ackc\" value=\"true\"></form><div id=\"Fackc\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <b onclick=\"ackc()\">Accept</b></div>"
     
     # Define Header Pre
     if pageloc=="/index.html":
