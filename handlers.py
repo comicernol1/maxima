@@ -498,7 +498,8 @@ class ProductHand(tornado.web.RequestHandler):
                 ProductRequested_Contents = ""
                 for Ti in range(0,len(ProductRequested_ContentsDict)):
                     ProductRequested_ContentsDict_Keys = str(ProductRequested_ContentsDict.items())
-                    ProductRequested_Contents += "<li>"+ProductRequested_ContentsDict_Keys[Ti][0]+": "+ProductRequested_ContentsDict_Keys[Ti][1]+"</li>"
+                    ProductRequested_Contents += ProductRequested_ContentsDict_Keys[Ti]
+                    # ProductRequested_Contents += "<li>"+ProductRequested_ContentsDict_Keys[Ti][0]+": "+ProductRequested_ContentsDict_Keys[Ti][1]+"</li>"
                 ProductRequested_Contents = "<ul>"+ProductRequested_Contents+"</ul>"
             elif len(ProductRequested_ContentsDict) == 1:
                 ProductRequested_Contents = ProductRequested_ContentsDict["Main"]
