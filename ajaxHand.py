@@ -11,3 +11,7 @@ class AddToCartAjax(tornado.web.RequestHandler):
                 ATCRequestID = ContactRequestBody[(ContactRequestBody.index("id=")+3):ContactRequestBody.index("&qty=")]
                 ATCRequestQty = ContactRequestBody[(ContactRequestBody.index("&qty=")+5):len(ContactRequestBody)]
                 print(UserInfoFu)
+            else:
+                print("Error A")
+        else:
+            print("Error B")
