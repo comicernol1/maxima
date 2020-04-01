@@ -50,6 +50,8 @@ class ContactHand(tornado.web.RequestHandler):
         self.write(ContactIndex)
         
     def post(self):
+        CheckCookie(self)
+        
         # Open
         ContactIndex = ServePage(self,"/contact/index.html")
         ContactSentIndex = ServePage(self,"/contact/sent.html")
