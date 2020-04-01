@@ -8,10 +8,10 @@ class AddToCartAjax(tornado.web.RequestHandler):
         if self.get_secure_cookie("Fu"):
             UserInfoFu = self.get_secure_cookie("Fu")
             if ATCRequest.find("id=") and ATCRequest.find("&qty="):
-                ATCRequestID = ContactRequestBody[(ContactRequestBody.index("id=")+3):ContactRequestBody.index("&qty=")]
-                ATCRequestQty = ContactRequestBody[(ContactRequestBody.index("&qty=")+5):len(ContactRequestBody)]
+                ATCRequestID = ATCRequest[(ATCRequest.index("id=")+3):ATCRequest.index("&qty=")]
+                ATCRequestQty = ATCRequest[(ATCRequest.index("&qty=")+5):len(ATCRequest)]
                 print(UserInfoFu)
             else:
-                print("Error A")
+                print("Error A - "+ATCRequest)
         else:
             print("Error B")
