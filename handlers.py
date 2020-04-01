@@ -37,6 +37,9 @@ class HomeHand(tornado.web.RequestHandler):
         HomeIndex = ServePage(self,"/index.html")
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         self.write(HomeIndex)
+        
+    def post(self):
+        CheckCookie(self)
 
 class ContactHand(tornado.web.RequestHandler):
     def get(self):
