@@ -561,7 +561,7 @@ class CartHand(tornado.web.RequestHandler):
         UserCartList = GetCart(self)
         UserCartItems = ""
         for i in range(0,len(UserCartList)):
-            UserCartItems += str(UserCartList[i][0])+" - "+str(UserCartList[i][1])
+            UserCartItems += str(UserCartList[i][0])+" - "+str(UserCartList[i][1])+"\n"
         CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
         self.write(CartIndex)
 
