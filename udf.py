@@ -28,9 +28,11 @@ def CheckLogin(self):
 
 def CheckCookie(self):
     CheckCookieRequestBody = self.request.body.decode('utf-8')
-    CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
-    self.set_secure_cookie("Fa","true")
-    self.write(CheckCookieRequestM)
+    if CheckCookieRequestBody.find("ackc=") >= 0:
+        CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
+        if CheckCookieRequestM == "true":
+            # self.set_secure_cookie("Fa","true")
+            self.write(self.request.uri)
 
 def ServePage(self,pageloc):
     # Define Basics
