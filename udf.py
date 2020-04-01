@@ -26,6 +26,13 @@ def CheckLogin(self):
     else:
         return False
 
+def CheckCookie(self):
+    CheckCookieRequestBody = self.request.body.decode('utf-8')
+    if CheckCookieRequestBody.find("ackc"):
+        CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
+        if CheckCookieRequestM=="true":
+            self.set_secure_cookie("Fa","true")
+
 def ServePage(self,pageloc):
     # Define Basics
     HeaderLISignIn = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
