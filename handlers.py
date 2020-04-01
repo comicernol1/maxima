@@ -442,9 +442,7 @@ class AccountHand(tornado.web.RequestHandler):
             # Set OrderList
             AccountOrdersList = ""
             for OFi in range(0,len(AccountOrdersFetch)):
-                AccountOrdersListStatus = AccountOrdersFetch[OFi][3]
-                for OFIk,OFIv in ShippingCodesList:
-                    AccountOrdersListStatus = AccountOrdersListStatus.replace(OFIk,OFIv)
+                AccountOrdersListStatus = ShippingCodesList[AccountOrdersFetch[OFi][3]]
                 AccountOrdersList += "<tr>"
                 AccountOrdersList += "<td><a href=\"/order/"+str(AccountOrdersFetch[OFi][0])+"/\">"+str(AccountOrdersFetch[OFi][0])+"</a></td>"
                 AccountOrdersList += "<td><a href=\"/product/"+str(AccountOrdersFetch[OFi][1])+"/\">"+str(FindProduct(AccountOrdersFetch[OFi][1])["Name"])+"</a></td>"
