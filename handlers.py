@@ -506,9 +506,9 @@ class ProductHand(tornado.web.RequestHandler):
             ProductRequested_ColourOptions = ""
             for i in range(0,len(ProductColoursDict)):
                 if ProductColoursDict["Hex"][i] == str(FindProduct(ProductRequested_ID)["Colour"]):
-                    ProductRequested_ColourOptions += "<abbr style=\"background:#"+str(FindProduct(ProductRequested_ID)["Colour"])+";\" title=\""+str(FindProduct(ProductRequested_ID)["ColourName"])+"\" s=\"y\"></abbr>"
+                    ProductRequested_ColourOptions += "<a style=\"background:#"+str(FindProduct(ProductRequested_ID)["Colour"])+";\" title=\""+str(FindProduct(ProductRequested_ID)["ColourName"])+"\" s=\"y\"></a>"
                 else:
-                    ProductRequested_ColourOptions += "<abbr style=\"background:#"+ProductColoursDict["Hex"][i]+";\" title=\""+ProductColoursDict["Name"][i]+"\" s=\"n\"></abbr>"
+                    ProductRequested_ColourOptions += "<a href=\""+ProductColoursDict["ID"][i]+"\" style=\"background:#"+ProductColoursDict["Hex"][i]+";\" title=\""+ProductColoursDict["Name"][i]+"\" s=\"n\"></a>"
             ProductRequested_ImageCnt = len(fnmatch.filter(os.listdir("/root/maxima/static/product/"+ProductRequested_ID+"/"), "*.jpg"))
             ProductRequested_BPs = ""
             for BPSi in range(0,ProductRequested_ImageCnt):
