@@ -1,4 +1,4 @@
-import os,random,base64,fnmatch,tornado.web,urllib.parse,mysql.connector,smtplib
+import os,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
@@ -131,7 +131,7 @@ def FindProduct(pid):
             FindProductSize = str(FindProductFetch[4])
             FindProductColour = str(FindProductFetch[5])
             FindProductColourName = str(FindProductFetch[6]).title()
-            FindProductContentsDict = FindProductFetch[7]
+            FindProductContentsDict = json.loads(FindProductFetch[7])
             FindProductWash = str(FindProductFetch[8])
             FindProductBleach = str(FindProductFetch[9])
             FindProductDry = str(FindProductFetch[10])
