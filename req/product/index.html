@@ -29,10 +29,20 @@
         </div>
         <div id="BIt"><% ProductColourOptions %></div>
         <div id="BIo">
-            <input type="number" id="BIOq" value="1">
+            <input type="number" id="BIOq" value="1" onblur="AdjOq()">
             <button id="BIOb">Add to Cart</button>
         </div>
     </div>
 </div>
+<script>
+BIOq=document.getElementById("BIOq");
+function AdjOq(){
+    if (Number(BIOq.value)>10){
+        BIOq.value="10";
+    }else if (Number(BIOq.value)<1){
+        BIOq.value="1";
+    }
+}
+</script>
 <% Footer %>
 </body></html>
