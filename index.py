@@ -14,7 +14,7 @@ if __name__ == "__main__":
         (r"/account/", AccountHand),
         (r"/product/.*", ProductHand),
         (r"/legal/terms_and_conditions/", TermsConditionsHand),
-        (r"/legal/report_a_counterfeit/", CounterfeitHand),
+        (r"/report_a_counterfeit/", CounterfeitHand),
         (r"/.*", NotFoundHand)
     ], **settings)
 
