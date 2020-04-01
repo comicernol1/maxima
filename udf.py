@@ -120,22 +120,23 @@ else:
 
 def FindProduct(pid):
     try:
-        FindProductQuery = "SELECT ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products where id='{0:d}'".format(int(pid))
+        FindProductQuery = "SELECT ttl,description,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
         if FindProductFetch:
-            FindProductName = FindProductFetch[0]
-            FindProductPrice = FindProductFetch[1]
-            FindProductDiscount = FindProductFetch[2]
-            FindProductSize = FindProductFetch[3]
-            FindProductColour = FindProductFetch[4]
-            FindProductColourName = FindProductFetch[5].title()
-            FindProductDict = {"Name":FindProductName,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName}
+            FindProductName = str(FindProductFetch[0])
+            FindProductDesc = str(FindProductFetch[1])
+            FindProductPrice = float(FindProductFetch[2])
+            FindProductDiscount = int(FindProductFetch[3])
+            FindProductSize = str(FindProductFetch[4])
+            FindProductColour = str(FindProductFetch[5])
+            FindProductColourName = str(FindProductFetch[6]).title()
+            FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName}
             return FindProductDict
         else:
-            return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+            return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
     except:
-        return {"Name":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
+        return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":""}
 
 def FindProductColours(pid):
     UniversalPID = pid[0:7]
