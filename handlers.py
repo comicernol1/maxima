@@ -497,7 +497,7 @@ class ProductHand(tornado.web.RequestHandler):
             if len(ProductRequested_ContentsDict) > 1:
                 ProductRequested_Contents = ""
                 for Ti in range(0,len(ProductRequested_ContentsDict)):
-                    ProductRequested_ContentsDict_Keys
+                    ProductRequested_ContentsDict_Keys = ProductRequested_ContentsDict.keys()
                     ProductRequested_Contents += "<li>"+ProductRequested_ContentsDict_Keys[Ti]+": "+ProductRequested_ContentsDict[ProductRequested_ContentsDict_Keys[Ti]]+"</li>"
                 ProductRequested_Contents = "<ul>"+ProductRequested_Contents+"</ul>"
             elif len(ProductRequested_ContentsDict) == 1:
