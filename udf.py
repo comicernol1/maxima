@@ -26,7 +26,7 @@ def CheckLogin(self):
     else:
         return False
 
-def CheckCookie(self):
+def SetCookie(self):
     CheckCookieRequestBody = self.request.body.decode('utf-8')
     if CheckCookieRequestBody.find("ackc=") >= 0:
         CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
@@ -67,7 +67,11 @@ def ServePage(self,pageloc):
     else:
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLISignIn)
     PageIndex = PageIndex.replace("<% Head %>",HeadHTML)
-    if self.get_secure_cookie("Fa").decode('utf-8') == "true":
+    try:
+        UserInfoFa = self.get_secure_cookie("Fa").decode('utf-8')
+    except:
+        UserInfoFa = "false"
+    if UserInfoFa == "true":
         FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
     else:
         FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
