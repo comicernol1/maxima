@@ -488,11 +488,11 @@ class ProductHand(tornado.web.RequestHandler):
         ProductRequested_Name = FindProduct(ProductRequested_ID)["Name"]
         if ProductRequested_Name != "":
             ProductRequested_Desc = FindProduct(ProductRequested_ID)["Description"]
-            if FindProduct(ProductRequested_ID)["Wring"]!=None:
-                ProductRequested_CareWring = FindProduct(ProductRequested_ID)["Wring"]+", "
+            if FindProduct(ProductRequested_ID)["Wring"]=="n":
+                ProductRequested_CareWring = "Do Not Wring, "
             else:
                 ProductRequested_CareWring = ""
-            ProductRequested_Care = FindProduct(ProductRequested_ID)["Wash"]+", "+FindProduct(ProductRequested_ID)["Bleach"]+", "+FindProduct(ProductRequested_ID)["Dry"]+", "+ProductRequested_CareWring+FindProduct(ProductRequested_ID)["DryClean"]
+            ProductRequested_Care = WashCareCodesList[FindProduct(ProductRequested_ID)["Wash"]]+", "+BleachCareCodesList[FindProduct(ProductRequested_ID)["Bleach"]]+", "+DryCareCodesList[FindProduct(ProductRequested_ID)["Dry"]]+", "+ProductRequested_CareWring+DryCleanCareCodesList[FindProduct(ProductRequested_ID)["DryClean"]]
             ProductRequested_Price = FindProduct(ProductRequested_ID)["Price"]
             ProductRequested_DiscountPre = FindProduct(ProductRequested_ID)["Discount"]
             ProductRequested_Discount = (ProductRequested_Price * ((100 - ProductRequested_DiscountPre) / 100))
