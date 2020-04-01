@@ -39,7 +39,7 @@ class HomeHand(tornado.web.RequestHandler):
         self.write(HomeIndex)
         
     def post(self):
-        CheckCookie(self)
+        SetCookie(self)
 
 class ContactHand(tornado.web.RequestHandler):
     def get(self):
@@ -108,7 +108,7 @@ class ContactHand(tornado.web.RequestHandler):
                 ContactIndex = ContactIndex.replace("<% ShowError %>","block")
                 self.write(ContactIndex)
         else:
-            if CheckCookie(self):
+            if SetCookie(self):
                 pass
             else:
                 ContactIndex = ContactIndex.replace("<% ErrorMsg %>","(C2) Something went wrong")
