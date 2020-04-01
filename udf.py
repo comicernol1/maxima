@@ -146,8 +146,10 @@ def FindProductColours(pid):
     ColourNamesList = []
     if ColoursFetch:
         for i in ColoursFetch:
-            ColoursList.append(ColoursFetch[i][0])
-            ColourNamesList.append(ColoursFetch[i][1])
+            PIDColour = str(ColoursFetch[i][0]).title()
+            PIDColourName = str(ColoursFetch[i][1]).title()
+            ColoursList.append(PIDColour)
+            ColourNamesList.append(PIDColourName)
     ColoursDict = {"Hex":ColoursList,"Name":ColourNamesList}
     return ColoursDict
 
