@@ -4,4 +4,5 @@ from udf import *
 
 class AddToCartAjax(tornado.web.RequestHandler):
     def post(self):
-        # Placeholder
+        AddToCartRequest = self.request.body.decode('utf-8')
+        print(AddToCartRequest)
