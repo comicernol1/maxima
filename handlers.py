@@ -156,9 +156,12 @@ class SignInHand(tornado.web.RequestHandler):
                 SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Account does not exist")
                 self.write(SignInIndex)
         else:
-            SignInIndex = SignInIndex.replace("<% ShowError %>","block")
-            SignInIndex = SignInIndex.replace("<% ErrorMsg %>","(N1) Something went wrong")
-            self.write(SignInIndex)
+            if SetCookie(self):
+                pass
+            else:
+                SignInIndex = SignInIndex.replace("<% ShowError %>","block")
+                SignInIndex = SignInIndex.replace("<% ErrorMsg %>","(N1) Something went wrong")
+                self.write(SignInIndex)
 
 class ForgotPWHand(tornado.web.RequestHandler):
     def get(self):
@@ -238,9 +241,12 @@ class ForgotPWHand(tornado.web.RequestHandler):
                 ForgotPWIndex = ForgotPWIndex.replace("<% ErrorMsg %>","Account does not exist")
                 self.write(ForgotPWIndex)
         else:
-            ForgotPWIndex = ForgotPWIndex.replace("<% ShowError %>","block")
-            ForgotPWIndex = ForgotPWIndex.replace("<% ErrorMsg %>","(F1) Something went wrong")
-            self.write(ForgotPWIndex)
+            if SetCookie(self):
+                pass
+            else:
+                ForgotPWIndex = ForgotPWIndex.replace("<% ShowError %>","block")
+                ForgotPWIndex = ForgotPWIndex.replace("<% ErrorMsg %>","(F1) Something went wrong")
+                self.write(ForgotPWIndex)
 
 class ResetPWHand(tornado.web.RequestHandler):
     def get(self):
@@ -336,8 +342,11 @@ class ResetPWHand(tornado.web.RequestHandler):
                 ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","(R1) Something went wrong")
                 self.write(ResetPWMsgIndex)
         else:
-            ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","(R2) Something went wrong")
-            self.write(ResetPWMsgIndex)
+            if SetCookie(self):
+                pass
+            else:
+                ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","(R2) Something went wrong")
+                self.write(ResetPWMsgIndex)
 
 class SignUpHand(tornado.web.RequestHandler):
     def get(self):
@@ -408,9 +417,12 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRSVEEmail)
             self.write(SignUpConfIndex)
         else:
-            SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
-            SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P2) Something went wrong")
-            self.write(SignUpIndex)
+            if SetCookie(self):
+                pass
+            else:
+                SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
+                SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P2) Something went wrong")
+                self.write(SignUpIndex)
 
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
@@ -463,6 +475,9 @@ class AccountHand(tornado.web.RequestHandler):
             self.write(AccountIndex)
         else:
             self.redirect("/sign_in/")
+    
+    def post(self):
+        SetCookie(self)
 
 class ProductHand(tornado.web.RequestHandler):
     def get(self):
@@ -504,15 +519,24 @@ class ProductHand(tornado.web.RequestHandler):
             self.write(ProductIndex)
         else:
             self.write(NotFoundIndex)
+    
+    def post(self):
+        SetCookie(self)
 
 class TermsConditionsHand(tornado.web.RequestHandler):
     def get(self):
         # Open
         TermsConditionsIndex = ServePage(self,"/legal/terms.html")
         self.write(TermsConditionsIndex)
+    
+    def post(self):
+        SetCookie(self)
 
 class NotFoundHand(tornado.web.RequestHandler):
     def get(self):
         # Open
         NotFoundIndex = ServePage(self,"/status/404.html")
         self.write(NotFoundIndex)
+    
+    def post(self):
+        SetCookie(self)
