@@ -505,7 +505,6 @@ class ProductHand(tornado.web.RequestHandler):
             ProductColoursDict = FindProductColours(ProductRequested_ID)
             ProductRequested_ColourOptions = ""
             for i in range(0,len(ProductColoursDict)):
-                print(ProductColoursDict["Hex"][i])
                 if ProductColoursDict["Hex"][i] == str(FindProduct(ProductRequested_ID)["Colour"]):
                     ProductRequested_ColourOptions += "<a style=\"background:#"+str(FindProduct(ProductRequested_ID)["Colour"])+";\" title=\""+str(FindProduct(ProductRequested_ID)["ColourName"])+"\" s=\"y\"></a>"
                 else:
