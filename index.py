@@ -1,5 +1,6 @@
 import os,tornado.web,tornado.ioloop
 from handlers import *
+from ajaxHand import *
 from settings import settings
 
 if __name__ == "__main__":
@@ -13,6 +14,7 @@ if __name__ == "__main__":
         (r"/verify/", VerifyHand),
         (r"/account/", AccountHand),
         (r"/product/.*", ProductHand),
+        (r"/add_to_cart/", AddToCartAjax),
         (r"/legal/terms_and_conditions/", TermsConditionsHand),
         (r"/report_a_counterfeit/", CounterfeitHand),
         (r"/.*", NotFoundHand)
