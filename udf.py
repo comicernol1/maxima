@@ -131,7 +131,7 @@ def FindProduct(pid):
             FindProductSize = str(FindProductFetch[4])
             FindProductColour = str(FindProductFetch[5])
             FindProductColourName = str(FindProductFetch[6]).title()
-            exec("FindProductContentsDict = "+str(FindProductFetch[7]))
+            FindProductContentsDict = FindProductFetch[7]
             FindProductWash = str(FindProductFetch[8])
             FindProductBleach = str(FindProductFetch[9])
             FindProductDry = str(FindProductFetch[10])
