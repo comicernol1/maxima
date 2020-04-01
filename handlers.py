@@ -493,6 +493,7 @@ class ProductHand(tornado.web.RequestHandler):
             else:
                 ProductRequested_CareWring = ""
             ProductRequested_Care = "<li>"+WashCareCodesList[FindProduct(ProductRequested_ID)["Wash"]]+"</li><li>"+BleachCareCodesList[FindProduct(ProductRequested_ID)["Bleach"]]+"</li><li>"+DryCareCodesList[FindProduct(ProductRequested_ID)["Dry"]]+"</li>"+ProductRequested_CareWring+"<li>"+DryCleanCareCodesList[FindProduct(ProductRequested_ID)["DryClean"]]+"</li>"
+            ProductRequested_Contents = FindProduct(ProductRequested_ID)["ContentsDict"]
             ProductRequested_Price = FindProduct(ProductRequested_ID)["Price"]
             ProductRequested_DiscountPre = FindProduct(ProductRequested_ID)["Discount"]
             ProductRequested_Discount = (ProductRequested_Price * ((100 - ProductRequested_DiscountPre) / 100))
@@ -529,6 +530,7 @@ class ProductHand(tornado.web.RequestHandler):
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
             ProductIndex = ProductIndex.replace("<% ProductDescription %>",ProductRequested_Desc)
+            ProductIndex = ProductIndex.replace("<% ProductContents %>",ProductRequested_Contents)
             ProductIndex = ProductIndex.replace("<% ProductCare %>",ProductRequested_Care)
             ProductIndex = ProductIndex.replace("<% ProductPrice %>",ProductRequested_PriceSet)
             ProductIndex = ProductIndex.replace("<% ProductColourOptions %>",ProductRequested_ColourOptions)
