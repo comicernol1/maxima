@@ -42,7 +42,7 @@ def SetCookie(self):
 def ServePage(self,pageloc):
     # Define Basics
     HeaderLISignIn = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
-    HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span>0</span></a>"
+    HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span id=\"HMCi\">0</span></a>"
     CookieNotifDiv = "<form id=\"Fackc\" action=\"\" method=\"POST\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <input type=\"hidden\" name=\"ackc\" value=\"true\"><input type=\"submit\" value=\"Accept\"></form>"
     
     # Define Header Pre
