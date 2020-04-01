@@ -27,7 +27,7 @@ class HomeHand(tornado.web.RequestHandler):
             QueryProductsDefaultColourName = str(QueryProductsDict[i][6]).title()
             QueryProductColoursDict = FindProductColours(QueryProductsID)
             ReturnProductColoursDict = ""
-            for Ci in range(0,len(QueryProductColoursDict)):
+            for Ci in range(0,len(QueryProductColoursDict["ID"])):
                 if QueryProductColoursDict["Hex"][Ci] != QueryProductsDefaultColour:
                     ReturnProductColoursDict += "<abbr style=\"background:#"+QueryProductColoursDict["Hex"][Ci]+";\" title=\""+QueryProductColoursDict["Name"][Ci]+"\" s=\"n\"></abbr>"
             HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColourName+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
@@ -504,7 +504,7 @@ class ProductHand(tornado.web.RequestHandler):
                     ProductRequested_PriceSet = "<h1 id=\"BIp\">{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,ProductRequested_Price)
             ProductColoursDict = FindProductColours(ProductRequested_ID)
             ProductRequested_ColourOptions = ""
-            for i in range(0,len(ProductColoursDict)):
+            for i in range(0,len(ProductColoursDict["ID"])):
                 if ProductColoursDict["Hex"][i] == str(FindProduct(ProductRequested_ID)["Colour"]):
                     ProductRequested_ColourOptions += "<a style=\"background:#"+str(FindProduct(ProductRequested_ID)["Colour"])+";\" title=\""+str(FindProduct(ProductRequested_ID)["ColourName"])+"\" s=\"y\"></a>"
                 else:
