@@ -558,6 +558,11 @@ class ProductHand(tornado.web.RequestHandler):
 class CartHand(tornado.web.RequestHandler):
     def get(self):
         CartIndex = ServePage(self,"/cart/index.html")
+        UserCartList = GetCart(self)
+        UserCartItems = ""
+        for i in range(0,len(UserCartList)):
+            UserCartItems += str(UserCartList[i][0])+" - "+str(UserCartList[i][1])
+        CartIndex = CartIndex.replace("<% Cart %>",CartItems)
         self.write(CartIndex)
 
 class TermsConditionsHand(tornado.web.RequestHandler):
