@@ -65,7 +65,7 @@ input[type="submit"]:active,.rgsb:active{background:#006A3B;}
 #HMc span{font-size:14px;color:white;position:relative;left:2px;}
 #Fackc{width:100%;background:#04151F;font-size:20px;color:#FAFAFF;padding:15px 50px;box-sizing:border-box;position:fixed;z-index:100;bottom:0;left:0;}
 #Fackc a{color:#757780;}
-#Fackc b{cursor:pointer;font-weight:300;float:right;}
+#Sackc input[type="submit"]{cursor:pointer;font-weight:300;float:right;}
 #Foot{width:100%;height:350px;background:#605F5E;position:absolute;left:0;}
 #Ft{width:calc(100% - 100px);position:absolute;top:20px;left:50px;}
 #Ft tr th{text-align:left;font-size:16px;color:#EAEAEA;padding:10px 0;}
