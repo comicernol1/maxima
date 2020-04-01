@@ -26,11 +26,12 @@ class HomeHand(tornado.web.RequestHandler):
             QueryProductsDefaultColour = str(QueryProductsDict[i][5])
             QueryProductsDefaultColourName = str(QueryProductsDict[i][6]).title()
             QueryProductColoursDict = FindProductColours(QueryProductsID)
+            ReturnProductTitle = str(QueryProductsDict[i][1])
             ReturnProductColoursDict = ""
             for Ci in range(0,len(QueryProductColoursDict["ID"])):
                 if QueryProductColoursDict["Hex"][Ci] != QueryProductsDefaultColour:
                     ReturnProductColoursDict += "<abbr style=\"background:#"+QueryProductColoursDict["Hex"][Ci]+";\" title=\""+QueryProductColoursDict["Name"][Ci]+"\" s=\"n\"></abbr>"
-            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColourName+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+str(QueryProductsDict[i][1])+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
+            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\" title=\""+ReturnProductTitle+"\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColourName+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+ReturnProductTitle+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
         
         # Open
         HomeIndex = ServePage(self,"/index.html")
