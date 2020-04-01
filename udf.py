@@ -41,7 +41,7 @@ def SetCookie(self):
 
 def GetCart(self):
     UserInfoFu = self.get_secure_cookie("Fu")
-    UserCartQuery = "SELECT pid,qty from cart where uid='{0:d}'".format(int(UserInfoFu),int(UserInfoFt))
+    UserCartQuery = "SELECT pid,qty from cart where uid='{0:d}'".format(int(UserInfoFu))
     mycursor.execute(UserCartQuery)
     UserCartFetch = mycursor.fetchall()
     UserCartList = []
