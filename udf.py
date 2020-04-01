@@ -39,10 +39,21 @@ def SetCookie(self):
     else:
         return False
 
+def GetCart(self):
+    UserInfoFu = self.get_secure_cookie("Fu")
+    UserCartQuery = "SELECT pid,qty from cart where uid='{0:d}'".format(int(UserInfoFu),int(UserInfoFt))
+    mycursor.execute(UserCartQuery)
+    UserCartFetch = mycursor.fetchall()
+    UserCartList = []
+    for i in UserCartFetch:
+        UserCartItm = []
+        UserCartItm.append(UserCartFetch[i][0])
+        UserCartItm.append(UserCartFetch[i][1])
+        UserCartList.append(UserCartItm)
+
 def ServePage(self,pageloc):
     # Define Basics
     HeaderLISignIn = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
-    HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span id=\"HMCi\">0</span></a>"
     CookieNotifDiv = "<form id=\"Fackc\" action=\"\" method=\"POST\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <input type=\"hidden\" name=\"ackc\" value=\"true\"><input type=\"submit\" value=\"Accept\"></form>"
     
     # Define Header Pre
@@ -63,6 +74,8 @@ def ServePage(self,pageloc):
     with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
         PageIndex = PageIndex_F.read()
     if CheckLogin(self):
+        UserCartNum = len(GetCart(self))
+        HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span id=\"HMCi\">"+UserCartNum+"</span></a>"
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLIAccountButton)
     else:
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLISignIn)
