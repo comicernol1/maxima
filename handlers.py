@@ -532,6 +532,15 @@ class TermsConditionsHand(tornado.web.RequestHandler):
     def post(self):
         SetCookie(self)
 
+class CounterfeitHand(tornado.web.RequestHandler):
+    def get(self):
+        # Open
+        CounterfeitIndex = ServePage(self,"/legal/counterfeit.html")
+        self.write(CounterfeitIndex)
+    
+    def post(self):
+        SetCookie(self)
+
 class NotFoundHand(tornado.web.RequestHandler):
     def get(self):
         # Open
