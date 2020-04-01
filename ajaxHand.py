@@ -4,5 +4,10 @@ from udf import *
 
 class AddToCartAjax(tornado.web.RequestHandler):
     def post(self):
-        AddToCartRequest = self.request.body.decode('utf-8')
-        print(AddToCartRequest)
+        ATCRequest = urllib.parse.unquote(self.request.body.decode('utf-8'))
+        if self.get_secure_cookie("Fu"):
+            UserInfoFu = self.get_secure_cookie("Fu")
+            if ATCRequest.find("id=") and ATCRequest.find("&qty="):
+                ATCRequestID = ContactRequestBody[(ContactRequestBody.index("id=")+3):ContactRequestBody.index("&qty=")]
+                ATCRequestQty = ContactRequestBody[(ContactRequestBody.index("&qty=")+5):len(ContactRequestBody)]
+                print(UserInfoFu)
