@@ -14,10 +14,24 @@ class AddToCartAjax(tornado.web.RequestHandler):
             if ATCRequest.find("id=") >= 0 and ATCRequest.find("&qty=") >= 0:
                 ATCRequestID = int(ATCRequest[(ATCRequest.index("id=")+3):ATCRequest.index("&qty=")])
                 ATCRequestQty = int(ATCRequest[(ATCRequest.index("&qty=")+5):len(ATCRequest)])
-                UserCartQuery = "INSERT INTO cart (uid,pid,qty) VALUES({0:d},{1:d},{2:d})".format(UserInfoFu,ATCRequestID,ATCRequestQty)
-                mycursor.execute(UserCartQuery)
-                db.commit()
-                self.write("A")
+                UserCartCntQuery = "SELECT pid,qty FROM cart WHERE uid={0:d} AND pid={0:d}".format(UserInfoFu,ATCRequestID)
+                mycursor.execute(UserCartCntQuery)
+                UserCartCntFetch = UserCartCntQuery.fetchone()
+                if UserCartCntFetch:
+                    CartItemCurrentQty = int(UserCartCntFetch[0][1])
+                    if CartItemCurrentQty >= 10:
+                        self.write("E_F")
+                    else:
+                        CartItemNewQty = (CartItemCurrentQty+ATCRequestQty)
+                        UserCartQuery = "UPDATE cart SET qty={0:d} WHERE uid={1:d} AND pid={2:d}".format(CartItemNewQty,UserInfoFu,ATCRequestID)
+                        mycursor.execute(UserCartQuery)
+                        db.commit()
+                        self.write("A")
+                else:
+                    UserCartQuery = "INSERT INTO cart (uid,pid,qty) VALUES({0:d},{1:d},{2:d})".format(UserInfoFu,ATCRequestID,ATCRequestQty)
+                    mycursor.execute(UserCartQuery)
+                    db.commit()
+                    self.write("A")
             else:
                 self.write("E_A")
         else:
