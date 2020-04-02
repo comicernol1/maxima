@@ -574,7 +574,7 @@ class CartHand(tornado.web.RequestHandler):
             UserCartItems += "<div class=\"CIt\" id=\"CIt_"+UserCartItem_ID+"\" style=\"top:"+str(i*210)+"px;\"><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a><h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1><button class=\"CIr\" onclick=\"RMp('"+UserCartItem_ID+"')\">Remove</button></div>\n"
             UserCartFootTop += 210
         CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
-        CartIndex = CartIndex.replace("<% FootTop %>",UserCartFootTop)
+        CartIndex = CartIndex.replace("<% FootTop %>",str(UserCartFootTop))
         self.write(CartIndex)
 
 class TermsConditionsHand(tornado.web.RequestHandler):
