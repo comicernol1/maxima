@@ -572,7 +572,7 @@ class CartHand(tornado.web.RequestHandler):
                 UserCartItem_PriceSet = "{0:s}{1:,.2f}".format(UserCurrencySymbol,UserCartItem_Price)
             UserCartItems += "<div class=\"CIt\" style=\"top:"+str(i*210)+"px;\"><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"><div class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></div><h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1></div>\n"
         CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
-        UserCartFootTop = str((i*210)+120)
+        UserCartFootTop = str(((i+1)*210)+120)
         CartIndex = CartIndex.replace("<% FootTop %>",UserCartFootTop)
         self.write(CartIndex)
 
