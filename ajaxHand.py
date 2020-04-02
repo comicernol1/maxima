@@ -19,7 +19,7 @@ class AddToCartAjax(tornado.web.RequestHandler):
                 UserCartCntFetch = mycursor.fetchone()
                 if UserCartCntFetch:
                     CartItemCurrentQty = int(UserCartCntFetch[1])
-                    if CartItemCurrentQty >= 100:
+                    if CartItemCurrentQty >= 10:
                         self.write("E_F")
                     else:
                         CartItemNewQty = (CartItemCurrentQty+ATCRequestQty)
