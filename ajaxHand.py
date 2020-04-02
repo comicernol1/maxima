@@ -14,7 +14,7 @@ class AddToCartAjax(tornado.web.RequestHandler):
             if ATCRequest.find("id=") >= 0 and ATCRequest.find("&qty=") >= 0:
                 ATCRequestID = int(ATCRequest[(ATCRequest.index("id=")+3):ATCRequest.index("&qty=")])
                 ATCRequestQty = int(ATCRequest[(ATCRequest.index("&qty=")+5):len(ATCRequest)])
-                UserCartCntQuery = "SELECT pid,qty FROM cart WHERE uid={0:d} AND pid={0:d}".format(UserInfoFu,ATCRequestID)
+                UserCartCntQuery = "SELECT pid,qty FROM cart WHERE uid={0:d} AND pid={1:d}".format(UserInfoFu,ATCRequestID)
                 mycursor.execute(UserCartCntQuery)
                 UserCartCntFetch = mycursor.fetchone()
                 if UserCartCntFetch:
