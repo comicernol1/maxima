@@ -28,6 +28,7 @@ class AddToCartAjax(tornado.web.RequestHandler):
                         db.commit()
                         self.write("A")
                 else:
+                    print(UserCartCntFetch)
                     UserCartQuery = "INSERT INTO cart (uid,pid,qty) VALUES({0:d},{1:d},{2:d})".format(UserInfoFu,ATCRequestID,ATCRequestQty)
                     mycursor.execute(UserCartQuery)
                     db.commit()
