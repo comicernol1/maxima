@@ -18,8 +18,7 @@ class AddToCartAjax(tornado.web.RequestHandler):
                 mycursor.execute(UserCartCntQuery)
                 UserCartCntFetch = mycursor.fetchone()
                 if UserCartCntFetch:
-                    CartItemCurrentQty = int(UserCartCntFetch[0][1])
-                    print(UserCartCntFetch)
+                    CartItemCurrentQty = int(UserCartCntFetch[1])
                     if CartItemCurrentQty >= 100:
                         self.write("E_F")
                     else:
