@@ -19,16 +19,24 @@
 <script>
 HMCi=document.getElementById("HMCi");
 Cm=document.getElementById("Cm");
-/*function AdjOq(){if (Number(BIOq.value)>10){BIOq.value="10";}else if (Number(BIOq.value)<1){BIOq.value="1";}}*/
+function AdjOa(){
+    var i;
+    for (i=0;i<CIt.length;i++){
+        CIt[i].style.top=(i*210)+"px";
+    }
+    /*if (Number(BIOq.value)>10){BIOq.value="10";}else if (Number(BIOq.value)<1){BIOq.value="1";}*/
+}
 function RMp(pid){
     var xhttp=new XMLHttpRequest();
     xhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (this.responseText=="A"){
                 ElmID="CIt_"+pid;
-                HMCi.innerText=Math.floor(Number(HMCi.innerText)-Number(document.getElementById(ElmID).getElementsByClassName("CIq")[0].value));
+                HMCi.innerText=(Number(HMCi.innerText)-Number(document.getElementById(ElmID).getElementsByClassName("CIq")[0].value));
                 document.getElementById(ElmID).parentNode.removeChild(document.getElementById(ElmID));
-                if (Cm.getElementsByClassName("CIt").length==0){document.getElementById("CIEx").style.display="block";}
+                CIt=Cm.getElementsByClassName("CIt");
+                if (CIt.length==0){document.getElementById("CIEx").style.display="block";}
+                AdjOa();
             }else if (this.responseText=="E_B"){
                 window.open("/sign_in/","_self");
             }else{
