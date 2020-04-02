@@ -10,7 +10,7 @@ db = mysql.connector.connect(
     password = str(os.environ["MYSQL_MAXIMA_PASSWD"]),
     database = "franzar"
 )
-mycursor = db.cursor()
+mycursor = db.cursor(buffered=True)
 
 def CheckLogin(self):
     if self.get_secure_cookie("Fu") and self.get_secure_cookie("Ft"):
