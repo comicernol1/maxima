@@ -19,7 +19,6 @@ class AddToCartAjax(tornado.web.RequestHandler):
                 UserCartCntFetch = mycursor.fetchone()
                 if UserCartCntFetch:
                     CartItemCurrentQty = int(UserCartCntFetch[0][1])
-                    print(ATCRequestQty)
                     if CartItemCurrentQty >= 100:
                         self.write("E_F")
                     else:
@@ -28,13 +27,11 @@ class AddToCartAjax(tornado.web.RequestHandler):
                         mycursor.execute(UserCartQuery)
                         db.commit()
                         self.write("A")
-                        print("A1")
                 else:
                     UserCartQuery = "INSERT INTO cart (uid,pid,qty) VALUES({0:d},{1:d},{2:d})".format(UserInfoFu,ATCRequestID,ATCRequestQty)
                     mycursor.execute(UserCartQuery)
                     db.commit()
                     self.write("A")
-                    print("A2")
             else:
                 self.write("E_A")
         else:
