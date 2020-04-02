@@ -565,7 +565,7 @@ class CartHand(tornado.web.RequestHandler):
                 UserCartItem_ImgLink = "/static/product/"+UserCartItem_ID+"/0.jpg"
             else:
                 UserCartItem_ImgLink = "/static/product/missing.jpg"
-            UserCartItems += "<div class=\"CIt\"><div class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></div><h1>"+FindProduct(UserCartItem_ID)["Name"]+"</h1><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"></div>\n"
+            UserCartItems += "<div class=\"CIt\" style=\"top:"+((i*300)+110)+"px;\"><div class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></div><h1>"+FindProduct(UserCartItem_ID)["Name"]+"</h1><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"></div>\n"
         CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
         self.write(CartIndex)
 
