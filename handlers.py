@@ -559,6 +559,7 @@ class CartHand(tornado.web.RequestHandler):
         CartIndex = ServePage(self,"/cart/index.html")
         UserCartList = GetCart(self)
         UserCartItems = ""
+        UserCartFootTop = 110
         for i in range(0,len(UserCartList)):
             UserCartItem_ID = str(UserCartList[i][0])
             if FindProduct(UserCartItem_ID)["HasImg"]:
@@ -571,8 +572,8 @@ class CartHand(tornado.web.RequestHandler):
             else:
                 UserCartItem_PriceSet = "{0:s}{1:,.2f}".format(UserCurrencySymbol,UserCartItem_Price)
             UserCartItems += "<div class=\"CIt\" id=\"CIt_"+UserCartItem_ID+"\" style=\"top:"+str(i*210)+"px;\"><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a><h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1><button class=\"CIr\" onclick=\"RMp('"+UserCartItem_ID+"')\">Remove</button></div>\n"
+            UserCartFootTop += 210
         CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
-        UserCartFootTop = str((i*210)+320)
         CartIndex = CartIndex.replace("<% FootTop %>",UserCartFootTop)
         self.write(CartIndex)
 
