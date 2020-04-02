@@ -154,12 +154,16 @@ def FindProduct(pid):
             FindProductDry = str(FindProductFetch[10])
             FindProductWring = str(FindProductFetch[11])
             FindProductDryClean = str(FindProductFetch[12])
-            FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean}
+            if os.path.exists("/static/product/"+pid+"/0.jpg"):
+                FindProductHasImg = True
+            else:
+                FindProductHasImg = False
+            FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Size":FindProductSize,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean,"HasImg":FindProductHasImg}
             return FindProductDict
         else:
-            return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":"","Contents":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":""}
+            return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":"","Contents":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":"","HasImg":False}
     except:
-        return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":"","Contents":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":""}
+        return {"Name":"","Description":"","Price":"","Discount":"","Size":"","Colour":"","ColourName":"","Contents":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":"","HasImg":False}
 
 def FindProductColours(pid):
     UniversalPID = pid[0:7]
