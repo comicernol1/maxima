@@ -19,7 +19,7 @@
 <script>
 HMCi=document.getElementById("HMCi");
 Cm=document.getElementById("Cm");
-CtLt=[];
+CtLt="";
 function AdjOa(){
     CIt=Cm.getElementsByClassName("CIt");
     CiCnt=0;
@@ -31,7 +31,7 @@ function AdjOa(){
         CItID=CIt[i].id.replace("CIt_","");
         CItQty=Number(CIq.value)
         CiCnt+=CItQty;
-        CItLt=[CItID,CItQty];
+        CItLt="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
         CtLt.push(CItLt);
     }
     HMCi.innerText=CiCnt;
