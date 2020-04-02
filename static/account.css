@@ -3,9 +3,9 @@ body{overflow-x:hidden;}
 
 #Cm{width:100%;position:absolute;top:110px;left:0;}
 .CIt{display:block;width:100%;height:290px;background:#FAFAFF;position:absolute;left:0;}
-.CIt input[type="number"]{width:80px;font-size:20px;text-align:center;padding:0 10px;position:absolute;top:120px;left:20px;}
-.CIi{width:280px;height:280px;background-size:cover;background-position:center;border:1px solid #E6E6E6;box-sizing:border-box;position:relative;top:5px;left:120px;}
-.CIt h1{width:calc(100% - 430px);margin:0;font-size:24px;position:absolute;top:10px;left:415px;}
+.CIt input[type="number"]{width:70px;font-size:20px;text-align:center;padding:0 10px;position:absolute;top:120px;left:20px;}
+.CIi{width:280px;height:280px;background-size:cover;background-position:center;border:1px solid #E6E6E6;box-sizing:border-box;position:relative;top:5px;left:110px;}
+.CIt h1{width:calc(100% - 420px);margin:0;font-size:24px;position:absolute;top:10px;left:405px;}
 
 #ACM{width:100%;height:2000px;background:#FAFAFF;position:absolute;top:100px;left:0;}
 #ACM h1{width:100%;font-size:60px;font-weight:300;text-align:center;margin:0;position:absolute;top:40px;left:0;}
