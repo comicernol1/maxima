@@ -18,6 +18,7 @@
 <style>#Foot{top:<% FootTop %>px;}#CIEx{display:<% ShowEmptyCartMsg %>;}</style>
 <script>
 HMCi=document.getElementById("HMCi");
+Cm=document.getElementById("Cm");
 /*function AdjOq(){if (Number(BIOq.value)>10){BIOq.value="10";}else if (Number(BIOq.value)<1){BIOq.value="1";}}*/
 function RMp(pid){
     var xhttp=new XMLHttpRequest();
@@ -27,6 +28,9 @@ function RMp(pid){
                 ElmID="CIt_"+pid;
                 HMCi.innerText=Math.floor(Number(HMCi.innerText)-Number(document.getElementById(ElmID).getElementsByClassName("CIq")[0].value));
                 document.getElementById(ElmID).style.display="none";
+                for i in Cm.getElementsByClassName("CIt"){
+                    i.style.background="red";
+                }
             }else if (this.responseText=="E_B"){
                 window.open("/sign_in/","_self");
             }else{
