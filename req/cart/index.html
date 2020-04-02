@@ -29,7 +29,7 @@ function RMp(pid){
             }else if (this.responseText=="E_B"){
                 window.open("/sign_in/","_self");
             }else{
-                alert("Something went wrong.");
+                alert("Something went wrong: "+this.responseText);
             }
         }
     };
