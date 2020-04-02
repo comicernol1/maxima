@@ -23,7 +23,7 @@ class AddToCartAjax(tornado.web.RequestHandler):
                         self.write("E_F")
                     else:
                         CartItemNewQty = (CartItemCurrentQty+ATCRequestQty)
-                        UserCartQuery = "UPDATE cart SET qty={0:d} WHERE uid={1:d} AND pid={2:d}".format(CartItemNewQty,UserInfoFu,ATCRequestID)
+                        UserCartQuery = "UPDATE cart SET qty={0:d} WHERE uid={1:d} AND pid={2:d} LIMIT 1".format(CartItemNewQty,UserInfoFu,ATCRequestID)
                         mycursor.execute(UserCartQuery)
                         db.commit()
                         self.write("A")
