@@ -575,8 +575,10 @@ class CartHand(tornado.web.RequestHandler):
             UserCartFootTop += 210
         if UserCartItems != "":
             CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
+            CartIndex = CartIndex.replace("<% ShowEmptyCartMsg %>","none")
         else:
-            CartIndex = CartIndex.replace("<% Cart %>","<h3 id=\"CIEx\">There are no items in your cart.</h3>")
+            CartIndex = CartIndex.replace("<% Cart %>","")
+            CartIndex = CartIndex.replace("<% ShowEmptyCartMsg %>","block")
         if UserCartFootTop >= 700:
             CartIndex = CartIndex.replace("<% FootTop %>",str(UserCartFootTop))
         else:
