@@ -561,7 +561,10 @@ class CartHand(tornado.web.RequestHandler):
         UserCartItems = ""
         for i in range(0,len(UserCartList)):
             UserCartItem_ID = str(UserCartList[i][0])
-            UserCartItem_ImgLink = "/static/product/"+UserCartItem_ID+"/0.jpg"
+            if FindProduct(UserCartItem_ID)["HasImg"]:
+                UserCartItem_ImgLink = "/static/product/"+UserCartItem_ID+"/0.jpg"
+            else:
+                UserCartItem_ImgLink = "/static/product/missing.jpg"
             UserCartItems += "<div class=\"CIt\"><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"><div class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></div><h1>"+FindProduct(UserCartItem_ID)["Name"]+"</h1></div>\n"
         CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
         self.write(CartIndex)
