@@ -11,10 +11,11 @@
     <% HeaderLI %>
 </ul>
 <div id="Cm">
+    <h3 id=\"CIEx\">There are no items in your cart.</h3>
     <% Cart %>
 </div>
 <% Footer %>
-<style>#Foot{top:<% FootTop %>px;}</style>
+<style>#Foot{top:<% FootTop %>px;}#CIEx{display:<% ShowEmptyCartMsg %>;}</style>
 <script>
 HMCi=document.getElementById("HMCi");
 /*function AdjOq(){if (Number(BIOq.value)>10){BIOq.value="10";}else if (Number(BIOq.value)<1){BIOq.value="1";}}*/
