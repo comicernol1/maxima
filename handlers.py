@@ -570,7 +570,7 @@ class CartHand(tornado.web.RequestHandler):
                 UserCartItem_PriceSet = "{0:s}{1:,.2f} ({2:s})".format(UserCurrencySymbol,UserCartItem_Price,UserCurrency)
             else:
                 UserCartItem_PriceSet = "{0:s}{1:,.2f}".format(UserCurrencySymbol,UserCartItem_Price)
-            UserCartItems += "<div class=\"CIt\" style=\"top:"+str(i*210)+"px;\"><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a><h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1><button class=\"CIr\" onclick=\"RMp('"+UserCartItem_ID+"')\">REMOVE</button></div>\n"
+            UserCartItems += "<div class=\"CIt\" style=\"top:"+str(i*210)+"px;\"><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a><h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1><button class=\"CIr\" onclick=\"RMp('"+UserCartItem_ID+"')\">Remove</button></div>\n"
         CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
         UserCartFootTop = str((i*210)+320)
         CartIndex = CartIndex.replace("<% FootTop %>",UserCartFootTop)
