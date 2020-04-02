@@ -19,9 +19,9 @@
 <script>
 HMCi=document.getElementById("HMCi");
 Cm=document.getElementById("Cm");
-CtLt="";
 function AdjOa(){
     CIt=Cm.getElementsByClassName("CIt");
+    CtLt="";
     CiCnt=0;
     var i;
     for (i=0;i<CIt.length;i++){
@@ -33,28 +33,27 @@ function AdjOa(){
         CiCnt+=CItQty;
         CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
     }
-    HMCi.innerText=CiCnt;
-    alert(CtLt);
-}
-function RMp(pid){
     var xhttp=new XMLHttpRequest();
     xhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (this.responseText=="A"){
-                ElmID="CIt_"+pid;
-                document.getElementById(ElmID).parentNode.removeChild(document.getElementById(ElmID));
-                if (Cm.getElementsByClassName("CIt").length==0){document.getElementById("CIEx").style.display="block";}
-                AdjOa();
+                HMCi.innerText=CiCnt;
             }else if (this.responseText=="E_B"){
                 window.open("/sign_in/","_self");
             }else{
-                alert("Something went wrong: "+this.responseText);
+                alert("Something went wrong.");
             }
         }
     };
-    xhttp.open("POST", "/remove_from_cart/", true);
+    xhttp.open("POST", "/refresh_cart/", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("id="+pid);
+    xhttp.send(CtLt);
+}
+function RMp(pid){
+    ElmID="CIt_"+pid;
+    document.getElementById(ElmID).parentNode.removeChild(document.getElementById(ElmID));
+    if (Cm.getElementsByClassName("CIt").length==0){document.getElementById("CIEx").style.display="block";}
+    AdjOa();
 }
 </script>
 </body></html>
