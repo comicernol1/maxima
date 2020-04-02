@@ -565,7 +565,11 @@ class CartHand(tornado.web.RequestHandler):
                 UserCartItem_ImgLink = "/static/product/"+UserCartItem_ID+"/0.jpg"
             else:
                 UserCartItem_ImgLink = "/static/product/missing.jpg"
-            UserCartItems += "<div class=\"CIt\" style=\"top:"+str(i*300)+"px;\"><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"><div class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></div><h1>"+FindProduct(UserCartItem_ID)["Name"]+"</h1></div>\n"
+            if UserCurrencySymbol in SpecifyCurrencyList:
+                UserCartItem_PriceSet = UserCurrencySymbol+str(FindProduct(UserCartItem_ID)["Price"])+" ("+UserCurrency+")"
+            else:
+                UserCartItem_PriceSet = UserCurrencySymbol+str(FindProduct(UserCartItem_ID)["Price"])
+            UserCartItems += "<div class=\"CIt\" style=\"top:"+str(i*300)+"px;\"><input type=\"number\" value=\""+str(UserCartList[i][1])+"\"><div class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></div><h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1></div>\n"
         CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
         self.write(CartIndex)
 
