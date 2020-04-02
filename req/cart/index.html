@@ -27,7 +27,7 @@ function RMp(pid){
             if (this.responseText=="A"){
                 ElmID="CIt_"+pid;
                 HMCi.innerText=Math.floor(Number(HMCi.innerText)-Number(document.getElementById(ElmID).getElementsByClassName("CIq")[0].value));
-                Cm.removeElement(document.getElementById(ElmID));
+                Cm.parentNode.removeElement(document.getElementById(ElmID));
                 /*CICnt=0;
                 CIt=Cm.querySelector(".CIt");
                 var i;
