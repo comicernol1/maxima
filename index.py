@@ -18,6 +18,7 @@ if __name__ == "__main__":
         (r"/legal/terms_and_conditions/", TermsConditionsHand),
         (r"/report_a_counterfeit/", CounterfeitHand),
         (r"/add_to_cart/", AddToCartAjax),
+        (r"/remove_from_cart/", RemoveFromCartAjax),
         (r"/.*", NotFoundHand)
     ], **settings)
 
