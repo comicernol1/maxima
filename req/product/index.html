@@ -44,6 +44,8 @@ function ACt(){
         if (this.readyState==4 && this.status==200) {
             if (this.responseText=="A"){
                 HMCi.innerText=Math.floor(Number(HMCi.innerText)+Number(BIOq.value));
+            }else if (this.responseText=="E_F"){
+                alert("You may only order up to 10 of each item.")
             }else if (this.responseText=="E_B"){
                 window.open("/sign_in/","_self");
             }else{
