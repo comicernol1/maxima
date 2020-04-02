@@ -48,7 +48,7 @@ class RemoveFromCartAjax(tornado.web.RequestHandler):
             UserInfoFu = int(self.get_secure_cookie("Fu"))
             if RFCRequest.find("id=") >= 0:
                 RFCRequestID = int(RFCRequest[(RFCRequest.index("id=")+3):len(RFCRequest)])
-                RFCQuery = "DELETE FROM cart WHERE uid={0:d} AND pid={1:d} LIMIT 1".format(UserInfoFu,ATCRequestID)
+                RFCQuery = "DELETE FROM cart WHERE uid={0:d} AND pid={1:d} LIMIT 1".format(UserInfoFu,RFCRequestID)
                 mycursor.execute(RFCQuery)
                 db.commit()
                 self.write("A")
