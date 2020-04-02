@@ -21,15 +21,21 @@ HMCi=document.getElementById("HMCi");
 Cm=document.getElementById("Cm");
 function AdjOa(){
     CIt=Cm.getElementsByClassName("CIt");
+    CtLt=[];
     CiCnt=0;
     var i;
     for (i=0;i<CIt.length;i++){
         CIt[i].style.top=(i*210)+"px";
         CIq=CIt[i].getElementsByClassName("CIq")[0];
         if (Number(CIq.value)>10){CIq.value="10";}else if (Number(CIq.value)<=0){CIq.value="1";}
-        CiCnt+=Number(CIq.value);
+        CItID=CIt[i].id.replace("CIt_","");
+        CItQty=Number(CIq.value)
+        CiCnt+=CItQty;
+        CItLt=[CItID,CItQty];
+        CtLt.append(CItLt);
     }
     HMCi.innerText=CiCnt;
+    alert(CtLt);
 }
 function RMp(pid){
     var xhttp=new XMLHttpRequest();
