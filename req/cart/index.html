@@ -31,8 +31,7 @@ function AdjOa(){
         CItID=CIt[i].id.replace("CIt_","");
         CItQty=Number(CIq.value)
         CiCnt+=CItQty;
-        CItLt="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
-        CtLt.push(CItLt);
+        CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
     }
     HMCi.innerText=CiCnt;
     alert(CtLt);
