@@ -53,7 +53,7 @@ class RemoveFromCartAjax(tornado.web.RequestHandler):
                 db.commit()
                 self.write("A")
             else:
-                self.write("E_A")
+                self.write(RFCRequest)
         else:
             self.write("E_B")
 
