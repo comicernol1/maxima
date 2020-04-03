@@ -533,10 +533,15 @@ class ProductHand(tornado.web.RequestHandler):
             else:
                 ProductRequested_ImageLink = "/static/product/missing.jpg"
                 ProductRequested_BPs = "<li><img src=\"/static/product/missing.jpg\" alt=\""+ProductRequested_Name+" (1)\"></li>\n"
+            if CheckLogin(self):
+                ProductRequested_CartButton = "<button id=\"BIOb\" onclick=\"ACt()\">Add To Cart</button>"
+            else:
+                ProductRequested_CartButton = "<a id=\"BIOb\" href=\"/sign_in/\">Sign In To Add To Cart</a>"
             ProductRequested_Rating = 0
             ProductRequested_ReviewCount = 0
         
             ProductIndex = ProductIndex.replace("<% ProductID %>",ProductRequested_ID)
+            ProductIndex = ProductIndex.replace("<% CartButton %>",ProductRequested_CartButton)
             ProductIndex = ProductIndex.replace("<% ProductName %>",ProductRequested_Name)
             ProductIndex = ProductIndex.replace("<% ProductDescription %>",ProductRequested_Desc)
             ProductIndex = ProductIndex.replace("<% ProductContents %>",ProductRequested_Contents)
