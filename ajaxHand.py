@@ -51,11 +51,11 @@ class RefreshCartAjax(tornado.web.RequestHandler):
             RFCValList = []
             RFCRequestCnt = RFCRequest.count("&id")
             for i in range(0,RFCRequestCnt):
-                RFCRequestID = RFCRequest[RFCRequest.find("&id"+i+"="):RFCRequest.find("&qty"+i+"=")]
+                RFCRequestID = RFCRequest[RFCRequest.find("&id"+str(i)+"="):RFCRequest.find("&qty"+str(i)+"=")]
                 if i<RFCRequestCnt:
-                    RFCRequestQty = RFCRequest[RFCRequest.find("&qty"+i+"="):RFCRequest.find("&id"+i+"=")]
+                    RFCRequestQty = RFCRequest[RFCRequest.find("&qty"+str(i)+"="):RFCRequest.find("&id"+str(i)+"=")]
                 else:
-                    RFCRequestQty = RFCRequest[RFCRequest.find("&qty"+i+"="):len(RFCRequest)]
+                    RFCRequestQty = RFCRequest[RFCRequest.find("&qty"+str(i)+"="):len(RFCRequest)]
                 RFCValTuple = (RFCRequestID,RFCRequestQty)
                 RFCValList.append(RFCValTuple)
             RFCQuery = "INSERT INTO cart (uid,pid,qty) VALUES(%d,%d,%d)"
