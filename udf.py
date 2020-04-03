@@ -33,9 +33,9 @@ def CheckLogin(self):
     else:
         return False
 
-def SendVerificationEmail(uid,eml):
+def SendVerificationEmail(eml):
     SVEVerifyCode = random.randint(1000000000,9999999999)
-    SVERequestDBUpdate = "UPDATE compacc SET tmpcode='{0:d}' WHERE userid='{1:s}' AND email='{2:s}'".format(SVEVerifyCode,uid,eml)
+    SVERequestDBUpdate = "UPDATE compacc SET tmpcode='{0:d}' WHERE email='{1:s}' LIMIT 1".format(SVEVerifyCode,eml)
     mycursor.execute(SVERequestDBUpdate)
     db.commit()
     with open("/root/maxima/templates/sign_up/conf_email.html") as SVESMPTTemplate_F:
