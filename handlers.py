@@ -428,7 +428,7 @@ class VerifyHand(tornado.web.RequestHandler):
             VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
             self.write(VerifyIndex)
         except Exception as ex:
-            self.write(ex)
+            self.write(str(ex))
         else:
             self.write("Something went wrong")
 
