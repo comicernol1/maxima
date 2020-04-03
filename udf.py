@@ -152,7 +152,7 @@ def FindProduct(pid):
         FindProductDry = str(FindProductFetch[9])
         FindProductWring = str(FindProductFetch[10])
         FindProductDryClean = str(FindProductFetch[11])
-        if os.path.exists("/static/product/"+pid+"/0.jpg"):
+        if os.path.exists("/static/product/"+str(pid)+"/0.jpg"):
             FindProductHasImg = True
         else:
             FindProductHasImg = False
