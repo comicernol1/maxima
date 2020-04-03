@@ -422,9 +422,13 @@ class SignUpHand(tornado.web.RequestHandler):
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
         # Open
-        VerifyIndex = ServePage(self,"/sign_up/verified.html")
-        VerifyIndex = VerifyIndex.replace("<% Email %>",self.get_query_argument("e"))
-        self.write(VerifyIndex)
+        try:
+            VerifyQueryEmail = self.get_query_argument("e")
+            VerifyIndex = ServePage(self,"/sign_up/verified.html")
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",VerifyQueryEmail)
+            self.write(VerifyIndex)
+        except ValueError:
+            self.write("Missing Argument")
 
 class AccountHand(tornado.web.RequestHandler):
     def get(self):
