@@ -4,7 +4,7 @@
     <title>FRANZAR&trade; Official Site | Cart</title>
     <% Head %>
 </head>
-<body>
+<body onbeforeunload="return AdjOa()">
 <script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
 <div id="M_H"><button onclick="M_menu_show()"></button></div>
 <ul id="Hm">
@@ -53,7 +53,7 @@ function RMp(pid){
     ElmID="CIt_"+pid;
     document.getElementById(ElmID).parentNode.removeChild(document.getElementById(ElmID));
     if (Cm.getElementsByClassName("CIt").length==0){document.getElementById("CIEx").style.display="block";}
-    AdjOa();
+    // AdjOa();
 }
 </script>
 </body></html>
