@@ -46,12 +46,12 @@ class RefreshCartAjax(tornado.web.RequestHandler):
         RFCRequest = urllib.parse.unquote(self.request.body.decode('utf-8'))
         if self.get_secure_cookie("Fu"):
             UserInfoFu = int(self.get_secure_cookie("Fu"))
-            # RFCQuery = "DELETE FROM cart WHERE uid={0:d}".format(UserInfoFu)
-            # mycursor.execute(RFCQuery)
+            RFCQuery = "DELETE FROM cart WHERE uid={0:d}".format(UserInfoFu)
+            mycursor.execute(RFCQuery)
             RFCValList = []
             RFCRequestCnt = RFCRequest.count("&id")
             for i in range(0,RFCRequestCnt):
-                RFCRequestID = RFCRequest[(RFCRequest.find("&id"+str(i)+"=")+4+len(str(i))):RFCRequest.find("&qty"+str(i)+"=")]
+                RFCRequestID = int(RFCRequest[(RFCRequest.find("&id"+str(i)+"=")+4+len(str(i))):RFCRequest.find("&qty"+str(i)+"=")])
                 if i<(RFCRequestCnt-1):
                     RFCRequestQty = int(RFCRequest[(RFCRequest.find("&qty"+str(i)+"=")+5+len(str(i))):RFCRequest.find("&id"+str(i+1)+"=")])
                 else:
@@ -59,9 +59,8 @@ class RefreshCartAjax(tornado.web.RequestHandler):
                 RFCValTuple = (UserInfoFu,RFCRequestID,RFCRequestQty)
                 RFCValList.append(RFCValTuple)
             RFCQuery = "INSERT INTO cart (uid,pid,qty) VALUES(%d,%d,%d)"
-            print(RFCValList)
-            # mycursor.executemany(RFCQuery,RFCValList)
-            # db.commit()
+            mycursor.executemany(RFCQuery,RFCValList)
+            db.commit()
             self.write("A")
         else:
             self.write("E_B")
