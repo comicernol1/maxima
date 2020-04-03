@@ -33,6 +33,19 @@ def CheckLogin(self):
     else:
         return False
 
+def SendVerificationEmail(eml,vercode):
+    with open("/root/maxima/templates/sign_up/conf_email.html") as SVESMPTTemplate_F:
+        SVESMTPTemplate = SVESMPTTemplate_F.read()
+    SVESMTPTemplate = SVESMTPTemplate.replace("<% UserCode %>",str(vercode))
+    SVESMTPHeaders = "\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+eml,"mime-version: 1.0","content-type: text/html"])
+    SVESMTPContent = SVESMTPHeaders+"\r\n\r\n"+SVESMTPTemplate
+    SVEMail = smtplib.SMTP('smtp.gmail.com',587)
+    SVEMail.ehlo()
+    SVEMail.starttls()
+    SVEMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
+    SVEMail.sendmail('comicernol@gmail.com',eml,SVESMTPContent)
+    SVEMail.close()
+
 def SetCookie(self):
     CheckCookieRequestBody = self.request.body.decode('utf-8')
     if CheckCookieRequestBody.find("ackc=") >= 0:
