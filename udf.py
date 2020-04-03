@@ -140,29 +140,24 @@ def FindProduct(pid):
         FindProductQuery = "SELECT ttl,description,price_"+UserCurrency.lower()+",discount,size,colour,colour_name,contents_dict,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
-        if FindProductFetch:
-            FindProductName = str(FindProductFetch[0])
-            FindProductDesc = str(FindProductFetch[1])
-            FindProductPrice = float(FindProductFetch[2])
-            FindProductDiscount = int(FindProductFetch[3])
-            FindProductColour = str(FindProductFetch[4])
-            FindProductColourName = str(FindProductFetch[5]).title()
-            FindProductContentsDict = json.loads(FindProductFetch[6])
-            FindProductWash = str(FindProductFetch[7])
-            FindProductBleach = str(FindProductFetch[8])
-            FindProductDry = str(FindProductFetch[9])
-            FindProductWring = str(FindProductFetch[10])
-            FindProductDryClean = str(FindProductFetch[11])
-            if os.path.exists("/static/product/"+pid+"/0.jpg"):
-                FindProductHasImg = True
-            else:
-                FindProductHasImg = False
-            FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean,"HasImg":FindProductHasImg}
-            return FindProductDict
+        FindProductName = str(FindProductFetch[0])
+        FindProductDesc = str(FindProductFetch[1])
+        FindProductPrice = float(FindProductFetch[2])
+        FindProductDiscount = int(FindProductFetch[3])
+        FindProductColour = str(FindProductFetch[4])
+        FindProductColourName = str(FindProductFetch[5]).title()
+        FindProductContentsDict = json.loads(FindProductFetch[6])
+        FindProductWash = str(FindProductFetch[7])
+        FindProductBleach = str(FindProductFetch[8])
+        FindProductDry = str(FindProductFetch[9])
+        FindProductWring = str(FindProductFetch[10])
+        FindProductDryClean = str(FindProductFetch[11])
+        if os.path.exists("/static/product/"+pid+"/0.jpg"):
+            FindProductHasImg = True
         else:
-            return {"Name":"","Description":"","Price":"","Discount":"","Colour":"","ColourName":"","Contents":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":"","HasImg":False}
-    except:
-        return {"Name":"","Description":"","Price":"","Discount":"","Colour":"","ColourName":"","Contents":"","Wash":"","Bleach":"","Dry":"","Wring":"","DryClean":"","HasImg":False}
+            FindProductHasImg = False
+        FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean,"HasImg":FindProductHasImg}
+        return FindProductDict
 
 def FindProductColours(pid):
     UniversalPID = pid[0:7]
