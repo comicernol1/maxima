@@ -1,6 +1,5 @@
 import os,re,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
-from urllib import HTTPError
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
 
