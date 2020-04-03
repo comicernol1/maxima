@@ -373,23 +373,12 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestPasswordAgain = SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)]
             if ValidEmail(SignUpRequestEmail) and len(SignUpRequestPasswordPre) >= 8 and SignUpRequestPasswordPre == SignUpRequestPasswordAgain and int(QueryCountEmail[0]) < 1:
                 SignUpUserID = random.randint(1000000000,9999999999)
-                SignUpVerifyCode = random.randint(1000000000,9999999999)
-                SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,tmpcode,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:d}','{3:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpVerifyCode,SignUpRequestPassword)
+                SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd,token) VALUES ('{0:d}','{1:s}',0,'{3:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
                 
                 # Send Verification Email
-                with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
-                    SignUpSMTPTemplate = SignUpSMPTTemplate_F.read()
-                SignUpSMTPTemplate = SignUpSMTPTemplate.replace("<% UserCode %>",str(SignUpVerifyCode))
-                SignUpSMTPHeaders = "\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+SignUpRequestEmail,"mime-version: 1.0","content-type: text/html"])
-                SignUpSMTPContent = SignUpSMTPHeaders+"\r\n\r\n"+SignUpSMTPTemplate
-                SignUpMail = smtplib.SMTP('smtp.gmail.com',587)
-                SignUpMail.ehlo()
-                SignUpMail.starttls()
-                SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
-                SignUpMail.sendmail('comicernol@gmail.com',SignUpRequestEmail,SignUpSMTPContent)
-                SignUpMail.close()
+                SendVerificationEmail(SignUpRequestEmail)
                 SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRequestEmail)
                 self.write(SignUpConfIndex)
             elif not ValidEmail(SignUpRequestEmail):
@@ -408,16 +397,7 @@ class SignUpHand(tornado.web.RequestHandler):
             
             # Resend Verification Email
             SignUpRSVEEmail = SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)]
-            with open("/root/maxima/templates/sign_up/conf_email.html") as SignUpSMPTTemplate_F:
-                    SignUpSMTPTemplate = SignUpSMPTTemplate_F.read()
-            SignUpSMTPHeaders = "\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+SignUpRSVEEmail,"mime-version: 1.0","content-type: text/html"])
-            SignUpSMTPContent = SignUpSMTPHeaders+"\r\n\r\n"+SignUpSMTPTemplate
-            SignUpMail = smtplib.SMTP('smtp.gmail.com',587)
-            SignUpMail.ehlo()
-            SignUpMail.starttls()
-            SignUpMail.login('comicernol@gmail.com',str(os.environ["Comicernol_Gmail_Passwd"]))
-            SignUpMail.sendmail('comicernol@gmail.com',SignUpRSVEEmail,SignUpSMTPContent)
-            SignUpMail.close()
+            SendVerificationEmail(SignUpRSVEEmail)
             SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRSVEEmail)
             self.write(SignUpConfIndex)
         else:
