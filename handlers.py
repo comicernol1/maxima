@@ -405,7 +405,6 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P1) Something went wrong")
                 self.write(SignUpIndex)
         elif SignUpRequestBody.find("rsve=") >= 0:
-            
             # Resend Verification Email
             SignUpRSVEEmail = SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)]
             SendVerificationEmail(SignUpRSVEEmail)
@@ -423,12 +422,15 @@ class VerifyHand(tornado.web.RequestHandler):
     def get(self):
         # Open
         try:
-            VerifyQueryEmail = self.get_query_argument("e")
+            VerifyTmpCode = int(self.get_query_argument("e"))
+            self.set_secure_cookie("Fv",VerifyTmpCode)
             VerifyIndex = ServePage(self,"/sign_up/verified.html")
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",VerifyQueryEmail)
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",VerifyTmpCode)
             self.write(VerifyIndex)
-        except ValueError:
-            self.write("Missing Argument")
+        except Exception as ex:
+            self.write(ex)
+        else:
+            self.write("Something went wrong")
 
 class AccountHand(tornado.web.RequestHandler):
     def get(self):
