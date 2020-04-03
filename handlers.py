@@ -432,7 +432,7 @@ class VerifyHand(tornado.web.RequestHandler):
             VerifyEmail(VerifyTmpCode)
         except tornado.web.MissingArgumentError:
             if self.get_secure_cookie("Fv"):
-                VerifyEmail(self.get_secure_cookie("Fv"))
+                VerifyEmail(int(self.get_secure_cookie("Fv")))
             else:
                 self.write("(V1) Something went wrong")
         else:
