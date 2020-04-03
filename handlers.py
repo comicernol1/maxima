@@ -423,9 +423,9 @@ class VerifyHand(tornado.web.RequestHandler):
         # Open
         try:
             VerifyTmpCode = int(self.get_query_argument("e"))
-            self.set_secure_cookie("Fv",VerifyTmpCode)
+            self.set_secure_cookie("Fv",str(VerifyTmpCode))
             VerifyIndex = ServePage(self,"/sign_up/verified.html")
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",VerifyTmpCode)
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
             self.write(VerifyIndex)
         except Exception as ex:
             self.write(ex)
