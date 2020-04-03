@@ -130,7 +130,7 @@ class SignInHand(tornado.web.RequestHandler):
         
         # Test
         SignInRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
-        if SignUpRequestBody.find("rsve=y") == -1 and SignInRequestBody.find("siem=") >= 0 and SignInRequestBody.find("sipw=") >= 0:
+        if SignInRequestBody.find("rsve=") == -1 and SignInRequestBody.find("siem=") >= 0 and SignInRequestBody.find("sipw=") >= 0:
             SignInRequestEmail = SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")]
             SignInRequestPassword = SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)]
             SignInRequestDBSelectEmail = "SELECT veremail,passwd,userid FROM compacc WHERE email='{0:s}'".format(SignInRequestEmail)
@@ -161,8 +161,8 @@ class SignInHand(tornado.web.RequestHandler):
                 SignInIndex = SignInIndex.replace("<% ShowError %>","block")
                 SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Account does not exist")
                 self.write(SignInIndex)
-        elif SignUpRequestBody.find("rsve=y") >= 0:
-            SignUpRSVEEmail = SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)]
+        elif SignInRequestBody.find("rsve=") >= 0:
+            SignUpRSVEEmail = SignInRequestBody[(SignInRequestBody.index("rsve=")+5):len(SignInRequestBody)]
             SendVerificationEmail(SignUpRSVEEmail)
             SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRSVEEmail)
             self.write(SignUpConfIndex)
@@ -374,7 +374,7 @@ class SignUpHand(tornado.web.RequestHandler):
         
         # Test
         SignUpRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
-        if SignUpRequestBody.find("rsve=y") == -1 and SignUpRequestBody.find("suem=") >= 0 and SignUpRequestBody.find("supw=") >= 0 and SignUpRequestBody.find("supa=") >= 0:
+        if SignUpRequestBody.find("rsve=") == -1 and SignUpRequestBody.find("suem=") >= 0 and SignUpRequestBody.find("supw=") >= 0 and SignUpRequestBody.find("supa=") >= 0:
             SignUpRequestEmail = SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")]
             SignUpRequestDBSelectEmail = "SELECT COUNT(*) FROM compacc WHERE email='{0:s}' and veremail=1".format(SignUpRequestEmail)
             mycursor.execute(SignUpRequestDBSelectEmail)
