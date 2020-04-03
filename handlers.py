@@ -427,13 +427,10 @@ class VerifyHand(tornado.web.RequestHandler):
             VerifyIndex = ServePage(self,"/sign_up/verified.html")
             VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
             self.write(VerifyIndex)
-        except urllib.HTTPError as ex:
-            if ex.code == 400:
-                self.write("Err 400")
-            else:
-                self.write("(V1) Something went wrong")
+        except tornado.web.HTTPError(400):
+            self.write("Err 400")
         else:
-            self.write("(V2) Something went wrong")
+            self.write("Something went wrong")
 
 class AccountHand(tornado.web.RequestHandler):
     def get(self):
