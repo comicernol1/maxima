@@ -422,7 +422,7 @@ class VerifyHand(tornado.web.RequestHandler):
     def get(self):
         def VerifyEmail(tmpcode):
             VerifyIndex = ServePage(self,"/sign_up/verified.html")
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(tmpcode))
             self.write(VerifyIndex)
         
         # Open
