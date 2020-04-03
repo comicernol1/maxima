@@ -536,7 +536,7 @@ class ProductHand(tornado.web.RequestHandler):
             if CheckLogin(self):
                 ProductRequested_CartButton = "<button id=\"BIOb\" onclick=\"ACt()\">Add To Cart</button>"
             else:
-                ProductRequested_CartButton = "<a href=\"/sign_in/\"><button id=\"BIOb\">Sign In To Add To Cart</button></a>"
+                ProductRequested_CartButton = "<a href=\"/sign_in/\"><button id=\"BIOb\">Sign In To Purchase</button></a>"
             ProductRequested_Rating = 0
             ProductRequested_ReviewCount = 0
         
