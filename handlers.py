@@ -6,7 +6,7 @@ class HomeHand(tornado.web.RequestHandler):
     def get(self):
         # Generate Products List
         HomeProductList = ""
-        mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,size,colour,colour_name from products group by left(id,7)")
+        mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,colour,colour_name from products group by left(id,7)")
         QueryProductsDict = mycursor.fetchall()
         for i in range(0,len(QueryProductsDict)):
             QueryProductsPrice = float(QueryProductsDict[i][2])
@@ -23,8 +23,8 @@ class HomeHand(tornado.web.RequestHandler):
                 else:
                     QueryProductsPriceSet = "<h1>{0:s}{1:,.2f}</h1>".format(UserCurrencySymbol,QueryProductsPrice)
             QueryProductsID = str(QueryProductsDict[i][0])
-            QueryProductsDefaultColour = str(QueryProductsDict[i][5])
-            QueryProductsDefaultColourName = str(QueryProductsDict[i][6]).title()
+            QueryProductsDefaultColour = str(QueryProductsDict[i][4])
+            QueryProductsDefaultColourName = str(QueryProductsDict[i][5]).title()
             QueryProductColoursDict = FindProductColours(QueryProductsID)
             ReturnProductTitle = str(QueryProductsDict[i][1])
             ReturnProductColoursDict = ""
