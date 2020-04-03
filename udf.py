@@ -1,4 +1,4 @@
-import os,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
+import os,re,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
@@ -11,6 +11,13 @@ db = mysql.connector.connect(
     database = "franzar"
 )
 mycursor = db.cursor(buffered=True)
+
+def ValidEmail(eml):
+    rgx = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
+    if(re.search(rgx,eml)):
+        return True
+    else:
+        return False
 
 def CheckLogin(self):
     if self.get_secure_cookie("Fu") and self.get_secure_cookie("Ft"):
