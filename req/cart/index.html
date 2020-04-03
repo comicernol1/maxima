@@ -4,7 +4,7 @@
     <title>FRANZAR&trade; Official Site | Cart</title>
     <% Head %>
 </head>
-<body onbeforeunload="return AdjOa()">
+<body onbeforeunload="return RfrCt()">
 <script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
 <div id="M_H"><button onclick="M_menu_show()"></button></div>
 <ul id="Hm">
@@ -33,6 +33,9 @@ function AdjOa(){
         CiCnt+=CItQty;
         CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
     }
+    return CtLt;
+}
+function RfrCt(){
     var xhttp=new XMLHttpRequest();
     xhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
@@ -47,13 +50,13 @@ function AdjOa(){
     };
     xhttp.open("POST", "/refresh_cart/", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(CtLt);
+    xhttp.send(AdjOa());
 }
 function RMp(pid){
     ElmID="CIt_"+pid;
     document.getElementById(ElmID).parentNode.removeChild(document.getElementById(ElmID));
     if (Cm.getElementsByClassName("CIt").length==0){document.getElementById("CIEx").style.display="block";}
-    // AdjOa();
+    AdjOa();
 }
 </script>
 </body></html>
