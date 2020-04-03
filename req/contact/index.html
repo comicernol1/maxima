@@ -26,20 +26,10 @@ Cfm=document.getElementById("Cfm");
 CFn=document.getElementById("CFn");
 CFe=document.getElementById("CFe");
 CFt=document.getElementById("CFt");
-function valEm(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
 function sb_cf(){
-    if (CFn.value!="" && valEm(CFe.value) && CFt.value!=""){Cfm.submit();}else{
+    if (CFn.value!="" && CFt.value!=""){Cfm.submit();}else{
         cfer.style.display="block";
-        if (CFn.value==""){
-            cfer.innerHTML="Please enter your name";
-        }else if (!valEm(CFe.value)){
-            cfer.innerHTML="Please enter a valid Email";
-        }else if (CFt.value==""){
-            cfer.innerHTML="Please enter your message";
-        }
+        if (CFn.value==""){cfer.innerHTML="Please enter your name";}else{cfer.innerHTML="Please enter your message";}
     }
 }
 </script>
