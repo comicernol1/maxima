@@ -31,11 +31,11 @@ function valEm(email) {
     return re.test(String(email).toLowerCase());
 }
 function sb_si(){
-    if (valEm(siem.value) && sipw.value.length>=8){
+    if (sipw.value.length>=8){
         sier.style.display="none";
         si_form.submit();
-    }else{sier.style.display="block";}
-    if (sipw.value.length<8){
+    }else{
+        sier.style.display="block";
         sier.innerHTML="Password must be 8 characters or more";
     }
 }
