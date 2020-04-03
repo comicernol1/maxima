@@ -150,7 +150,7 @@ class SignInHand(tornado.web.RequestHandler):
                     self.set_secure_cookie("Ft",str(SignInRequestToken))
                     self.redirect("/")
                 elif QueryEmailVerified != 1:
-                    SendVerificationEmail(SignInRequestEmail)
+                    SendVerificationEmail(self,SignInRequestEmail)
                     SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignInRequestEmail)
                     self.write(SignUpConfIndex)
                 else:
