@@ -61,7 +61,7 @@ class ContactHand(tornado.web.RequestHandler):
             ContactRequestCFe = ContactRequestBody[(ContactRequestBody.index("CFe=")+4):ContactRequestBody.index("&CFo=")]
             ContactRequestCFo = ContactRequestBody[(ContactRequestBody.index("CFo=")+4):ContactRequestBody.index("&CFt=")]
             ContactRequestCFt = ContactRequestBody[(ContactRequestBody.index("CFt=")+4):len(ContactRequestBody)]
-            if ContactRequestCFn!="" and ContactRequestCFe!="" and ContactRequestCFt!="":
+            if ContactRequestCFn != "" and ValidEmail(ContactRequestCFe) and ContactRequestCFt != "":
                 with open("/root/maxima/templates/contact/ticket.html") as ContactSMPTTemplate_T_F:
                     ContactSMTPTemplate_T = ContactSMPTTemplate_T_F.read()
                 with open("/root/maxima/templates/contact/confirm.html") as ContactSMPTTemplate_U_F:
@@ -99,7 +99,7 @@ class ContactHand(tornado.web.RequestHandler):
             else:
                 if ContactRequestCFn=="":
                     ContactIndex = ContactIndex.replace("<% ErrorMsg %>","Please enter your name")
-                elif ContactRequestCFe=="":
+                elif not ValidEmail(ContactRequestCFe):
                     ContactIndex = ContactIndex.replace("<% ErrorMsg %>","Please enter a valid Email")
                 elif ContactRequestCFt=="":
                     ContactIndex = ContactIndex.replace("<% ErrorMsg %>","Please enter your message")
