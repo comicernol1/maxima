@@ -440,6 +440,9 @@ class VerifyHand(tornado.web.RequestHandler):
                 self.write("(V1) Something went wrong.")
         else:
             self.write("(V2) Something went wrong.")
+    
+    def post(self):
+        SetCookie(self)
 
 class AccountHand(tornado.web.RequestHandler):
     def get(self):
