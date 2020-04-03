@@ -59,6 +59,7 @@ class RefreshCartAjax(tornado.web.RequestHandler):
                 RFCValTuple = (RFCRequestID,RFCRequestQty)
                 RFCValList.append(RFCValTuple)
             RFCQuery = "INSERT INTO cart (uid,pid,qty) VALUES(%d,%d,%d)"
+            print(i,RFCRequestCnt)
             print(RFCValList)
             # mycursor.executemany(RFCQuery,RFCValList)
             # db.commit()
