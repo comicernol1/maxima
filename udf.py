@@ -137,7 +137,7 @@ else:
 
 def FindProduct(pid):
     try:
-        FindProductQuery = "SELECT ttl,description,price_"+UserCurrency.lower()+",discount,size,colour,colour_name,contents_dict,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
+        FindProductQuery = "SELECT ttl,description,price_"+UserCurrency.lower()+",discount,colour,colour_name,contents_dict,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
         FindProductName = str(FindProductFetch[0])
