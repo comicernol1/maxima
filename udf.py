@@ -158,6 +158,8 @@ def FindProduct(pid):
             FindProductHasImg = False
         FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean,"HasImg":FindProductHasImg}
         return FindProductDict
+    finally:
+        pass
 
 def FindProductColours(pid):
     UniversalPID = pid[0:7]
