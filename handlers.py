@@ -163,7 +163,7 @@ class SignInHand(tornado.web.RequestHandler):
                 self.write(SignInIndex)
         elif SignInRequestBody.find("rsve=") >= 0:
             SignUpRSVEEmail = SignInRequestBody[(SignInRequestBody.index("rsve=")+5):len(SignInRequestBody)]
-            SendVerificationEmail(SignUpRSVEEmail)
+            SendVerificationEmail(self,SignUpRSVEEmail)
             SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRSVEEmail)
             self.write(SignUpConfIndex)
         else:
@@ -389,7 +389,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 db.commit()
                 
                 # Send Verification Email
-                SendVerificationEmail(SignUpRequestEmail)
+                SendVerificationEmail(self,SignUpRequestEmail)
                 SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRequestEmail)
                 self.write(SignUpConfIndex)
             elif not ValidEmail(SignUpRequestEmail):
@@ -407,7 +407,7 @@ class SignUpHand(tornado.web.RequestHandler):
         elif SignUpRequestBody.find("rsve=") >= 0:
             # Resend Verification Email
             SignUpRSVEEmail = SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)]
-            SendVerificationEmail(SignUpRSVEEmail)
+            SendVerificationEmail(self,SignUpRSVEEmail)
             SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRSVEEmail)
             self.write(SignUpConfIndex)
         else:
