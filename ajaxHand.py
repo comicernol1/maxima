@@ -37,7 +37,7 @@ class AddToCartAjax(tornado.web.RequestHandler):
         else:
             self.write("E_B")
 
-class RemoveFromCartAjax(tornado.web.RequestHandler):
+class RefreshCartAjax(tornado.web.RequestHandler):
     def get(self):
         NotFoundIndex = ServePage(self,"/status/404.html")
         self.write(NotFoundIndex)
@@ -46,14 +46,23 @@ class RemoveFromCartAjax(tornado.web.RequestHandler):
         RFCRequest = urllib.parse.unquote(self.request.body.decode('utf-8'))
         if self.get_secure_cookie("Fu"):
             UserInfoFu = int(self.get_secure_cookie("Fu"))
-            if RFCRequest.find("id=") >= 0:
-                RFCRequestID = int(RFCRequest[(RFCRequest.index("id=")+3):len(RFCRequest)])
-                RFCQuery = "DELETE FROM cart WHERE uid={0:d} AND pid={1:d} LIMIT 1".format(UserInfoFu,RFCRequestID)
-                mycursor.execute(RFCQuery)
-                db.commit()
-                self.write("A")
-            else:
-                self.write("E_A")
+            # RFCQuery = "DELETE FROM cart WHERE uid={0:d}".format(UserInfoFu)
+            # mycursor.execute(RFCQuery)
+            RFCValList = []
+            RFCRequestCnt = RFCRequest.count("&id")
+            for i in range(0,RFCRequestCnt):
+                RFCRequestID = RFCRequest[RFCRequest.find("&id"+i+"="):RFCRequest.find("&qty"+i+"=")]
+                if i<RFCRequestCnt:
+                    RFCRequestQty = RFCRequest[RFCRequest.find("&qty"+i+"="):RFCRequest.find("&id"+i+"=")]
+                else:
+                    RFCRequestQty = RFCRequest[RFCRequest.find("&qty"+i+"="):len(RFCRequest)]
+                RFCValTuple = (RFCRequestID,RFCRequestQty)
+                RFCValList.append(RFCValTuple)
+            RFCQuery = "INSERT INTO cart (uid,pid,qty) VALUES(%d,%d,%d)"
+            print(RFCValList)
+            # mycursor.executemany(RFCQuery,RFCValList)
+            # db.commit()
+            self.write("A")
         else:
             self.write("E_B")
 
