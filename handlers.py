@@ -427,10 +427,13 @@ class VerifyHand(tornado.web.RequestHandler):
             VerifyIndex = ServePage(self,"/sign_up/verified.html")
             VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
             self.write(VerifyIndex)
-        except "HTTP 400: Bad Request (Missing argument e)":
-            self.write(str(ex))
+        except HTTPError as ex:
+            if ex.code == 400:
+                self.write("Err 400")
+            else:
+                self.write("(V1) Something went wrong")
         else:
-            self.write("Something went wrong")
+            self.write("(V2) Something went wrong")
 
 class AccountHand(tornado.web.RequestHandler):
     def get(self):
