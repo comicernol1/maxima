@@ -126,20 +126,22 @@ class SignInHand(tornado.web.RequestHandler):
     def post(self):
         # Open
         SignInIndex = ServePage(self,"/sign_in/index.html")
+        SignUpConfIndex = ServePage(self,"/sign_up/conf_sent.html")
         
         # Test
         SignInRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
-        if SignInRequestBody.find("siem=") >= 0 and SignInRequestBody.find("sipw=") >= 0:
+        if SignUpRequestBody.find("rsve=y") == -1 and SignInRequestBody.find("siem=") >= 0 and SignInRequestBody.find("sipw=") >= 0:
             SignInRequestEmail = SignInRequestBody[(SignInRequestBody.index("siem=")+5):SignInRequestBody.index("&sipw=")]
             SignInRequestPassword = SignInRequestBody[(SignInRequestBody.index("sipw=")+5):len(SignInRequestBody)]
-            SignInRequestDBSelectEmail = "SELECT passwd,userid FROM compacc WHERE email='{0:s}'".format(SignInRequestEmail)
+            SignInRequestDBSelectEmail = "SELECT veremail,passwd,userid FROM compacc WHERE email='{0:s}'".format(SignInRequestEmail)
             mycursor.execute(SignInRequestDBSelectEmail)
             QueryEmailPre = mycursor.fetchone()
             if QueryEmailPre:
-                QueryEmailPw = QueryEmailPre[0].encode()
-                QueryEmailUserID = str(QueryEmailPre[1])
+                QueryEmailVerified = int(QueryEmailPre[0])
+                QueryEmailPw = QueryEmailPre[1].encode()
+                QueryEmailUserID = str(QueryEmailPre[2])
                 SignInQueryPassword = Enc32a.decrypt(QueryEmailPw).decode('utf-8')
-                if SignInQueryPassword == SignInRequestPassword:
+                if QueryEmailVerified == 1 and SignInQueryPassword == SignInRequestPassword:
                     SignInRequestToken = random.randint(1000000000,9999999999)
                     SignInRequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE email='{1:s}'".format(SignInRequestToken,SignInRequestEmail)
                     mycursor.execute(SignInRequestDBUpdate)
@@ -147,6 +149,10 @@ class SignInHand(tornado.web.RequestHandler):
                     self.set_secure_cookie("Fu",QueryEmailUserID)
                     self.set_secure_cookie("Ft",str(SignInRequestToken))
                     self.redirect("/")
+                elif QueryEmailVerified != 1:
+                    SendVerificationEmail(SignInRequestEmail)
+                    SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignInRequestEmail)
+                    self.write(SignUpConfIndex)
                 else:
                     SignInIndex = SignInIndex.replace("<% ShowError %>","block")
                     SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Incorrect Password")
@@ -155,6 +161,11 @@ class SignInHand(tornado.web.RequestHandler):
                 SignInIndex = SignInIndex.replace("<% ShowError %>","block")
                 SignInIndex = SignInIndex.replace("<% ErrorMsg %>","Account does not exist")
                 self.write(SignInIndex)
+        elif SignUpRequestBody.find("rsve=y") >= 0:
+            SignUpRSVEEmail = SignUpRequestBody[(SignUpRequestBody.index("rsve=")+5):len(SignUpRequestBody)]
+            SendVerificationEmail(SignUpRSVEEmail)
+            SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRSVEEmail)
+            self.write(SignUpConfIndex)
         else:
             if SetCookie(self):
                 pass
@@ -373,7 +384,7 @@ class SignUpHand(tornado.web.RequestHandler):
             SignUpRequestPasswordAgain = SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)]
             if ValidEmail(SignUpRequestEmail) and len(SignUpRequestPasswordPre) >= 8 and SignUpRequestPasswordPre == SignUpRequestPasswordAgain and int(QueryCountEmail[0]) < 1:
                 SignUpUserID = random.randint(1000000000,9999999999)
-                SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd,token) VALUES ('{0:d}','{1:s}',0,'{3:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpRequestPassword)
+                SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
                 
