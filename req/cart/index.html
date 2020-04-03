@@ -33,6 +33,7 @@ function AdjOa(){
         CiCnt+=CItQty;
         CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
     }
+    HMCi.innerText=CiCnt;
     return CtLt;
 }
 function RfrCt(){
@@ -40,7 +41,7 @@ function RfrCt(){
     xhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (this.responseText=="A"){
-                HMCi.innerText=CiCnt;
+                return True;
             }else if (this.responseText=="E_B"){
                 window.open("/sign_in/","_self");
             }else{
