@@ -33,11 +33,16 @@ def CheckLogin(self):
     else:
         return False
 
-def SendVerificationEmail(eml):
+def SendVerificationEmail(self,eml):
     SVEVerifyCode = random.randint(1000000000,9999999999)
     SVERequestDBUpdate = "UPDATE compacc SET tmpcode='{0:d}' WHERE email='{1:s}' LIMIT 1".format(SVEVerifyCode,eml)
     mycursor.execute(SVERequestDBUpdate)
     db.commit()
+    if not CheckLogin(self):
+        UserInfoLoginQuery = "SELECT userid from compacc where email='{0:s}'".format(eml)
+        mycursor.execute(UserInfoLoginQuery)
+        UserInfoLoginFetch = mycursor.fetchone()
+        self.set_secure_cookie(UserInfoLoginFetch[0])
     with open("/root/maxima/templates/sign_up/conf_email.html") as SVESMPTTemplate_F:
         SVESMTPTemplate = SVESMPTTemplate_F.read()
     SVESMTPTemplate = SVESMTPTemplate.replace("<% UserCode %>",str(SVEVerifyCode))
