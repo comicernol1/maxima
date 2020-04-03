@@ -420,17 +420,23 @@ class SignUpHand(tornado.web.RequestHandler):
 
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
+        def VerifyEmail(tmpcode):
+            VerifyIndex = ServePage(self,"/sign_up/verified.html")
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
+            self.write(VerifyIndex)
+        
         # Open
         try:
             VerifyTmpCode = int(self.get_query_argument("e"))
             self.set_secure_cookie("Fv",str(VerifyTmpCode))
-            VerifyIndex = ServePage(self,"/sign_up/verified.html")
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
-            self.write(VerifyIndex)
+            VerifyEmail(VerifyTmpCode)
         except tornado.web.MissingArgumentError:
-            self.write("Err 400")
+            if self.get_secure_cookie("Fv"):
+                VerifyEmail(self.get_secure_cookie("Fv"))
+            else:
+                self.write("(V1) Something went wrong")
         else:
-            self.write("Something went wrong")
+            self.write("(V2) Something went wrong")
 
 class AccountHand(tornado.web.RequestHandler):
     def get(self):
