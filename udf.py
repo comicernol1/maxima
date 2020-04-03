@@ -33,10 +33,14 @@ def CheckLogin(self):
     else:
         return False
 
-def SendVerificationEmail(eml,vercode):
+def SendVerificationEmail(uid,eml):
+    SVEVerifyCode = random.randint(1000000000,9999999999)
+    SVERequestDBUpdate = "UPDATE compacc SET tmpcode='{0:d}' WHERE userid='{1:s}' AND email='{2:s}'".format(SVEVerifyCode,uid,eml)
+    mycursor.execute(SVERequestDBUpdate)
+    db.commit()
     with open("/root/maxima/templates/sign_up/conf_email.html") as SVESMPTTemplate_F:
         SVESMTPTemplate = SVESMPTTemplate_F.read()
-    SVESMTPTemplate = SVESMTPTemplate.replace("<% UserCode %>",str(vercode))
+    SVESMTPTemplate = SVESMTPTemplate.replace("<% UserCode %>",str(SVEVerifyCode))
     SVESMTPHeaders = "\r\n".join(["from: comicernol@gmail.com","subject: Verify Your Email - FRANZAR","to:"+eml,"mime-version: 1.0","content-type: text/html"])
     SVESMTPContent = SVESMTPHeaders+"\r\n\r\n"+SVESMTPTemplate
     SVEMail = smtplib.SMTP('smtp.gmail.com',587)
