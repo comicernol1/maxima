@@ -37,6 +37,10 @@ class HomeHand(tornado.web.RequestHandler):
         HomeIndex = ServePage(self,"/index.html")
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         self.write(HomeIndex)
+        try:
+            print("UserCookie:",str(self.get_secure_cookie("Fu")))
+        except:
+            pass
         
     def post(self):
         SetCookie(self)
