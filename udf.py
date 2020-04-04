@@ -108,10 +108,8 @@ def ServePage(self,pageloc):
     else:
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLISignIn)
     PageIndex = PageIndex.replace("<% Head %>",HeadHTML)
-    try:
+    if self.get_cookie("Fa"):
         UserInfoFa = self.get_cookie("Fa").decode('utf-8')
-    except:
-        UserInfoFa = "false"
     print(UserInfoFa)
     if UserInfoFa == "true":
         FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
