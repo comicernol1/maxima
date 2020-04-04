@@ -432,8 +432,6 @@ class VerifyHand(tornado.web.RequestHandler):
             self.set_secure_cookie("Ft",str(VENewToken))
             VERequestDBUpdate = "UPDATE compacc SET veremail=1,token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,int(uid),int(tmpcode))
             mycursor.execute(VERequestDBUpdate)
-            print("UserID (A):",uid)
-            print("TmpCode (A):",tmpcode)
             if mycursor.rowcount >= 1:
                 return True
             else:
