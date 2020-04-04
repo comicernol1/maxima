@@ -421,34 +421,30 @@ class SignUpHand(tornado.web.RequestHandler):
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
-        def VerifyEmail(uid,tmpcode):
+        def VerifyEmail(self,uid,tmpcode):
             VENewToken = random.randint(1000000000,9999999999)
             self.set_secure_cookie("Ft",str(VENewToken))
             VERequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,uid,tmpcode)
             mycursor.execute(VERequestDBUpdate)
             db.commit()
         
-        # Open
         try:
             if self.get_secure_cookie("Fu"):
                 VerifyTmpCode = int(self.get_query_argument("e"))
                 self.set_secure_cookie("Fv",str(VerifyTmpCode))
-                VerifyEmail(int(self.get_secure_cookie("Fu")),VerifyTmpCode)
+                VerifyEmail(self,int(self.get_secure_cookie("Fu")),VerifyTmpCode)
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Your email has been verified")
                 self.write(VerifyIndex)
             else:
                 self.redirect("/sign_in/")
         except tornado.web.MissingArgumentError:
             if self.get_secure_cookie("Fu") and self.get_secure_cookie("Fv"):
-                VerifyEmail(int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv")))
+                VerifyEmail(self,int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv")))
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Your email has been verified")
                 self.write(VerifyIndex)
             else:
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V1) Something went wrong")
                 self.write(VerifyIndex)
-        else:
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V2) Something went wrong")
-            self.write(VerifyIndex)
     
     def post(self):
         SetCookie(self)
