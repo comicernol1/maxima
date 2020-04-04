@@ -445,7 +445,7 @@ class VerifyHand(tornado.web.RequestHandler):
         try:
             if self.get_secure_cookie("Fu"):
                 VerifyTmpCode = int(self.get_query_argument("e"))
-                self.set_secure_cookie("Fv",VerifyTmpCode)
+                self.set_secure_cookie("Fv",str(VerifyTmpCode))
                 if VerifyEmail(int(self.get_secure_cookie("Fu")),VerifyTmpCode):
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Vr1) Your email has been verified")
                     self.write(VerifyIndex)
