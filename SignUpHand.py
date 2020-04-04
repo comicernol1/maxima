@@ -29,6 +29,7 @@ class handler(tornado.web.RequestHandler):
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
                 self.set_cookie("Fu",str(SignUpUserID))
+                self.set_cookie("Fa","true")
                 
                 # Send Verification Email
                 SendVerificationEmail(self,SignUpRequestEmail)
