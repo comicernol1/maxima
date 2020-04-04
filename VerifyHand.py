@@ -10,8 +10,13 @@ class handler(tornado.web.RequestHandler):
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
                 self.write(VerifyIndex)
             except tornado.web.MissingArgumentError:
-                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","E Empty")
-                self.write(VerifyIndex)
+                if self.get_cookie("Fv"):
+                    VerifyTmpCode = int(self.get_cookie("Fv"))
+                    VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
+                    self.write(VerifyIndex)
+                else:
+                    VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","E Empty")
+                    self.write(VerifyIndex)
         else:
             VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","PROBLEM")
             self.write(VerifyIndex)
