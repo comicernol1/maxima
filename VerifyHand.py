@@ -27,7 +27,7 @@ class handler(tornado.web.RequestHandler):
                     self.write(VerifyIndex)
             else:
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V2) This account could not be found")
-                    self.write(VerifyIndex)
+                self.write(VerifyIndex)
         
         if self.get_cookie("Fu"):
             UserInfoFu = int(self.get_cookie("Fu"))
