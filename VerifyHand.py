@@ -4,10 +4,11 @@ class handler(tornado.web.RequestHandler):
     def get(self):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
         if self.get_cookie("Fu"):
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Yes")
+            VerifyTmpCode = int(self.get_query_argument("e"))
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
             self.write(VerifyIndex)
         else:
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","No")
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","PROBLEM")
             self.write(VerifyIndex)
         """
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
