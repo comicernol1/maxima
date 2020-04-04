@@ -76,7 +76,7 @@ def GetCart(self):
         UserCartList.append(UserCartItm)
     return UserCartList
 
-def ServePage(self,pageloc):
+def ServePage(self,pageloc,ForceLogin):
     # Define Basics
     HeaderLISignIn = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
     CookieNotifDiv = "<form id=\"Fackc\" action=\"\" method=\"POST\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <input type=\"hidden\" name=\"ackc\" value=\"true\"><input type=\"submit\" value=\"Accept\"></form>"
@@ -98,15 +98,7 @@ def ServePage(self,pageloc):
     # Open Requested Page
     with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
         PageIndex = PageIndex_F.read()
-    try:
-        if ForceLogin:
-            User_Force_Login = True
-        else:
-            User_Force_Login = False
-    except NameError:
-        User_Force_Login = False
-    
-    if CheckLogin(self) or User_Force_Login and self.get_cookie("Fu"):
+    if CheckLogin(self) or ForceLogin and self.get_cookie("Fu"):
         UserCartCnt = 0
         UserCartList = GetCart(self)
         for i in range(0,len(UserCartList)):
