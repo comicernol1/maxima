@@ -3,15 +3,24 @@ from udf import *
 class handler(tornado.web.RequestHandler):
     def get(self):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
+        
+        def VerifyEmail(uid,tmpcode):
+            VE_uid=int(uid)
+            VE_tmpcode=int(tmpcode)
+            VE_token = random.randint(1000000000,9999999999)
+        
         if self.get_cookie("Fu"):
+            UserInfoFu = int(self.get_cookie("Fu"))
             try:
                 VerifyTmpCode = int(self.get_query_argument("e"))
                 self.set_cookie("Fv",str(VerifyTmpCode))
+                VerifyEmail(UserInfoFu,VerifyTmpCode)
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
                 self.write(VerifyIndex)
             except tornado.web.MissingArgumentError:
                 if self.get_cookie("Fv"):
                     VerifyTmpCode = int(self.get_cookie("Fv"))
+                    VerifyEmail(UserInfoFu,VerifyTmpCode)
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
                     self.write(VerifyIndex)
                 else:
