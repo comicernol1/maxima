@@ -2,7 +2,7 @@ from udf import *
 
 class handler(tornado.web.RequestHandler):
     def get(self):
-        CartIndex = ServePage(self,"/cart/index.html")
+        CartIndex = ServePage(self,"/cart/index.html",False)
         UserCartList = GetCart(self)
         UserCartItems = ""
         UserCartFootTop = 110
