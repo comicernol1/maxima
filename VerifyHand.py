@@ -12,15 +12,22 @@ class handler(tornado.web.RequestHandler):
             VE_RequestDBUpdate = "UPDATE compacc SET veremail='1',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VE_token,VE_uid,VE_tmpcode)
             mycursor.execute(VE_RequestDBUpdate)
             db.commit()
+            if mycursor.rowcount >= 1:
+                return True
+            else:
+                return False
         
         if self.get_cookie("Fu"):
             UserInfoFu = int(self.get_cookie("Fu"))
             try:
                 VerifyTmpCode = int(self.get_query_argument("e"))
                 self.set_cookie("Fv",str(VerifyTmpCode))
-                VerifyEmail(UserInfoFu,VerifyTmpCode)
-                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
-                self.write(VerifyIndex)
+                if VerifyEmail(UserInfoFu,VerifyTmpCode)
+                    VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Your Email has been verified")
+                    self.write(VerifyIndex)
+                else:
+                    VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","This account could not be found")
+                    self.write(VerifyIndex)
             except tornado.web.MissingArgumentError:
                 if self.get_cookie("Fv"):
                     VerifyTmpCode = int(self.get_cookie("Fv"))
@@ -31,8 +38,7 @@ class handler(tornado.web.RequestHandler):
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","E Empty")
                     self.write(VerifyIndex)
         else:
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","PROBLEM")
-            self.write(VerifyIndex)
+            self.redirect("/sign_in/")
         """
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
         def VerifyEmail(uid,tmpcode):
