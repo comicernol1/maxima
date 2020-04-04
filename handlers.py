@@ -426,7 +426,7 @@ class SignUpHand(tornado.web.RequestHandler):
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
-        def VerifyEmail(self,uid,tmpcode):
+        def VerifyEmail(uid,tmpcode):
             VENewToken = random.randint(1000000000,9999999999)
             self.set_secure_cookie("Ft",str(VENewToken))
             VERequestDBUpdate = "UPDATE compacc SET veremail='1',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,uid,tmpcode)
@@ -435,13 +435,15 @@ class VerifyHand(tornado.web.RequestHandler):
                 return True
             else:
                 return False
+            print(uid)
+            print(tmpcode)
             db.commit()
         
         try:
             if self.get_secure_cookie("Fu"):
                 VerifyTmpCode = int(self.get_query_argument("e"))
                 self.set_secure_cookie("Fv",str(VerifyTmpCode))
-                if VerifyEmail(self,int(self.get_secure_cookie("Fu")),VerifyTmpCode):
+                if VerifyEmail(int(self.get_secure_cookie("Fu")),VerifyTmpCode):
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Vr1) Your email has been verified")
                     self.write(VerifyIndex)
                 else:
@@ -451,7 +453,7 @@ class VerifyHand(tornado.web.RequestHandler):
                 self.redirect("/sign_in/")
         except tornado.web.MissingArgumentError:
             if self.get_secure_cookie("Fu") and self.get_secure_cookie("Fv"):
-                if VerifyEmail(self,int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv"))):
+                if VerifyEmail(int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv"))):
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Vr2) Your email has been verified")
                     self.write(VerifyIndex)
                 else:
