@@ -8,7 +8,7 @@ class handler(tornado.web.RequestHandler):
             VE_tmpcode=int(tmpcode)
             VE_token = random.randint(1000000000,9999999999)
             self.set_cookie("Ft",str(VE_token))
-            VE_RequestDBUpdate = "UPDATE compacc SET veremail='1',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VE_token,VE_uid,VE_tmpcode)
+            VE_RequestDBUpdate = "UPDATE compacc SET veremail='1',tmpcode='',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VE_token,VE_uid,VE_tmpcode)
             mycursor.execute(VE_RequestDBUpdate)
             db.commit()
             if mycursor.rowcount >= 1:
