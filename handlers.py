@@ -376,13 +376,13 @@ class SignUpHand(tornado.web.RequestHandler):
         SignUpRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
         if SignUpRequestBody.find("rsve=") == -1 and SignUpRequestBody.find("suem=") >= 0 and SignUpRequestBody.find("supw=") >= 0 and SignUpRequestBody.find("supa=") >= 0:
             SignUpRequestEmail = SignUpRequestBody[(SignUpRequestBody.index("suem=")+5):SignUpRequestBody.index("&supw=")]
-            SignUpRequestDBSelectEmail = "SELECT COUNT(*) FROM compacc WHERE email='{0:s}' and veremail=1".format(SignUpRequestEmail)
+            SignUpRequestDBSelectEmail = "SELECT veremail FROM compacc WHERE email='{0:s}'".format(SignUpRequestEmail)
             mycursor.execute(SignUpRequestDBSelectEmail)
             QueryCountEmail = mycursor.fetchone()
             SignUpRequestPasswordPre = SignUpRequestBody[(SignUpRequestBody.index("supw=")+5):SignUpRequestBody.index("&supa=")]
             SignUpRequestPassword = Enc32a.encrypt(SignUpRequestPasswordPre.encode()).decode('utf-8')
             SignUpRequestPasswordAgain = SignUpRequestBody[(SignUpRequestBody.index("supa=")+5):len(SignUpRequestBody)]
-            if ValidEmail(SignUpRequestEmail) and len(SignUpRequestPasswordPre) >= 8 and SignUpRequestPasswordPre == SignUpRequestPasswordAgain and int(QueryCountEmail[0]) < 1:
+            if ValidEmail(SignUpRequestEmail) and len(SignUpRequestPasswordPre) >= 8 and SignUpRequestPasswordPre == SignUpRequestPasswordAgain and mycursor.rowcount < 1:
                 SignUpUserID = random.randint(1000000000,9999999999)
                 SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
@@ -396,10 +396,15 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
                 SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","Please enter a valid Email")
                 self.write(SignUpIndex)
-            elif int(QueryCountEmail[0]) >= 1:
-                SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
-                SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","This account already exists")
-                self.write(SignUpIndex)
+            elif mycursor.rowcount >= 1:
+                if int(QueryCountEmail[0]) != 1:
+                    SendVerificationEmail(self,SignUpRequestEmail)
+                    SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRequestEmail)
+                    self.write(SignUpConfIndex)
+                else:
+                    SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
+                    SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","This account already exists")
+                    self.write(SignUpIndex)
             else:
                 SignUpIndex = SignUpIndex.replace("<% ShowError %>","block")
                 SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","(P1) Something went wrong")
