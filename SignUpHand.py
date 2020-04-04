@@ -3,15 +3,15 @@ from udf import *
 class handler(tornado.web.RequestHandler):
     def get(self):
         # Open
-        SignUpIndex = ServePage(self,"/sign_up/index.html")
+        SignUpIndex = ServePage(self,"/sign_up/index.html",False)
         SignUpIndex = SignUpIndex.replace("<% ShowError %>","none")
         SignUpIndex = SignUpIndex.replace("<% ErrorMsg %>","")
         self.write(SignUpIndex)
 
     def post(self):
         # Open
-        SignUpIndex = ServePage(self,"/sign_up/index.html")
-        SignUpConfIndex = ServePage(self,"/sign_up/conf_sent.html")
+        SignUpIndex = ServePage(self,"/sign_up/index.html",False)
+        SignUpConfIndex = ServePage(self,"/sign_up/conf_sent.html",False)
         
         # Test
         SignUpRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
