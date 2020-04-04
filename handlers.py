@@ -394,7 +394,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 self.set_secure_cookie("Fu",str(SignUpUserID))
                 
                 # Send Verification Email
-                # SendVerificationEmail(self,SignUpRequestEmail)
+                SendVerificationEmail(self,SignUpRequestEmail)
                 SignUpConfIndex = SignUpConfIndex.replace("<% Email %>",SignUpRequestEmail)
                 self.write(SignUpConfIndex)
             elif not ValidEmail(SignUpRequestEmail):
