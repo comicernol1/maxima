@@ -37,10 +37,6 @@ class HomeHand(tornado.web.RequestHandler):
         HomeIndex = ServePage(self,"/index.html")
         HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
         self.write(HomeIndex)
-        try:
-            print("UserCookie:",int(self.get_secure_cookie("Fu")))
-        except:
-            pass
         
     def post(self):
         SetCookie(self)
@@ -434,8 +430,10 @@ class VerifyHand(tornado.web.RequestHandler):
         def VerifyEmail(uid,tmpcode):
             VENewToken = random.randint(1000000000,9999999999)
             self.set_secure_cookie("Ft",str(VENewToken))
-            VERequestDBUpdate = "UPDATE compacc SET veremail='1',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,uid,tmpcode)
+            VERequestDBUpdate = "UPDATE compacc SET veremail=1,token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,int(uid),int(tmpcode))
             mycursor.execute(VERequestDBUpdate)
+            print("UserID (A):",uid)
+            print("TmpCode (A):",tmpcode)
             if mycursor.rowcount >= 1:
                 return True
             else:
