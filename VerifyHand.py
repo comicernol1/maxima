@@ -8,6 +8,16 @@ class handler(tornado.web.RequestHandler):
             VE_uid=int(uid)
             VE_tmpcode=int(tmpcode)
             VE_token = random.randint(1000000000,9999999999)
+            self.set_cookie("Ft",str(VE_token))
+            VERequestDBUpdate = "UPDATE compacc SET veremail=1,token={0:d} WHERE userid={1:d} and tmpcode={2:d}".format(VE_token,VE_uid,VE_tmpcode)
+            print(VE_uid)
+            print(VE_tmpcode)
+            mycursor.execute(VERequestDBUpdate)
+            if mycursor.rowcount >= 1:
+                return True
+            else:
+                return False
+            db.commit()
         
         if self.get_cookie("Fu"):
             UserInfoFu = int(self.get_cookie("Fu"))
