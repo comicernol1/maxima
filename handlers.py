@@ -434,11 +434,15 @@ class VerifyHand(tornado.web.RequestHandler):
                 VerifyTmpCode = int(self.get_query_argument("e"))
                 self.set_secure_cookie("Fv",str(VerifyTmpCode))
                 VerifyEmail(int(self.get_secure_cookie("Fu")),VerifyTmpCode)
+                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Your email has been verified")
+                self.write(VerifyIndex)
             else:
                 self.redirect("/sign_in/")
         except tornado.web.MissingArgumentError:
             if self.get_secure_cookie("Fu") and self.get_secure_cookie("Fv"):
                 VerifyEmail(int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv")))
+                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Your email has been verified")
+                self.write(VerifyIndex)
             else:
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V1) Something went wrong")
                 self.write(VerifyIndex)
