@@ -391,6 +391,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
+                self.set_secure_cookie("Fu",SignUpUserID)
                 
                 # Send Verification Email
                 # SendVerificationEmail(self,SignUpRequestEmail)
