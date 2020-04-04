@@ -42,7 +42,8 @@ def SendVerificationEmail(self,eml):
         UserInfoLoginQuery = "SELECT userid from compacc where email='{0:s}'".format(eml)
         mycursor.execute(UserInfoLoginQuery)
         UserInfoLoginFetch = mycursor.fetchone()
-        print("UserID (B):",str(UserInfoLoginFetch[0]))
+        print("Email (B):",eml)
+        print("UserID (B):",UserInfoLoginFetch[0])
         self.set_secure_cookie("Fu",str(UserInfoLoginFetch[0]))
     with open("/root/maxima/templates/sign_up/conf_email.html") as SVESMPTTemplate_F:
         SVESMTPTemplate = SVESMPTTemplate_F.read()
