@@ -2,7 +2,7 @@ from udf import *
 
 class handler(tornado.web.RequestHandler):
     def get(self):
-        NotFoundIndex = ServePage(self,"/status/404.html")
+        NotFoundIndex = ServePage(self,"/status/404.html",False)
         self.write(NotFoundIndex)
         
     def post(self):
