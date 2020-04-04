@@ -3,13 +3,13 @@ from udf import *
 class handler(tornado.web.RequestHandler):
     def get(self):
         # Open
-        ForgotPWIndex = ServePage(self,"/sign_in/forgot_pw.html")
+        ForgotPWIndex = ServePage(self,"/sign_in/forgot_pw.html",False)
         self.write(ForgotPWIndex)
     
     def post(self):
         # Open
-        ForgotPWIndex = ServePage(self,"/sign_in/forgot_pw.html")
-        ForgotPWConfIndex = ServePage(self,"/sign_in/forgot_pw_conf.html")
+        ForgotPWIndex = ServePage(self,"/sign_in/forgot_pw.html",False)
+        ForgotPWConfIndex = ServePage(self,"/sign_in/forgot_pw_conf.html",False)
         
         # Test
         ForgotPWRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
