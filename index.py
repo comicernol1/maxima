@@ -19,7 +19,8 @@ if __name__ == "__main__":
         (r"/report_a_counterfeit/", CounterfeitHand),
         (r"/add_to_cart/", AddToCartAjax),
         (r"/refresh_cart/", RefreshCartAjax),
-        (r"/.*", NotFoundHand)
+        (r"/.*", NotFoundHand),
+        (r"/test/", TestingHand)
     ], **settings)
 
     app.listen(80)
