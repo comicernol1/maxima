@@ -2,9 +2,8 @@ from udf import *
 
 class handler(tornado.web.RequestHandler):
     def get(self):
-        VerifyIndex = ServePage(self,"/sign_up/verified.html")
-        
         def VerifyEmail(uid,tmpcode):
+            VerifyIndex = ServePage(self,"/sign_up/verified.html")
             VE_uid=int(uid)
             VE_tmpcode=int(tmpcode)
             VE_token = random.randint(1000000000,9999999999)
@@ -30,6 +29,7 @@ class handler(tornado.web.RequestHandler):
                     VerifyTmpCode = int(self.get_cookie("Fv"))
                     VerifyEmail(UserInfoFu,VerifyTmpCode)
                 else:
+                    VerifyIndex = ServePage(self,"/sign_up/verified.html")
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","E Empty")
                     self.write(VerifyIndex)
         else:
