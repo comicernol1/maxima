@@ -432,7 +432,7 @@ class VerifyHand(tornado.web.RequestHandler):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
         def VerifyEmail(uid,tmpcode):
             VENewToken = random.randint(1000000000,9999999999)
-            self.set_secure_cookie("Ft",str(VENewToken))
+            self.set_secure_cookie("Ft",VENewToken)
             VERequestDBUpdate = "UPDATE compacc SET veremail='1',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,uid,tmpcode)
             mycursor.execute(VERequestDBUpdate)
             if mycursor.rowcount >= 1:
@@ -444,7 +444,7 @@ class VerifyHand(tornado.web.RequestHandler):
         try:
             if self.get_secure_cookie("Fu"):
                 VerifyTmpCode = int(self.get_query_argument("e"))
-                self.set_secure_cookie("Fv",str(VerifyTmpCode))
+                self.set_secure_cookie("Fv",VerifyTmpCode)
                 if VerifyEmail(int(self.get_secure_cookie("Fu")),VerifyTmpCode):
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Vr1) Your email has been verified")
                     self.write(VerifyIndex)
