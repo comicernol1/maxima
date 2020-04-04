@@ -420,10 +420,13 @@ class SignUpHand(tornado.web.RequestHandler):
 
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
+        VerifyIndex = ServePage(self,"/sign_up/verified.html")
         def VerifyEmail(uid,tmpcode):
-            VerifyIndex = ServePage(self,"/sign_up/verified.html")
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(tmpcode))
-            self.write(VerifyIndex)
+            VENewToken = random.randint(1000000000,9999999999)
+            self.set_secure_cookie("Ft",str(VENewToken))
+            VERequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,uid,tmpcode)
+            mycursor.execute(VERequestDBUpdate)
+            db.commit()
         
         # Open
         try:
@@ -437,9 +440,11 @@ class VerifyHand(tornado.web.RequestHandler):
             if self.get_secure_cookie("Fu") and self.get_secure_cookie("Fv"):
                 VerifyEmail(int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv")))
             else:
-                self.write("(V1) Something went wrong.")
+                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V1) Something went wrong")
+                self.write(VerifyIndex)
         else:
-            self.write("(V2) Something went wrong.")
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V2) Something went wrong")
+            self.write(VerifyIndex)
     
     def post(self):
         SetCookie(self)
