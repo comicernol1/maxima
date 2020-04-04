@@ -10,10 +10,10 @@ body{overflow-x:hidden;}
 #rg_block[hg="ue"]{top:calc(50% - 25px);}
 #rg_block[hg="uc"]{height:500px;top:calc(50% - 250px);}
 #suv_h{width:calc(100% - 60px);margin:0px;font-size:16px;font-weight:300;position:absolute;top:30px;left:30px;}
-#rg_block[hg="uc"] h1{width:100%;margin:0;font-size:36px;font-weight:300;text-align:center;position:absolute;top:20px;left:0;}
-#suc_i{width:calc(100% - 20px);height:300px;background:blue;position:absolute;top:80px;left:10px;}
-#rg_block[hg="uc"] h3{width:calc(100% - 20px);margin:0;font-size:24px;font-weight:300;position:absolute;top:400px;left:10px;}
-#rg_block a.sign_x{width:50%;text-align:center;font-size:28px;color:#0A0908;text-decoration:none;margin:0;padding:20px 0;position:absolute;top:0;}
+#rg_block[hg="uc"] h1{width:100%;margin:0;font-size:36px;font-weight:300;text-align:center;position:absolute;top:15px;left:0;}
+#suc_i{width:calc(100% - 20px);height:250px;background:blue;position:absolute;top:65px;left:10px;}
+#rg_block[hg="uc"] h3{width:calc(100% - 20px);margin:0;font-size:20px;font-weight:300;text-align:justify;position:absolute;top:325px;left:10px;}
+#rg_block a.sign_x{width:50%;text-align:center;font-size:16px;line-height:1.2;color:#0A0908;text-decoration:none;margin:0;padding:20px 0;position:absolute;top:0;}
 #rg_block a.sign_x[s="y"]{background:transparent;}
 #rg_block a.sign_x[s="n"]{background:#F2F2F2;}
 #sign_x_in{left:0;}
