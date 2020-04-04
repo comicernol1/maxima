@@ -112,6 +112,7 @@ def ServePage(self,pageloc):
         UserInfoFa = self.get_cookie("Fa").decode('utf-8')
     except:
         UserInfoFa = "false"
+    print(UserInfoFa)
     if UserInfoFa == "true":
         FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
     else:
