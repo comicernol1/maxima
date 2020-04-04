@@ -431,22 +431,32 @@ class VerifyHand(tornado.web.RequestHandler):
             self.set_secure_cookie("Ft",str(VENewToken))
             VERequestDBUpdate = "UPDATE compacc SET veremail='1',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,uid,tmpcode)
             mycursor.execute(VERequestDBUpdate)
+            if cursor.rowcount >= 1:
+                return True
+            else:
+                return False
             db.commit()
         
         try:
             if self.get_secure_cookie("Fu"):
                 VerifyTmpCode = int(self.get_query_argument("e"))
                 self.set_secure_cookie("Fv",str(VerifyTmpCode))
-                VerifyEmail(self,int(self.get_secure_cookie("Fu")),VerifyTmpCode)
-                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Your email has been verified")
-                self.write(VerifyIndex)
+                if VerifyEmail(self,int(self.get_secure_cookie("Fu")),VerifyTmpCode):
+                    VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Vr1) Your email has been verified")
+                    self.write(VerifyIndex)
+                else:
+                    VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Ve1) This account could not be found")
+                    self.write(VerifyIndex)
             else:
                 self.redirect("/sign_in/")
         except tornado.web.MissingArgumentError:
             if self.get_secure_cookie("Fu") and self.get_secure_cookie("Fv"):
-                VerifyEmail(self,int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv")))
-                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Your email has been verified")
-                self.write(VerifyIndex)
+                if VerifyEmail(self,int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv"))):
+                    VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Vr2) Your email has been verified")
+                    self.write(VerifyIndex)
+                else:
+                    VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Ve2) This account could not be found")
+                    self.write(VerifyIndex)
             else:
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V1) Something went wrong")
                 self.write(VerifyIndex)
