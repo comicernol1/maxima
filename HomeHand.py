@@ -4,7 +4,7 @@ class handler(tornado.web.RequestHandler):
     def get(self):
         # Generate Products List
         HomeProductList = ""
-        mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,colour,colour_name from products group by left(id,7)")
+        mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,colour,colour_name FROM products WHERE disp=1 GROUP BY left(id,7)")
         QueryProductsDict = mycursor.fetchall()
         for i in range(0,len(QueryProductsDict)):
             QueryProductsPrice = float(QueryProductsDict[i][2])
