@@ -146,8 +146,8 @@ class SignInHand(tornado.web.RequestHandler):
                     SignInRequestDBUpdate = "UPDATE compacc SET token='{0:d}' WHERE email='{1:s}'".format(SignInRequestToken,SignInRequestEmail)
                     mycursor.execute(SignInRequestDBUpdate)
                     db.commit()
-                    self.set_secure_cookie("Fu",QueryEmailUserID)
-                    self.set_secure_cookie("Ft",str(SignInRequestToken))
+                    self.set_cookie("Fu",QueryEmailUserID)
+                    self.set_cookie("Ft",str(SignInRequestToken))
                     self.redirect("/")
                 elif QueryEmailVerified != 1:
                     SendVerificationEmail(self,SignInRequestEmail)
@@ -285,8 +285,8 @@ class ResetPWHand(tornado.web.RequestHandler):
                     ResetPWRequestDBTokenUpdate = "UPDATE compacc SET tmpcode=NULL,token=NULL WHERE userid='{0:d}'".format(ResetPWRequestE)
                     mycursor.execute(ResetPWRequestDBTokenUpdate)
                     db.commit()
-                    self.set_secure_cookie("Fu",str(ResetPWRequestE))
-                    self.set_secure_cookie("Ft","")
+                    self.set_cookie("Fu",str(ResetPWRequestE))
+                    self.set_cookie("Ft","")
                     self.write(ResetPWIndex)
                 else:
                     ResetPWMsgIndex = ResetPWMsgIndex.replace("<% Msg %>","This link has expired.")
@@ -296,7 +296,7 @@ class ResetPWHand(tornado.web.RequestHandler):
                 self.write(ResetPWMsgIndex)
         except tornado.web.MissingArgumentError:
             try:
-                ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
+                ResetPWCookieFu = int(self.get_cookie("Fu"))
                 ResetPWRequestDBSelectCode = "SELECT email FROM compacc WHERE userid='{0:d}'".format(ResetPWCookieFu)
                 mycursor.execute(ResetPWRequestDBSelectCode)
                 QueryIDPre = mycursor.fetchone()
@@ -318,9 +318,9 @@ class ResetPWHand(tornado.web.RequestHandler):
         ResetPWMsgIndex = ServePage(self,"/sign_in/reset_pw_msg.html")
         
         # Test
-        if self.get_secure_cookie("Fu") != "":
+        if self.get_cookie("Fu") != "":
             ResetPWRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8'))
-            ResetPWCookieFu = int(self.get_secure_cookie("Fu"))
+            ResetPWCookieFu = int(self.get_cookie("Fu"))
             if ResetPWRequestBody.find("rppw=") >= 0 and ResetPWRequestBody.find("rppa=") >= 0:
                 ResetPWRequestNewPWPre = ResetPWRequestBody[(ResetPWRequestBody.index("rppw=")+5):ResetPWRequestBody.index("&rppa=")]
                 ResetPWRequestNewPWAgain = ResetPWRequestBody[(ResetPWRequestBody.index("rppa=")+5):len(ResetPWRequestBody)]
@@ -387,7 +387,7 @@ class SignUpHand(tornado.web.RequestHandler):
                 SignUpRequestDBInsert = "INSERT INTO compacc (userid,email,veremail,passwd,token) VALUES ('{0:d}','{1:s}',0,'{2:s}','')".format(SignUpUserID,SignUpRequestEmail,SignUpRequestPassword)
                 mycursor.execute(SignUpRequestDBInsert)
                 db.commit()
-                self.set_secure_cookie("Fu",str(SignUpUserID))
+                self.set_cookie("Fu",str(SignUpUserID))
                 
                 # Send Verification Email
                 SendVerificationEmail(self,SignUpRequestEmail)
@@ -429,7 +429,7 @@ class VerifyHand(tornado.web.RequestHandler):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
         def VerifyEmail(uid,tmpcode):
             VENewToken = random.randint(1000000000,9999999999)
-            self.set_secure_cookie("Ft",str(VENewToken))
+            self.set_cookie("Ft",str(VENewToken))
             VERequestDBUpdate = "UPDATE compacc SET veremail=1,token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,int(uid),int(tmpcode))
             mycursor.execute(VERequestDBUpdate)
             if mycursor.rowcount >= 1:
@@ -439,10 +439,10 @@ class VerifyHand(tornado.web.RequestHandler):
             db.commit()
         
         try:
-            if self.get_secure_cookie("Fu"):
+            if self.get_cookie("Fu"):
                 VerifyTmpCode = int(self.get_query_argument("e"))
-                self.set_secure_cookie("Fv",str(VerifyTmpCode))
-                if VerifyEmail(int(self.get_secure_cookie("Fu")),VerifyTmpCode):
+                self.set_cookie("Fv",str(VerifyTmpCode))
+                if VerifyEmail(int(self.get_cookie("Fu")),VerifyTmpCode):
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Vr1) Your email has been verified")
                     self.write(VerifyIndex)
                 else:
@@ -451,8 +451,8 @@ class VerifyHand(tornado.web.RequestHandler):
             else:
                 self.redirect("/sign_in/")
         except tornado.web.MissingArgumentError:
-            if self.get_secure_cookie("Fu") and self.get_secure_cookie("Fv"):
-                if VerifyEmail(int(self.get_secure_cookie("Fu")),int(self.get_secure_cookie("Fv"))):
+            if self.get_cookie("Fu") and self.get_cookie("Fv"):
+                if VerifyEmail(int(self.get_cookie("Fu")),int(self.get_cookie("Fv"))):
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(Vr2) Your email has been verified")
                     self.write(VerifyIndex)
                 else:
@@ -468,7 +468,7 @@ class VerifyHand(tornado.web.RequestHandler):
 class AccountHand(tornado.web.RequestHandler):
     def get(self):
         if CheckLogin(self):
-            UserInfoFu = self.get_secure_cookie("Fu")
+            UserInfoFu = self.get_cookie("Fu")
             # Pull Account Orders
             AccountOrdersQuery = "SELECT oid,pid,fprice,stat,arrival,dest from orders where uid='{0:d}' order by pdate desc".format(int(UserInfoFu))
             mycursor.execute(AccountOrdersQuery)
