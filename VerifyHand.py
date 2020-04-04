@@ -4,9 +4,13 @@ class handler(tornado.web.RequestHandler):
     def get(self):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
         if self.get_cookie("Fu"):
-            VerifyTmpCode = int(self.get_query_argument("e"))
-            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
-            self.write(VerifyIndex)
+            try:
+                VerifyTmpCode = int(self.get_query_argument("e"))
+                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
+                self.write(VerifyIndex)
+            except tornado.web.MissingArgumentError:
+                VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","E Empty")
+                self.write(VerifyIndex)
         else:
             VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","PROBLEM")
             self.write(VerifyIndex)
