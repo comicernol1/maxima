@@ -19,20 +19,19 @@ class handler(tornado.web.RequestHandler):
                         VE_AddRulerToCart = "INSERT INTO cart (uid,pid,qty) VALUES('{0:d}','11111110',1)".format(VE_uid)
                         mycursor.execute(VE_AddRulerToCart)
                         db.commit()
-                        ForceLogin = True
-                        VerifyIndex = ServePage(self,"/sign_up/verified.html")
+                        VerifyIndex = ServePage(self,"/sign_up/verified.html",True)
                         VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","<div id=\"rg_block\" hg=\"uc\"><h1>Welcome to Franzar!</h1><div id=\"suc_i\"></div><h3>As a sign of appreciation for making it this far, we've added a FREE tailor's ruler to your cart. You'll need this if you want to order custom tailored clothes from us. To see your cart, you can click the button below or the shopping cart icon in the top-right corner.</h3><a href=\"/cart/\"><button class=\"rgsb\" id=\"Vuc_L\">Open Cart</button></a></div>")
                         self.write(VerifyIndex)
                     else:
-                        VerifyIndex = ServePage(self,"/sign_up/verified.html")
+                        VerifyIndex = ServePage(self,"/sign_up/verified.html",False)
                         VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","<div id=\"rg_block\" hg=\"ue\">(V1) This account could not be found</div>")
                         self.write(VerifyIndex)
                 else:
-                    VerifyIndex = ServePage(self,"/sign_up/verified.html")
+                    VerifyIndex = ServePage(self,"/sign_up/verified.html",False)
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","<div id=\"rg_block\" hg=\"ue\">This Email is already verified</div>")
                     self.write(VerifyIndex)
             else:
-                VerifyIndex = ServePage(self,"/sign_up/verified.html")
+                VerifyIndex = ServePage(self,"/sign_up/verified.html",False)
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","<div id=\"rg_block\" hg=\"ue\">(V2) This account could not be found</div>")
                 self.write(VerifyIndex)
         
@@ -47,7 +46,7 @@ class handler(tornado.web.RequestHandler):
                     VerifyTmpCode = int(self.get_cookie("Fv"))
                     VerifyEmail(UserInfoFu,VerifyTmpCode)
                 else:
-                    VerifyIndex = ServePage(self,"/sign_up/verified.html")
+                    VerifyIndex = ServePage(self,"/sign_up/verified.html",False)
                     VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","<div id=\"rg_block\" hg=\"ue\">This link is invalid</div>")
                     self.write(VerifyIndex)
         else:
