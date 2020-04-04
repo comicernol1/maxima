@@ -429,7 +429,7 @@ class VerifyHand(tornado.web.RequestHandler):
         def VerifyEmail(self,uid,tmpcode):
             VENewToken = random.randint(1000000000,9999999999)
             self.set_secure_cookie("Ft",str(VENewToken))
-            VERequestDBUpdate = "UPDATE compacc SET veremail='0',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,uid,tmpcode)
+            VERequestDBUpdate = "UPDATE compacc SET veremail='1',token='{0:d}' WHERE userid='{1:d}' and tmpcode='{2:d}'".format(VENewToken,uid,tmpcode)
             mycursor.execute(VERequestDBUpdate)
             db.commit()
         
