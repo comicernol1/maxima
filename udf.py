@@ -98,7 +98,15 @@ def ServePage(self,pageloc):
     # Open Requested Page
     with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
         PageIndex = PageIndex_F.read()
-    if CheckLogin(self) or ForceLogin and self.get_cookie("Fu"):
+    try:
+        if ForceLogin:
+            User_Force_Login = True
+        else:
+            User_Force_Login = False
+    except NameError:
+        User_Force_Login = False
+    
+    if CheckLogin(self) or User_Force_Login and self.get_cookie("Fu"):
         UserCartCnt = 0
         UserCartList = GetCart(self)
         for i in range(0,len(UserCartList)):
