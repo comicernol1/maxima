@@ -7,9 +7,11 @@ body{overflow-x:hidden;}
 #rg_block[hg="fp"]{height:270px;top:250px;}
 #rg_block[hg="fa"]{height:230px;top:280px;}
 #rg_block[hg="rp"]{height:330px;top:220px;}
+#rg_block[hg="ue"]{top:calc(50% - 25px);}
 #rg_block[hg="uc"]{top:calc(50% - 25px);}
 #suv_h{width:calc(100% - 60px);margin:0px;font-size:16px;font-weight:300;position:absolute;top:30px;left:30px;}
-#suc_h{margin:15px 0;text-align:center;font-size:16px;font-weight:300;}
+#suc_i{width:calc(100% - 40px);height:400px;background:blue;}
+
 #rg_block a.sign_x{width:50%;text-align:center;font-size:28px;color:#0A0908;text-decoration:none;margin:0;padding:20px 0;position:absolute;top:0;}
 #rg_block a.sign_x[s="y"]{background:transparent;}
 #rg_block a.sign_x[s="n"]{background:#F2F2F2;}
