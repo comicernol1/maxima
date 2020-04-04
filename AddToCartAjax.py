@@ -1,6 +1,6 @@
 from udf import *
 
-class AddToCartAjax(tornado.web.RequestHandler):
+class handler(tornado.web.RequestHandler):
     def get(self):
         NotFoundIndex = ServePage(self,"/status/404.html")
         self.write(NotFoundIndex)
