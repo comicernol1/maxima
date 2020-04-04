@@ -36,7 +36,7 @@ class handler(tornado.web.RequestHandler):
                 AccountAddressOptions = "<option value=\"na\"> - Please Connect an Address - </option>"
             
             # Open
-            AccountIndex = ServePage(self,"/account/index.html")
+            AccountIndex = ServePage(self,"/account/index.html",False)
             AccountIndex = AccountIndex.replace("<% AddressOptions %>",AccountAddressOptions)
             AccountIndex = AccountIndex.replace("<% OrderList %>",AccountOrdersList)
             self.write(AccountIndex)
