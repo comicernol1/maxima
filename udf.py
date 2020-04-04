@@ -161,26 +161,27 @@ else:
 
 def FindProduct(pid):
     try:
-        FindProductQuery = "SELECT ttl,description,price_"+UserCurrency.lower()+",discount,colour,colour_name,contents_dict,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
+        FindProductQuery = "SELECT disp,ttl,description,price_"+UserCurrency.lower()+",discount,colour,colour_name,contents_dict,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
         mycursor.execute(FindProductQuery)
         FindProductFetch = mycursor.fetchone()
-        FindProductName = str(FindProductFetch[0])
-        FindProductDesc = str(FindProductFetch[1])
-        FindProductPrice = float(FindProductFetch[2])
-        FindProductDiscount = int(FindProductFetch[3])
-        FindProductColour = str(FindProductFetch[4])
-        FindProductColourName = str(FindProductFetch[5]).title()
-        FindProductContentsDict = json.loads(FindProductFetch[6])
-        FindProductWash = str(FindProductFetch[7])
-        FindProductBleach = str(FindProductFetch[8])
-        FindProductDry = str(FindProductFetch[9])
-        FindProductWring = str(FindProductFetch[10])
-        FindProductDryClean = str(FindProductFetch[11])
+        FindProductDisp = str(FindProductFetch[0])
+        FindProductName = str(FindProductFetch[1])
+        FindProductDesc = str(FindProductFetch[2])
+        FindProductPrice = float(FindProductFetch[3])
+        FindProductDiscount = int(FindProductFetch[4])
+        FindProductColour = str(FindProductFetch[5])
+        FindProductColourName = str(FindProductFetch[6]).title()
+        FindProductContentsDict = json.loads(FindProductFetch[7])
+        FindProductWash = str(FindProductFetch[8])
+        FindProductBleach = str(FindProductFetch[9])
+        FindProductDry = str(FindProductFetch[10])
+        FindProductWring = str(FindProductFetch[11])
+        FindProductDryClean = str(FindProductFetch[12])
         if os.path.exists("/static/product/"+str(pid)+"/0.jpg"):
             FindProductHasImg = True
         else:
             FindProductHasImg = False
-        FindProductDict = {"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean,"HasImg":FindProductHasImg}
+        FindProductDict = {"Display":FindProductDisp,"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean,"HasImg":FindProductHasImg}
         return FindProductDict
     finally:
         pass
@@ -205,7 +206,7 @@ def FindProductColours(pid):
     return ColoursDict
 
 ShippingCodesList = {"p":"In Production","i":"In Progress","d":"Delivered"}
-WashCareCodesList = {"a":"Machine Wash Normal","b":"Machine Wash Cold (30°C)","c":"Machine Wash Warm (40°C)","d":"Machine Was Hot (50°C)","e":"Machine Wash Hot (60°C)","f":"Machine Wash Hot (70°C)","g":"Machine Wash Hot (95°C)","h":"Machine Wash Permanent Press","i":"Machine Wash Cold Permanent Press (30°C)","j":"Machine Wash Warm Permanent Press (40°C)","k":"Machine Wash Hot Permanent Press","m":"Machine Wash Hot Permanent Press (50°C)","o":"Machine Wash Hot Permanent Press (70°C)","p":"Machine Wash Hot Permanent Press (95°C)","q":"Machine Wash Gentle","r":"Machine Wash Cold Gentle (30°C)","s":"Machine Wash Warm Gentle (40°C)","t":"Machine Wash Hot Gentle (50°C)","u":"Machine Wash Hot Gentle (60°C)","v":"Machine Wash Hot Gentle (70°C)","w":"Machine Wash Hot Gentle (95°C)","x":"Hand Wash Normal","y":"Hand Wash Cold (30°C)","z":"Hand Wash Warm (40°C)","n":"Do Not Wash"}
-BleachCareCodesList = {"a":"Bleach When Needed","b":"Non-Chlorine Bleach When Needed","n":"Do Not Bleach"}
-DryCareCodesList = {"a":"Tumble Dry Normal","b":"Tumble Dry Normal Low Heat","c":"Tumble Dry Normal Medium Heat","d":"Tumble Dry Normal High Heat","e":"Tumble Dry Normal No Heat","f":"Tumble Dry Permanent Press","g":"Tumble Dry Permanent Press Low Heat","h":"Tumble Dry Permanent Press Medium Heat","i":"Tumble Dry Permanent Press High Heat","j":"Tumble Dry Gentle","k":"Tumble Dry Gentle Low Heat","m":"Tumble Dry Gentle Medium Heat","o":"Tumble Dry Gentle High Heat","p":"Tumble Dry Gentle No Heat","q":"Do Not Tumble Dry","n":"Do Not Dry","r":"Line Dry","s":"Line Dry In Shade","t":"Drip Dry","u":"Drip Dry In Shade","v":"Dry Flat","w":"Dry Flat In Shade"}
-DryCleanCareCodesList = {"a":"Dry Clean","b":"Dry Clean Any Solvent","c":"Dry Clean Petroleum Solvent Only","d":"Dry Clean Any Colvent Except Trichloroethylene","e":"Dry Clean Low Heat","f":"Dry Clean No Steam","g":"Dry Clean Reduced Moisture","h":"Dry Clean Short Cycle","i":"Dry Clean Any Solvent Low Heat","j":"Dry Clean Any Solvent No Steam","k":"Dry Clean Any Solvent Reduced Moisture","m":"Dry Clean Any Solvent Short Cycle","n":"Do Not Dry Clean"}
+WashCareCodesList = {"0":"","a":"Machine Wash Normal","b":"Machine Wash Cold (30°C)","c":"Machine Wash Warm (40°C)","d":"Machine Was Hot (50°C)","e":"Machine Wash Hot (60°C)","f":"Machine Wash Hot (70°C)","g":"Machine Wash Hot (95°C)","h":"Machine Wash Permanent Press","i":"Machine Wash Cold Permanent Press (30°C)","j":"Machine Wash Warm Permanent Press (40°C)","k":"Machine Wash Hot Permanent Press","m":"Machine Wash Hot Permanent Press (50°C)","o":"Machine Wash Hot Permanent Press (70°C)","p":"Machine Wash Hot Permanent Press (95°C)","q":"Machine Wash Gentle","r":"Machine Wash Cold Gentle (30°C)","s":"Machine Wash Warm Gentle (40°C)","t":"Machine Wash Hot Gentle (50°C)","u":"Machine Wash Hot Gentle (60°C)","v":"Machine Wash Hot Gentle (70°C)","w":"Machine Wash Hot Gentle (95°C)","x":"Hand Wash Normal","y":"Hand Wash Cold (30°C)","z":"Hand Wash Warm (40°C)","n":"Do Not Wash"}
+BleachCareCodesList = {"0":"","a":"Bleach When Needed","b":"Non-Chlorine Bleach When Needed","n":"Do Not Bleach"}
+DryCareCodesList = {"0":"","a":"Tumble Dry Normal","b":"Tumble Dry Normal Low Heat","c":"Tumble Dry Normal Medium Heat","d":"Tumble Dry Normal High Heat","e":"Tumble Dry Normal No Heat","f":"Tumble Dry Permanent Press","g":"Tumble Dry Permanent Press Low Heat","h":"Tumble Dry Permanent Press Medium Heat","i":"Tumble Dry Permanent Press High Heat","j":"Tumble Dry Gentle","k":"Tumble Dry Gentle Low Heat","m":"Tumble Dry Gentle Medium Heat","o":"Tumble Dry Gentle High Heat","p":"Tumble Dry Gentle No Heat","q":"Do Not Tumble Dry","n":"Do Not Dry","r":"Line Dry","s":"Line Dry In Shade","t":"Drip Dry","u":"Drip Dry In Shade","v":"Dry Flat","w":"Dry Flat In Shade"}
+DryCleanCareCodesList = {"0":"","a":"Dry Clean","b":"Dry Clean Any Solvent","c":"Dry Clean Petroleum Solvent Only","d":"Dry Clean Any Colvent Except Trichloroethylene","e":"Dry Clean Low Heat","f":"Dry Clean No Steam","g":"Dry Clean Reduced Moisture","h":"Dry Clean Short Cycle","i":"Dry Clean Any Solvent Low Heat","j":"Dry Clean Any Solvent No Steam","k":"Dry Clean Any Solvent Reduced Moisture","m":"Dry Clean Any Solvent Short Cycle","n":"Do Not Dry Clean"}
