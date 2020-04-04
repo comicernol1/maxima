@@ -6,6 +6,7 @@ class handler(tornado.web.RequestHandler):
         if self.get_cookie("Fu"):
             try:
                 VerifyTmpCode = int(self.get_query_argument("e"))
+                self.set_cookie("Fv",str(VerifyTmpCode))
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>",str(VerifyTmpCode))
                 self.write(VerifyIndex)
             except tornado.web.MissingArgumentError:
