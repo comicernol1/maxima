@@ -20,9 +20,9 @@ def ValidEmail(eml):
         return False
 
 def CheckLogin(self):
-    if self.get_secure_cookie("Fu") and self.get_secure_cookie("Ft"):
-        UserInfoFu = self.get_secure_cookie("Fu")
-        UserInfoFt = self.get_secure_cookie("Ft")
+    if self.get_cookie("Fu") and self.get_cookie("Ft"):
+        UserInfoFu = self.get_cookie("Fu")
+        UserInfoFt = self.get_cookie("Ft")
         UserInfoLoginQuery = "SELECT * from compacc where userid='{0:d}' and token='{1:d}'".format(int(UserInfoFu),int(UserInfoFt))
         mycursor.execute(UserInfoLoginQuery)
         UserInfoLoginFetch = mycursor.fetchone()
@@ -55,7 +55,7 @@ def SetCookie(self):
     if CheckCookieRequestBody.find("ackc=") >= 0:
         CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
         if CheckCookieRequestM == "true":
-            self.set_secure_cookie("Fa","true")
+            self.set_cookie("Fa","true")
             self.redirect(self.request.uri)
             return True
         else:
@@ -64,7 +64,7 @@ def SetCookie(self):
         return False
 
 def GetCart(self):
-    UserInfoFu = self.get_secure_cookie("Fu")
+    UserInfoFu = self.get_cookie("Fu")
     UserCartQuery = "SELECT pid,qty from cart where uid='{0:d}'".format(int(UserInfoFu))
     mycursor.execute(UserCartQuery)
     UserCartFetch = mycursor.fetchall()
@@ -109,7 +109,7 @@ def ServePage(self,pageloc):
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLISignIn)
     PageIndex = PageIndex.replace("<% Head %>",HeadHTML)
     try:
-        UserInfoFa = self.get_secure_cookie("Fa").decode('utf-8')
+        UserInfoFa = self.get_cookie("Fa").decode('utf-8')
     except:
         UserInfoFa = "false"
     if UserInfoFa == "true":
