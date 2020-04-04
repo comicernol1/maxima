@@ -3,8 +3,12 @@ from udf import *
 class handler(tornado.web.RequestHandler):
     def get(self):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
-        VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V1) Something went wrong")
-        self.write(VerifyIndex)
+        if self.get_cookie("Fu"):
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","Yes")
+            self.write(VerifyIndex)
+        else:
+            VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","No")
+            self.write(VerifyIndex)
         """
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
         def VerifyEmail(uid,tmpcode):
