@@ -1,6 +1,6 @@
 from udf import *
 
-class CartHand(tornado.web.RequestHandler):
+class handler(tornado.web.RequestHandler):
     def get(self):
         CartIndex = ServePage(self,"/cart/index.html")
         UserCartList = GetCart(self)
