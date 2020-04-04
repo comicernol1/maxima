@@ -427,6 +427,10 @@ class SignUpHand(tornado.web.RequestHandler):
 class VerifyHand(tornado.web.RequestHandler):
     def get(self):
         VerifyIndex = ServePage(self,"/sign_up/verified.html")
+        VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V1) Something went wrong")
+        self.write(VerifyIndex)
+        """
+        VerifyIndex = ServePage(self,"/sign_up/verified.html")
         def VerifyEmail(uid,tmpcode):
             VENewToken = random.randint(1000000000,9999999999)
             self.set_cookie("Ft",str(VENewToken))
@@ -461,6 +465,7 @@ class VerifyHand(tornado.web.RequestHandler):
             else:
                 VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","(V1) Something went wrong")
                 self.write(VerifyIndex)
+        """
     
     def post(self):
         SetCookie(self)
