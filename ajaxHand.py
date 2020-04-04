@@ -9,8 +9,8 @@ class AddToCartAjax(tornado.web.RequestHandler):
         
     def post(self):
         ATCRequest = urllib.parse.unquote(self.request.body.decode('utf-8'))
-        if self.get_secure_cookie("Fu"):
-            UserInfoFu = int(self.get_secure_cookie("Fu"))
+        if self.get_cookie("Fu"):
+            UserInfoFu = int(self.get_cookie("Fu"))
             if ATCRequest.find("id=") >= 0 and ATCRequest.find("&qty=") >= 0:
                 ATCRequestID = int(ATCRequest[(ATCRequest.index("id=")+3):ATCRequest.index("&qty=")])
                 ATCRequestQty = int(ATCRequest[(ATCRequest.index("&qty=")+5):len(ATCRequest)])
@@ -44,8 +44,8 @@ class RefreshCartAjax(tornado.web.RequestHandler):
         
     def post(self):
         RFCRequest = urllib.parse.unquote(self.request.body.decode('utf-8'))
-        if self.get_secure_cookie("Fu"):
-            UserInfoFu = int(self.get_secure_cookie("Fu"))
+        if self.get_cookie("Fu"):
+            UserInfoFu = int(self.get_cookie("Fu"))
             RFCQuery = "DELETE FROM cart WHERE uid={0:d}".format(UserInfoFu)
             mycursor.execute(RFCQuery)
             RFCValList = []
