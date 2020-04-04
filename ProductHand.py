@@ -3,8 +3,8 @@ from udf import *
 class handler(tornado.web.RequestHandler):
     def get(self):
         # Open
-        ProductIndex = ServePage(self,"/product/index.html")
-        NotFoundIndex = ServePage(self,"/status/404.html")
+        ProductIndex = ServePage(self,"/product/index.html",False)
+        NotFoundIndex = ServePage(self,"/status/404.html",False)
         
         # Formatting
         ProductIndexURI = self.request.uri
