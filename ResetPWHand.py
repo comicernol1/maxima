@@ -3,8 +3,8 @@ from udf import *
 class handler(tornado.web.RequestHandler):
     def get(self):
         # Open
-        ResetPWIndex = ServePage(self,"/sign_in/reset_pw.html")
-        ResetPWMsgIndex = ServePage(self,"/sign_in/reset_pw_msg.html")
+        ResetPWIndex = ServePage(self,"/sign_in/reset_pw.html",False)
+        ResetPWMsgIndex = ServePage(self,"/sign_in/reset_pw_msg.html",False)
         
         # Test
         try:
@@ -55,8 +55,8 @@ class handler(tornado.web.RequestHandler):
             
     def post(self):
         # Open
-        ResetPWIndex = ServePage(self,"/sign_in/reset_pw.html")
-        ResetPWMsgIndex = ServePage(self,"/sign_in/reset_pw_msg.html")
+        ResetPWIndex = ServePage(self,"/sign_in/reset_pw.html",False)
+        ResetPWMsgIndex = ServePage(self,"/sign_in/reset_pw_msg.html",False)
         
         # Test
         if self.get_cookie("Fu") != "":
