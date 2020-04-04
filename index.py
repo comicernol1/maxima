@@ -4,10 +4,9 @@ import SignInHand,ForgotPWHand,ResetPWHand
 import SignUpHand,VerifyHand
 import AccountHand
 import ProductHand,CartHand
-import TermsConditionsHand,CounterfeitHand
 import AddToCartAjax,RefreshCartAjax
 import TestingHand
-import NotFoundHand
+import InfoHand
 from settings import settings
 
 if __name__ == "__main__":
@@ -22,12 +21,12 @@ if __name__ == "__main__":
         (r"/account/", AccountHand.handler),
         (r"/product/.*", ProductHand.handler),
         (r"/cart/", CartHand.handler),
-        (r"/legal/terms_and_conditions/", TermsConditionsHand.handler),
-        (r"/report_a_counterfeit/", CounterfeitHand.handler),
+        (r"/legal/terms_and_conditions/", InfoHand.TermsConditions),
+        (r"/report_a_counterfeit/", InfoHand.Counterfeit),
         (r"/add_to_cart/", AddToCartAjax.handler),
         (r"/refresh_cart/", RefreshCartAjax.handler),
         (r"/test/", TestingHand.handler),
-        (r"/.*", NotFoundHand.handler)
+        (r"/.*", InfoHand.NotFound)
     ], **settings)
 
     app.listen(80)
