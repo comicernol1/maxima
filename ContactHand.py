@@ -3,15 +3,15 @@ from udf import *
 class handler(tornado.web.RequestHandler):
     def get(self):
         # Open
-        ContactIndex = ServePage(self,"/contact/index.html")
+        ContactIndex = ServePage(self,"/contact/index.html",False)
         ContactIndex = ContactIndex.replace("<% ShowError %>","none")
         ContactIndex = ContactIndex.replace("<% ErrorMsg %>","")
         self.write(ContactIndex)
         
     def post(self):
         # Open
-        ContactIndex = ServePage(self,"/contact/index.html")
-        ContactSentIndex = ServePage(self,"/contact/sent.html")
+        ContactIndex = ServePage(self,"/contact/index.html",False)
+        ContactSentIndex = ServePage(self,"/contact/sent.html",False)
         
         # Test
         ContactRequestBody = urllib.parse.unquote(self.request.body.decode('utf-8').replace("+"," "))
