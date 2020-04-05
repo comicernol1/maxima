@@ -21,7 +21,7 @@ body{overflow-x:hidden;}
 #BIt a[s="n"]{border:1px solid white;box-shadow:none;}
 #BIo{position:relative;top:25px;}
 #BIOq{display:inline-block;width:70px;height:40px;background:white;border:1px solid #F46036;padding:0 5px;text-align:center;position:relative;top:2px;}
-#BIOb{display:inline-block;width:calc(60% - 110px);height:40px;box-sizing:border-box;font-size:16px;font-weight:600;color:#FAFAFF;letter-spacing:1px;background:#F46036;border:none;border-radius:4px;}
+#BIOb{display:inline-block;width:calc(60% - 110px);height:40px;box-sizing:border-box;font-size:16px;font-weight:600;color:#FAFAFF;letter-spacing:1px;background:#F46036;border:none;border-radius:4px;position:relative;}
 #BIOb:active{background:#C84F2D;}
 #Foot{top:2000px;}
 @media only screen and (max-width:700px){
@@ -31,5 +31,11 @@ body{overflow-x:hidden;}
     #Bi{width:100%;top:605px;}
     #BIp{top:10px;left:10px;}
     #BId{top:20px;left:15px;}
-    #BIc{width:calc(100% - 30px);top:60px;left:15px;}
+    #BIc{width:calc(100% - 30px);top:70px;left:15px;}
+    #BIi{top:0;}
+    #BIi h3{margin:10px 0 5px 0;}
+    #BIi ul{margin:10px 0;}
+    #BIo{width:100%;height:50px;position:fixed;top:calc(100% - 50px);left:0;}
+    #BIOq{display:block;width:60px;height:100%;border-radius:0;position:absolute;top:0;left:0;}
+    #BIOb{display:block;width:calc(100% - 60px);height:100%;border-radius:0;position:absolute;top:0;left:60px;}
 }
