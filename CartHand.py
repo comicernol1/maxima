@@ -17,7 +17,13 @@ class handler(tornado.web.RequestHandler):
                 UserCartItem_PriceSet = "{0:s}{1:,.2f} ({2:s})".format(UserCurrencySymbol,UserCartItem_Price,UserCurrency)
             else:
                 UserCartItem_PriceSet = "{0:s}{1:,.2f}".format(UserCurrencySymbol,UserCartItem_Price)
-            UserCartItems += "<div class=\"CIt\" id=\"CIt_"+UserCartItem_ID+"\" style=\"top:"+str(i*210)+"px;\"><input class=\"CIq\" type=\"number\" value=\""+str(UserCartList[i][1])+"\" onblur=\"AdjOa()\"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a><h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1><button class=\"CIr\" onclick=\"RMp('"+UserCartItem_ID+"')\">Remove</button></div>\n"
+            if str(UserCartItem_ID)[0:7] == "1111111":
+                UserCartAdjustNumDisable = " disabled"
+                UserCartRemoveButton = ""
+            else:
+                UserCartAdjustNumDisable = ""
+                UserCartRemoveButton = "<button class=\"CIr\" onclick=\"RMp('"+UserCartItem_ID+"')\">Remove</button>"
+            UserCartItems += "<div class=\"CIt\" id=\"CIt_"+UserCartItem_ID+"\" style=\"top:"+str(i*210)+"px;\"><input class=\"CIq\" type=\"number\" value=\""+str(UserCartList[i][1])+"\" onblur=\"AdjOa()\""+UserCartAdjustNumDisable+"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a><h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1>"+UserCartRemoveButton+"</div>\n"
             UserCartFootTop += 210
         if UserCartItems != "":
             CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
