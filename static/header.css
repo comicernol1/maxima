@@ -9,6 +9,8 @@
 #113A83 - Active Link Blue
 #FAFAFF - White
 #04151F - Dark Grey / Blue
+#030E14 - Darker Grey / Blue
+#020A0F - Active Darker Grey / Blue
 #444054 - Dark Grey / Purple
 #605F5E - Registration Grey
 #757780 - Silver
@@ -88,7 +90,8 @@ input[type="submit"]:active,.rgsb:active{background:#006A3B;}
     #HMs{width:calc(100% - 60px);height:50px;color:#FAFAFF;text-decoration:none;text-align:center;font-size:24px;padding:10px 0;box-sizing:border-box;background:#008148;border:none;border-radius:4px;box-sizing:border-box;position:absolute;bottom:30px;right:30px;}
     #HMs span{position:absolute;bottom:8px;right:15px;}
     #Fackc{padding:15px 10px 50px 10px;font-size:16px;}
-    #Fackc input[type="submit"]{width:100%;text-align:center;padding:15px 0;position:absolute;}
+    #Fackc input[type="submit"]{width:100%;text-align:center;padding:10px 0;background:#030E14;position:absolute;}
+    #Fackc input[type="submit"]:active{background:#020A0F;}
     #Foot{height:340px;}
     #Ft{width:calc(100% - 60px);left:30px;}
     #Ft tr th{font-size:14px;padding:5px 0px;}
