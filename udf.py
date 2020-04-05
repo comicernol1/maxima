@@ -94,6 +94,9 @@ def ServePage(self,pageloc,ForceLogin):
         HeadHTML = HeadHTML_F.read()
     with open("/root/maxima/templates/footer.html") as FooterHTML_F:
         FooterHTML = FooterHTML_F.read()
+    with open("/root/maxima/templates/nation_options.html") as NationOptionsHTML_F:
+        NationOptionsHTML = NationOptionsHTML_F.read()
+    FooterHTML = FooterHTML.replace("<% NationOptions %>",NationOptionsHTML)
     
     # Open Requested Page
     with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
@@ -117,6 +120,7 @@ def ServePage(self,pageloc,ForceLogin):
     else:
         FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
     PageIndex = PageIndex.replace("<% Footer %>",FooterHTML)
+    PageIndex = PageIndex.replace("<% NationOptions %>",NationOptionsHTML)
     
     # Return Page
     self.set_status(200)
