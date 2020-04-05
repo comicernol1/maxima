@@ -4,7 +4,8 @@ body{overflow-x:hidden;}
 #Cm{width:100%;position:absolute;top:110px;left:0;}
 #CIEx{width:100%;margin:0;font-size:20px;font-weight:300;text-align:center;position:absolute;top:30px;left:0;}
 .CIt{display:block;width:100%;height:200px;background:#FAFAFF;position:absolute;left:0;}
-.CIt input[type="number"]{width:70px;font-size:20px;text-align:center;padding:0 10px;position:absolute;top:70px;left:20px;}
+.CIq{width:70px;font-size:20px;text-align:center;padding:0 10px;position:absolute;top:70px;left:20px;}
+.CIq:disabled{background:transparent;color:#444054;}
 .CIi{display:block;width:180px;height:180px;background-size:cover;background-position:center;border:1px solid #E6E6E6;box-sizing:border-box;cursor:pointer;position:relative;top:10px;left:110px;}
 .CIt h3{width:calc(100% - 600px);margin:0;font-size:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:absolute;top:20px;left:310px;}
 .CIt h1{width:250px;font-size:32px;margin:0;text-align:right;position:absolute;top:15px;right:30px;}
