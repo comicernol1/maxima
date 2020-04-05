@@ -56,10 +56,13 @@ class handler(tornado.web.RequestHandler):
             else:
                 ProductRequested_ImageLink = "/static/product/missing.jpg"
                 ProductRequested_BPs = "<li><img src=\"/static/product/missing.jpg\" alt=\""+ProductRequested_Name+" (1)\"></li>\n"
-            if CheckLogin(self):
-                ProductRequested_CartButton = "<button id=\"BIOb\" onclick=\"ACt()\">Add To Cart</button>"
+            if str(ProductRequested_ID)[0:7] != "1111111":
+                if CheckLogin(self):
+                    ProductRequested_CartButton = "<input type=\"number\" id=\"BIOq\" value=\"1\" onblur="AdjOq()"><button id=\"BIOb\" onclick=\"ACt()\">Add To Cart</button>"
+                else:
+                    ProductRequested_CartButton = "<input type=\"number\" id=\"BIOq\" value=\"1\" onblur="AdjOq()"><a href=\"/sign_in/\"><button id=\"BIOb\">Sign In To Purchase</button></a>"
             else:
-                ProductRequested_CartButton = "<a href=\"/sign_in/\"><button id=\"BIOb\">Sign In To Purchase</button></a>"
+                ProductRequested_CartButton = ""
             ProductRequested_Rating = 0
             ProductRequested_ReviewCount = 0
         
