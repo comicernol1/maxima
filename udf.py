@@ -63,6 +63,27 @@ def SetCookie(self):
     else:
         return False
 
+NationDict = {"af":"Afghanistan","al":"Albania","dz":"Algeria","as":"American Samoa","ad":"Andorra","ao":"Angolia","ai":"Anguilla","aq":"Antartica","ag":"Antigua & Barbuda","ar":"Argentina","am":"Armenia","aw":"Aruba","au":"Australia","at":"Austria","az":"Azerbijan","bs":"Bahamas","bh":"Bahrain","bd":"Bangladesh","bb":"Barbados","by":"Belarus","be":"Belgium","bz":"Belize","bj":"Benin","bm":"Bermuda","bt":"Bhutan","bo":"Bolivia","ba":"Bosnia & Herzegovina","bw":"Botswana","bv":"Bouvet Island","br":"Brazil","io":"BIOT","bn":"Brunei Darussalam","bg":"Bulgaria","bf":"Burkina Faso","bi":"Burundi","kh":"Cambodia","cm":"Cameroon","ca":"Canada","cv":"Cape Verde","ky":"Cayman Islands","cf":"Central African Republic","td":"Chad","cl":"Chile","cn":"China","cx":"Christmas Island","cc":"Cocos Islands","co":"Colombia","km":"Comoros","cg":"Congo","cd":"DR Congo","ck":"Cook Islands","cr":"Costa Rica","ci":"Côte d'Ivoire","hr":"Croatia","cu":"Cuba","cy":"Cyprus","cz":"Czech Republic","dk":"Denmark","dj":"Djibouti","dm":"Dominica","do":"Dominican Republic","ec":"Ecuador","eg":"Egypt","eh":"Western Sahara","sv":"El Salvador","gq":"Equatorial Guinea","er":"Eritrea","ee":"Estonia","et":"Ethiopia","fk":"Falkland Islands","fo":"Faroe Islands","fj":"Fiji","fi":"Finland","fr":"France","gf":"French Guiana","pf":"French Polynesia","tf":"French Southern Territories","ga":"Gabon","gm":"Gambia","ge":"Georgia","de":"Germany","gh":"Ghana","gi":"Gilbraltar","gr":"Greece","gl":"Greenland","gd":"Grenada","gp":"Guadeloupe","gu":"Guam","gt":"Guatemala","gn":"Guinea","gw":"Guinea-Bissau","gy":"Guyana","ht":"Haiti","hm":"Heard & Mcdonald Islands","hn":"Honduras","hk":"Hong Kong","hu":"Hungary","is":"Iceland","in":"India","id":"Indonesia","ir":"Iran","iq":"Iraq","ie":"Ireland","il":"Israel","it":"Italy","jm":"Jamaica","jp":"Japan","jo":"Jordan","kz":"Kazakhstan","ke":"Kenya","ki":"Kiribati","kr":"South Korea","kw":"Kuwait","kg":"Kyrgyzstan","la":"Laos","ly":"Latvia","lb":"Lebanon","ls":"Lesotho","lr":"Liberia","ly":"Libya","li":"Liechtenstein","lt":"Lithuania","lu":"Luxembourg","mo":"Macao","mk":"Macedonia","mg":"Madagascar","mw":"Malawi","my":"Malasia","mv":"Maldives","ml":"Mali","mt":"Malta","mh":"Marshall Islands","mq":"Martinique","mr":"Mauritania","mu":"Mauritius","yt":"Mayotte","mx":"Mexico","fm":"Micronesia","md":"Moldova","mc":"Monaco","mn":"Mongolia","ms":"Montserrat","ma":"Morocco","mz":"Mozambique","mm":"Myanmar","na":"Nambia","nr":"Nauru","np":"Nepal","nl":"Netherlands","an":"Netherlands Antilles","nc":"New Caledonia","nz":"New Zealand","ni":"Nicaragua","ne":"Niger","ng":"Nigeria","nu":"Niue","nf":"Norfold Island","mp":"Northern Marina Islands","no":"Norway","om":"Oman","pk":"Pakistan","pw":"Palau","ps":"Palestine","pa":"Panama","pg":"Papua New Guinea","py":"Paraguay","pe":"Peru","ph":"Philippines","pn":"Pitcairn","pl":"Poland","pt":"Portugal","pr":"Puerto Rico","qa":"Qatar","re":"Réunion","ro":"Romania","ru":"Russia","rw":"Rwanda","sh":"Saint Helena","kn":"Saint Kitts & Nevis","lc":"Saint Lucia","pm":"Saint Pierre & Miquelon","vc":"Saint Vincent & Grenadines","ws":"Samoa","sm":"San Marino","st":"Sao Tome & Principe","sa":"Saudi Arabia","sn":"Senegal","cs":"Serbia & Montenegro","sc":"Seychelles","sl":"Sierra Leone","sg":"Singapore","sk":"Slovakia","si":"Slovenia","sb":"Solomon Islands","so":"Somalia","za":"South Africa","gs":"South Georgia","es":"Spain","lk":"Sri Lanka","sd":"Sudan","sr":"Suriname","sj":"Svalbard & Jan Mayen","sz":"Swaziland","se":"Sweden","ch":"Switzerland","sy":"Syria","tw":"Taiwan","tj":"Tajikistan","tz":"Tanzania","th":"Thailand","tl":"Timor-Leste","tg":"Togo","tk":"Tokelau","to":"Tonga","tt":"Trinidad & Tobago","tn":"Tunisia","tr":"Turkey","tm":"Turkmanistan","tc":"Turks & Caicos","tv":"Tuvalu","ug":"Uganda","ua":"Ukraine","ae":"United Arab Emirates","gb":"United Kingdom","us":"United States","um":"US Minor Outlying Islands","uy":"Uruguay","uz":"Uzbekistan","ve":"Venezuela","vu":"Vanuatu","vn":"Vietnam","vg":"British Virgin Islands","vi":"US Virgin Islands","wf":"Wallis & Futuna","ye":"Yemen","zw":"Zimbabwe"}
+UserNation = "us"
+NationList = ""
+NationDictKeys = NationDict.keys()
+for i in NationDictKeys:
+    if i == UserNation:
+        SelectedNationLi = " selected"
+    else:
+        SelectedNationLi = ""
+    NationList += "<option value=\""+i+"\""+SelectedNationLi+">"+NationDict[i]+"</option>\n"
+    
+SpecifyCurrencyList = ["$"]
+
+UserCurrency = "USD"
+if UserCurrency=="USD" or UserCurrency=="CAD":
+    UserCurrencySymbol = "$"
+elif UserCurrency=="EUR":
+    UserCurrencySymbol = "€"
+else:
+    UserCurrencySymbol = "(?)"
+
 def GetCart(self):
     UserInfoFu = self.get_cookie("Fu")
     UserCartQuery = "SELECT pid,qty from cart where uid='{0:d}'".format(int(UserInfoFu))
@@ -94,8 +115,6 @@ def ServePage(self,pageloc,ForceLogin):
         HeadHTML = HeadHTML_F.read()
     with open("/root/maxima/templates/footer.html") as FooterHTML_F:
         FooterHTML = FooterHTML_F.read()
-    with open("/root/maxima/templates/nation_options.html") as NationOptionsHTML_F:
-        NationOptionsHTML = NationOptionsHTML_F.read()
     FooterHTML = FooterHTML.replace("<% NationOptions %>",NationOptionsHTML)
     
     # Open Requested Page
@@ -120,7 +139,7 @@ def ServePage(self,pageloc,ForceLogin):
     else:
         FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
     PageIndex = PageIndex.replace("<% Footer %>",FooterHTML)
-    PageIndex = PageIndex.replace("<% NationOptions %>",NationOptionsHTML)
+    PageIndex = PageIndex.replace("<% NationOptions %>",NationList)
     
     # Return Page
     self.set_status(200)
@@ -151,17 +170,6 @@ def FindAddress(adid):
             return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
     except:
         return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
-
-
-SpecifyCurrencyList = ["$"]
-
-UserCurrency = "USD"
-if UserCurrency=="USD" or UserCurrency=="CAD":
-    UserCurrencySymbol = "$"
-elif UserCurrency=="EUR":
-    UserCurrencySymbol = "€"
-else:
-    UserCurrencySymbol = "(?)"
 
 def FindProduct(pid):
     try:
