@@ -109,9 +109,20 @@ def ServePage(self,pageloc,ForceLogin):
     for i in UserLanguagesUnclean:
         if len(i) == 2:
             UserLanguagesList.append(i)
-            if i in AcceptedLanguages.keys() and not UserLanguage:
+            if i in AcceptedLanguages.keys() and UserLanguage == "":
                 UserLanguage = i
-    print(UserLanguage)
+    LanguageOptions = ""
+    for i in AcceptedLanguages.keys():
+        if UserLanguage in AcceptedLanguages:
+            if i == UserLanguage:
+                SelectedLanguageLi = " selected"
+            else:
+                SelectedLanguageLi = ""
+        elif i == "en":
+            SelectedLanguageLi = " selected"
+        else:
+            SelectedLanguageLi = ""
+        LanguageOptions += "<option value=\""+i+"\""+SelectedLanguageLi+">"+AcceptedLanguages[i]+"</option>"
     
     # Define Basics
     HeaderLISignIn = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
@@ -151,6 +162,7 @@ def ServePage(self,pageloc,ForceLogin):
     if UserInfoFa == "true":
         FooterHTML = FooterHTML.replace("<% CookieNotif %>","")
         FooterHTML = FooterHTML.replace("<% NationOptions %>",NationList)
+        FooterHTML = FooterHTML.replace("<% LanguageOptions %>",LanguageOptions)
     else:
         FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
         FooterHTML = FooterHTML.replace("<% NationOptions %>",NationListDefault)
