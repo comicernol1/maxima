@@ -227,7 +227,7 @@ def FindProduct(pid):
             FindProductHasImg = False
         FindProductDict = {"Display":FindProductDisp,"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean,"HasImg":FindProductHasImg}
     else:
-        FindProductDict = {"Display":0,"Name":"","Description":"","Price":0.00,"Discount":0,"Colour":"000000","ColourName":"","ContentsDict":json.loads("{'Main':['']}"),"Wash":"0","Bleach":"0","Dry":"0","Wring":"0","DryClean":"0","HasImg":False}
+        FindProductDict = {"Display":0,"Name":"","Description":"","Price":0.00,"Discount":0,"Colour":"000000","ColourName":"","ContentsDict":{'Main':['']},"Wash":"0","Bleach":"0","Dry":"0","Wring":"0","DryClean":"0","HasImg":False}
     return FindProductDict
 
 def FindProductColours(pid):
