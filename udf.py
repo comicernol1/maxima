@@ -64,7 +64,7 @@ def SetCookie(self):
         return False
 
 # User Language
-AcceptedLanguages = {"en":"English","fr":"French","de"}
+AcceptedLanguages = {"en":"English","fr":"French","de":"German"}
 UserLanguage = "en"
 
 # User Nation
