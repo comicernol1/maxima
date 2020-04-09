@@ -105,7 +105,7 @@ def ServePage(self,pageloc,ForceLogin):
     AcceptedLanguages = {"en":"English","fr":"French","de":"German"}
     UserLanguagesUnclean = re.split(" |,|;",self.request.headers.get("Accept-Language"))
     UserLanguagesList = []
-    global UserLanguage
+    UserLanguage = ""
     for i in UserLanguagesUnclean:
         if len(i) == 2:
             UserLanguagesList.append(i)
