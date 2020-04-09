@@ -13,7 +13,7 @@ class handler(tornado.web.RequestHandler):
                     LOCRequestNation = LOCRequest[(LOCRequest.index("nt=")+3):LOCRequest.index("&lg=")]
                     LOCRequestLanguage = LOCRequest[(LOCRequest.index("&lg=")+4):len(LOCRequest)]
                     self.set_cookie("Fn",LOCRequestNation)
-                    self.set_cookie("FL",LOCRequestNation)
+                    self.set_cookie("FL",LOCRequestLanguage)
                     self.write("A")
                 else:
                     self.write("E_A")
