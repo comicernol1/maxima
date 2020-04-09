@@ -28,7 +28,7 @@ function M_menu_hide(){Hm.style.display="none";}
     </p>
 </footer>
 <script>
-FL=document.getElementById("FL");
+FLi=document.getElementById("FL");
 Fn=document.getElementById("Fn");
 function F_CLn(){
     var xhttp=new XMLHttpRequest();
@@ -39,6 +39,6 @@ function F_CLn(){
     };
     xhttp.open("POST", "/account/locales/", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("nt="+Fn.value+"&lg="+FL.value);
+    xhttp.send("nt="+Fn.value+"&lg="+FLi.value);
 }
 </script>
