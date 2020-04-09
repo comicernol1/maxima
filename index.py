@@ -2,7 +2,7 @@ import os,tornado.web,tornado.ioloop
 import HomeHand,ContactHand
 import SignInHand,ForgotPWHand,ResetPWHand
 import SignUpHand,VerifyHand
-import AccountHand
+import AccountHand,ChangeLocalesAjax
 import ProductHand,CartHand
 import AddToCartAjax,RefreshCartAjax
 import TestingHand
@@ -19,6 +19,7 @@ if __name__ == "__main__":
         (r"/sign_up/", SignUpHand.handler),
         (r"/verify/", VerifyHand.handler),
         (r"/account/", AccountHand.handler),
+        (r"/account/locales/", ChangeLocalesAjax.handler),
         (r"/product/.*", ProductHand.handler),
         (r"/cart/", CartHand.handler),
         (r"/legal/terms_and_conditions/", InfoHand.TermsConditions),
