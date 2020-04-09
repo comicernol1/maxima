@@ -3,6 +3,19 @@
 Hm=document.getElementById("Hm");
 function M_menu_show(){Hm.style.display="block";}
 function M_menu_hide(){Hm.style.display="none";}
+FL=document.getElementById("FL");
+Fn=document.getElementById("Fn");
+function F_CLn(){
+    var xhttp=new XMLHttpRequest();
+    xhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            if (this.responseText=="A"){location.reload();}
+        }
+    };
+    xhttp.open("POST", "/account/locales/", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("nt="+Fn.value+"&lg="+FL.value);
+}
 </script>
 <footer id="Foot">
     <table id="Ft"><tbody>
