@@ -111,15 +111,18 @@ def ServePage(self,pageloc,ForceLogin):
             UserLanguagesList.append(i)
             if i in AcceptedLanguages.keys() and UserLanguage == "":
                 UserLanguage = i
+    global LanguageListDefault
     LanguageOptions = ""
     for i in AcceptedLanguages.keys():
         if UserLanguage in AcceptedLanguages:
             if i == UserLanguage:
                 SelectedLanguageLi = " selected"
+                LanguageListDefault = "<option value=\""+i+"\" selected>"+AcceptedLanguages[i]+"</option>"
             else:
                 SelectedLanguageLi = ""
         elif i == "en":
             SelectedLanguageLi = " selected"
+            LanguageListDefault = "<option value=\"en\" selected>English</option>"
         else:
             SelectedLanguageLi = ""
         LanguageOptions += "<option value=\""+i+"\""+SelectedLanguageLi+">"+AcceptedLanguages[i]+"</option>"
@@ -166,6 +169,7 @@ def ServePage(self,pageloc,ForceLogin):
     else:
         FooterHTML = FooterHTML.replace("<% CookieNotif %>",CookieNotifDiv)
         FooterHTML = FooterHTML.replace("<% NationOptions %>",NationListDefault)
+        FooterHTML = FooterHTML.replace("<% LanguageOptions %>",LanguageListDefault)
     PageIndex = PageIndex.replace("<% Footer %>",FooterHTML)
     PageIndex = PageIndex.replace("<% NationOptions %>",NationList)
     
