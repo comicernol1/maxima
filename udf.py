@@ -102,7 +102,7 @@ def GetCart(self):
 
 def ServePage(self,pageloc,ForceLogin):
     # User Language
-    AcceptedLanguages = {"en":"English","fr":"French","de":"German"}
+    AcceptedLanguages = {"en":"English","fr":"Français","de":"Deutsche"}
     UserLanguagesUnclean = re.split(" |,|;",self.request.headers.get("Accept-Language"))
     UserLanguagesList = []
     UserLanguage = ""
