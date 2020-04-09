@@ -204,11 +204,11 @@ def FindAddress(adid):
         return {"StAddA":"","StAddB":"","City":"","Zip":"","Prov":"","Ntn":""}
 
 def FindProduct(pid):
-    try:
-        FindProductQuery = "SELECT disp,ttl,description,price_"+UserCurrency.lower()+",discount,colour,colour_name,contents_dict,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
-        mycursor.execute(FindProductQuery)
-        FindProductFetch = mycursor.fetchone()
-        FindProductDisp = str(FindProductFetch[0])
+    FindProductQuery = "SELECT disp,ttl,description,price_"+UserCurrency.lower()+",discount,colour,colour_name,contents_dict,wash,bleach,dry,wring,dryclean from products where id='{0:d}'".format(int(pid))
+    mycursor.execute(FindProductQuery)
+    FindProductFetch = mycursor.fetchone()
+    if FindProductFetch:
+        FindProductDisp = int(FindProductFetch[0])
         FindProductName = str(FindProductFetch[1])
         FindProductDesc = str(FindProductFetch[2])
         FindProductPrice = float(FindProductFetch[3])
@@ -226,9 +226,9 @@ def FindProduct(pid):
         else:
             FindProductHasImg = False
         FindProductDict = {"Display":FindProductDisp,"Name":FindProductName,"Description":FindProductDesc,"Price":FindProductPrice,"Discount":FindProductDiscount,"Colour":FindProductColour,"ColourName":FindProductColourName,"ContentsDict":FindProductContentsDict,"Wash":FindProductWash,"Bleach":FindProductBleach,"Dry":FindProductDry,"Wring":FindProductWring,"DryClean":FindProductDryClean,"HasImg":FindProductHasImg}
-        return FindProductDict
-    finally:
-        pass
+    else:
+        FindProductDict = {"Display":0,"Name":"","Description":"","Price":0.00,"Discount":0,"Colour":"000000","ColourName":"","ContentsDict":json.loads("{'Main':['']}"),"Wash":"0","Bleach":"0","Dry":"0","Wring":"0","DryClean":"0","HasImg":False}
+    return FindProductDict
 
 def FindProductColours(pid):
     UniversalPID = pid[0:7]
