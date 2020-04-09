@@ -8,7 +8,7 @@ class handler(tornado.web.RequestHandler):
             if len(i) == 2:
                 UserLanguages.append(i)
         self.write(str(UserLanguages))
-        # VerifyIndex = ServePage(self,"/sign_up/verified.html",False)
+        VerifyIndex = ServePage(self,"/sign_up/verified.html",False)
         # VerifyIndex = VerifyIndex.replace("<% VerificationMsg %>","<div id=\"rg_block\" hg=\"ue\">This Email is already verified</div>")
         # self.write(VerifyIndex)
     
