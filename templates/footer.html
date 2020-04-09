@@ -31,10 +31,10 @@ function F_CLn(){
     </tbody></table>
     <hr>
     <p id="FPu">
-        <select id="FL">
+        <select id="FL" onchange="F_CLn()">
             <% LanguageOptions %>
         </select><span id="FLo"></span>
-        <select id="country" name="country">
+        <select id="Fn" onchange="F_CLn()">
             <% NationOptions %>
         </select><span id="FNo"></span>
         <u id="FPUc">Copyright &copy; 2020 Harrison Reed Sienkiewicz</u>
