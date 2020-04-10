@@ -100,6 +100,7 @@ def ServePage(self,pageloc,ForceLogin):
     if UserInfoFL != "" and UserInfoFL in AcceptedLanguages:
         UserLanguage = UserInfoFL
     else:
+        global UserLanguage
         UserLanguage = ""
         UserLanguagesUnclean = re.split(" |,|;",str(self.request.headers.get("Accept-Language")))
         UserLanguagesList = []
@@ -119,7 +120,7 @@ def ServePage(self,pageloc,ForceLogin):
                 LanguageListDefault = "<option value=\""+i+"\" selected>"+AcceptedLanguages[i]+"</option>"
             else:
                 SelectedLanguageLi = ""
-        LanguageOptions += "<option value=\""+i+"\""+SelectedLanguageLi+">"+AcceptedLanguages[i]+"</option>"
+            LanguageOptions += "<option value=\""+i+"\""+SelectedLanguageLi+">"+AcceptedLanguages[i]+"</option>"
     else:
         SelectedLanguageLi = ""
     
