@@ -154,9 +154,9 @@ def ServePage(self,pageloc,ForceLogin):
         HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
     
     # Open Templates
-    with open("/root/maxima/templates/head.html") as HeadHTML_F:
+    with open("/root/maxima/"+UserLanguage+"/templates/head.html") as HeadHTML_F:
         HeadHTML = HeadHTML_F.read()
-    with open("/root/maxima/templates/footer.html") as FooterHTML_F:
+    with open("/root/maxima/"+UserLanguage+"/templates/footer.html") as FooterHTML_F:
         FooterHTML = FooterHTML_F.read()
     
     # Open Requested Page
