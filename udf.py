@@ -88,6 +88,7 @@ def GetCart(self):
 
 def ServePage(self,pageloc,ForceLogin):
     # User Language
+    global UserLanguage
     if self.get_cookie("Fn"):
         UserInfoFn = str(self.get_cookie("Fn")).lower()
     else:
@@ -100,7 +101,6 @@ def ServePage(self,pageloc,ForceLogin):
     if UserInfoFL != "" and UserInfoFL in AcceptedLanguages:
         UserLanguage = UserInfoFL
     else:
-        global UserLanguage
         UserLanguage = ""
         UserLanguagesUnclean = re.split(" |,|;",str(self.request.headers.get("Accept-Language")))
         UserLanguagesList = []
