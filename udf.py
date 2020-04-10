@@ -161,8 +161,12 @@ def ServePage(self,pageloc,ForceLogin):
         FooterHTML = FooterHTML_F.read()
     
     # Open Requested Page
-    with open("/root/maxima/"+UserLanguage+"/req"+str(pageloc)) as PageIndex_F:
-        PageIndex = PageIndex_F.read()
+    try:
+        with open("/root/maxima/"+UserLanguage+"/req"+str(pageloc)) as PageIndex_F:
+            PageIndex = PageIndex_F.read()
+    except FileNotFoundError:
+        with open("/root/maxima/"+UserLanguage+"/req/status/404.html") as PageIndex_F:
+            PageIndex = PageIndex_F.read()
     if CheckLogin(self) or ForceLogin and self.get_cookie("Fu"):
         UserCartCnt = 0
         UserCartList = GetCart(self)
