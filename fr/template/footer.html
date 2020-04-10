@@ -1,0 +1,44 @@
+<% CookieNotif %>
+<script>
+Hm=document.getElementById("Hm");
+function M_menu_show(){Hm.style.display="block";}
+function M_menu_hide(){Hm.style.display="none";}
+</script>
+<footer id="Foot">
+    <table id="Ft"><tbody>
+        <tr><th>Découvrez-Nous</th><th>Juridique</th></tr>
+        <tr><td><a href="/propos/">À Propos</a></td><td><a href="/legal/conditions_generales/">Conditions Générales</a></td></tr>
+        <tr><td><a href="/livraison_et_rendre/">Livraison & Rendre</a></td><td><a href="/legal/confidentialite/">Confidentialité</a></td></tr>
+        <tr><td><a href="/paiement/">Paiement</a></td><td><a href="/legal/cookies/">Cookies</a></td></tr>
+        <tr><td><a href="/accessibilite/">Accessibilité</a></td><td><a href="/signaler_une_contrefacon/">Signaler une Contrefaçon</a></td></tr>
+        <tr><td><a href="/contact/">Contact</a></td><td><a href="/legal/garantie/">Garantie</a></td></tr>
+        <tr><!--<td><a href="/faq/">FAQ</a></td><td><a href="/legal/marques_deposee/">Marques Déposée</a></td>--></tr>
+        <tr><!--<td><a href="/durabilite/">Durabilité</a></td>--></tr>
+        <tr><!--<td><a href="/carrieres/">Carrières</a></td>--></tr>
+    </tbody></table>
+    <hr>
+    <p id="FPu">
+        <select id="FL" onchange="F_CLn()">
+            <% LanguageOptions %>
+        </select><span id="FLo"></span>
+        <select id="Fn" onchange="F_CLn()">
+            <% NationOptions %>
+        </select><span id="FNo"></span>
+        <u id="FPUc">Droit d'Auteur &copy; 2020 Harrison Reed Sienkiewicz</u>
+    </p>
+</footer>
+<script>
+FLi=document.getElementById("FL");
+Fn=document.getElementById("Fn");
+function F_CLn(){
+    var xhttp=new XMLHttpRequest();
+    xhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            if (this.responseText=="A"){location.reload();}
+        }
+    };
+    xhttp.open("POST", "/account/locales/", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("nt="+Fn.value+"&lg="+FLi.value);
+}
+</script>
