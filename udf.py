@@ -88,15 +88,26 @@ def GetCart(self):
 
 def ServePage(self,pageloc,ForceLogin):
     # User Language
+    if self.get_cookie("Fn"):
+        UserInfoFn = str(self.get_cookie("Fn"))
+    else:
+        UserInfoFn = ""
+    if self.get_cookie("FL"):
+        UserInfoFL = str(self.get_cookie("FL"))
+    else:
+        UserInfoFL = ""
     AcceptedLanguages = {"en":"English","fr":"Français"}
-    UserLanguagesUnclean = re.split(" |,|;",str(self.request.headers.get("Accept-Language")))
-    UserLanguagesList = []
-    UserLanguage = ""
-    for i in UserLanguagesUnclean:
-        if len(i) == 2:
-            UserLanguagesList.append(i)
-            if i in AcceptedLanguages.keys() and UserLanguage == "":
-                UserLanguage = i
+    if UserInfoFL != "" and UserInfoFL in AcceptedLanguages:
+        UserLanguage = UserInfoFL
+    else:
+        UserLanguage = ""
+        UserLanguagesUnclean = re.split(" |,|;",str(self.request.headers.get("Accept-Language")))
+        UserLanguagesList = []
+        for i in UserLanguagesUnclean:
+            if len(i) == 2:
+                UserLanguagesList.append(i)
+                if i in AcceptedLanguages.keys() and UserLanguage == "":
+                    UserLanguage = i
     LanguageListDefault = ""
     LanguageOptions = ""
     for i in AcceptedLanguages.keys():
