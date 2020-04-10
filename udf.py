@@ -108,21 +108,21 @@ def ServePage(self,pageloc,ForceLogin):
                 UserLanguagesList.append(i)
                 if i in AcceptedLanguages.keys() and UserLanguage == "":
                     UserLanguage = i
+        if UserLanguage == "":
+            UserLanguage = "en"
     LanguageListDefault = ""
     LanguageOptions = ""
-    for i in AcceptedLanguages.keys():
-        if UserLanguage in AcceptedLanguages:
+    if UserLanguage in AcceptedLanguages:
+        for i in AcceptedLanguages.keys():
             if i == UserLanguage:
                 SelectedLanguageLi = " selected"
                 LanguageListDefault = "<option value=\""+i+"\" selected>"+AcceptedLanguages[i]+"</option>"
             else:
                 SelectedLanguageLi = ""
-        elif i == "en":
-            SelectedLanguageLi = " selected"
-            LanguageListDefault = "<option value=\"en\" selected>English</option>"
-        else:
-            SelectedLanguageLi = ""
         LanguageOptions += "<option value=\""+i+"\""+SelectedLanguageLi+">"+AcceptedLanguages[i]+"</option>"
+    else:
+        SelectedLanguageLi = ""
+    
     
     # User Nation
     global NationDict,NationDict_EN,NationDict_FR
@@ -160,7 +160,7 @@ def ServePage(self,pageloc,ForceLogin):
         FooterHTML = FooterHTML_F.read()
     
     # Open Requested Page
-    with open("/root/maxima/req"+str(pageloc)) as PageIndex_F:
+    with open("/root/maxima/"+UserLanguage+"/req"+str(pageloc)) as PageIndex_F:
         PageIndex = PageIndex_F.read()
     if CheckLogin(self) or ForceLogin and self.get_cookie("Fu"):
         UserCartCnt = 0
