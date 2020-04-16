@@ -29,9 +29,8 @@ if __name__ == "__main__":
         (r"/refresh_cart/", RefreshCartAjax.handler),
         (r"/test/", TestingHand.handler),
         (r"/.*", InfoHand.NotFound)
+        print(tornado.web.RequestHandler.path_args)
     ], **settings)
-    
-    print(tornado.web.RequestHandler.path_args)
 
     app.listen(80)
     tornado.ioloop.IOLoop.current().start()
