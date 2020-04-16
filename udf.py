@@ -222,7 +222,6 @@ def CreateCookie(self,cookie_name,cookie_value):
         RequestedHostNatrl = RequestedHostName
         RequestedHostWWW = "www."+RequestedHostName
     self.set_cookie(str(cookie_name),str(cookie_value),str(RequestedHostNatrl))
-    self.set_cookie(str(cookie_name),str(cookie_value),str(RequestedHostWWW))
 
 def FindAddress(adid):
     try:
