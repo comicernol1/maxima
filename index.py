@@ -1,5 +1,5 @@
 import os,tornado.web,tornado.ioloop
-import HomeHand,ContactHand
+import HomeHand,AboutHand,ContactHand
 import SignInHand,ForgotPWHand,ResetPWHand
 import SignUpHand,VerifyHand
 import AccountHand,ChangeLocalesAjax
@@ -12,6 +12,7 @@ from settings import settings
 if __name__ == "__main__":
     app = tornado.web.Application([
         (r"/", HomeHand.handler),
+        (r"/about_us/", AboutHand.handler),
         (r"/contact/", ContactHand.handler),
         (r"/sign_in/", SignInHand.handler),
         (r"/sign_in/forgot_password/", ForgotPWHand.handler),
