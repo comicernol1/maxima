@@ -1,6 +1,7 @@
 from udf import *
 
 def handler(self):
+    SetCookie(self,"FF","Hello World")
     # Generate Products List
     HomeProductList = ""
     mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,colour,colour_name FROM products WHERE disp=1 GROUP BY left(id,7)")
