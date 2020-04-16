@@ -1,15 +1,14 @@
 import os,tornado.web,tornado.ioloop
-import HomeHand,AboutHand,ContactHand
-import SignInHand,ForgotPWHand,ResetPWHand
-import SignUpHand,VerifyHand
-import AccountHand,ChangeLocalesAjax
-import ProductHand,CartHand
-import AddToCartAjax,RefreshCartAjax
-import TestingHand
-import InfoHand
+import K_HomeHand
+import F_HomeHand
 
 class handler(tornado.web.RequestHandler):
     def get(self):
-        print(self.request.host)
-        if self.request.path == "/":
-            HomeHand.handler(self)
+        if self.request.host == "kelimart.com" || self.request.host == "www.kelimart.com":
+            if self.request.path == "/":
+                K_HomeHand.handler(self)
+        elif self.request.host == "franzar.com" || self.request.host == "www.franzar.com":
+            if self.request.path == "/":
+                F_HomeHand.handler(self)
+        else:
+            pass
