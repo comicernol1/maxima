@@ -1,4 +1,4 @@
-import os,re,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
+import os,re,random,base64,fnmatch,json,datetime,tornado.web,urllib.parse,mysql.connector,smtplib
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
 Enc32b = Fernet(base64.b64encode(os.environ["Enc32b"].encode()))
@@ -214,9 +214,8 @@ def ServePage(self,pageloc,ForceLogin):
     return PageIndex
 
 def CreateCookie(self,cookie_name,cookie_value):
-    var a = new Date();
-a = new Date(a.getTime() +1000*60*60*24*365);
-    self.set_cookie("FF","HelloWorld","kelimart.com",a.toGMTString(),"/")
+    a = datetime.date((datetime.now()+1000*60*60*24*365);
+    self.set_cookie("FF","HelloWorld","kelimart.com",a,"/")
     # self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+";")
 
 def FindAddress(adid):
