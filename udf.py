@@ -50,7 +50,7 @@ def SendVerificationEmail(self,eml):
     SVEMail.sendmail('comicernol@gmail.com',eml,SVESMTPContent)
     SVEMail.close()
 
-def SetCookie(self):
+def AcceptCookies(self):
     CheckCookieRequestBody = self.request.body.decode('utf-8')
     if CheckCookieRequestBody.find("ackc=") >= 0:
         CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
