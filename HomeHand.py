@@ -1,6 +1,6 @@
 from udf import *
 
-handler(self):
+def handler(self):
     # Generate Products List
     HomeProductList = ""
     mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,colour,colour_name FROM products WHERE disp=1 GROUP BY left(id,7)")
