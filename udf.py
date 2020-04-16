@@ -215,8 +215,8 @@ def ServePage(self,pageloc,ForceLogin):
     return PageIndex
 
 def CreateCookie(self,cookie_name: str,cookie_value: str,*args,**kwargs):
-    cookie_expires = int(args[0])
-    if cookie_expires != None:
+    if args[0] != None:
+        cookie_expires = int(args[0])
         ExpiresDateString = "expires:"+str(datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires))+"; "
     else:
         ExpiresDateString = ""
