@@ -214,7 +214,15 @@ def ServePage(self,pageloc,ForceLogin):
     return PageIndex
 
 def CreateCookie(self,cookie_name,cookie_value):
-    self.set_cookie("Fu","Hello World")
+    RequestedHostName = self.request.host
+    if RequestedHostName.find("www.") >= 0:
+        RequestedHostNatrl = RequestedHostName[(RequestedHostName.find("www.") + 4):]
+        RequestedHostWWW = RequestedHostName
+    else:
+        RequestedHostNatrl = RequestedHostName
+        RequestedHostWWW = "www."+RequestedHostName
+    self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostNatrl)
+    self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostWWW)
 
 def FindAddress(adid):
     try:
