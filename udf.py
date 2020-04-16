@@ -214,7 +214,7 @@ def ServePage(self,pageloc,ForceLogin):
     return PageIndex
 
 def CreateCookie(self,cookie_name,cookie_value):
-    self.set_cookie("Fu","HW")
+    self.set_cookie("Fu","Hello World")
 
 def FindAddress(adid):
     try:
