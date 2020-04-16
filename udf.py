@@ -213,7 +213,7 @@ def ServePage(self,pageloc,ForceLogin):
     self.set_header("Server", "Harrison Sienkiewicz (Tornado Server)")
     return PageIndex
 
-def SetCookie(self,cookie_name,cookie_value):
+def CreateCookie(self,cookie_name,cookie_value):
     self.set_cookie("FF","Hello World")
 
 def FindAddress(adid):
