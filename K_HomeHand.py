@@ -37,4 +37,4 @@ def handler(self):
     self.write(HomeIndex)
 
 def post(self):
-    SetCookie(self)
+    AcceptCookies(self)
