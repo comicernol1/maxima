@@ -8,4 +8,6 @@ import AddToCartAjax,RefreshCartAjax
 import TestingHand
 import InfoHand
 
-print(tornado.web.RequestHandler.path_args)
+class handler(tornado.web.RequestHandler):
+    def get(self):
+        print(self.request.uri)
