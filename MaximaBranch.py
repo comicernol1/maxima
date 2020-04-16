@@ -10,4 +10,5 @@ import InfoHand
 
 class handler(tornado.web.RequestHandler):
     def get(self):
-        print(self.request.uri)
+        if self.request.uri == "/":
+            print("Hello World")
