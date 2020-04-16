@@ -214,9 +214,10 @@ def ServePage(self,pageloc,ForceLogin):
     self.set_header("Server", "Harrison Sienkiewicz (Tornado Server)")
     return PageIndex
 
-def CreateCookie(self,cookie_name,cookie_value,*args,**kwargs):
+def CreateCookie(self,cookie_name: str,cookie_value: str,*args,**kwargs):
+    cookie_expires = int(args[0])
     if cookie_expires != None:
-        ExpiresDateString = "expires:"+str(datetime.fromtimestamp(int(datetime.today().timestamp())+int(args[0])))+"; "
+        ExpiresDateString = "expires:"+str(datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires))+"; "
     else:
         ExpiresDateString = ""
     RequestedHostName = self.request.host
