@@ -215,7 +215,7 @@ def ServePage(self,pageloc,ForceLogin):
     return PageIndex
 
 def CreateCookie(self,cookie_name,cookie_value):
-    a = datetime.date(datetime.today().timestamp()+1000)
+    a = datetime.date(int(datetime.today().timestamp())+1000)
     self.set_cookie("FF","HelloWorld","kelimart.com",a,"/")
     # self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+";")
 
