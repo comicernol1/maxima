@@ -212,7 +212,10 @@ def ServePage(self,pageloc,ForceLogin):
     self.set_header("Access-Control-Allow-Headers", "*")
     self.set_header("Server", "Harrison Sienkiewicz (Tornado Server)")
     return PageIndex
-    
+
+def SetCookie(self,cookie_name,cookie_value):
+    self.set_cookie(cookie_name,cookie_value)
+
 def FindAddress(adid):
     try:
         FindAddressQuery = "SELECT stadda,staddb,city,zip,prov,ntn from addresses where adid='{0:d}'".format(int(adid))
