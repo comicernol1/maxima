@@ -87,6 +87,13 @@ def GetCart(self):
     return UserCartList
 
 def ServePage(self,pageloc,ForceLogin):
+    RequestedHostName = self.request.host
+    RequestedHostPre = RequestedHostName[0:RequestedHostName.index(".com")]
+    if "www." in RequestedHostPre:
+        RequestedHostBase = RequestedHostPre[(RequestedHostPre.index("www.") + 4):]
+    else:
+        RequestedHostBase = RequestedHostPre
+    
     # User Language
     global UserLanguage
     if self.get_cookie("Fn"):
@@ -165,10 +172,10 @@ def ServePage(self,pageloc,ForceLogin):
     
     # Open Requested Page
     try:
-        with open("/root/maxima/"+UserLanguage+"/req"+str(pageloc)) as PageIndex_F:
+        with open("/root/maxima/"+RequestedHostBase+"/"+UserLanguage+"/req"+str(pageloc)) as PageIndex_F:
             PageIndex = PageIndex_F.read()
     except FileNotFoundError:
-        with open("/root/maxima/"+UserLanguage+"/req/status/incomplete.html") as PageIndex_F:
+        with open("/root/maxima/"+RequestedHostBase+"/"+UserLanguage+"/req/status/incomplete.html") as PageIndex_F:
             PageIndex = PageIndex_F.read()
     if CheckLogin(self) or ForceLogin and self.get_cookie("Fu"):
         UserCartCnt = 0
