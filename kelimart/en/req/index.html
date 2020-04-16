@@ -1,0 +1,26 @@
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/home.css">
+    <title>FRANZAR&trade; Official Site</title>
+    <% Head %>
+</head>
+<body>
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<header id="Hdr">
+    <h1>FRANZAR</h1>
+    <h2>Custom tailored clothes made affordable.</h2>
+    <a href="/about_us/" id="HdrLk">About Us</a>
+</header>
+<center id="BPa">
+    <% Products %>
+</center>
+<% Footer %>
+<script>
+if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
+document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
+</script>
+</body></html>
