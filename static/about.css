@@ -1,0 +1,8 @@
+#Hdr{width:100%;height:700px;background-image:url("/static/1135762634.jpg");background-size:cover;background-position:center;position:absolute;top:0;left:0;}
+#Hdr::before{width:100%;height:100%;content:"";background:rgba(0,0,0,0.5);position:absolute;top:0;left:0;}
+#Hdr h1{width:100%;font-size:72px;font-weight:300;letter-spacing:5px;margin:0;color:#FAFAFF;text-align:center;text-shadow:0 0 2px #04151F;position:absolute;top:260px;left:0;}
+#Foot{top:700px;}
+@media only screen and (max-width:700px){
+    #Hdr h1{font-size:48px;top:180px;}
+    #Foot{top:940px;}
+}
