@@ -31,7 +31,7 @@ if __name__ == "__main__":
         (r"/.*", InfoHand.NotFound)
     ], **settings)
     
-    print(tornado.web.RequestHandler.request.uri)
+    print(tornado.web.RequestHandler.path_args)
 
     app.listen(80)
     tornado.ioloop.IOLoop.current().start()
