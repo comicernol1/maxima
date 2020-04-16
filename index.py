@@ -7,5 +7,4 @@ if __name__ == "__main__":
     ], **settings)
 
     app.listen(80)
-    print(tornado.web.RequestHandler.path_args)
     tornado.ioloop.IOLoop.current().start()
