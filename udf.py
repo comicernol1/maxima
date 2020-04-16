@@ -214,10 +214,17 @@ def ServePage(self,pageloc,ForceLogin):
     self.set_header("Server", "Harrison Sienkiewicz (Tornado Server)")
     return PageIndex
 
-def CreateCookie(self,cookie_name,cookie_value):
-    a = datetime.fromtimestamp(int(datetime.today().timestamp())+1000)
-    self.set_cookie("FF","HelloWorld","kelimart.com",a,"/")
-    # self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+";")
+def CreateCookie(self,cookie_name: str,cookie_value: Union[str, bytes],cookie_expires: Optional[int],**kwargs: Any):
+    if cookie_expires != None:
+        ExpiresDateString = "expires:"str(datetime.fromtimestamp(int(datetime.today().timestamp())+100000000))+"; "
+    else:
+        ExpiresDateString = ""
+    RequestedHostName = self.request.host
+    if "www." in RequestedHostName:
+        RequestedHostBase = RequestedHostName[(RequestedHostName.index("www.") + 4):]
+    else:
+        RequestedHostBase = RequestedHostName
+    self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+"; Domain:"+RequestedHostBase+"; "+ExpiresDateString+"Path:/;")
 
 def FindAddress(adid):
     try:
