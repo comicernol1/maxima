@@ -31,7 +31,7 @@ def handler(self):
         HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\" title=\""+ReturnProductTitle+"\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColourName+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+ReturnProductTitle+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
 
     # Open
-    HomeIndex = ServePage(self,"/index.html",False)
+    HomeIndex = ServePage(self,"kelimart","/index.html",False)
     HomeIndex = HomeIndex.replace("<% Products %>", HomeProductList)
     self.write(HomeIndex)
 
