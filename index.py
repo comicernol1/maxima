@@ -29,6 +29,7 @@ class RedirectRemoveWWW(tornado.web.RequestHandler):
 
 if __name__ == "__main__":
     app = tornado.web.Application([
+        # (HostMatches(r'(localhost|127\.0\.0\.1)'), []),
         (HostMatches("kelimart.com"), [
             (r"/about_us/", kelimart.AboutHand.handler),
             (r"/account/", kelimart.AccountHand.handler),
