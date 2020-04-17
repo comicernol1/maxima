@@ -51,19 +51,6 @@ def SendVerificationEmail(self,eml):
     SVEMail.sendmail('comicernol@gmail.com',eml,SVESMTPContent)
     SVEMail.close()
 
-def AcceptCookies(self):
-    CheckCookieRequestBody = self.request.body.decode('utf-8')
-    if CheckCookieRequestBody.find("ackc=") >= 0:
-        CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
-        if CheckCookieRequestM == "true":
-            self.set_cookie("Fa","true")
-            self.redirect(self.request.uri)
-            return True
-        else:
-            return False
-    else:
-        return False
-
 # User Currency
 SpecifyCurrencyList = ["$"]
 UserCurrency = "USD"
@@ -218,6 +205,19 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
         ExpiresDateString = None
         
     self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostName,ExpiresDateString,"/",httponly=True)
+
+def AcceptCookies(self):
+    CheckCookieRequestBody = self.request.body.decode('utf-8')
+    if CheckCookieRequestBody.find("ackc=") >= 0:
+        CheckCookieRequestM = urllib.parse.unquote(CheckCookieRequestBody[(CheckCookieRequestBody.index("ackc=")+5):len(CheckCookieRequestBody)])
+        if CheckCookieRequestM == "true":
+            CreateCookie(self,"Fa","true",100000000)
+            self.redirect(self.request.uri)
+            return True
+        else:
+            return False
+    else:
+        return False
 
 def FindAddress(adid):
     try:
