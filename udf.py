@@ -219,12 +219,7 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
         ExpiresDateString = "Expires:"+str(datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires))+"; "
     else:
         ExpiresDateString = ""
-    RequestedHostName = self.request.host
-    if "www." in RequestedHostName:
-        RequestedHostBase = RequestedHostName[(RequestedHostName.index("www.") + 4):]
-    else:
-        RequestedHostBase = RequestedHostName
-    self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+"; Domain:"+RequestedHostBase+"; "+ExpiresDateString+"Path:/; HttpOnly; SameSite=None")
+    self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+"; "+ExpiresDateString+"Path:/")
 
 def FindAddress(adid):
     try:
