@@ -1,4 +1,5 @@
-import os,tornado.web,tornado.ioloop,MaximaBranch
+import os,tornado.web,tornado.ioloop
+import K_HomeHand,F_HomeHand
 from settings import settings
 
 if __name__ == "__main__":
@@ -7,9 +8,13 @@ if __name__ == "__main__":
         (r'/.*', MaximaBranch.handler)
     ], **settings)
     """
-    app = tornado.web.Application([
-    (HostMatches(r'(localhost|127\.0\.0\.1)'),
-        [('/.*', MaximaBranch.handler)]),
+    application = web.Application([
+        (HostMatches("kelimart.com"), [
+            (r"/", K_HomeHand.handler)
+        ]),
+        (HostMatches("franzar.com"), [
+            (r"/", F_HomeHand.handler)
+        ])
     ])
 
     app.listen(80)
