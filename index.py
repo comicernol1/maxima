@@ -11,10 +11,10 @@ if __name__ == "__main__":
     """
     app = tornado.web.Application([
         (HostMatches("kelimart.com"), [
-            (r"/", K_HomeHand.handler)
+            (r"/", kelimart.HomeHand.handler)
         ]),
         (HostMatches("franzar.com"), [
-            (r"/", F_HomeHand.handler)
+            (r"/", franzar.HomeHand.handler)
         ])
     ], **settings)
 
