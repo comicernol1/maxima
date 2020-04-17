@@ -222,7 +222,7 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
     # self.set_cookie('trakr', 'email', httponly=True, samesite="None")
     C = cookies.SimpleCookie()
     C[str(cookie_name)] = str(cookie_value)
-    
+    C.output()
 
 def FindAddress(adid):
     try:
