@@ -16,7 +16,7 @@ if __name__ == "__main__":
         (HostMatches("franzar.com"), [
             (r"/", F_HomeHand.handler)
         ])
-    ])
+    ], **settings)
 
     app.listen(80)
     tornado.ioloop.IOLoop.current().start()
