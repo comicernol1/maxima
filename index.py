@@ -9,7 +9,7 @@ if __name__ == "__main__":
         (r'/.*', MaximaBranch.handler)
     ], **settings)
     """
-    application = tornado.web.Application([
+    app = tornado.web.Application([
         (HostMatches("kelimart.com"), [
             (r"/", K_HomeHand.handler)
         ]),
