@@ -1,6 +1,6 @@
 import os,tornado.web,tornado.ioloop
 from tornado.routing import HostMatches
-import K_HomeHand,F_HomeHand
+import maxima.K_HomeHand
 from settings import settings
 
 if __name__ == "__main__":
