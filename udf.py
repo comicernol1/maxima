@@ -216,10 +216,15 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
     if cookie_expires != None:
         ExpiresDateString = datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires)
     else:
-        ExpiresDateString = ""
+        ExpiresDateString = None
         
     # self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostName,ExpiresDateString,"/",SameSite="Strict")
-    self.set_cookie('trakr', 'email', httponly=True, samesite="None")
+    # self.set_cookie('trakr', 'email', httponly=True, samesite="None")
+    CookieToSet = http.cookies.SimpleCookie()
+    CookieToSet[str(cookie_name)] = str(cookie_value)
+    CookieToSet["expires"] = ExpiresDateString
+    CookieToSet["path"] = "/"
+    
 
 def FindAddress(adid):
     try:
