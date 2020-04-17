@@ -24,7 +24,7 @@ import kelimart.VerifyHand
 import franzar.HomeHand
 
 class RedirectRemoveWWW(tornado.web.RequestHandler):
-    def prepare(self):
+    def get(self):
         self.add_headers("Location", "google.com/")
         # self.write(self.request.host)
 
