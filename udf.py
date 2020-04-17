@@ -223,6 +223,7 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
     C = Morsel()
     C.key = str(cookie_name)
     C.value = str(cookie_value)
+    C.coded_value = str(cookie_value)
     print(C.output())
 
 def FindAddress(adid):
