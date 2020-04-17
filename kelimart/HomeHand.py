@@ -2,7 +2,6 @@ from udf import *
 
 class handler(tornado.web.RequestHandler):
     def get(self):
-        CreateCookie(self,"FF","HelloWorld",100000000)
         # Generate Products List
         HomeProductList = ""
         mycursor.execute("SELECT id,ttl,price_"+UserCurrency.lower()+",discount,colour,colour_name FROM products WHERE disp=1 GROUP BY left(id,7)")
