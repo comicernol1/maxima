@@ -50,6 +50,10 @@ if __name__ == "__main__":
             (r"/verify/", kelimart.VerifyHand.handler),
             (r"/.*", kelimart.InfoHand.NotFound)
         ]),
+        (HostMatches("www.kelimart.com"), [
+            (r"/.*", {"url":"kelimart.com/"})
+        ]),
+        
         (HostMatches("franzar.com"), [
             (r"/", franzar.HomeHand.handler)
         ])
