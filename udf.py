@@ -89,11 +89,7 @@ def GetCart(self):
 
 def ServePage(self,pageloc,ForceLogin):
     RequestedHostName = self.request.host
-    RequestedHostPre = RequestedHostName[0:RequestedHostName.index(".com")]
-    if "www." in RequestedHostPre:
-        RequestedHostBase = RequestedHostPre[(RequestedHostPre.index("www.") + 4):]
-    else:
-        RequestedHostBase = RequestedHostPre
+    RequestedHostBase = RequestedHostName[0:RequestedHostName.index(".com")]
     
     # User Language
     global UserLanguage
@@ -215,11 +211,13 @@ def ServePage(self,pageloc,ForceLogin):
     return PageIndex
 
 def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*args,**kwargs):
+    RequestedHostName = self.request.host
     if cookie_expires != None:
-        ExpiresDateString = "Expires:"+str(datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires))+"; "
+        ExpiresDateString = str(datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires))
     else:
         ExpiresDateString = ""
-    self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+"; "+ExpiresDateString+"Path:/")
+        
+    self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostName,ExpiresDateString,"/")
 
 def FindAddress(adid):
     try:
