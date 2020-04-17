@@ -51,7 +51,7 @@ if __name__ == "__main__":
             (r"/.*", kelimart.InfoHand.NotFound)
         ]),
         (HostMatches("www.kelimart.com"), [
-            (r"/.*", {"url":"kelimart.com/"})
+            (r"/.*", kelimart.InfoHand.NotFound)
         ]),
         
         (HostMatches("franzar.com"), [
