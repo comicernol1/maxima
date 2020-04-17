@@ -7,7 +7,7 @@ if __name__ == "__main__":
         (r'/.*', MaximaBranch.handler)
     ], **settings)
     """
-    app = Application([
+    app = tornado.web.Application([
     (HostMatches(r'(localhost|127\.0\.0\.1)'),
         [('/.*', MaximaBranch.handler)]),
     ])
