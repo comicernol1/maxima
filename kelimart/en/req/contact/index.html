@@ -1,0 +1,36 @@
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/contact.css">
+    <title>FRANZAR&trade; Official Site | Contact</title>
+    <% Head %>
+</head>
+<body>
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<div id="cfer"><% ErrorMsg %></div>
+<form action="" method="POST" id="Cfm">
+    <h1>Contact</h1>
+    <input type="text" id="CFn" name="CFn" placeholder="Full Name">
+    <input type="email" id="CFe" name="CFe" placeholder="Email">
+    <input type="text" id="CFo" name="CFo" placeholder="Order ID (optional)">
+    <textarea id="CFt" name="CFt" data-gramm_editor="false" placeholder="Message"></textarea>
+</form>
+<button id="CFs" onclick="sb_cf()">SUBMIT</button>
+<script>
+cfer=document.getElementById("cfer");
+Cfm=document.getElementById("Cfm");
+CFn=document.getElementById("CFn");
+CFe=document.getElementById("CFe");
+CFt=document.getElementById("CFt");
+function sb_cf(){
+    if (CFn.value!="" && CFt.value!=""){Cfm.submit();}else{
+        cfer.style.display="block";
+        if (CFn.value==""){cfer.innerHTML="Please enter your name";}else{cfer.innerHTML="Please enter your message";}
+    }
+}
+</script>
+<% Footer %>
+</body></html>
