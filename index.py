@@ -1,6 +1,6 @@
 import os,tornado.web,tornado.ioloop
 from tornado.routing import HostMatches
-import ..maxima.kelimart.HomeHand
+from ..maxima.kelimart.HomeHand import handler
 from settings import settings
 
 if __name__ == "__main__":
