@@ -1,5 +1,5 @@
 import os,re,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
-import http.cookies
+from http import cookies
 from datetime import datetime
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
@@ -220,10 +220,8 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
         
     # self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostName,ExpiresDateString,"/",SameSite="Strict")
     # self.set_cookie('trakr', 'email', httponly=True, samesite="None")
-    CookieToSet = http.cookies.SimpleCookie()
-    CookieToSet[str(cookie_name)] = str(cookie_value)
-    CookieToSet[str(cookie_name)]["expires"] = ExpiresDateString
-    CookieToSet[str(cookie_name)]["path"] = "/"
+    C = cookies.SimpleCookie()
+    C[str(cookie_name)] = str(cookie_value)
     
 
 def FindAddress(adid):
