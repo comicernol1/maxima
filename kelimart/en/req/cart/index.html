@@ -1,0 +1,63 @@
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/account.css">
+    <title>FRANZAR&trade; Official Site | Cart</title>
+    <% Head %>
+</head>
+<body onbeforeunload="return RfrCt()">
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<div id="Cm">
+    <h3 id="CIEx" style="display:<% ShowEmptyCartMsg %>;">There are no items in your cart.</h3>
+    <% Cart %>
+</div>
+<% Footer %>
+<style>#Foot{top:<% FootTop %>px;}</style>
+<script>
+HMCi=document.getElementById("HMCi");
+Cm=document.getElementById("Cm");
+function AdjOa(){
+    CIt=Cm.getElementsByClassName("CIt");
+    CtLt="";
+    CiCnt=0;
+    var i;
+    for (i=0;i<CIt.length;i++){
+        CIt[i].style.top=(i*210)+"px";
+        CIq=CIt[i].getElementsByClassName("CIq")[0];
+        if (Number(CIq.value)>10){CIq.value="10";}else if (Number(CIq.value)<=0){CIq.value="1";}
+        CItID=CIt[i].id.replace("CIt_","");
+        CItQty=Number(CIq.value)
+        CiCnt+=CItQty;
+        CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
+    }
+    HMCi.innerText=CiCnt;
+    return CtLt;
+}
+function RfrCt(){
+    var xhttp=new XMLHttpRequest();
+    xhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            if (this.responseText=="A"){
+                return True;
+            }else if (this.responseText=="E_B"){
+                window.open("/sign_in/","_self");
+            }else{
+                alert("Something went wrong.");
+            }
+        }
+    };
+    xhttp.open("POST", "/refresh_cart/", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(AdjOa());
+}
+function RMp(pid){
+    ElmID="CIt_"+pid;
+    document.getElementById(ElmID).parentNode.removeChild(document.getElementById(ElmID));
+    if (Cm.getElementsByClassName("CIt").length==0){document.getElementById("CIEx").style.display="block";}
+    AdjOa();
+}
+</script>
+</body></html>
