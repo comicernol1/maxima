@@ -23,6 +23,10 @@ import kelimart.VerifyHand
 
 import franzar.HomeHand
 
+class RedirectRemoveWWW(tornado.web.RequestHandler):
+    def get(self):
+        self.write("WWW Problem")
+
 if __name__ == "__main__":
     """
     app = tornado.web.Application([
@@ -51,7 +55,7 @@ if __name__ == "__main__":
             (r"/.*", kelimart.InfoHand.NotFound)
         ]),
         (HostMatches("www.kelimart.com"), [
-            (r"/.*", kelimart.InfoHand.NotFound)
+            (r"/.*", RedirectRemoveWWW)
         ]),
         
         (HostMatches("franzar.com"), [
