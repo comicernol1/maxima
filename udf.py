@@ -218,7 +218,7 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
         ExpiresDateString = ""
         
     # self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostName,ExpiresDateString,"/",SameSite="Strict")
-    self.set_secure_cookie('name': 'session_cookie','value': 'session_cookie_value','httponly': True,'expires_days': None,'samesite': 'Strict')
+    self.set_secure_cookie("session_id", "session_key", samesite="None")
 
 def FindAddress(adid):
     try:
