@@ -1,5 +1,5 @@
 import os,re,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
-from http import Morsel
+from http.cookies import Morsel
 from datetime import datetime
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
