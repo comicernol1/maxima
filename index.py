@@ -9,7 +9,7 @@ import kelimart.AccountHand
 import kelimart.AddToCartAjax
 import kelimart.CartHand
 import kelimart.ChangeLocalesAjax
-import kelimart.ConbtactHand
+import kelimart.ContactHand
 import kelimart.ForgotPWHand
 import kelimart.HomeHand
 import kelimart.InfoHand
