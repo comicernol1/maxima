@@ -216,7 +216,7 @@ def ServePage(self,pageloc,ForceLogin):
 
 def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*args,**kwargs):
     if cookie_expires != None:
-        ExpiresDateString = "expires:"+str(datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires))+"; "
+        ExpiresDateString = "Expires:"+str(datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires))+"; "
     else:
         ExpiresDateString = ""
     RequestedHostName = self.request.host
@@ -224,7 +224,7 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
         RequestedHostBase = RequestedHostName[(RequestedHostName.index("www.") + 4):]
     else:
         RequestedHostBase = RequestedHostName
-    self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+"; Domain:"+RequestedHostBase+"; "+ExpiresDateString+"Path:/; HttpOnly; SameSite=None;")
+    self.set_header("Set-Cookie",str(cookie_name)+"="+str(cookie_value)+"; Domain:"+RequestedHostBase+"; "+ExpiresDateString+"Path:/; HttpOnly; SameSite=None")
 
 def FindAddress(adid):
     try:
