@@ -222,8 +222,8 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
     # self.set_cookie('trakr', 'email', httponly=True, samesite="None")
     CookieToSet = http.cookies.SimpleCookie()
     CookieToSet[str(cookie_name)] = str(cookie_value)
-    CookieToSet["expires"] = ExpiresDateString
-    CookieToSet["path"] = "/"
+    CookieToSet[str(cookie_name)]["expires"] = ExpiresDateString
+    CookieToSet[str(cookie_name)]["path"] = "/"
     
 
 def FindAddress(adid):
