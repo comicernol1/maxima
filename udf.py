@@ -1,5 +1,4 @@
 import os,re,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
-from http.cookies import Morsel
 from datetime import datetime
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
@@ -218,14 +217,7 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
     else:
         ExpiresDateString = None
         
-    # self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostName,ExpiresDateString,"/",SameSite="Strict")
-    # self.set_cookie('trakr', 'email', httponly=True, samesite="None")
-    C = Morsel()
-    C.key = str(cookie_name)
-    C.value = str(cookie_value)
-    C.coded_value = str(cookie_value)
-    C["domain"] = "kelimart.com"
-    print(C.output())
+    self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostName,ExpiresDateString,"/",httponly=True, samesite="None")
 
 def FindAddress(adid):
     try:
