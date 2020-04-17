@@ -213,7 +213,7 @@ def ServePage(self,pageloc,ForceLogin):
 def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*args,**kwargs):
     RequestedHostName = self.request.host
     if cookie_expires != None:
-        ExpiresDateString = str(datetime.fromtimestamp(int(datetime.today().timestamp())+cookie_expires))
+        ExpiresDateString = str(int(datetime.today().timestamp())+cookie_expires)
     else:
         ExpiresDateString = ""
         
