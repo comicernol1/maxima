@@ -25,7 +25,8 @@ import franzar.HomeHand
 
 class RedirectRemoveWWW(tornado.web.RequestHandler):
     def get(self):
-        self.write(self.request.host)
+        self.redirect("kelimart.com/")
+        # self.write(self.request.host)
 
 if __name__ == "__main__":
     """
