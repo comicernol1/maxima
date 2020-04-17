@@ -25,7 +25,7 @@ import franzar.HomeHand
 
 class RedirectRemoveWWW(tornado.web.RequestHandler):
     def get(self):
-        self.write("WWW Problem")
+        self.write(self.request.host)
 
 if __name__ == "__main__":
     """
