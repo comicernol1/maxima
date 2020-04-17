@@ -1,0 +1,61 @@
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/product.css">
+    <title>FRANZAR&trade; Official Site | <% ProductName %></title>
+    <% Head %>
+</head>
+<body>
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<div id="Bp" style="background-image:url('<% ProductImgLink %>');"></div>
+<ul id="BPs">
+    <% FullImageList %>
+</ul>
+<div id="Bi">
+    <h1 id="BIn"><% ProductName %></h1>
+    <!--<h6 id="BIr"><span class="r_star_s" r="<% Rating %>"></span> <u><% ReviewCount %> Reviews</u></h6>-->
+    <% ProductPrice %>
+    <div id="BIc">
+        <div id="BIi">
+            <h3>Description:</h3>
+            <% ProductDescription %>
+            <h3>Contents:</h3>
+            <% ProductContents %>
+            <h3>Care Instructions:</h3>
+            <ul><% ProductCare %></ul>
+        </div>
+        <div id="BIt"><% ProductColourOptions %></div>
+        <div id="BIo">
+            <% CartButton %>
+        </div>
+    </div>
+</div>
+<script>
+HMCi=document.getElementById("HMCi");
+BIOq=document.getElementById("BIOq");
+function AdjOq(){if (Number(BIOq.value)>10){BIOq.value="10";}else if (Number(BIOq.value)<1){BIOq.value="1";}}
+function ACt(){
+    var xhttp=new XMLHttpRequest();
+    xhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            if (this.responseText=="A"){
+                HMCi.innerText=Math.floor(Number(HMCi.innerText)+Number(BIOq.value));
+            }else if (this.responseText=="E_F"){
+                alert("You may only order up to 10 of each item.")
+            }else if (this.responseText=="E_B"){
+                window.open("/sign_in/","_self");
+            }else{
+                alert("Something went wrong.");
+            }
+        }
+    };
+    xhttp.open("POST", "/add_to_cart/", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id=<% ProductID %>&qty="+BIOq.value);
+}
+</script>
+<% Footer %>
+</body></html>
