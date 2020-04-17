@@ -218,7 +218,7 @@ def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*ar
         ExpiresDateString = ""
         
     # self.set_cookie(str(cookie_name),str(cookie_value),RequestedHostName,ExpiresDateString,"/",SameSite="Strict")
-    self.set_cookie('trakr', 'email', httponly=True)
+    self.set_cookie('trakr', 'email', samesite='Strict', httponly=True)
 
 def FindAddress(adid):
     try:
