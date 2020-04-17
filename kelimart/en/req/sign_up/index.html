@@ -1,0 +1,48 @@
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/register.css">
+    <title>FRANZAR&trade; Official Site | Sign Up</title>
+    <% Head %>
+</head>
+<body>
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<div class="ser" id="suer"><% ErrorMsg %></div>
+<div id="rg_block" hg="u">
+    <a class="sign_x" id="sign_x_in" s="n" href="/sign_in/">Sign In</a>
+    <a class="sign_x" id="sign_x_up" s="y">Sign Up</a>
+    <form action="" method="POST" id="su_form">
+        <input type="email" placeholder="Email" spellcheck="false" name="suem" id="suem">
+        <input type="password" placeholder="Password" name="supw" id="supw">
+        <h6 id="supwmin">Password must be at least 8 characters long</h6>
+        <input type="password" placeholder="Retype Password" name="supa" id="supa">
+        <p id="suua">By clicking SIGN UP, you agree to our <a href="/legal/terms_and_conditions/" target="_blank">Terms and Conditions</a>, <a href="/legal/privacy_policy/" target="_blank">Privacy Policy</a>, and <a href="/legal/cookie_policy/" target="_blank">Cookie Policy</a>. You may receive email notifications from us, and can opt-out at any time.</p>
+    </form>
+    <button class="rgsb" hg="u" onclick="sb_su()">SIGN UP</button>
+</div>
+<style>#suer{display:<% ShowError %>;}</style>
+<script>
+su_form=document.getElementById("su_form");
+suer=document.getElementById("suer");
+suem=document.getElementById("suem");
+supw=document.getElementById("supw");
+supa=document.getElementById("supa");
+if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
+document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
+function sb_su(){
+    if (supw.value.length>=8 && supw.value==supa.value){
+        suer.style.display="none";
+        su_form.submit();
+    }else{suer.style.display="block";}
+    if (supw.value.length<8){
+        suer.innerHTML="Password must be 8 characters or more";
+    }else if (supw.value!=supa.value){
+        suer.innerHTML="Passwords must match";
+    }
+}
+</script>
+<% Footer %>
+</body></html>
