@@ -25,7 +25,7 @@ import franzar.HomeHand
 
 class RedirectRemoveWWW(tornado.web.RequestHandler):
     def get(self):
-        self.add_headers("Location", "google.com/")
+        self.add_header("Location", "google.com/")
         # self.write(self.request.host)
 
 if __name__ == "__main__":
