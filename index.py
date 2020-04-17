@@ -53,7 +53,7 @@ if __name__ == "__main__":
             (r"/sign_up/", kelimart.SignUpHand.handler),
             (r"/test/", kelimart.TestingHand.handler),
             (r"/verify/", kelimart.VerifyHand.handler),
-            (r"/.*", kelimart.InfoHand.NotFound)
+            (r"/", kelimart.InfoHand.NotFound)
         ]),
         (HostMatches("www.kelimart.com"), [
             (r"/.*", RedirectRemoveWWW)
