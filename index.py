@@ -54,7 +54,19 @@ if __name__ == "__main__":
             (r"/.*", RedirectRemoveWWW)
         ]),
         
+        """
+        (HostMatches("company.kelimart.com"), [
+            (r"/", company_kelimart.HomeHand.handler)
+        ]),
+        (HostMatches("www.company.kelimart.com"), [
+            (r"/", company_kelimart.HomeHand.handler)
+        ]),
+        """
+        
         (HostMatches("franzar.com"), [
+            (r"/", franzar.HomeHand.handler)
+        ]),
+        (HostMatches("www.franzar.com"), [
             (r"/", franzar.HomeHand.handler)
         ])
     ], **settings)
