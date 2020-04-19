@@ -137,16 +137,24 @@ def ServePage(self,pageloc,ForceLogin):
         NationList += "<option value=\""+i+"\""+SelectedNationLi+">"+NationDict[i]+"</option>\n"
     
     # Define Basics
-    HeaderLISignIn = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
-    CookieNotifDiv = "<form id=\"Fackc\" action=\"\" method=\"POST\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <input type=\"hidden\" name=\"ackc\" value=\"true\"><input type=\"submit\" value=\"Accept\"></form>"
+    HeaderLISignIn_EN = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
+    HeaderLISignIn_FR = "<a id=\"HMs\" href=\"/sinscrire/\">S'Inscrire</a>"
+    exec("HeaderLISignIn = HeaderLISignIn_"+UserLanguage.upper())
+    CookieNotifDiv_EN = "<form id=\"Fackc\" action=\"\" method=\"POST\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <input type=\"hidden\" name=\"ackc\" value=\"true\"><input type=\"submit\" value=\"Accept\"></form>"
+    CookieNotifDiv_FR = "<form id=\"Fackc\" action=\"\" method=\"POST\">Ce site internet utilise des cookies. Lisez notre <a href=\"/legal/cookies/\">Politique des Cookies</a> s'il vous plaît. <input type=\"hidden\" name=\"ackc\" value=\"true\"><input type=\"submit\" value=\"Accepter\"></form>"
+    exec("CookieNotifDiv = CookieNotifDiv_"+UserLanguage.upper())
     
     # Define Header Pre
     if pageloc=="/index.html":
-        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
+        HeaderLIPre_EN = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Home</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
+        HeaderLIPre_FR = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\"><b>Accueil</b></a></li><li><a href=\"/contact/\">Contact</a></li>"
     elif pageloc=="/contact/index.html" or pageloc=="/contact/sent.html":
-        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
+        HeaderLIPre_EN = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
+        HeaderLIPre_FR = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Accueil</a></li><li><a href=\"/contact/\"><b>Contact</b></a></li>"
     else:
-        HeaderLIPre = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        HeaderLIPre_EN = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
+        HeaderLIPre_FR = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Accueil</a></li><li><a href=\"/contact/\">Contact</a></li>"
+    exec("HeaderLIPre = HeaderLIPre_"+UserLanguage.upper())
     
     # Open Templates
     with open("/root/maxima/"+RequestedHostBase+"/"+UserLanguage+"/templates/head.html") as HeadHTML_F:
@@ -166,7 +174,9 @@ def ServePage(self,pageloc,ForceLogin):
         UserCartList = GetCart(self)
         for i in range(0,len(UserCartList)):
             UserCartCnt += int(UserCartList[i][1])
-        HeaderLIAccountButton = "<a id=\"HMs\" href=\"/account/\" title=\"My Account\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span id=\"HMCi\">"+str(UserCartCnt)+"</span></a>"
+        HeaderLIAccountButton_EN = "<a id=\"HMs\" href=\"/account/\" title=\"My Account\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span id=\"HMCi\">"+str(UserCartCnt)+"</span></a>"
+        HeaderLIAccountButton_FR = "<a id=\"HMs\" href=\"/compte/\" title=\"Mon Compte\">Mon Compte<span></span></a><a id=\"HMc\" href=\"/panier/\" title=\"Panier\"><span id=\"HMCi\">"+str(UserCartCnt)+"</span></a>"
+        exec("HeaderLIAccountButton = HeaderLIAccountButton_"+UserLanguage.upper())
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLIAccountButton)
     else:
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLISignIn)
