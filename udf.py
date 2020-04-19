@@ -154,7 +154,7 @@ def ServePage(self,pageloc,ForceLogin):
     else:
         HeaderLIPre_EN = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Home</a></li><li><a href=\"/contact/\">Contact</a></li>"
         HeaderLIPre_FR = "<div id=\"M_H_close\" onclick=\"M_menu_hide()\"></div><li><a href=\"/\">Accueil</a></li><li><a href=\"/contact/\">Contact</a></li>"
-    HeaderLIPre = globals()["HeaderLIPre_"+UserLanguage.upper()]
+    HeaderLIPre = vars()["HeaderLIPre_"+UserLanguage.upper()]
     
     # Open Templates
     with open("/root/maxima/"+RequestedHostBase+"/"+UserLanguage+"/templates/head.html") as HeadHTML_F:
