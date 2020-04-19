@@ -21,7 +21,7 @@ import kelimart.SignUpHand
 import kelimart.TestingHand
 import kelimart.VerifyHand
 
-import franzar.HomeHand
+import franzar.F_HomeHand
 
 class RedirectRemoveWWW(tornado.web.RequestHandler):
     def prepare(self):
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         """
         
         (HostMatches("franzar.com"), [
-            (r"/", franzar.HomeHand.handler)
+            (r"/", franzar.F_HomeHand.handler)
         ]),
         (HostMatches("www.franzar.com"), [
             (r"/.*", RedirectRemoveWWW)
