@@ -4,24 +4,8 @@ import tornado.ioloop
 from tornado.routing import HostMatches
 from settings import settings
 
-import kelimart.AboutHand
-import kelimart.AccountHand
-import kelimart.AddToCartAjax
-import kelimart.CartHand
-import kelimart.ChangeLocalesAjax
-import kelimart.ContactHand
-import kelimart.ForgotPWHand
-import kelimart.HomeHand
-import kelimart.InfoHand
-import kelimart.ProductHand
-import kelimart.RefreshCartAjax
-import kelimart.ResetPWHand
-import kelimart.SignInHand
-import kelimart.SignUpHand
-import kelimart.TestingHand
-import kelimart.VerifyHand
-
-import franzar.HomeHand
+import kelimart
+import franzar
 
 class RedirectRemoveWWW(tornado.web.RequestHandler):
     def prepare(self):
@@ -59,7 +43,7 @@ if __name__ == "__main__":
             (r"/", company_kelimart.HomeHand.handler)
         ]),
         (HostMatches("www.company.kelimart.com"), [
-            (r"/", company_kelimart.HomeHand.handler)
+            (r"/.*", RedirectRemoveWWW)
         ]),
         """
         
@@ -67,7 +51,7 @@ if __name__ == "__main__":
             (r"/", franzar.HomeHand.handler)
         ]),
         (HostMatches("www.franzar.com"), [
-            (r"/", franzar.HomeHand.handler)
+            (r"/.*", RedirectRemoveWWW)
         ])
     ], **settings)
 
