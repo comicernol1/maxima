@@ -15,8 +15,10 @@
     <h2>Custom tailored clothes made affordable.</h2>
     <a href="/about_us/" id="HdrLk">About Us</a>
 </header>
-<form id="BPSt">
-    <button id="BPSf" title="Filter Results">Filter</button>
+<div id="BPSt"><button id="BPSf" onclick="OFm()" title="Filter Results">Filter</button></div>
+<form id="BPSo" action="" method="POST">
+    <p class="BPFc"><input type="checkbox" name="pkts"> Has Pockets</p>
+    <input type="submit" value="SHOW 1 RESULT" id="BPS_S">
 </form>
 <center id="BPa">
     <% Products %>
@@ -25,5 +27,8 @@
 <script>
 if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
 document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
+
+BPSo=document.getElementById("BPSo");
+function OFm(){BPSo.style.display="block";}
 </script>
 </body></html>
