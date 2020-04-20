@@ -29,6 +29,7 @@
     #Hdr h2{width:270px;letter-spacing:2px;top:240px;left:calc(50% - 135px);}
     #HdrLk{width:calc(100% - 100px);top:300px;left:50px;}
     #BPSt{top:450px;}
+    #BPSf{right:20px;}
     #BPa{top:500px;}
     #BPa a{display:block;width:300px;height:300px;}
     #BPa a .BPX{top:195px;}
