@@ -8,7 +8,7 @@
 #BPSf::before{width:30px;height:30px;content:"";background-image:url("/static/multiplier_image.png");background-size:180px;background-position:-57px -79px;position:absolute;top:5px;left:3px;}
 #BPSo{display:block;width:100%;height:100%;background:#FAFAFF;position:fixed;z-index:101;top:0;left:0;}
 #BPSo .BPFc{padding:15px 50px;margin:0;font-size:20px;}
-#BPSo .BPFc input[type="checkbox"]::after{top:-9px;}
+#BPSo .BPFc input[type="checkbox"]::after{top:-8px;}
 #BPS_S{width:100%;border-radius:0;position:fixed;bottom:0;left:0;}
 #BPa{width:100%;background:#FAFAFF;position:absolute;top:700px;left:0px;}
 #BPa a{display:inline-block;width:400px;height:400px;box-sizing:border-box;border:1px solid #EAEAEA;text-decoration:none;background:white;background-size:cover;background-position:center;margin:10px;}
