@@ -139,10 +139,10 @@ def ServePage(self,pageloc,ForceLogin):
     # Define Basics
     HeaderLISignIn_EN = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
     HeaderLISignIn_FR = "<a id=\"HMs\" href=\"/sinscrire/\">S'Inscrire</a>"
-    exec("HeaderLISignIn = HeaderLISignIn_"+UserLanguage.upper())
+    HeaderLISignIn = vars()[HeaderLISignIn_"+UserLanguage.upper()]
     CookieNotifDiv_EN = "<form id=\"Fackc\" action=\"\" method=\"POST\">By continuing to use this site, you agree to our <a href=\"/legal/cookie_policy/\">Cookie Policy</a>. <input type=\"hidden\" name=\"ackc\" value=\"true\"><input type=\"submit\" value=\"Accept\"></form>"
     CookieNotifDiv_FR = "<form id=\"Fackc\" action=\"\" method=\"POST\">Ce site internet utilise des cookies. Lisez notre <a href=\"/legal/cookies/\">Politique des Cookies</a> s'il vous plaît. <input type=\"hidden\" name=\"ackc\" value=\"true\"><input type=\"submit\" value=\"Accepter\"></form>"
-    exec("CookieNotifDiv = CookieNotifDiv_"+UserLanguage.upper())
+    CookieNotifDiv = vars()[CookieNotifDiv_"+UserLanguage.upper()]
     
     # Define Header Pre
     if pageloc=="/index.html":
