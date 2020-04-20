@@ -176,7 +176,7 @@ def ServePage(self,pageloc,ForceLogin):
             UserCartCnt += int(UserCartList[i][1])
         HeaderLIAccountButton_EN = "<a id=\"HMs\" href=\"/account/\" title=\"My Account\">My Account<span></span></a><a id=\"HMc\" href=\"/cart/\" title=\"My Cart\"><span id=\"HMCi\">"+str(UserCartCnt)+"</span></a>"
         HeaderLIAccountButton_FR = "<a id=\"HMs\" href=\"/compte/\" title=\"Mon Compte\">Mon Compte<span></span></a><a id=\"HMc\" href=\"/panier/\" title=\"Panier\"><span id=\"HMCi\">"+str(UserCartCnt)+"</span></a>"
-        exec("HeaderLIAccountButton = HeaderLIAccountButton_"+UserLanguage.upper())
+        HeaderLIAccountButton = vars()["HeaderLIAccountButton_"+UserLanguage.upper()]
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLIAccountButton)
     else:
         PageIndex = PageIndex.replace("<% HeaderLI %>",HeaderLIPre+HeaderLISignIn)
