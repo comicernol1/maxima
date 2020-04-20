@@ -57,7 +57,7 @@ input[type="submit"]:active,.rgsb:active{background:#006A3B;}
 #M_H{width:100%;height:50px;background:#FAFAFF;display:none;position:absolute;top:0px;left:0px;}
 #M_H button{width:40px;height:40px;background-image:url("/static/multiplier_image.png");background-color:transparent;background-size:400px;background-position:-240px -265px;border:none;margin:5px 15px;position:absolute;top:0px;left:0px;}
 #M_H_close{display:none;width:40px;height:40px;background-image:url("/static/multiplier_image.png");background-size:400px;background-position:-290px -223px;position:absolute;top:15px;right:15px;}
-#Hm{width:100%;height:100px;color:#FAFAFF;font-size:16px;box-sizing:border-box;list-style-type:none;margin:0;padding:0 15px;position:absolute;z-index:1000;top:0;left:0;}
+#Hm{width:100%;height:100px;color:#FAFAFF;font-size:16px;box-sizing:border-box;list-style-type:none;margin:0;padding:0 15px;position:absolute;z-index:90;top:0;left:0;}
 #Hm li{display:inline-block;padding:0;cursor:pointer;position:relative;top:40px;}
 #Hm li a{font-size:16px;color:#FAFAFF;padding:40px 20px;text-decoration:none;font-weight:300;}
 #Hm li a b{font-weight:300;padding:6px 5px;border-bottom:2px solid #EAEAEA;}
