@@ -3,7 +3,7 @@
 #Hdr h1{width:100%;font-size:72px;font-weight:300;letter-spacing:5px;margin:0;color:#FAFAFF;text-align:center;text-shadow:0 0 2px #04151F;position:absolute;top:260px;left:0;}
 #Hdr h2{width:400px;color:#FAFAFF;font-size:18px;letter-spacing:1px;font-weight:300;text-align:center;margin:0px;text-shadow:0 0 2px #04151F;position:absolute;top:340px;left:calc(50% - 200px);}
 #HdrLk{width:300px;font-size:18px;color:#FAFAFF;text-decoration:none;text-align:center;background:#04151F;padding:6px 0;border:none;position:absolute;top:390px;left:calc(50% - 150px);}
-#BPSt{width:100%;height:50px;box-sizing:border-box;position:-webkit-sticky;position:sticky;top:650px;left:0;}
+#BPSt{width:100%;height:50px;box-sizing:border-box;position:absolute;top:650px;left:0;}
 #BPa{width:100%;background:#FAFAFF;position:absolute;top:700px;left:0px;}
 #BPa a{display:inline-block;width:400px;height:400px;box-sizing:border-box;border:1px solid #EAEAEA;text-decoration:none;background:white;background-size:cover;background-position:center;margin:10px;}
 #BPa a .BPX{width:100%;height:105px;background:rgba(255,255,255,0.75);text-align:left;position:relative;top:295px;left:0px;}
