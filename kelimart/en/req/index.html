@@ -17,7 +17,8 @@
 </header>
 <div id="BPSt"><button id="BPSf" onclick="OFm()" title="Filter Results">Filter</button></div>
 <form id="BPSo" action="" method="POST">
-    <p class="BPFc"><input type="checkbox" v="y" name="pkts"> Has Pockets</p>
+    <h1>Filter Results</h1>
+    <p class="BPFc"><input type="checkbox" v="y" name="pkts"> Has Usable Pockets</p>
     <input type="submit" value="SHOW 1 RESULT" id="BPS_S">
 </form>
 <center id="BPa">
@@ -27,8 +28,6 @@
 <script>
 if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
 document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
-
-BPSo=document.getElementById("BPSo");
-function OFm(){BPSo.style.display="block";}
+function OFm(){document.getElementById("BPSo").style.display="block";}
 </script>
 </body></html>
