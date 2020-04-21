@@ -11,8 +11,8 @@
 #BPSo .BPFc{padding:15px 40px 15px 70px;margin:0;font-size:20px;}
 #BPSo .BPFc input[type="checkbox"]::after{top:-8px;}
 #BPSo .BPFd{font-size:20px;padding:15px 40px 15px 40px;margin:0;}
-#BPSo .BPFd select{width:100%;margin:10px 0;}
-#BPSo .BPFd .DDoB_B{display:block;position:relative;float:right;top:-48px;right:20px;}
+#BPSo .BPFd select{width:100%;margin:10px 0 0 0;}
+#BPSo .BPFd .DDoB_B{display:block;position:relative;float:right;top:-38px;right:20px;}
 #BPS_S{width:100%;border-radius:0;position:fixed;bottom:0;left:0;}
 #BPa{width:100%;background:#FAFAFF;position:absolute;top:700px;left:0px;}
 #BPa a{display:inline-block;width:400px;height:400px;box-sizing:border-box;border:1px solid #EAEAEA;text-decoration:none;background:white;background-size:cover;background-position:center;margin:10px;}
