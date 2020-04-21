@@ -35,7 +35,7 @@ body{overflow-x:hidden;}
     #BIi{top:0;}
     #BIi h3{margin:10px 0 5px 0;}
     #BIi ul{margin:10px 0;}
-    #BIo{width:100%;height:50px;position:fixed;z-index:100;top:calc(100% - 50px);left:0;}
+    #BIo{width:100%;height:50px;position:fixed;z-index:90;top:calc(100% - 50px);left:0;}
     #BIOq{display:block;width:60px;height:100%;border-radius:0;position:absolute;top:0;left:0;}
     #BIOb{display:block;width:calc(100% - 60px);height:100%;border-radius:0;position:absolute;top:0;left:60px;}
     #Foot{top:1300px;}
