@@ -15,7 +15,16 @@
     <h2>Custom tailored clothes made affordable.</h2>
     <a href="/about_us/" id="HdrLk">About Us</a>
 </header>
-<div id="BPSt"><button id="BPSf" onclick="OFm()" title="Filter Results">Filter</button></div>
+<div id="BPSt">
+    <button id="BPSf" onclick="OFm()" title="Filter Results">Filter</button>
+    <button id="BPSr" onclick="OFs()" title="Sort Results">Sort</button>
+    <select id="BPSRL">
+        <option>Relevance</option>
+        <option>Popular</option>
+        <option>Price (Low to High)</option>
+        <option>Price (High to Low)</option>
+    </select>
+</div>
 <form id="BPSo" action="" method="POST">
     <h1>Filter Results</h1>
     <p class="BPFd">
@@ -71,5 +80,6 @@
 if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
 document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
 function OFm(){document.getElementById("BPSo").style.display="block";}
+function OFs(){document.getElementById("BPSRL").click();}
 </script>
 </body></html>
