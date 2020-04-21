@@ -58,7 +58,7 @@ input[type="submit"]:active,.rgsb:active{background:#006A3B;}
 .r_star_s[r="1"]{background-position:-376px -250px;}
 .r_star_s[r="0.5"]{background-position:-376px -275px;}
 .r_star_s[r="0"]{background-position:-392px -250px;}
-#M_H{width:100%;height:50px;background:#FAFAFF;display:none;position:absolute;top:0px;left:0px;}
+#M_H{width:100%;height:50px;background:#FAFAFF;display:none;position:absolute;z-index:90;top:0px;left:0px;}
 #M_H button{width:40px;height:40px;background-image:url("/static/multiplier_image.png");background-color:transparent;background-size:400px;background-position:-240px -265px;border:none;margin:5px 15px;position:absolute;top:0px;left:0px;}
 #M_H_close{display:none;width:40px;height:40px;background-image:url("/static/multiplier_image.png");background-size:400px;background-position:-290px -223px;position:absolute;top:15px;right:15px;}
 #Hm{width:100%;height:100px;color:#FAFAFF;font-size:16px;box-sizing:border-box;list-style-type:none;margin:0;padding:0 15px;position:absolute;z-index:90;top:0;left:0;}
