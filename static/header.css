@@ -72,7 +72,7 @@ input[type="submit"]:active,.rgsb:active{background:#006A3B;}
 #Fackc{width:100%;background:#04151F;font-size:20px;color:#FAFAFF;padding:15px 50px;box-sizing:border-box;position:fixed;z-index:100;bottom:0;left:0;}
 #Fackc a{color:#757780;}
 #Fackc input[type="submit"]{height:auto;cursor:pointer;font-size:20px;font-weight:300;background:none;float:right;position:relative;bottom:0;left:0;}
-#Foot{width:100%;height:350px;background:#605F5E;position:absolute;left:0;}
+#Foot{width:100%;height:260px;background:#605F5E;position:absolute;left:0;}
 #Ft{width:calc(100% - 100px);position:absolute;top:20px;left:50px;}
 #Ft tr th{text-align:left;font-size:16px;color:#EAEAEA;padding:10px 0;}
 #Ft tr td{text-align:left;}
@@ -101,7 +101,6 @@ input[type="submit"]:active,.rgsb:active{background:#006A3B;}
     #Fackc{padding:15px 10px 50px 10px;font-size:16px;}
     #Fackc input[type="submit"]{width:100%;text-align:center;padding:10px 0;background:#030E14;position:absolute;}
     #Fackc input[type="submit"]:active{background:#020A0F;}
-    #Foot{height:340px;}
     #Ft{width:calc(100% - 60px);left:30px;}
     #Ft tr th{font-size:14px;padding:5px 0px;}
     #Ft tr td a{font-size:9px;}
