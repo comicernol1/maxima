@@ -15,16 +15,17 @@
     <h2>Custom tailored clothes made affordable.</h2>
     <a href="/about_us/" id="HdrLk">About Us</a>
 </header>
+<div id="HdrOv"></div>
 <div id="BPSt">
     <button id="BPSf" onclick="OFm()" title="Filter Results">Filter</button>
     <button id="BPSr" onclick="OFS_s()" title="Sort Results">Sort</button>
-    <ul id="BPSRL">
-        <li onclick="OFs('r')">Relevance</li>
-        <li onclick="OFs('p')">Popular</li>
-        <li onclick="OFs('l')">Price (Low to High)</li>
-        <li onclick="OFs('h')">Price (High to Low)</li>
-    </ul>
 </div>
+<ul id="BPSRL">
+    <li onclick="OFs('r')">Relevance</li>
+    <li onclick="OFs('p')">Popular</li>
+    <li onclick="OFs('l')">Price (Low to High)</li>
+    <li onclick="OFs('h')">Price (High to Low)</li>
+</ul>
 <form id="BPSo" action="" method="POST">
     <h1>Filter Results</h1>
     <p class="BPFd">
@@ -77,8 +78,9 @@
 </center>
 <% Footer %>
 <script>
+HdrOv=document.getElementById("HdrOv");
 if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
 document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
-function OFm(){document.getElementById("BPSo").style.display="block";}
+function OFm(){HdrOv.style.display="block";document.getElementById("BPSo").style.display="block";}
 </script>
 </body></html>
