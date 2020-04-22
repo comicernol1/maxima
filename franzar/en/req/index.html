@@ -21,12 +21,14 @@
     <button id="BPSr" onclick="OFS_s()" title="Sort Results">Sort By</button>
 </div>
 <ul id="BPSRL">
-    <li onclick="OFs('r')">Relevance</li>
-    <li onclick="OFs('p')">Popular</li>
-    <li onclick="OFs('l')">Price (Low to High)</li>
-    <li onclick="OFs('h')">Price (High to Low)</li>
+    <input type="hidden" id="BPSRL_V" value="r">
+    <li onclick="OFs()">Relevance</li> <!--r-->
+    <li onclick="OFs()">Popular</li> <!--p-->
+    <li onclick="OFs()">Price (Low to High)</li> <!--w-->
+    <li onclick="OFs()">Price (High to Low)</li> <!--h-->
 </ul>
-<form id="BPSo" action="" method="POST">
+<div id="BPSRL_C"></div>
+<div id="BPSo">
     <h1>Filter Results</h1>
     <p class="BPFd">
         Style:<br>
@@ -71,8 +73,8 @@
             <option>United States</option>
         </select><span class="DDoB_B"></span>
     </p>
-    <input type="submit" value="SHOW 1 RESULT" id="BPS_S">
-</form>
+    <button id="BPS_S" onclick="OFs()">SHOW 1 RESULT</button>
+</div>
 <center id="BPa">
     <% Products %>
 </center>
@@ -80,12 +82,15 @@
 <script>
 HdrOv=document.getElementById("HdrOv");
 BPSRL=document.getElementById("BPSRL");
+BPSRL_C=document.getElementById("BPSRL_C");
 BPSo=document.getElementById("BPSo");
 if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
 document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
 function HdrEx(){HdrOv.style.display="none";BPSo.style.display="none";BPSRL.style.display="none";}
 function OFm(){HdrOv.style.display="block";BPSo.style.display="block";}
 function OFS_s(){HdrOv.style.display="block";BPSRL.style.display="block";}
-function OFs(ofs_i){HdrOv.style.display="none";BPSRL.style.display="none";}
+function OFs(){
+    HdrEx();
+}
 </script>
 </body></html>
