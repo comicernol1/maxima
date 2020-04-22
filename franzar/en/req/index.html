@@ -79,8 +79,11 @@
 <% Footer %>
 <script>
 HdrOv=document.getElementById("HdrOv");
+BPSRL=document.getElementById("BPSRL")
 if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
 document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
 function OFm(){HdrOv.style.display="block";document.getElementById("BPSo").style.display="block";}
+function OFS_s(){HdrOv.style.display="block";BPSRL.style.display="block";}
+function OFs(ofs_i){HdrOv.style.display="none";BPSRL.style.display="none";}
 </script>
 </body></html>
