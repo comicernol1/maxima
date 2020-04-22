@@ -8,10 +8,10 @@
 #BPSf::before{width:30px;height:30px;content:"";background-image:url("/static/multiplier_image.png");background-size:180px;background-position:-57px -79px;position:absolute;top:5px;left:3px;}
 #BPSr{width:100px;height:40px;border:0;background:none;font-size:16px;text-align:left;padding:0  0 0 40px;position:absolute;top:5px;right:60px;}
 #BPSr::before{width:30px;height:30px;content:"";background-image:url("/static/multiplier_image.png");background-size:180px;background-position:-21px -78px;position:absolute;top:5px;left:3px;}
-#BPSRL{display:none;width:500px;height:220px;background:#FAFAFF;border-radius:6px;overflow-x:hidden;overflow-y:auto;margin:0;padding:0;position:fixed;z-index:101;top:calc(50% - 110px);left:calc(50% - 250px);}
+#BPSRL{display:none;width:400px;height:220px;background:#FAFAFF;border-radius:6px;overflow-x:hidden;overflow-y:auto;margin:0;padding:0;position:fixed;z-index:101;top:calc(50% - 110px);left:calc(50% - 200px);}
 #BPSRL li{display:block;width:100%;height:55px;box-sizing:border-box;padding:15px 0;font-size:20px;cursor:pointer;background:transparent;border-top:0;border-bottom:1px solid #E2DADB;border-left:0;border-right:0;text-align:center;}
 #BPSRL li:hover{background:#EAEAEA;color:#444054;}
-#BPSRL_C{width:30px;height:30px;background:blue;position:absolute;top:5px;left:10px;}
+#BPSRL_C{width:30px;height:30px;background-image:url("/static/multiplier_image.png");background-size:400px;background-position:-200px -200px;position:absolute;top:12px;left:20px;}
 #BPSo{display:none;width:500px;height:calc(100% - 100px);background:#FAFAFF;border-radius:6px;overflow:hidden;position:fixed;z-index:101;top:50px;left:calc(50% - 250px);}
 #BPSo h1{font-size:36px;padding:25px 0 15px 0;margin:0;text-align:center;}
 #BPSo .BPFc{padding:15px 40px 15px 70px;margin:0;font-size:20px;}
