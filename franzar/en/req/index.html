@@ -22,10 +22,10 @@
 </div>
 <ul id="BPSRL">
     <input type="hidden" id="BPSRL_V" value="r">
-    <li onclick="OFs()">Relevance</li> <!--r-->
-    <li onclick="OFs()">Popular</li> <!--p-->
-    <li onclick="OFs()">Price (Low to High)</li> <!--w-->
-    <li onclick="OFs()">Price (High to Low)</li> <!--h-->
+    <li onclick="OFs('r')">Relevance</li>
+    <li onclick="OFs('p')">Popular</li>
+    <li onclick="OFs('w')">Price (Low to High)</li>
+    <li onclick="OFs('h')">Price (High to Low)</li>
     <div id="BPSRL_C"></div>
 </ul>
 <div id="BPSo">
@@ -73,7 +73,7 @@
             <option>United States</option>
         </select><span class="DDoB_B"></span>
     </p>
-    <button id="BPS_S" onclick="OFs()">SHOW 1 RESULT</button>
+    <button id="BPS_S" onclick="OFs('0')">SHOW 1 RESULT</button>
 </div>
 <center id="BPa">
     <% Products %>
@@ -89,8 +89,12 @@ document.getElementById("Foot").style.top=(Number(document.getElementById("BPa")
 function HdrEx(){HdrOv.style.display="none";BPSo.style.display="none";BPSRL.style.display="none";}
 function OFm(){HdrOv.style.display="block";BPSo.style.display="block";}
 function OFS_s(){HdrOv.style.display="block";BPSRL.style.display="block";}
-function OFs(){
+function OFs(fsi){
     HdrEx();
+    if (fsi=="r"){BPSRL_C.style.top="12px";}
+    if (fsi=="p"){BPSRL_C.style.top="67px";}
+    if (fsi=="w"){BPSRL_C.style.top="122px";}
+    if (fsi=="h"){BPSRL_C.style.top="177px";}
 }
 </script>
 </body></html>
