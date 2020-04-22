@@ -15,7 +15,7 @@
     <h2>Custom tailored clothes made affordable.</h2>
     <a href="/about_us/" id="HdrLk">About Us</a>
 </header>
-<div id="HdrOv"></div>
+<div id="HdrOv" onclick="HdrEx()"></div>
 <div id="BPSt">
     <button id="BPSf" onclick="OFm()" title="Filter Results">Filter</button>
     <button id="BPSr" onclick="OFS_s()" title="Sort Results">Sort By</button>
@@ -79,10 +79,12 @@
 <% Footer %>
 <script>
 HdrOv=document.getElementById("HdrOv");
-BPSRL=document.getElementById("BPSRL")
+BPSRL=document.getElementById("BPSRL");
+BPSo=document.getElementById("BPSo");
 if (Number(window.innerWidth)>=700){BPAt=700;}else{BPAt=500;}
 document.getElementById("Foot").style.top=(Number(document.getElementById("BPa").offsetHeight)+BPAt)+"px";
-function OFm(){HdrOv.style.display="block";document.getElementById("BPSo").style.display="block";}
+function HdrEx(){HdrOv.style.display="none";BPSo.style.display="none";BPSRL.style.display="none";}
+function OFm(){HdrOv.style.display="block";BPSo.style.display="block";}
 function OFS_s(){HdrOv.style.display="block";BPSRL.style.display="block";}
 function OFs(ofs_i){HdrOv.style.display="none";BPSRL.style.display="none";}
 </script>
