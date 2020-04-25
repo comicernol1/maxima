@@ -1,4 +1,4 @@
-import os,re,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
+import os,re,math,random,base64,fnmatch,json,tornado.web,urllib.parse,mysql.connector,smtplib
 from datetime import datetime
 from cryptography.fernet import Fernet
 Enc32a = Fernet(base64.b64encode(os.environ["Enc32a"].encode()))
@@ -74,16 +74,9 @@ def GetCart(self):
         UserCartList.append(UserCartItm)
     return UserCartList
 
-def ServePage(self,pageloc,ForceLogin):
-    RequestedHostName = self.request.host
-    RequestedHostBase = RequestedHostName[0:RequestedHostName.index(".com")]
-    
+def GetUserLang(self):
     # User Language
     global UserLanguage
-    if self.get_cookie("Fn"):
-        UserInfoFn = str(self.get_cookie("Fn")).lower()
-    else:
-        UserInfoFn = ""
     if self.get_cookie("FL"):
         UserInfoFL = str(self.get_cookie("FL")).lower()
     else:
@@ -114,9 +107,14 @@ def ServePage(self,pageloc,ForceLogin):
             LanguageOptions += "<option value=\""+i+"\""+SelectedLanguageLi+">"+AcceptedLanguages[i]+"</option>"
     else:
         SelectedLanguageLi = ""
-    
-    
-    # User Nation
+    return UserLanguage
+
+def GetUserNatn(self):
+    UserLanguage = GetUserLang(self)
+    if self.get_cookie("Fn"):
+        UserInfoFn = str(self.get_cookie("Fn")).lower()
+    else:
+        UserInfoFn = ""
     global NationDict,NationDict_EN,NationDict_FR
     NationDict_EN = {"af":"Afghanistan","al":"Albania","dz":"Algeria","as":"American Samoa","ad":"Andorra","ao":"Angola","ai":"Anguilla","aq":"Antarctica","ag":"Antigua & Barbuda","ar":"Argentina","am":"Armenia","aw":"Aruba","au":"Australia","at":"Austria","az":"Azerbaijan","bs":"Bahamas","bh":"Bahrain","bd":"Bangladesh","bb":"Barbados","by":"Belarus","be":"Belgium","bz":"Belize","bj":"Benin","bm":"Bermuda","bt":"Bhutan","bo":"Bolivia","ba":"Bosnia & Herzegovina","bw":"Botswana","bv":"Bouvet Island","br":"Brazil","io":"BIOT","bn":"Brunei Darussalam","bg":"Bulgaria","bf":"Burkina Faso","bi":"Burundi","kh":"Cambodia","cm":"Cameroon","ca":"Canada","cv":"Cape Verde","ky":"Cayman Islands","cf":"Central African Republic","td":"Chad","cl":"Chile","cn":"China","cx":"Christmas Island","cc":"Cocos Islands","co":"Colombia","km":"Comoros","cg":"Congo","cd":"DR Congo","ck":"Cook Islands","cr":"Costa Rica","ci":"Côte d'Ivoire","hr":"Croatia","cu":"Cuba","cy":"Cyprus","cz":"Czech Republic","dk":"Denmark","dj":"Djibouti","dm":"Dominica","do":"Dominican Republic","ec":"Ecuador","eg":"Egypt","eh":"Western Sahara","sv":"El Salvador","gq":"Equatorial Guinea","er":"Eritrea","ee":"Estonia","et":"Ethiopia","fk":"Falkland Islands","fo":"Faroe Islands","fj":"Fiji","fi":"Finland","fr":"France","gf":"French Guiana","pf":"French Polynesia","tf":"French Southern Territories","ga":"Gabon","gm":"Gambia","ge":"Georgia","de":"Germany","gh":"Ghana","gi":"Gibraltar","gr":"Greece","gl":"Greenland","gd":"Grenada","gp":"Guadeloupe","gu":"Guam","gt":"Guatemala","gn":"Guinea","gw":"Guinea-Bissau","gy":"Guyana","ht":"Haiti","hm":"Heard & Mcdonald Islands","hn":"Honduras","hk":"Hong Kong","hu":"Hungary","is":"Iceland","in":"India","id":"Indonesia","ir":"Iran","iq":"Iraq","ie":"Ireland","il":"Israel","it":"Italy","jm":"Jamaica","jp":"Japan","jo":"Jordan","kz":"Kazakhstan","ke":"Kenya","ki":"Kiribati","kr":"South Korea","kw":"Kuwait","kg":"Kyrgyzstan","la":"Laos","ly":"Latvia","lb":"Lebanon","ls":"Lesotho","lr":"Liberia","ly":"Libya","li":"Liechtenstein","lt":"Lithuania","lu":"Luxembourg","mo":"Macao","mk":"Macedonia","mg":"Madagascar","mw":"Malawi","my":"Malasia","mv":"Maldives","ml":"Mali","mt":"Malta","mh":"Marshall Islands","mq":"Martinique","mr":"Mauritania","mu":"Mauritius","yt":"Mayotte","mx":"Mexico","fm":"Micronesia","md":"Moldova","mc":"Monaco","mn":"Mongolia","ms":"Montserrat","ma":"Morocco","mz":"Mozambique","mm":"Myanmar","na":"Nambia","nr":"Nauru","np":"Nepal","nl":"Netherlands","an":"Netherlands Antilles","nc":"New Caledonia","nz":"New Zealand","ni":"Nicaragua","ne":"Niger","ng":"Nigeria","nu":"Niue","nf":"Norfold Island","mp":"Northern Marina Islands","no":"Norway","om":"Oman","pk":"Pakistan","pw":"Palau","ps":"Palestine","pa":"Panama","pg":"Papua New Guinea","py":"Paraguay","pe":"Peru","ph":"Philippines","pn":"Pitcairn","pl":"Poland","pt":"Portugal","pr":"Puerto Rico","qa":"Qatar","re":"Réunion","ro":"Romania","ru":"Russia","rw":"Rwanda","sh":"Saint Helena","kn":"Saint Kitts & Nevis","lc":"Saint Lucia","pm":"Saint Pierre & Miquelon","vc":"Saint Vincent & Grenadines","ws":"Samoa","sm":"San Marino","st":"Sao Tome & Principe","sa":"Saudi Arabia","sn":"Senegal","cs":"Serbia & Montenegro","sc":"Seychelles","sl":"Sierra Leone","sg":"Singapore","sk":"Slovakia","si":"Slovenia","sb":"Solomon Islands","so":"Somalia","za":"South Africa","gs":"South Georgia","es":"Spain","lk":"Sri Lanka","sd":"Sudan","sr":"Suriname","sj":"Svalbard & Jan Mayen","sz":"Swaziland","se":"Sweden","ch":"Switzerland","sy":"Syria","tw":"Taiwan","tj":"Tajikistan","tz":"Tanzania","th":"Thailand","tl":"Timor-Leste","tg":"Togo","tk":"Tokelau","to":"Tonga","tt":"Trinidad & Tobago","tn":"Tunisia","tr":"Turkey","tm":"Turkmenistan","tc":"Turks & Caicos","tv":"Tuvalu","ug":"Uganda","ua":"Ukraine","ae":"United Arab Emirates","gb":"United Kingdom","us":"United States","um":"US Minor Outlying Islands","uy":"Uruguay","uz":"Uzbekistan","ve":"Venezuela","vu":"Vanuatu","vn":"Vietnam","vg":"British Virgin Islands","vi":"US Virgin Islands","wf":"Wallis & Futuna","ye":"Yemen","zw":"Zimbabwe"}
     NationDict_FR = {"af":"Afghanistan","al":"Albanie","dz":"Algérie","as":"Samoa Américaines","ad":"Andorre","ao":"Angola","ai":"Anguilla","aq":"Antarctique","ag":"Antigua & Barbuda","ar":"Argentine","am":"Arménie","aw":"Aruba","au":"Australie","at":"Autriche","az":"Azerbaïdjan","bs":"Bahamas","bh":"Bahrein","bd":"Bangladesh","bb":"Barbade","by":"Biélorussie","be":"Belgique","bz":"Belize","bj":"Bénin","bm":"Bermudes","bt":"Bhoutan","bo":"Bolivie","ba":"Bosnie-Herzegovine","bw":"Botswana","bv":"Île Bouvet","br":"Brésil","io":"BIOT","bn":"Brunei Darussalam","bg":"Bulgarie","bf":"Burkina Faso","bi":"Burundi","kh":"Cambodge","cm":"Cameroun","ca":"Canada","cv":"Cap-Vert","ky":"Îles Caïmans","cf":"République Centrafricaine","td":"Tchad","cl":"Chili","cn":"Chine","cx":"Île de Noël","cc":"Îles Cocos","co":"Colombie","km":"Comores","cg":"Congo","cd":"RD Congo","ck":"Îles Cook","cr":"Costa Rica","ci":"Côte d'Ivoire","hr":"Croatie","cu":"Cuba","cy":"Chypre","cz":"République Tchèque","dk":"Danemark","dj":"Djibouti","dm":"Dominique","do":"République Dominicaine","ec":"Équateur","eg":"Egypte","eh":"Sahara Occidental","sv":"Le Salvador","gq":"Guinée Équatoriale","er":"Érythrée","ee":"Estonie","et":"Ethiopie","fk":"Îles Falkland","fo":"Îles Féroé","fj":"Fidji","fi":"Finlande","fr":"France","gf":"Guyane Française","pf":"Polynésie Française","tf":"Territoires Français du Sud","ga":"Gabon","gm":"Gambie","ge":"Géorgie","de":"Allemagne","gh":"Ghana","gi":"Gibraltar","gr":"Grèce","gl":"Groenland","gd":"Grenade","gp":"Guadeloupe","gu":"Guam","gt":"Guatemala","gn":"Guinée","gw":"Guinée-Bissau","gy":"Guyane","ht":"Haïti","hm":"Îles Heard et Mcdonald","hn":"Honduras","hk":"Hong Kong","hu":"Hongrie","is":"Islande","in":"Inde","id":"Indonésie","ir":"Iran","iq":"Irak","ie":"Irlande","il":"Israël","it":"Italie","jm":"Jamaïque","jp":"Japon","jo":"Jordan","kz":"Kazakhstan","ke":"Kenya","ki":"Kiribati","kr":"Corée du Sud","kw":"Koweit","kg":"Kirghizistan","la":"Laos","ly":"Lettonie","lb":"Liban","ls":"Lesotho","lr":"Libéria","ly":"Libye","li":"Liechtenstein","lt":"Lituanie","lu":"Luxembourg","mo":"Macao","mk":"Macédoine","mg":"Madagascar","mw":"Malawi","my":"Malasia","mv":"Maldives","ml":"Mali","mt":"Malte","mh":"Îles Marshall","mq":"Martinique","mr":"Mauritanie","mu":"Maurice","yt":"Mayotte","mx":"Mexique","fm":"Micronésie","md":"Moldova","mc":"Monaco","mn":"Mongolie","ms":"Montserrat","ma":"Maroc","mz":"Mozambique","mm":"Myanmar","na":"Nambia","nr":"Nauru","np":"Népal","nl":"Pays-Bas","an":"Antilles Néerlandaises","nc":"Nouvelle Calédonie","nz":"Nouvelle-Zélande","ni":"Nicaragua","ne":"Niger","ng":"Nigeria","nu":"Niue","nf":"Île de Norfolk","mp":"Îles du Nord de la Marina","no":"Norvège","om":"Oman","pk":"Pakistan","pw":"Palau","ps":"Palestine","pa":"Panama","pg":"Papouasie Nouvelle Guinée","py":"Paraguay","pe":"Pérou","ph":"Philippines","pn":"Pitcairn","pl":"Pologne","pt":"Portugal","pr":"Porto Rico","qa":"Qatar","re":"Réunion","ro":"Roumanie","ru":"Russie","rw":"Rwanda","sh":"Sainte-Hélène","kn":"Saint-Kitts-et-Nevis","lc":"Sainte-Lucie","pm":"Saint Pierre et Miquelon","vc":"Saint Vincent et Grenadines","ws":"Samoa","sm":"Saint Marin","st":"Sao Tomé et Principe","sa":"Arabie Saoudite","sn":"Sénégal","cs":"Serbie & Monténégro","sc":"Seychelles","sl":"Sierra Leone","sg":"Singapour","sk":"Slovaquie","si":"Slovénie","sb":"Îles Salomon","so":"Somalie","za":"Afrique du Sud","gs":"Géorgie du Sud","es":"Espagne","lk":"Sri Lanka","sd":"Soudan","sr":"Suriname","sj":"Svalbard & Jan Mayen","sz":"Swaziland","se":"Suède","ch":"Suisse","sy":"Syrie","tw":"Taïwan","tj":"Tajikistan","tz":"Tanzanie","th":"Thaïlande","tl":"Timor-Leste","tg":"Aller","tk":"Tokelau","to":"Tonga","tt":"Trinidad & Tobago","tn":"Tunisie","tr":"Turquie","tm":"Turkménistan","tc":"Turks & Caicos","tv":"Tuvalu","ug":"Ouganda","ua":"Ukraine","ae":"Emirats Arabes Unis","gb":"Royaume-Uni","us":"États Unis","um":"Îles Mineures des ÉU","uy":"Uruguay","uz":"Ouzbékistan","ve":"Venezuela","vu":"Vanuatu","vn":"Vietnam","vg":"Îles Vierges Britanniques","vi":"Îles Vierges Américaines","wf":"Wallis et Futuna","ye":"Yémen","zw":"Zimbabwe"}
@@ -135,6 +133,14 @@ def ServePage(self,pageloc,ForceLogin):
         else:
             SelectedNationLi = ""
         NationList += "<option value=\""+i+"\""+SelectedNationLi+">"+NationDict[i]+"</option>\n"
+    return UserNation
+
+def ServePage(self,pageloc,ForceLogin):
+    RequestedHostName = self.request.host
+    RequestedHostBase = RequestedHostName[0:RequestedHostName.index(".com")]
+    
+    UserLanguage = GetUserLang(self)
+    UserNation = GetUserNatn(self)
     
     # Define Basics
     HeaderLISignIn_EN = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
@@ -206,6 +212,13 @@ def ServePage(self,pageloc,ForceLogin):
     self.set_header("Access-Control-Allow-Headers", "*")
     self.set_header("Server", "Harrison Sienkiewicz (Tornado Server)")
     return PageIndex
+
+def CalculateSalesTax(self,natn: str,rgn: str,prc: float):
+    StateSalesTaxDict_US = {"al":0.04,"ak":0,"az":0.056,"ar":0.065,"ca":0.0725,"co":0.029,"ct":0.0635,"dc":0.06,"de":0,"fl":0.06,"ga":0.04,"hi":0.04,"id":0.06,"il":0.0625,"in":0.07,"ia":0.06,"ks":0.065,"ky":0.06,"la":0.0445,"me":0.055,"md":0.06,"ma":0.0625,"mi":0.06,"mn":0.06875,"ms":0.07,"mo":0.04225,"mt":0,"ne":0.055,"nv":0.0685,"nh":0,"nj":0.06625,"nm":0.05125,"ny":0.04,"nc":0.0475,"nd":0.05,"oh":0.0575,"ok":0.045,"or":0,"pa":0.06,"ri":0.07,"sc":0.06,"sd":0.045,"tn":0.07,"tx":0.0625,"ut":0.061,"vt":0.06,"va":0.053,"wa":0.065,"wv":0.06,"wi"0.05,"wy":0.04}
+    MaxLocalSalesTaxDict_US = {"al":0.075,"ak":0.075,"az":0.056,"ar":0.05125,"ca":0.025,"co":0.083,"ct":0,"dc":0,"de":0,"fl":0.025,"ga":0.05,"hi":0.005,"id":0.03,"il":0.1,"in":0,"ia":0.01,"ks":0.04,"ky":0,"la":0.07,"me":0,"md":0,"ma":0,"mi":0,"mn":0.02,"ms":0.01,"mo":0.05625,"mt":0,"ne":0.025,"nv":0.0165,"nh":0,"nj":0.03313,"nm":0.04125,"ny":0.04875,"nc":0.0275,"nd":0.035,"oh":0.0225,"ok":0.07,"or":0,"pa":0.02,"ri":0,"sc":0.03,"sd":0.045,"tn":0.0275,"tx":0.02,"ut":0.0295,"vt":0.01,"va":0.007,"wa":0.04,"wv":0.01,"wi"0.0175,"wy":0.02}
+    StateSalesTaxDict = vars()["StateSalesTaxDict_"+natn.upper()]
+    MaxLocalSalesTaxDict = vars()["MaxLocalSalesTaxDict_"+natn.upper()]
+    return round((prc*(float(StateSalesTaxDict[rgn])+float(MaxLocalSalesTaxDict[rgn]))), 2)
 
 def CreateCookie(self,cookie_name: str,cookie_value: str,cookie_expires: int,*args,**kwargs):
     RequestedHostName = self.request.host
@@ -299,8 +312,4 @@ WashCareCodesList = {"0":"","a":"Machine Wash Normal","b":"Machine Wash Cold (30
 BleachCareCodesList = {"0":"","a":"Bleach When Needed","b":"Non-Chlorine Bleach When Needed","n":"Do Not Bleach"}
 DryCareCodesList = {"0":"","a":"Tumble Dry Normal","b":"Tumble Dry Normal Low Heat","c":"Tumble Dry Normal Medium Heat","d":"Tumble Dry Normal High Heat","e":"Tumble Dry Normal No Heat","f":"Tumble Dry Permanent Press","g":"Tumble Dry Permanent Press Low Heat","h":"Tumble Dry Permanent Press Medium Heat","i":"Tumble Dry Permanent Press High Heat","j":"Tumble Dry Gentle","k":"Tumble Dry Gentle Low Heat","m":"Tumble Dry Gentle Medium Heat","o":"Tumble Dry Gentle High Heat","p":"Tumble Dry Gentle No Heat","q":"Do Not Tumble Dry","n":"Do Not Dry","r":"Line Dry","s":"Line Dry In Shade","t":"Drip Dry","u":"Drip Dry In Shade","v":"Dry Flat","w":"Dry Flat In Shade"}
 DryCleanCareCodesList = {"0":"","a":"Dry Clean","b":"Dry Clean Any Solvent","c":"Dry Clean Petroleum Solvent Only","d":"Dry Clean Any Colvent Except Trichloroethylene","e":"Dry Clean Low Heat","f":"Dry Clean No Steam","g":"Dry Clean Reduced Moisture","h":"Dry Clean Short Cycle","i":"Dry Clean Any Solvent Low Heat","j":"Dry Clean Any Solvent No Steam","k":"Dry Clean Any Solvent Reduced Moisture","m":"Dry Clean Any Solvent Short Cycle","n":"Do Not Dry Clean"}
-
-# Calculate Sales Tax
-def CalculateSalesTax(zipcode):
-    StateSalesTaxDict_US = {"al":0.04,"ak":0,"az":0.056,"ar":0.065,"ca":0.0725,"co":0.029,"ct":0.0635,"dc":0.06,"de":0,"fl":0.06,"ga":0.04,"hi":0.04,"id":0.06,"il":0.0625,"in":0.07,"ia":0.06,"ks":0.065,"ky":0.06,"la":0.0445,"me":0.055,"md":0.06,"ma":0.0625,"mi":0.06,"mn":0.06875,"ms":0.07,"mo":0.04225,"mt":0,"ne":0.055,"nv":0.0685,"nh":0,"nj":0.06625,"nm":0.05125,"ny":0.04,"nc":0.0475,"nd":0.05,"oh":0.0575,"ok":0.045,"or":0,"pa":0.06,"ri":0.07,"sc":0.06,"sd":0.045,"tn":0.07,"tx":0.0625,"ut":0.061,"vt":0.06,"va":0.053,"wa":0.065,"wv":0.06,"wi"0.05,"wy":0.04}
-    MaxLocalSalesTaxDict_US = {"al":0.075,"ak":0.075,"az":0.056,"ar":0.05125,"ca":0.025,"co":0.083,"ct":0,"dc":0,"de":0,"fl":0.025,"ga":0.05,"hi":0.005,"id":0.03,"il":0.1,"in":0,"ia":0.01,"ks":0.04,"ky":0,"la":0.07,"me":0,"md":0,"ma":0,"mi":0,"mn":0.02,"ms":0.01,"mo":0.05625,"mt":0,"ne":0.025,"nv":0.0165,"nh":0,"nj":0.03313,"nm":0.04125,"ny":0.04875,"nc":0.0275,"nd":0.035,"oh":0.0225,"ok":0.07,"or":0,"pa":0.02,"ri":0,"sc":0.03,"sd":0.045,"tn":0.0275,"tx":0.02,"ut":0.0295,"vt":0.01,"va":0.007,"wa":0.04,"wv":0.01,"wi"0.0175,"wy":0.02}
+   
