@@ -6,9 +6,9 @@ body{overflow-x:hidden;}
 .CIt{display:block;width:100%;height:200px;background:#FAFAFF;position:absolute;left:0;}
 .CIt input[type="number"]{width:70px;font-size:20px;text-align:center;padding:0 10px;position:absolute;top:70px;left:20px;}
 .CIt input[type="number"]:disabled{background:transparent;color:#C2C1C2;}
-.CIi{display:block;width:180px;height:180px;background-size:cover;background-position:center;border:1px solid #E6E6E6;box-sizing:border-box;cursor:pointer;position:relative;top:10px;left:110px;}
-.CIPt{font-size:12px;font-weight:300;margin:0;position:relative;top:-115px;left:310px;}
-.CIp{position:relative;top:-110px;left:310px;}
+.CIi{display:block;width:180px;height:180px;background-size:cover;background-position:center;border:1px solid #E6E6E6;box-sizing:border-box;cursor:pointer;position:absolute;top:10px;left:110px;}
+.CIPt{font-size:12px;font-weight:300;margin:0;position:relative;top:63px;left:310px;}
+.CIp{position:relative;top:80px;left:310px;}
 .CIt h3{width:calc(100% - 600px);margin:0;font-size:24px;font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:absolute;top:20px;left:310px;}
 .CIt h1{width:250px;font-size:32px;font-weight:300;margin:0;text-align:right;position:absolute;top:15px;right:30px;}
 .CIr{outline:none;cursor:pointer;background:transparent;border:0;font-size:20px;color:#1446A0;text-decoration:underline;position:absolute;bottom:20px;right:40px;}
