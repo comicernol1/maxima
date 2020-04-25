@@ -18,7 +18,7 @@ class handler(tornado.web.RequestHandler):
             else:
                 UserCartItem_PriceSet = "{0:s}{1:,.2f}".format(UserCurrencySymbol,UserCartItem_Price)
             if str(UserCartItem_ID)[0:7] != "1111111":
-                UserCartItem_TemplateSet = "<select class=\"CIp\"><option>Master Crafted</option><option>X-Small</option><option>Small</option><option>Medium</option></select><option>Large</option><option>X-Large</option></select>"
+                UserCartItem_TemplateSet = "<select class=\"CIp\"><option>Master Crafted</option><option>X-Small</option><option>Small</option><option>Medium</option><option>Large</option><option>X-Large</option></select>"
             else:
                 UserCartItem_TemplateSet = ""
             if str(UserCartItem_ID)[0:7] == "1111111":
