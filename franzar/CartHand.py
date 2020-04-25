@@ -4,8 +4,7 @@ class handler(tornado.web.RequestHandler):
     def get(self):
         CartIndex = ServePage(self,"/cart/index.html",False)
         UserCartList = GetCart(self)
-        UserCartListShipping = 1
-        UserCartListTaxes = 1.5
+        UserCartListShipping = 0
         UserCartListTotal = 0
         UserCartItems = ""
         UserCartListLen = len(UserCartList)
@@ -30,11 +29,12 @@ class handler(tornado.web.RequestHandler):
             else:
                 UserCartAdjustNumDisable = ""
                 UserCartRemoveButton = "<button class=\"CIr\" onclick=\"RMp('{0:d}')\">Remove</button>".format(UserCartItem_ID)
+                UserCartListShipping += 1.5
             UserCartListTotal += (UserCartItem_Price*int(UserCartList[i][1]))
             UserCartItems += "<div class=\"CIt\" id=\"CIt_{0:d}\" prc=\"{8:.2f}\" style=\"top:{1:d}px;\"><input class=\"CIq\" type=\"number\" value=\"{2:d}\" onblur=\"AdjOa()\"{3:s}><a href=\"/product/{0:d}/\" class=\"CIi\" style=\"background-image:url({4:s});\"></a>{5:s}<h3>{6:s}</h3><h1>{7:s}</h1>{9:s}</div>\n".format(UserCartItem_ID,(i*210),int(UserCartList[i][1]),UserCartAdjustNumDisable,UserCartItem_ImgLink,UserCartItem_TemplateSet,FindProduct(UserCartItem_ID)["Name"],UserCartItem_PriceSet,UserCartItem_Price,UserCartRemoveButton)
         if UserCartItems != "":
             UserCartListTotal += UserCartListShipping
-            UserCartListTotal += UserCartListTaxes
+            UserCartListTotal += round(UserCartListTotal*0.0475, 2)
             if UserCurrencySymbol in SpecifyCurrencyList:
                 UserCartTotalsSet = "<h3 id=\"CICh\">Shipping: {0:s}<u id=\"CICHt\">{2:,.2f}</u> ({1:s})</h3><h3 id=\"CICx\">Taxes: {0:s}<u id=\"CICXt\">{3:,.2f}</u> ({1:s})</h3><hr id=\"CICTh\"><h3 id=\"CICt\">Total: {0:s}<u id=\"CICTt\">{4:,.2f}</u> ({1:s})</h3>".format(UserCurrencySymbol,UserCurrency,UserCartListShipping,UserCartListTaxes,UserCartListTotal)
             else:
