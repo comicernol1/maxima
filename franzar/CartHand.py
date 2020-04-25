@@ -44,7 +44,7 @@ class handler(tornado.web.RequestHandler):
         else:
             CartIndex = CartIndex.replace("<% Cart %>","")
             CartIndex = CartIndex.replace("<% ShowEmptyCartMsg %>","block")
-        if UserCartListLen >= 3:
+        if UserCartListLen > 0:
             CartIndex = CartIndex.replace("<% FootTop %>",str(510+(UserCartListLen*210)))
         else:
             CartIndex = CartIndex.replace("<% FootTop %>","700")
