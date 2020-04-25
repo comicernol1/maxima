@@ -4,6 +4,7 @@ class handler(tornado.web.RequestHandler):
     def get(self):
         CartIndex = ServePage(self,"/cart/index.html",False)
         UserCartList = GetCart(self)
+        UserCartListShipping = 0
         UserCartListTotal = 0
         UserCartItems = ""
         UserCartListLen = len(UserCartList)
