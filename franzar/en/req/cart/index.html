@@ -25,6 +25,7 @@ function AdjOa(){
     CIt=Cm.getElementsByClassName("CIt");
     CtLt="";
     CiCnt=0;
+    CiTtl=0;
     var i;
     for (i=0;i<CIt.length;i++){
         CIt[i].style.top=(i*210)+"px";
@@ -34,10 +35,12 @@ function AdjOa(){
         CItQty=Number(CIq.value)
         CiCnt+=CItQty;
         CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
+        CiTtl+=(CItQty*Number(CIt.getAttribute("prc")))
     }
     CIc.style.top=(CIt.length*210)+"px";
     Foot.style.top=(510+(CIt.length*210))+"px";
     HMCi.innerText=CiCnt;
+    document.getelementById("CICTt").innerText=CiTtl;
     return CtLt;
 }
 function RfrCt(){
