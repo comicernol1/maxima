@@ -35,7 +35,7 @@ function AdjOa(){
         CItQty=Number(CIq.value)
         CiCnt+=CItQty;
         CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
-        CiTtl+=(CItQty*Number(CIt.getAttribute("prc")))
+        CiTtl+=(CItQty*Number(CIt[i].getAttribute("prc")))
     }
     CIc.style.top=(CIt.length*210)+"px";
     Foot.style.top=(510+(CIt.length*210))+"px";
