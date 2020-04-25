@@ -14,6 +14,7 @@ body{overflow-x:hidden;}
 .CIt h1{width:250px;font-size:32px;font-weight:300;margin:0;text-align:right;position:absolute;top:15px;right:30px;}
 .CIr{outline:none;cursor:pointer;background:transparent;border:0;font-size:20px;color:#1446A0;text-decoration:underline;position:absolute;bottom:20px;right:40px;}
 .CIr:active{color:#113A83;}
+#CIc{width:100%;background:#FAFAFF;position:absolute;left:0;}
 
 #ACM{width:100%;height:2000px;background:#FAFAFF;position:absolute;top:100px;left:0;}
 #ACM h1{width:100%;font-size:60px;font-weight:300;text-align:center;margin:0;position:absolute;top:40px;left:0;}
