@@ -37,6 +37,7 @@ function AdjOa(){
         CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
         CiTtl+=(CItQty*Number(CIt[i].getAttribute("prc")))
     }
+    CiTtl+=(Number(document.getElementById("CICHt").innerText)+Number(document.getElementById("CICXt").innerText))
     CIc.style.top=(CIt.length*210)+"px";
     Foot.style.top=(510+(CIt.length*210))+"px";
     HMCi.innerText=CiCnt;
