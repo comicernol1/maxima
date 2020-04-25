@@ -74,6 +74,7 @@ def GetCart(self):
         UserCartList.append(UserCartItm)
     return UserCartList
 
+AcceptedLanguages = {"en":"English","fr":"Français"}
 def GetUserLang(self):
     # User Language
     global UserLanguage
@@ -81,7 +82,6 @@ def GetUserLang(self):
         UserInfoFL = str(self.get_cookie("FL")).lower()
     else:
         UserInfoFL = ""
-    AcceptedLanguages = {"en":"English","fr":"Français"}
     if UserInfoFL != "" and UserInfoFL in AcceptedLanguages:
         UserLanguage = UserInfoFL
     else:
