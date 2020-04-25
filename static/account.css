@@ -15,9 +15,10 @@ body{overflow-x:hidden;}
 .CIr{outline:none;cursor:pointer;background:transparent;border:0;font-size:20px;color:#1446A0;text-decoration:underline;position:absolute;bottom:20px;right:40px;}
 .CIr:active{color:#113A83;}
 #CIc{width:100%;height:400px;background:#FAFAFF;position:absolute;left:0;}
-#CIc h1,#CIc h2{width:calc(50% - 100px);margin:0;font-weight:300;position:absolute;}
+#CIc h1,#CIc h2,#CIc h6{width:calc(50% - 100px);margin:0;font-weight:300;position:absolute;}
 #CIc h1{font-size:24px;}
 #CIc h2{font-size:20px;}
+#CIc h6{font-size:12px;}
 #CICSt{top:20px;left:50px;}
 #CICs{top:60px;left:50px;}
 #CICBt{top:170px;left:50px;}
