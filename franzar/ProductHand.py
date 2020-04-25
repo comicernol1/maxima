@@ -17,9 +17,9 @@ class handler(tornado.web.RequestHandler):
             else:
                 ProductRequested_CareWring = ""
             if str(FindProduct(ProductRequested_ID)["Wash"])=="0":
-                ProductRequested_Care = "<li>Unknown</li>"
+                ProductRequested_Care = "<p>Unknown</p>"
             else:
-                ProductRequested_Care = "<li>"+WashCareCodesList[FindProduct(ProductRequested_ID)["Wash"]]+"</li><li>"+BleachCareCodesList[FindProduct(ProductRequested_ID)["Bleach"]]+"</li><li>"+DryCareCodesList[FindProduct(ProductRequested_ID)["Dry"]]+"</li>"+ProductRequested_CareWring+"<li>"+DryCleanCareCodesList[FindProduct(ProductRequested_ID)["DryClean"]]+"</li>"
+                ProductRequested_Care = "<ul><li>"+WashCareCodesList[FindProduct(ProductRequested_ID)["Wash"]]+"</li><li>"+BleachCareCodesList[FindProduct(ProductRequested_ID)["Bleach"]]+"</li><li>"+DryCareCodesList[FindProduct(ProductRequested_ID)["Dry"]]+"</li>"+ProductRequested_CareWring+"<li>"+DryCleanCareCodesList[FindProduct(ProductRequested_ID)["DryClean"]]+"</li></ul>"
             ProductRequested_ContentsDict = FindProduct(ProductRequested_ID)["ContentsDict"]
             if len(ProductRequested_ContentsDict) > 1:
                 ProductRequested_Contents = ""
