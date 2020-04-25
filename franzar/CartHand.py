@@ -32,9 +32,9 @@ class handler(tornado.web.RequestHandler):
             UserCartItems += "<div class=\"CIt\" id=\"CIt_"+UserCartItem_ID+"\" style=\"top:"+str(i*210)+"px;\"><input class=\"CIq\" type=\"number\" value=\""+str(UserCartList[i][1])+"\" onblur=\"AdjOa()\""+UserCartAdjustNumDisable+"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a>"+UserCartItem_TemplateSet+"<h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1>"+UserCartRemoveButton+"</div>\n"
         if UserCartItems != "":
             if UserCurrencySymbol in SpecifyCurrencyList:
-                UserCartTotalsSet = "<h3 id=\"CICt\">Total: {0:s}{1:,.2f} ({2:s})</h3>".format(UserCurrencySymbol,UserCartItem_Price,UserCurrency)
+                UserCartTotalsSet = "<h3 id=\"CICt\">Total: {0:s}{1:,.2f} ({2:s})</h3>".format(UserCurrencySymbol,UserCartListTotal,UserCurrency)
             else:
-                UserCartTotalsSet = "<h3 id=\"CICt\">Total: {0:s}{1:,.2f}</h3>".format(UserCurrencySymbol,UserCartItem_Price)
+                UserCartTotalsSet = "<h3 id=\"CICt\">Total: {0:s}{1:,.2f}</h3>".format(UserCurrencySymbol,UserCartListTotal)
             UserCartItems += "<div id=\"CIc\" style=\"top:{0:s}px;\"><h1 id=\"CICSt\">Shipping Address</h1><h2 id=\"CICs\">{1:s}</h2><h1 id=\"CICBt\">Billing Address</h1><h2 id=\"CICb\">{2:s}</h2><h1 id=\"CICPt\">Payment Method</h1><h2 id=\"CICp\">{3:s}</h2><h6 id=\"CICRt\">Redeem a gift card:</h6><input type=\"text\" id=\"CICr\" placeholder=\"Enter code here\" maxlength=\"20\">{4:s}</div>".format(str(UserCartListLen*210),"0000 Street Name Rd Apt #1000<br>New York, NY 00000-0000<br>United States","0000 Street Name Rd Apt #1000<br>New York, NY 00000-0000<br>United States","Card ending in 0000<br>$100.00 gift card balance",UserCartTotalsSet)
             CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
             CartIndex = CartIndex.replace("<% ShowEmptyCartMsg %>","none")
