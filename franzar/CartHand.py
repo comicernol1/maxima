@@ -10,7 +10,7 @@ class handler(tornado.web.RequestHandler):
         for i in range(0,UserCartListLen):
             UserCartItem_ID = str(UserCartList[i][0])
             if FindProduct(UserCartItem_ID)["HasImg"]:
-                UserCartItem_ImgLink = "/static/product/"+UserCartItem_ID+"/0.jpg"
+                UserCartItem_ImgLink = "/static/product/{0:d}/0.jpg".format(UserCartItem_ID)
             else:
                 UserCartItem_ImgLink = "/static/product/missing.jpg"
             UserCartItem_Price = FindProduct(UserCartItem_ID)["Price"]
@@ -27,9 +27,9 @@ class handler(tornado.web.RequestHandler):
                 UserCartRemoveButton = ""
             else:
                 UserCartAdjustNumDisable = ""
-                UserCartRemoveButton = "<button class=\"CIr\" onclick=\"RMp('"+UserCartItem_ID+"')\">Remove</button>"
+                UserCartRemoveButton = "<button class=\"CIr\" onclick=\"RMp('{0:d}')\">Remove</button>".format(UserCartItem_ID)
             UserCartListTotal += (UserCartItem_Price*int(UserCartList[i][1]))
-            UserCartItems += "<div class=\"CIt\" id=\"CIt_"+UserCartItem_ID+"\" style=\"top:"+str(i*210)+"px;\"><input class=\"CIq\" type=\"number\" value=\""+str(UserCartList[i][1])+"\" onblur=\"AdjOa()\""+UserCartAdjustNumDisable+"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a>"+UserCartItem_TemplateSet+"<h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1>"+UserCartRemoveButton+"</div>\n"
+            UserCartItems += "<div class=\"CIt\" id=\"CIt_{0:s}\" style=\"top:{1:d}px;\"><input class=\"CIq\" type=\"number\" value=\"{2:d}\" onblur=\"AdjOa()\"{3:s}><a href=\"/product/{0:s}/\" class=\"CIi\" style=\"background-image:url({4:s});\"></a>{5:s}<h3>{6:s}</h3><h1>{6:s}</h1>{7:s}</div>\n".format(UserCartItem_ID,(i*210),(UserCartList[i][1]),UserCartAdjustNumDisable,UserCartItem_ImgLink,UserCartItem_TemplateSet,FindProduct(UserCartItem_ID)["Name"],UserCartItem_PriceSet,UserCartRemoveButton)
         if UserCartItems != "":
             if UserCurrencySymbol in SpecifyCurrencyList:
                 UserCartTotalsSet = "<h3 id=\"CICt\">Total: {0:s}{1:,.2f} ({2:s})</h3>".format(UserCurrencySymbol,UserCartListTotal,UserCurrency)
