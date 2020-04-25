@@ -23,6 +23,7 @@ body{overflow-x:hidden;}
 #CICs{width:450px;top:60px;left:50px;}
 #CICBt{width:450px;top:170px;left:50px;}
 #CICb{width:450px;top:210px;left:50px;}
+#CICs u,#CICb u{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #CICPt{top:20px;left:450px;}
 #CICp{top:60px;left:450px;}
 #CICRt{top:130px;left:450px;}
