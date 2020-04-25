@@ -20,6 +20,8 @@
 HMCi=document.getElementById("HMCi");
 Cm=document.getElementById("Cm");
 CIc=document.getElementById("CIc");
+CICXt=document.getElementById("CICXt");
+CICHt=document.getElementById("CICHt");
 Foot=document.getElementById("Foot");
 function AdjOa(){
     CIt=Cm.getElementsByClassName("CIt");
@@ -35,13 +37,17 @@ function AdjOa(){
         CItQty=Number(CIq.value)
         CiCnt+=CItQty;
         CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
-        CiTtl+=(CItQty*Number(CIt[i].getAttribute("prc")))
+        
+        ShippingCost=1.50;
+        CiTtl+=((CItQty*Number(CIt[i].getAttribute("prc")))+ShippingCost);
     }
-    CiTtl+=(Number(document.getElementById("CICHt").innerText)+Number(document.getElementById("CICXt").innerText))
+    CIXr=<% SalesTaxRate %>;
+    CICXt.innerText=(CiTtl*CIXr);
+    CiTtl_F=(CiTtl+(CiTtl*CIXr)).toFixed(2);
     CIc.style.top=(CIt.length*210)+"px";
     Foot.style.top=(510+(CIt.length*210))+"px";
     HMCi.innerText=CiCnt;
-    document.getElementById("CICTt").innerText=CiTtl.toFixed(2);
+    document.getElementById("CICTt").innerText=CiTtl_F;
     return CtLt;
 }
 function RfrCt(){
