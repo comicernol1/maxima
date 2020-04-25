@@ -45,6 +45,7 @@ class handler(tornado.web.RequestHandler):
             UserBillingAddress = "<p>0002 Street Name Rd Apt #1000</p><p>New York, NY 00000-0000</p><p>United States</p>"
             UserBillingInfoSet = "Card ending in 0000<br>$100.00 gift card balance"
             UserCartItems += "<div id=\"CIc\" style=\"top:{0:s}px;\"><h1 id=\"CICSt\">Shipping Address</h1><h2 id=\"CICs\">{1:s}</h2><h1 id=\"CICBt\">Billing Address</h1><h2 id=\"CICb\">{2:s}</h2><h1 id=\"CICPt\">Payment Method</h1><h2 id=\"CICp\">{3:s}</h2><h6 id=\"CICRt\">Redeem a gift card:</h6><input type=\"text\" id=\"CICr\" placeholder=\"Enter code here\" maxlength=\"19\">{4:s}<button class=\"rgsb\" id=\"CICy\">PLACE ORDER</button></div>".format(str(UserCartListLen*210),UserShippingAddress,UserBillingAddress,UserBillingInfoSet,UserCartTotalsSet)
+            CartIndex = CartIndex.replace("<% SalesTaxRate %>",UserCartListTaxes)
             CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
             CartIndex = CartIndex.replace("<% ShowEmptyCartMsg %>","none")
         else:
