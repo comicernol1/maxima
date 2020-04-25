@@ -42,7 +42,7 @@ function AdjOa(){
         CiTtl+=((CItQty*Number(CIt[i].getAttribute("prc")))+ShippingCost);
     }
     CIXr=<% SalesTaxRate %>;
-    CICXt.innerText=(CiTtl*CIXr);
+    CICXt.innerText=(CiTtl*CIXr).toFixed(2);
     CiTtl_F=(CiTtl+(CiTtl*CIXr)).toFixed(2);
     CIc.style.top=(CIt.length*210)+"px";
     Foot.style.top=(510+(CIt.length*210))+"px";
