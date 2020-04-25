@@ -19,11 +19,11 @@ body{overflow-x:hidden;}
 #CIc h1{font-size:24px;}
 #CIc h2{font-size:20px;}
 #CIc h6{font-size:12px;}
-#CICSt{width:450px;top:20px;left:50px;}
-#CICs{width:450px;top:60px;left:50px;}
-#CICBt{width:450px;top:170px;left:50px;}
-#CICb{width:450px;top:210px;left:50px;}
-#CICs u,#CICb u{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#CICSt{width:400px;top:20px;left:50px;}
+#CICs{width:400px;top:60px;left:50px;}
+#CICBt{width:400px;top:170px;left:50px;}
+#CICb{width:400px;top:210px;left:50px;}
+#CICs p,#CICb p{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #CICPt{top:20px;left:450px;}
 #CICp{top:60px;left:450px;}
 #CICRt{top:130px;left:450px;}
