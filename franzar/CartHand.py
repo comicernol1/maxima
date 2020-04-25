@@ -29,7 +29,7 @@ class handler(tornado.web.RequestHandler):
                 UserCartAdjustNumDisable = ""
                 UserCartRemoveButton = "<button class=\"CIr\" onclick=\"RMp('{0:d}')\">Remove</button>".format(UserCartItem_ID)
             UserCartListTotal += (UserCartItem_Price*int(UserCartList[i][1]))
-            UserCartItems += "<div class=\"CIt\" id=\"CIt_{0:d}\" style=\"top:{1:d}px;\"><input class=\"CIq\" type=\"number\" value=\"{2:d}\" onblur=\"AdjOa()\"{3:s}><a href=\"/product/{0:d}/\" class=\"CIi\" style=\"background-image:url({4:s});\"></a>{5:s}<h3>{6:s}</h3><h1>{6:s}</h1>{7:s}</div>\n".format(UserCartItem_ID,(i*210),(UserCartList[i][1]),UserCartAdjustNumDisable,UserCartItem_ImgLink,UserCartItem_TemplateSet,FindProduct(UserCartItem_ID)["Name"],UserCartItem_PriceSet,UserCartRemoveButton)
+            UserCartItems += "<div class=\"CIt\" id=\"CIt_{0:d}\" style=\"top:{1:d}px;\"><input class=\"CIq\" type=\"number\" value=\"{2:d}\" onblur=\"AdjOa()\"{3:s}><a href=\"/product/{0:d}/\" class=\"CIi\" style=\"background-image:url({4:s});\"></a>{5:s}<h3>{6:s}</h3><h1>{6:s}</h1>{7:s}</div>\n".format(UserCartItem_ID,(i*210),int(UserCartList[i][1]),UserCartAdjustNumDisable,UserCartItem_ImgLink,UserCartItem_TemplateSet,FindProduct(UserCartItem_ID)["Name"],UserCartItem_PriceSet,UserCartRemoveButton)
         if UserCartItems != "":
             if UserCurrencySymbol in SpecifyCurrencyList:
                 UserCartTotalsSet = "<h3 id=\"CICt\">Total: {0:s}{1:,.2f} ({2:s})</h3>".format(UserCurrencySymbol,UserCartListTotal,UserCurrency)
