@@ -34,9 +34,9 @@ class handler(tornado.web.RequestHandler):
         if UserCartItems != "":
             UserCartListTotal += UserCartListShipping
             if UserCurrencySymbol in SpecifyCurrencyList:
-                UserCartTotalsSet = "<h3 id=\"CICh\">Shipping: {0:s}<u id=\"CICHt\">{1:,.2f}</u> ({2:s})</h3><hr id=\"CICTh\"><h3 id=\"CICt\">Total: {0:s}<u id=\"CICTt\">{3:,.2f}</u> ({2:s})</h3>".format(UserCurrencySymbol,UserCartListShipping,UserCurrency,UserCartListTotal)
+                UserCartTotalsSet = "<h3 id=\"CICh\">Shipping: {0:s}<u id=\"CICHt\">{2:,.2f}</u> ({1:s})</h3><h3 id=\"CICx\">Taxes: {0:s}<u id=\"CICXt\">{3:,.2f}</u> ({1:s})</h3><hr id=\"CICTh\"><h3 id=\"CICt\">Total: {0:s}<u id=\"CICTt\">{4:,.2f}</u> ({1:s})</h3>".format(UserCurrencySymbol,UserCurrency,UserCartListShipping,UserCartListTaxes,UserCartListTotal)
             else:
-                UserCartTotalsSet = "<h3 id=\"CICh\">Shipping: {0:s}<u id=\"CICHt\">{1:,.2f}</u></h3><hr id=\"CICTh\"><h3 id=\"CICt\">Total: {0:s}{2:,.2f}</h3>".format(UserCurrencySymbol,UserCartListShipping,UserCartListTotal)
+                UserCartTotalsSet = "<h3 id=\"CICh\">Shipping: {0:s}<u id=\"CICHt\">{1:,.2f}</u></h3><h3 id=\"CICx\">Taxes: {0:s}<u id=\"CICXt\">{2:,.2f}</u></h3><hr id=\"CICTh\"><h3 id=\"CICt\">Total: {0:s}<u id=\"CICTt\">{3:,.2f}</u></h3>".format(UserCurrencySymbol,UserCartListShipping,UserCartListTaxes,UserCartListTotal)
             UserShippingAddress = "<p>0001 Street Name Rd Apt #1000</p><p>New York, NY 00000-0000</p><p>United States</p>"
             UserBillingAddress = "<p>0002 Street Name Rd Apt #1000</p><p>New York, NY 00000-0000</p><p>United States</p>"
             UserBillingInfoSet = "Card ending in 0000<br>$100.00 gift card balance"
