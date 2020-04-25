@@ -28,10 +28,10 @@ body{overflow-x:hidden;}
 #CICp{top:60px;left:450px;}
 #CICRt{top:130px;left:450px;}
 #CICr{width:265px;position:absolute;top:150px;left:450px;}
-#CICTt{text-decoration:none;}
+#CICh{width:400px;text-align:right;font-size:20px;margin:0;font-weight:300;position:absolute;top:200px;right:50px;}
+#CICTh{width:400px;position:absolute;top:220px;right:50px;}
+#CICt a,#CICh a{text-decoration:none;}
 #CICt{width:400px;text-align:right;font-size:32px;margin:0;font-weight:300;position:absolute;top:260px;right:50px;}
-#CICHt{text-decoration:none;}
-#CICh{width:400px;text-align:right;font-size:32px;margin:0;font-weight:300;position:absolute;top:260px;right:50px;}
 #CICy{width:300px;position:absolute;top:330px;right:50px;}
 
 #ACM{width:100%;height:2000px;background:#FAFAFF;position:absolute;top:100px;left:0;}
