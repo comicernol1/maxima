@@ -8,7 +8,7 @@ class handler(tornado.web.RequestHandler):
         UserCartItems = ""
         UserCartListLen = len(UserCartList)
         for i in range(0,UserCartListLen):
-            UserCartItem_ID = str(UserCartList[i][0])
+            UserCartItem_ID = int(UserCartList[i][0])
             if FindProduct(UserCartItem_ID)["HasImg"]:
                 UserCartItem_ImgLink = "/static/product/{0:d}/0.jpg".format(UserCartItem_ID)
             else:
