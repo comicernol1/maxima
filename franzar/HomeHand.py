@@ -29,7 +29,11 @@ class handler(tornado.web.RequestHandler):
             for Ci in range(0,len(QueryProductColoursDict["ID"])):
                 if QueryProductColoursDict["Hex"][Ci] != QueryProductsDefaultColour:
                     ReturnProductColoursDict += "<abbr style=\"background:#"+QueryProductColoursDict["Hex"][Ci]+";\" title=\""+QueryProductColoursDict["Name"][Ci]+"\" s=\"n\"></abbr>"
-            HomeProductList += "<a style=\"background-image:url(/static/product/"+QueryProductsID+"/0.jpg);\" href=\"/product/"+QueryProductsID+"/\" title=\""+ReturnProductTitle+"\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColourName+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+ReturnProductTitle+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
+            if os.path.exists("/static/product/"+str(QueryProductsID)+"/0.jpg"):
+                HomeProductImgSet = "/static/product/"+QueryProductsID+"/0.jpg"
+            else:
+                HomeProductImgSet = "/static/product/missing.jpg"
+            HomeProductList += "<a style=\"background-image:url("+HomeProductImgSet+");\" href=\"/product/"+QueryProductsID+"/\" title=\""+ReturnProductTitle+"\"><div class=\"BPX\"><span><abbr style=\"background:#"+QueryProductsDefaultColour+";\" title=\""+QueryProductsDefaultColourName+"\" s=\"y\"></abbr>"+ReturnProductColoursDict+"</span><h6>"+ReturnProductTitle+"</h6>"+QueryProductsPriceSet+"</div></a>\n"
 
         # Open
         HomeIndex = ServePage(self,"/index.html",False)
