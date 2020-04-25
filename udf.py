@@ -95,18 +95,6 @@ def GetUserLang(self):
                     UserLanguage = i
         if UserLanguage == "":
             UserLanguage = "en"
-    LanguageListDefault = ""
-    LanguageOptions = ""
-    if UserLanguage in AcceptedLanguages:
-        for i in AcceptedLanguages.keys():
-            if i == UserLanguage:
-                SelectedLanguageLi = " selected"
-                LanguageListDefault = "<option value=\""+i+"\" selected>"+AcceptedLanguages[i]+"</option>"
-            else:
-                SelectedLanguageLi = ""
-            LanguageOptions += "<option value=\""+i+"\""+SelectedLanguageLi+">"+AcceptedLanguages[i]+"</option>"
-    else:
-        SelectedLanguageLi = ""
     return UserLanguage
 
 def GetUserNatn(self):
@@ -129,7 +117,22 @@ def ServePage(self,pageloc,ForceLogin):
     RequestedHostName = self.request.host
     RequestedHostBase = RequestedHostName[0:RequestedHostName.index(".com")]
     
+    # User Language
     UserLanguage = GetUserLang(self)
+    LanguageListDefault = ""
+    LanguageOptions = ""
+    if UserLanguage in AcceptedLanguages:
+        for i in AcceptedLanguages.keys():
+            if i == UserLanguage:
+                SelectedLanguageLi = " selected"
+                LanguageListDefault = "<option value=\""+i+"\" selected>"+AcceptedLanguages[i]+"</option>"
+            else:
+                SelectedLanguageLi = ""
+            LanguageOptions += "<option value=\""+i+"\""+SelectedLanguageLi+">"+AcceptedLanguages[i]+"</option>"
+    else:
+        SelectedLanguageLi = ""
+    
+    # User Nation
     UserNation = GetUserNatn(self)
     NationList = ""
     NationListDefault = ""
