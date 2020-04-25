@@ -123,6 +123,14 @@ def GetUserNatn(self):
         UserNation = UserInfoFn
     else:
         UserNation = "us"
+    return UserNation
+
+def ServePage(self,pageloc,ForceLogin):
+    RequestedHostName = self.request.host
+    RequestedHostBase = RequestedHostName[0:RequestedHostName.index(".com")]
+    
+    UserLanguage = GetUserLang(self)
+    UserNation = GetUserNatn(self)
     NationList = ""
     NationListDefault = ""
     NationDictKeys = NationDict.keys()
@@ -133,14 +141,6 @@ def GetUserNatn(self):
         else:
             SelectedNationLi = ""
         NationList += "<option value=\""+i+"\""+SelectedNationLi+">"+NationDict[i]+"</option>\n"
-    return UserNation
-
-def ServePage(self,pageloc,ForceLogin):
-    RequestedHostName = self.request.host
-    RequestedHostBase = RequestedHostName[0:RequestedHostName.index(".com")]
-    
-    UserLanguage = GetUserLang(self)
-    UserNation = GetUserNatn(self)
     
     # Define Basics
     HeaderLISignIn_EN = "<a id=\"HMs\" href=\"/sign_in/\">Sign In</a>"
