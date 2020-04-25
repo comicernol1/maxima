@@ -5,8 +5,8 @@ class handler(tornado.web.RequestHandler):
         CartIndex = ServePage(self,"/cart/index.html",False)
         UserCartList = GetCart(self)
         UserCartItems = ""
-        UserCartFootTop = 110
-        for i in range(0,len(UserCartList)):
+        UserCartListLen = len(UserCartList)
+        for i in range(0,UserCartListLen):
             UserCartItem_ID = str(UserCartList[i][0])
             if FindProduct(UserCartItem_ID)["HasImg"]:
                 UserCartItem_ImgLink = "/static/product/"+UserCartItem_ID+"/0.jpg"
@@ -28,16 +28,15 @@ class handler(tornado.web.RequestHandler):
                 UserCartAdjustNumDisable = ""
                 UserCartRemoveButton = "<button class=\"CIr\" onclick=\"RMp('"+UserCartItem_ID+"')\">Remove</button>"
             UserCartItems += "<div class=\"CIt\" id=\"CIt_"+UserCartItem_ID+"\" style=\"top:"+str(i*210)+"px;\"><input class=\"CIq\" type=\"number\" value=\""+str(UserCartList[i][1])+"\" onblur=\"AdjOa()\""+UserCartAdjustNumDisable+"><a href=\"/product/"+UserCartItem_ID+"/\" class=\"CIi\" style=\"background-image:url("+UserCartItem_ImgLink+");\"></a>"+UserCartItem_TemplateSet+"<h3>"+FindProduct(UserCartItem_ID)["Name"]+"</h3><h1>"+UserCartItem_PriceSet+"</h1>"+UserCartRemoveButton+"</div>\n"
-            UserCartFootTop += 210
         if UserCartItems != "":
-            UserCartItems += "<div id=\"CIc\"><h1 id=\"CICSt\">Shipping Address</h1><h2 id=\"CICs\">0000 Street Name Rd Apt #1000<br>New York, NY 00000-0000<br>United States</h2><h1 id=\"CICBt\">Billing Address</h1><h2 id=\"CICb\">0000 Street Name Rd Apt #1000<br>New York, NY 00000-0000<br>United States</h2><h1 id=\"CICPt\">Payment Method</h1><h2 id=\"CICp\">Card ending in 0000<br>$100.00 gift card balance</h2></div>"
+            UserCartItems += "<div id=\"CIc\" style=\"top:"+str(110+(UserCartListLen*210))+"px;\"><h1 id=\"CICSt\">Shipping Address</h1><h2 id=\"CICs\">0000 Street Name Rd Apt #1000<br>New York, NY 00000-0000<br>United States</h2><h1 id=\"CICBt\">Billing Address</h1><h2 id=\"CICb\">0000 Street Name Rd Apt #1000<br>New York, NY 00000-0000<br>United States</h2><h1 id=\"CICPt\">Payment Method</h1><h2 id=\"CICp\">Card ending in 0000<br>$100.00 gift card balance</h2></div>"
             CartIndex = CartIndex.replace("<% Cart %>",UserCartItems)
             CartIndex = CartIndex.replace("<% ShowEmptyCartMsg %>","none")
         else:
             CartIndex = CartIndex.replace("<% Cart %>","")
             CartIndex = CartIndex.replace("<% ShowEmptyCartMsg %>","block")
         if UserCartFootTop >= 700:
-            CartIndex = CartIndex.replace("<% FootTop %>",str(UserCartFootTop))
+            CartIndex = CartIndex.replace("<% FootTop %>",str(110+(UserCartListLen*210)))
         else:
             CartIndex = CartIndex.replace("<% FootTop %>","700")
         self.write(CartIndex)
