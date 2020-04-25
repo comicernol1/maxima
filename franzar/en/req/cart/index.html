@@ -19,6 +19,8 @@
 <script>
 HMCi=document.getElementById("HMCi");
 Cm=document.getElementById("Cm");
+CIc=document.getElementById("CIc");
+Foot=document.getElementById("Foot");
 function AdjOa(){
     CIt=Cm.getElementsByClassName("CIt");
     CtLt="";
@@ -33,6 +35,8 @@ function AdjOa(){
         CiCnt+=CItQty;
         CtLt+="&id"+i+"="+CItID+"&qty"+i+"="+CItQty;
     }
+    CIc.style.top=(CIt.length*210)+"px";
+    Foot.style.top=(510+(CIt.length*210))+"px";
     HMCi.innerText=CiCnt;
     return CtLt;
 }
