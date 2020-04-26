@@ -18,6 +18,15 @@ class Counterfeit(tornado.web.RequestHandler):
     def post(self):
         SetCookie(self)
 
+class Returns(tornado.web.RequestHandler):
+    def get(self):
+        # Open
+        ReturnsIndex = ServePage(self,"/legal/returns.html",False)
+        self.write(ReturnsIndex)
+    
+    def post(self):
+        SetCookie(self)
+
 class NotFound(tornado.web.RequestHandler):
     def get(self):
         # Open
