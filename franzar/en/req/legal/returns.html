@@ -1,0 +1,34 @@
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/legal.css">
+    <title>FRANZAR&trade; Official Site | Delivery and Returns</title>
+    <% Head %>
+</head>
+<body>
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<div id="DC">
+    <h3>Deliveries</h3>
+    <p>Items may be mailed through a variety of mailing serivces including but not limited to:
+    <ul>
+        <li>USPS</li>
+        <li>UPS</li>
+        <li>FedEx</li>
+        <li>DHL</li>
+        <li>LaserShip</li>
+    </ul>
+    </p>
+    <h3>Returns</h3>
+    <p>All online purchases have an eligable return period of 30 days. All items must be returned unused with original hand tags. All returned items being mailed through USPS must be postmarked on or before midnight of the day the eligible return period ends. Returns being shipped by any other courier service must arrive at the returns center on or before midnight of the day the eligible return period ends. To make a return, please email us at <a href="mailto:company@franzar.com">company@franzar.com</a>.</p>
+</div>
+<% Footer %>
+<script>
+document.getElementById("Foot").style.top=(Number(document.getElementById("DC").offsetHeight)+140)+"px";
+Hm=document.getElementById("Hm");
+function M_menu_show(){Hm.style.display="block";}
+function M_menu_hide(){Hm.style.display="none";}
+</script>
+</body></html>
