@@ -10,92 +10,19 @@
 <ul id="Hm">
     <% HeaderLI %>
 </ul>
-<div id="ACM">
-    <h1>My Account</h1>
-    <form id="ACL" class="AC_block" action="" method="POST">
-        <h2>My Addresses</h1>
-        <select name="ACLn" id="ACLn">
-            <% AddressOptions %>
-        </select>
-        <span id="ACLNo" class="DDoB"></span>
-        <input type="submit" id="ACL_SA" value="REMOVE">
-        <hr>
-        <h3 id="ACLDh">Default Delivery Address:
-            <select name="ACLd" id="ACLd">
-                <% AddressOptions %>
-            </select>
-            <span id="ACLDo" class="DDoB"></span>
-        </h3>
-        <h3 id="ACLBh">Billing Address:
-            <select name="ACLb" id="ACLb">
-                <% AddressOptions %>
-            </select>
-            <span id="ACLBo" class="DDoB"></span>
-        </h3>
-        <input type="submit" id="ACL_SB" value="SAVE CHANGES">
-    </form>
-    <form id="ACa" class="AC_block" action="" method="POST">
-        <h2>Connect New Address</h2>
-        <h6 class="ACHM">* Required</h6>
-        <input type="text" name="ACAs" id="ACAs" placeholder="Street Address"><h6 id="ACAHs" class="ACH">*</h6>
-        <input type="text" name="ACAb" id="ACAb" placeholder="Street Address Line 2">
-        <input type="text" name="ACAc" id="ACAc" placeholder="City"><h6 id="ACAHc" class="ACH">*</h6>
-        <input type="text" name="ACAr" id="ACAr" placeholder="State / Province"><h6 id="ACAHr" class="ACH">*</h6>
-        <input type="text" name="ACAz" id="ACAz" placeholder="Zip Code"><h6 id="ACAHz" class="ACH">*</h6>
-        <select name="ACAt" id="ACAt">
-            <% NationOptions %>
-        </select>
-        <span id="ACATo" class="DDoB"></span>
-        <h6 id="ACAHt" class="ACH">*</h6>
-        <input type="submit" id="ACA_S" value="SAVE ADDRESS">
-    </form>
-    <form id="ACp" class="AC_block" action="" method="POST">
-        <h2>Change Password</h2>
-        <h6 class="ACHM">* Required</h6>
-        <input type="text" name="ACPp" id="ACPp" placeholder="New Password"><h6 id="ACPHp" class="ACH">*</h6>
-        <input type="text" name="ACPa" id="ACPa" placeholder="Retype New Password"><h6 id="ACPHa" class="ACH">*</h6>
-        <input type="submit" id="ACP_S" value="CHANGE PASSWORD">
-    </form>
-    <div id="ACs" class="AC_block">
-        <h2>My Measurements</h2>
-        <ul id="ACSn">
-            <li>Age: 18 years old</li>
-            <li>Height: 72 inches</li>
-            <li>Collar: 0 inches</li>
-            <li>Thigh: 0 inches</li>
-            <li>Inseam: 0 inches</li>
-        </ul>
-        <a href="/account/measurements/" id="ACSb">EDIT MY MEASUREMENTS</a>
-    </div>
-    <form id="ACm" class="AC_block" action="" method="POST">
-        <h2>Payment Methods</h2>
-        <h3 id="ACMc">Saved Cards:
-            <select>
-                <option>(VISA) &#8226;&#8226;&#8226;&#8226; 8234</option>
-            </select>
-            <span id="ACMCo" class="DDoB"></span>
-            <input type="submit" id="ACM_SA" value="REMOVE">
-        </h3>
-    </form>
-    <form id="ACd" class="AC_block">
-        <a href="/account/data/">View My Account Data</a>
-    </form>
-    <form id="ACo" class="AC_block" action="" method="POST">
-        <h2>Orders</h2>
-        <div id="ACOL">
-            <table>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Arrival</th>
-                    <th>Delivered To</th>
-                </tr>
-                <% OrderList %>
-            </table>
-        </div>
-    </form>
-</div>
+<h1 id="ACMt">My Account</h1>
+<ul id="ACM">
+    <li><a href="/account/payment/">Payment Methods</a></li>
+    <li><a href="/account/measurements/">Measurements</a></li>
+    <li><a href="/account/addresses/">Addresses</a></li>
+    <li><a href="/reset_password/">Change Password</a></li>
+    <li><a href="/account/orders/">Orders</a></li>
+    <li><a onclick="USo()">Sign Out</a></li>
+</ul>
+<script>
+function USo(){
+    /* ----- */
+}
+</script>
 <% Footer %>
 </body></html>
