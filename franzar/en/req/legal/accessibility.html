@@ -1,0 +1,24 @@
+  
+<!DOCTYPE html><html>
+<head>
+    <link rel="stylesheet" href="/static/legal.css">
+    <title>FRANZAR&trade; Official Site | Payments</title>
+    <% Head %>
+</head>
+<body>
+<script>wlhrf=window.location.href;whrswlh=wlhrf.substring(0, wlhrf.indexOf("?"));window.history.replaceState(null,null,whrswlh);</script>
+<div id="M_H"><button onclick="M_menu_show()"></button></div>
+<ul id="Hm">
+    <% HeaderLI %>
+</ul>
+<div id="AC">
+    <h3>Accessibility</h3>
+    <p>All payments made through our website (excluding gift cards and e-gift cards) will be processed by <a href="https://stripe.com/">Stripe</a>. Stripe is PCI DSS compliant, which means that they are authorized to store, process, and transmit sensitive information such as credit and debit cards. All websites which process sensitive information such as banking and payment details are required to maintain full PCI DSS compliance. We use Stripe to make our PCI DSS compliance easier, cheaper, and more secure since it shifts most of the liability away from us and into the hands of professionals. To learn more about what payments Stripe accepts, <a href="https://stripe.com/docs/payments/payment-methods">click here</a>.</p>
+</div>
+<% Footer %>
+<script>
+Foot=document.getElementById("Foot");
+xAC=document.getElementById("AC");
+if (xAC.offsetHeight<=460){Foot.style.top="600px";}else{Foot.style.top=(Number(xAC.offsetHeight)+140)+"px";}
+</script>
+</body></html>
