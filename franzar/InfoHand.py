@@ -27,6 +27,15 @@ class Returns(tornado.web.RequestHandler):
     def post(self):
         SetCookie(self)
 
+class Payments(tornado.web.RequestHandler):
+    def get(self):
+        # Open
+        PaymentsIndex = ServePage(self,"/legal/payments.html",False)
+        self.write(PaymentsIndex)
+    
+    def post(self):
+        SetCookie(self)
+
 class NotFound(tornado.web.RequestHandler):
     def get(self):
         # Open
