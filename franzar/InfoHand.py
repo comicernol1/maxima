@@ -36,6 +36,15 @@ class Payments(tornado.web.RequestHandler):
     def post(self):
         SetCookie(self)
 
+class Accessibility(tornado.web.RequestHandler):
+    def get(self):
+        # Open
+        AccessibilityIndex = ServePage(self,"/legal/accessibility.html",False)
+        self.write(AccessibilityIndex)
+    
+    def post(self):
+        SetCookie(self)
+
 class NotFound(tornado.web.RequestHandler):
     def get(self):
         # Open
