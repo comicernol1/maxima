@@ -35,15 +35,23 @@ body{overflow-x:hidden;}
 #CICh u,#CICx u,#CICt u{text-decoration:none;}
 #CICy{width:300px;position:absolute;top:330px;right:50px;}
 
-#ACMt{width:100%;margin:0;text-align:center;font-size:48px;position:absolute;top:70px;left:0;}
-#ACM{width:100%;margin:0;padding:0;list-style-type:none;position:absolute;top:150px;left:0;}
+#ACMt{width:100%;margin:0;text-align:center;font-size:48px;position:absolute;top:120px;left:0;}
+#ACM{width:100%;margin:0;padding:0;list-style-type:none;position:absolute;top:200px;left:0;}
 #ACM li,#ACM li a{display:block;width:100%;text-align:center;color:black;font-size:24px;text-decoration:none;box-sizing:border-box;}
 #ACM li a{background:#F4F4F4;padding:20px 0;border-bottom:1px solid #C2C1C2;}
 #ACM li:nth-child(1) a{border-top:1px solid #C2C1C2;}
-#ACF{width:100%;padding:0 20px;box-sizing:border-box;position:absolute;top:600px;left:0;}
-#ACF a{font-size:12px;text-decoration:underline;color:#1446A0;}
+#ACF{width:100%;padding:0 50px;box-sizing:border-box;position:absolute;top:670px;left:0;}
+#ACF a{font-size:14px;text-decoration:underline;color:#1446A0;}
 #ACF a:active{color:#113A83;}
 #ACF a:nth-child(1){float:left;}
 #ACF a:nth-child(2){float:right;}
 
-#Foot{top:630px;}
+#Foot{top:700px;}
+
+@media only screen and (max-width:700px){
+    #ACMt{top:70px;}
+    #ACM{top:150px;}
+    #ACF{padding:0 20px;top:600px;}
+    #ACF a{font-size:12px;}
+    #Foot{top:630px;}
+}
