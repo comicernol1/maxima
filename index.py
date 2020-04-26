@@ -47,6 +47,7 @@ if __name__ == "__main__":
             (r"/report_a_counterfeit/", franzar.InfoHand.Counterfeit),
             (r"/deliveries_and_returns/", franzar.InfoHand.Returns),
             (r"/payments/", franzar.InfoHand.Payments),
+            (r"/accessibility/", franzar.InfoHand.Accessibility),
             (r"/product/.*", franzar.ProductHand.handler),
             (r"/refresh_cart/", franzar.RefreshCartAjax.handler),
             (r"/sign_in/reset_password/", franzar.ResetPWHand.handler),
