@@ -39,6 +39,6 @@ body{overflow-x:hidden;}
 #ACM{width:100%;margin:0;padding:0;list-style-type:none;position:absolute;top:150px;left:0;}
 #ACM li,#ACM li a{display:block;width:100%;text-align:center;color:black;font-size:24px;text-decoration:none;box-sizing:border-box;}
 #ACM li a{padding:20px 0;border-bottom:1px solid black;}
-#ACM li:nth-child(1){background:red;}
+#ACM li:nth-child(1) a{border-top:1px solid black;}
 
 #Foot{top:700px;}
