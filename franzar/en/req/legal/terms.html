@@ -118,7 +118,9 @@
 </div>
 <% Footer %>
 <script>
-document.getElementById("Foot").style.top=(Number(document.getElementById("TC").offsetHeight)+140)+"px";
+Foot=document.getElementById("Foot");
+xDC=document.getElementById("DC");
+if (xDC.offsetHeight<=560){Foot.style.top="700px";}else{Foot.style.top=(Number(xDC.offsetHeight)+140)+"px";}
 Hm=document.getElementById("Hm");
 function M_menu_show(){Hm.style.display="block";}
 function M_menu_hide(){Hm.style.display="none";}
