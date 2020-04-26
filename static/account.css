@@ -40,5 +40,10 @@ body{overflow-x:hidden;}
 #ACM li,#ACM li a{display:block;width:100%;text-align:center;color:black;font-size:24px;text-decoration:none;box-sizing:border-box;}
 #ACM li a{background:#F4F4F4;padding:20px 0;border-bottom:1px solid #C2C1C2;}
 #ACM li:nth-child(1) a{border-top:1px solid #C2C1C2;}
+#ACF{width:100%;padding:50px 0;position:absolute;top:580px;left:0;}
+#ACF a{text-decoration:underline;color:#1446A0;}
+#ACF a:active{color:#113A83;}
+#ACF a:nth-child(1){float:left;}
+#ACF a:nth-child(2){float:right;}
 
-#Foot{top:700px;}
+#Foot{top:600px;}
