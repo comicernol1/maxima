@@ -22,4 +22,9 @@
     </p>
 </div>
 <% Footer %>
+<script>
+Foot=document.getElementById("Foot");
+xDC=document.getElementById("DC");
+if (xDC.offsetHeight<=560){Foot.style.top="700px";}else{Foot.style.top=(Number(xDC.offsetHeight)+140)+"px";}
+</script>
 </body></html>
