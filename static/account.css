@@ -38,7 +38,7 @@ body{overflow-x:hidden;}
 #ACMt{width:100%;margin:0;text-align:center;font-size:48px;position:absolute;top:70px;left:0;}
 #ACM{width:100%;margin:0;padding:0;list-style-type:none;position:absolute;top:150px;left:0;}
 #ACM li,#ACM li a{display:block;width:100%;text-align:center;color:black;font-size:24px;text-decoration:none;box-sizing:border-box;}
-#ACM li a{padding:20px 0;border-bottom:1px solid black;}
-#ACM li:nth-child(1) a{border-top:1px solid black;}
+#ACM li a{background:#F4F4F4;padding:20px 0;border-bottom:1px solid #C2C1C2;}
+#ACM li:nth-child(1) a{border-top:1px solid #C2C1C2;}
 
 #Foot{top:700px;}
