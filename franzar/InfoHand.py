@@ -9,6 +9,15 @@ class TermsConditions(tornado.web.RequestHandler):
     def post(self):
         SetCookie(self)
 
+class PrivacyPolicy(tornado.web.RequestHandler):
+    def get(self):
+        # Open
+        PrivacyPolicyIndex = ServePage(self,"/legal/privacy.html",False)
+        self.write(PrivacyPolicyIndex)
+    
+    def post(self):
+        SetCookie(self)
+
 class Counterfeit(tornado.web.RequestHandler):
     def get(self):
         # Open
