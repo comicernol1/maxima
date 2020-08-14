@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Language" content="nl_NL">
+
+    <title>DutchKingCraft | De Leukste Game Community van NL/BE</title>
+    <meta property="og:title" content="DutchKingCraft | De Leukste Game Community van NL/BE" />
+
+    <meta name="description" content="Dutchkingcraft, Een waanzinnig leuke nederlands talige Minecraft Community! 1.16.2
+Speel mee op DKC! Veel plezier.">
+    <meta property="og:description" content="Dutchkingcraft, Een waanzinnig leuke nederlands talige Minecraft Community! 1.16.2
+Speel mee op DKC! Veel plezier." />
+
+    <link rel="icon" type="image/png" href="/DKC/static/favicon_32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/DKC/static/favicon_64.png" sizes="64x64">
+    <!--<link rel="icon" type="image/png" href="/static/favicon_192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/static/favicon_180.png" sizes="180x180">-->
+
+    <link rel="preload" href="static/trailer_2020.mp4" as="video/mp4">
+
+    <meta name="msapplication-TileImage" content="/DKC/static/favicon_87.png">
+    <meta name="msapplication-TileColor" content="#4f7177">
+    <meta name="theme-color" content="">
+
+    <meta name="keywords" content="Dutch,King,Craft,DutchKingCraft,DKC,Community,Minecraft,Survival,Skywars,Minigames,Server,Nederlandse Minecraft Server">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.dutchkingcraft.nl" />
+    <meta property="og:image" content="" />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:site_name" content="DutchKingCraft" />
+
+    <meta name="robots" content="INDEX, FOLLOW">
+
+    <meta name="game" content="Call of Duty">
+    <meta name="game" content="League of Legends">
+    <meta name="game" content="LoL">
+    <meta name="game" content="Age of Empires">
+    <meta name="game" content="Unreal Tournament">
+    <meta name="game" content="Minecraft">
+    <meta name="game" content="MC">
+    <meta name="game" content="Counter-Strike: Global Offensive">
+    <meta name="game" content="Grand Theft Auto V">
+    <meta name="game" content="osu!">
+    <meta name="game" content="Battlefield 4">
+</head>
+<body>
+<header>
+    <ul id="H_H">
+        <img src="/DKC/static/logo_home_small.png">
+        <li class="H_Hn" onmouseover="menu_coll()"><a href="/DKC/index.html">Home</a></li>
+        <li class="H_Hd" onmouseover="menu_exp(0)">Over</li>
+        <li class="H_Hd" onmouseover="menu_exp(1)">Forums</li>
+        <li class="H_Hd" onmouseover="menu_exp(2)">Sollicitaties</li>
+        <li class="H_Hd" onmouseover="menu_exp(3)">Media</li>
+        <li class="H_Hn" onmouseover="menu_coll()"><a href="">Sponsor</a></li>
+        <a href="" id="H_L">Login</a>
+    </ul>
+    <ul class="H_db" id="H_O">
+        <h1>Over</h1>
+
+        <li><a href="">Algemeen</a></li>
+        <li><a href="">Staff Team</a></li>
+        <li><a href="">Vote</a></li>
+        <li><a href="">Discord</a></li>
+        <li><a href="">Forum</a></li>
+        <li><a href="">Ranks</a></li>
+        <li><a href="">Survival</a></li>
+        <li><a href="">Kingdom</a></li>
+        <li><a href="">Unban Aanvragen</a></li>
+    </ul>
+    <ul class="H_db" id="H_F">
+        <h1>Forums</h1>
+
+        <li><a href="">Allemaal</a></li>
+        <li><a href="">Algemeen</a></li>
+        <li><a href="">Rising Kingdom</a></li>
+        <li><a href="">Survival</a></li>
+        <li><a href="">Community</a></li>
+        <li><a href="">Support</a></li>
+        <li><a href="">Off Topic</a></li>
+        <li><a href="">Klachten</a></li>
+    </ul>
+    <ul class="H_db" id="H_S">
+        <h1>Sollicitaties</h1>
+
+        <li><a href="">Personeel</a></li>
+        <li><a href="">Bouwer</a></li>
+    </ul>
+    <ul class="H_db" id="H_M">
+        <h1>Media</h1>
+
+        <li><a href="http://dutchkingcraft.ga:8123/" target="_blank">Dynmap</a></li>
+        <li><a href="">Fotos</a></li>
+    </ul>
+    <div id="H_ov" onmouseover="menu_coll()"></div>
+</header>
+<div id="splash">
+    <video autoplay muted loop>
+        <source src="static/trailer_2020.mp4" type="video/mp4">
+    </video>
+    <div id="splash_cover"></div>
+</div>
+<div id="awesome">
+    <h1>Wat maakt DKC geweldig?</h1>
+    <h3>Wij bestaan al sinds <b>April 2011</b> en ons primaire doel is: <b>Gezelligheid</b></h3>
+    <table id="awesome_chart">
+        <tr>
+            <th class="td_corner"></th>
+            <th class="td_h"></th>
+        </tr>
+        <tr>
+            <td class="td_list"><a onmouseover="show_bubble('ranks')" onmouseout="hide_bubble('ranks')">Time Based Ranks</a></td>
+            <td class="td_yes"></td>
+        </tr>
+        <tr>
+            <td class="td_list">Survival</td>
+            <td class="td_yes"></td>
+        </tr>
+        <tr>
+            <td class="td_list">100+ Plugins</td>
+            <td class="td_yes"></td>
+        </tr>
+        <tr>
+            <td class="td_list">Drop Partys</td>
+            <td class="td_yes"></td>
+        </tr>
+        <tr>
+            <td class="td_list">PVP Arenas</td>
+            <td class="td_yes"></td>
+        </tr>
+        <tr>
+            <td class="td_list">Mob Arena</td>
+            <td class="td_yes"></td>
+        </tr>
+        <tr>
+            <td class="td_list">Hide and Seek</td>
+            <td class="td_yes"></td>
+        </tr>
+        <tr>
+            <td class="td_list">Skyblock</td>
+            <td class="td_yes"></td>
+        </tr>
+        <tr>
+            <td class="td_list">Meer!</td>
+            <td class="td_yes"></td>
+        </tr>
+    </table>
+</div>
+<div class="bubble" id="bubble_ranks"><i>Dit houdt in dat je een hogere rank krijgt naar mate je langer speelt op onze server. Deze ranks brengen leuke voordelen met zich mee, waar onder /fly vanaf DKC3 en het hakken van spawners met SilkTouch vanaf DKC4! Ook kan je cosmetics verdienen door langere tijd op de server te spelen. Verzamel ze allemaal!</i></div>
+<div id="news">
+    <h1>Nieuws</h1>
+    <form id="news_search" action="" method="POST">
+        <input type="search" id="news_search_text" placeholder="Zoek">
+        <input type="submit" value="" id="news_search_submit">
+    </form>
+    <div id="news_block">
+        <span>
+            <img src="/DKC/static/avatar/bierfiets.png">
+            <h2>WINACTIE!</h2>
+            <h6><u>bierfiets <verified size="1"></verified></u> 4 Aug 2020 gepost</h6>
+            <hr>
+            <p>Lieve DKC’ers!<br><br><br>Zoals jullie weten zijn we druk bezig met het gereed maken van de 1.16.1(2) wereld!
+Dit kost nog even wat tijd, maar we zijn hard aan het werk, dat kunnen we jullie zeker beloven!
+Er komt binnenkort weer de mogelijkheid om DKC-merch te bestellen!! Dit vinden wij super cool!!
+Wie weet komen we iemand van jullie wel een keer op straat tegen in een cool DKC T-shirt en dan kunnen we elkaar meteen herkennen! Meer informatie over de mogelijkheid van het bestellen van de merch volgt later maar…. JIJ kan misschien wel de eerste zijn die een van de eerste DKC T-shirts kan dragen!? Hoe? Nou heel simpel!
+We houden een WINACTIE! WOEHOEW!<br><br>Wat moet je doen?!: Laat op je meest creatieve manier zien wat DKC voor jou betekend! Dit kan je op de meest gekke manier laten zien! Door bijvoorbeeld een tekening te maken, een gedicht te schrijven, een bouwwerk te maken of misschien heb jij zelf wel een te gek idee!! Kort om laat al je creativiteit maar de vrije loop en verras ons!<br><br>Wat win je?!: Een DKC T-shirt in een maat naar keuze (S t/m XXXL mogelijk). Als je hebt gewonnen zal jouw T-shirt speciaal voor jou besteld worden in de gekozen maat en direct vers van de pers naar jouw brievenbus worden verstuurd! Tot slot: insturen van jouw creatie kan TOT: 06/09/2020 via het #winactie kanaal in de DKC Discordserver.<br><br>De winnende creatie zal gekozen worden door het DKC-Team en de winnaar zal op 10/09/2020 in het #winactie kanaal bekend gemaakt worden!! We wensen jullie heel veel succes en we zijn benieuwd naar jullie creaties!<br><br>Veel liefs en een creatieve groet,<br>Het DKC-Team</p>
+        </span>
+        <span>
+            <img src="/DKC/static/avatar/bierfiets.png">
+            <h2>Onze nieuwe promo video!</h2>
+            <h6><u>bierfiets <verified size="1"></verified></u> 16 Jun 2020 gepost</h6>
+            <hr>
+            <p><iframe width="560" height="315" src="https://www.youtube.com/embed/LxiOvhIpC5M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+        </span>
+    </div>
+</div>
+<center id="low_header">
+    <p>Server IP: <input type="text" value="dutchkingcraft.ga" disabled></p>
+    <p><a target="_blank" href="https://discord.com/invite/zFKTHc">Discord ID: <i>zFKTHc</i></a></p>
+    <p><a href="">Online gebruikers (0)</a></p>
+</center>
+<style>
+
+/* General */
+body{
+    overflow-x:hidden;
+    font-family:Arial;
+}
+input[type=search]::-ms-clear {display:none;width:0;height:0;}
+input[type=search]::-ms-reveal {display:none;width:0;height:0;}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration{display:none;}
+verified[size="1"]{
+    display:inline-block;
+    width:16px;
+    height:16px;
+    background-image:url("/DKC/static/multiplier.png");
+    background-size:200px;
+    background-position:-184px -183px;
+    margin:0 10px 0 2px;
+    position:relative;
+    top:3px;
+}
+.bubble{
+    background:#C4C8CA;
+    border:1px solid #9a9ea1;
+    border-radius:4px;
+    padding:0 15px;
+    box-sizing:border-box;
+}
+.bubble i{
+    font-size:14px;
+    line-height:1.3;
+    position:relative;
+    top:-10px;
+}
+.bubble::before{
+    display:block;
+    width:28px;
+    height:17px;
+    content:"";
+    background-image:url("/DKC/static/multiplier.png");
+    background-size:290px;
+    background-position:-95px -1px;
+    position:relative;
+    top:-17px;
+    left:20px;
+}
+
+
+/* Header */
+#H_H{
+    width:100%;
+    height:80px;
+    background:#2A2B2E;
+    border-bottom:3px solid #08A146;
+    margin:0;
+    padding:0;
+    position:fixed;
+    z-index:1001;
+    top:0;
+    left:0;
+}
+#H_H img{
+    position:relative;
+    top:15px;
+    left:20px;
+}
+#H_H li{
+    display:inline-block;
+    margin:0;
+    font-size:24px;
+    cursor:pointer;
+    background:transparent;
+    color:#F2FAF5;
+    position:relative;
+    top:-2px;
+    left:30px;
+}
+.H_Hn a{padding:26px 15px 26px 15px;color:inherit;text-decoration:none;}
+.H_Hn{padding:26px 0 26px 0;}
+.H_Hd{padding:26px 32px 26px 15px;}
+.H_Hd::before{
+    display:block;
+    width:16px;
+    height:16px;
+    content:"";
+    background-image:url("/DKC/static/multiplier.png");
+    background-size:300px;
+    background-position:-43px -47px;
+    position:absolute;
+    top:31px;
+    right:7px;
+}
+#H_L{
+    color:#F2FAF5;
+    text-decoration:none;
+    font-size:20px;
+    padding:30px 20px 30px 20px;
+    position:absolute;
+    top:0;
+    right:30px;
+}
+
+/* Header Drop-Boxes */
+.H_db{
+    display:none;
+    list-style-type:none;
+    width:200px;
+    background:#08A146;
+    margin:0;
+    padding:7px 10px;
+    position:fixed;
+    z-index:1002;
+    top:80px;
+}
+.H_db h1{
+    display:inline-block;
+    margin:0;
+    padding:26px 32px 26px 15px;
+    font-size:24px;
+    font-weight:300;
+    cursor:pointer;
+    background:#08A146;
+    color:#F2FAF5;
+    position:absolute;
+    top:-80px;
+    left:0;
+}
+.H_db h1::before{
+    display:block;
+    width:16px;
+    height:16px;
+    content:"";
+    background-image:url("/DKC/static/multiplier.png");
+    background-size:300px;
+    background-position:-43px -47px;
+    position:absolute;
+    top:31px;
+    right:7px;
+}
+.H_db li{padding:4px 0;}
+.H_db li a{
+    padding:4px 0;
+    cursor:pointer;
+    color:#F2FAF5;
+    text-decoration:none;
+}
+#H_O{left:220px;}
+#H_F{left:323px;}
+#H_S{left:456px;}
+#H_M{left:628px;}
+#H_ov{display:none;width:100%;height:100%;background:transparent;position:fixed;z-index:1000;top:0;left:0;}
+
+/* Splash Screen */
+#splash{
+    width:100%;
+    height:600px;
+    background-color:black;
+    position:absolute;
+    top:80px;
+    left:0;
+}
+#splash video{
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+}
+#splash_cover{
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.2);
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+/* Awesome */
+#awesome{
+    width:100%;
+    position:absolute;
+    top:800px;
+    left:0;
+}
+#awesome h1,#awesome h3{
+    width:100%;
+    text-align:center;
+    font-weight:300;
+}
+#awesome h1{font-size:52px;margin:0 0 10px 0;letter-spacing:1px;}
+#awesome h3{font-size:20px;margin:0 0 35px 0;}
+#awesome_chart{
+    width:calc(100vw - 110px);
+    background:#E5E5E5;
+    border:1px solid #DFDFDF;
+    border-collapse:collapse;
+    position:relative;
+    left:50px;
+}
+#bubble_ranks{
+    display:none;
+    width:300px;
+    position:absolute;
+    top:985px;
+    left:70px;
+}
+.td_corner{width:calc(50vw - 200px);}
+/*.td_h{padding:12px 0;}*/
+.td_list{padding:15px 20px;}
+.td_list a{
+    text-decoration:underline;
+    text-decoration-style:dotted;
+    cursor:pointer;
+}
+.td_list,.td_h,.td_yes,.td_no{font-size:20px;border:1px solid #DFDFDF;}
+.td_yes::after{
+    display:block;
+    width:30px;
+    height:30px;
+    content:"";
+    background-image:url("/DKC/static/multiplier.png");
+    background-size:400px;
+    background-position:-90px -36px;
+    margin:0 calc(50% - 15px);
+}
+.td_no::after{
+    display:block;
+    width:30px;
+    height:30px;
+    content:"";
+    background-image:url("/DKC/static/multiplier.png");
+    background-size:400px;
+    background-position:-88px -1px;
+    margin:0 calc(50% - 15px);
+}
+
+/* News */
+#news{
+    width:100%;
+    margin:0 0 100px 0;
+    position:absolute;
+    top:1550px;
+    left:0;
+}
+#news h1{
+    width:100%;
+    text-align:center;
+    margin:0 0 100px 0;
+    font-size:48px;
+    font-weight:300;
+    letter-spacing:1px;
+}
+#news_search_text,#news_search_submit{
+    outline:none;
+    height:40px;
+    margin:0;
+    box-sizing:border-box;
+    position:absolute;
+    top:80px;
+    right:100px;
+}
+#news_search_text{
+    width:450px;
+    font-size:24px;
+    padding:5px 44px 5px 8px;
+    border-top:none;
+    border-bottom:1px solid black;
+    border-left:none;
+    border-right:none;
+}
+#news_search_submit{
+    width:40px;
+    cursor:pointer;
+    margin:0;
+    border:none;
+    background-color:transparent;
+    background-image:url("/DKC/static/multiplier.png");
+    background-size:250px;
+    background-position:3px -163px;
+}
+#news_block{width:100%;}
+#news_block span{
+    display:block;
+    width:80%;
+    background:#E2E4E8;
+    margin-bottom:35px;
+    position:relative;
+    left:10%;
+}
+#news_block span img{
+    display:inline-block;
+    width:60px;
+    height:60px;
+    image-rendering:pixelated;
+    padding:10px 25px;
+}
+#news_block span h2{
+    display:inline-block;
+    width:calc(100% - 150px);
+    margin:0;
+    font-size:32px;
+    font-weight:300;
+    position:relative;
+    top:-40px;
+}
+#news_block span h6{
+    display:inline-block;
+    margin:0;
+    font-size:14px;
+    font-weight:300;
+    position:relative;
+    top:-40px;
+    left:115px;
+}
+#news_block span h6 u{color:#009600;text-decoration:none;}
+#news_block span hr{
+    width:calc(100% - 30px);
+    height:1px;
+    margin:0;
+    border:none;
+    background:#C1C3C8;
+    position:relative;
+    top:-18px;
+    left:15px;
+}
+#news_block span p{
+    width:calc(100% - 50px);
+    margin:0;
+    padding:0 0 15px 0;
+    position:relative;
+    left:25px;
+}
+
+
+/* Footer */
+#low_header{
+    width:100%;
+    box-sizing:border-box;
+    background:#2A2B2E;
+    border-top:3px solid #08A146;
+    position:fixed;
+    bottom:0;
+    left:0;
+}
+#low_header p{
+    display:inline-block;
+    margin:0;
+    padding:10px 7%;
+    color:#F2FAF5;
+}
+#low_header p a{text-decoration:none;color:inherit;}
+#low_header p a:hover{text-decoration:underline;}
+#low_header p input{
+    outline:none;
+    width:130px;
+    font-size:16px;
+    padding:0;
+    color:#F2FAF5;
+    background:transparent;
+    border:none;
+}
+</style>
+<script>
+H_ov=document.getElementById("H_ov");
+H_O=document.getElementById("H_O");
+H_F=document.getElementById("H_F");
+H_S=document.getElementById("H_S");
+H_M=document.getElementById("H_M");
+
+function menu_exp(ddi){
+    H_ov.style.display="block";
+    if (ddi==0){H_O.style.display="block";H_F.style.display="none";H_S.style.display="none";H_M.style.display="none";}
+    if (ddi==1){H_O.style.display="none";H_F.style.display="block";H_S.style.display="none";H_M.style.display="none";}
+    if (ddi==2){H_O.style.display="none";H_F.style.display="none";H_S.style.display="block";H_M.style.display="none";}
+    if (ddi==3){H_O.style.display="none";H_F.style.display="none";H_S.style.display="none";H_M.style.display="block";}
+}
+function menu_coll(){
+    H_ov.style.display="none";
+    H_O.style.display="none";
+    H_F.style.display="none";
+    H_S.style.display="none";
+    H_M.style.display="none";
+}
+function show_bubble(bbi){document.getElementById("bubble_"+bbi).style.display="block";}
+function hide_bubble(bbi){document.getElementById("bubble_"+bbi).style.display="none";}
+</script>
+</body>
+</html>
